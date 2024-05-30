@@ -1,7 +1,13 @@
 /*
-!/git/
+!/.git/
 !/.gitignore
 !/README.md
-!/Assets/
-!/ProjectSettings/
-!/Packages/
+!BeatRunner/Assets/
+!BeatRunner/ProjectSettings/
+!BeatRunner/Packages/
+!BeatRunner/Assets.meta
+!BeatRunner/ProjectSettings.meta
+!BeatRunner/Packages.meta
+!/Blender/
+!/Krita/
+!/FLStudio/
