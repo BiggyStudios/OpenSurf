@@ -193,7 +193,7 @@ MonoBehaviour:
   Cam: {fileID: 3739622192143396194}
   CamScript: {fileID: 4665491517851878246}
   ColliderSize: {x: 1, y: 2, z: 1}
-  Weight: 75
+  Weight: 100
   RigidbodyPushForce: 2
   SolidCollider: 0
   ViewTransform: {fileID: 1217767472598878372}

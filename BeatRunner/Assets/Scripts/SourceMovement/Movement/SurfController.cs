@@ -624,68 +624,31 @@ namespace SourceMovement.Movement
             var collSizeY = Mathf.Lerp(_surfer.moveData.defaultHeight, _surfer.moveData.defaultHeight * crouchingHeight, _crouchLerp);
             boxCollider.size = new Vector3 (boxCollider.size.x, collSizeY, boxCollider.size.z);
             
-            // Collider and position changing
+            foreach (Transform child in PlayerTransform)
+            {
+                if (child == _surfer.moveData.viewTransform) continue;
+                var childPosY = Mathf.Lerp(child.localPosition.y / crouchingHeight, child.localPosition.y * crouchingHeight, _crouchLerp);
+                child.localPosition = new Vector3 (child.localPosition.x, childPosY, child.localPosition.z);
+            }
+            
             if (_crouchLerp > 0.9f && !Crouching)
             {
                 Crouching = true;
-
-                // Move position and stuff
-                _surfer.moveData.origin += heightDifference / 2 * (grounded ? Vector3.down : Vector3.up);
-                foreach (Transform child in PlayerTransform)
-                {
-                    if (child == _surfer.moveData.viewTransform)
-                        continue;
-
-                    child.localPosition = new Vector3 (child.localPosition.x, child.localPosition.y * crouchingHeight, child.localPosition.z);
-                }
-
                 _uncrouchDown = !grounded;
-
             }
             else if (Crouching)
             {
                 // Check if the player can uncrouch
                 bool canUncrouch = true;
-                if (_surfer.collider.GetType () == typeof (BoxCollider)) {
+                Vector3 halfExtents = boxCollider.size * 0.5f;
+                Vector3 startPos = boxCollider.transform.position;
+                Vector3 endPos = boxCollider.transform.position + (_uncrouchDown ? Vector3.down : Vector3.up) * heightDifference;
+                Trace trace = Tracer.TraceBox (startPos, endPos, halfExtents, boxCollider.contactOffset, SurfPhysics.groundLayerMask);
 
-                    // Box collider
-                    Vector3 halfExtents = boxCollider.size * 0.5f;
-                    Vector3 startPos = boxCollider.transform.position;
-                    Vector3 endPos = boxCollider.transform.position + (_uncrouchDown ? Vector3.down : Vector3.up) * heightDifference;
-
-                    Trace trace = Tracer.TraceBox (startPos, endPos, halfExtents, boxCollider.contactOffset, SurfPhysics.groundLayerMask);
-
-                    if (trace.hitCollider != null)
-                        canUncrouch = false;
-
-                }
-
-                // Uncrouch
-                if (canUncrouch && _crouchLerp <= 0.9f) {
-
-                    Crouching = false;
-
-                    // Move position and stuff
-                    _surfer.moveData.origin += heightDifference / 2 * (_uncrouchDown ? Vector3.down : Vector3.up);
-                    foreach (Transform child in PlayerTransform) {
-
-                        child.localPosition = new Vector3 (child.localPosition.x, child.localPosition.y / crouchingHeight, child.localPosition.z);
-
-                    }
-
-                }
-
-                if (!canUncrouch)
-                    _crouchLerp = 1f;
-
+                if (trace.hitCollider != null) canUncrouch = false;
+                if (canUncrouch && _crouchLerp <= 0.9f) Crouching = false;
+                if (!canUncrouch) _crouchLerp = 1f;
             }
-
-            // Changing camera position
-            if (!Crouching)
-                _surfer.moveData.viewTransform.localPosition = Vector3.Lerp (_surfer.moveData.viewTransformDefaultLocalPos, _surfer.moveData.viewTransformDefaultLocalPos * crouchingHeight + Vector3.down * heightDifference * 0.5f, _crouchLerp);
-            else
-                _surfer.moveData.viewTransform.localPosition = Vector3.Lerp (_surfer.moveData.viewTransformDefaultLocalPos - Vector3.down * heightDifference * 0.5f, _surfer.moveData.viewTransformDefaultLocalPos * crouchingHeight, _crouchLerp);
-
         }
 
         void SlideMovement () {
