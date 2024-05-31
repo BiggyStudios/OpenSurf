@@ -11,8 +11,6 @@ public class PlayerManager : NetworkBehaviour
     [Header("Values")] 
     [SerializeField] private float _restartLerpSpeed;
     [SerializeField] private AnimationCurve _respawnAnimationCurve;
-
-    private bool _playerRespawning;
     
     public override void OnStartClient()
     {
@@ -40,8 +38,6 @@ public class PlayerManager : NetworkBehaviour
     private IEnumerator RestartPlayerRoutine()
     {
         Vector3 startPos = transform.position;
-
-        _playerRespawning = true;
         float lerpPos = 0f;
 
         while (lerpPos < 1f)
@@ -53,7 +49,5 @@ public class PlayerManager : NetworkBehaviour
 
             yield return null;
         }
-
-        _playerRespawning = false;
     }
 }
