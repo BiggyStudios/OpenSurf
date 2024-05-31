@@ -46,7 +46,7 @@ public class PlayerManager : NetworkBehaviour
 
         while (lerpPos < 1f)
         {
-            lerpPos = Mathf.Clamp01(Time.deltaTime / 1.5f + lerpPos);
+            lerpPos = Mathf.Clamp01(Time.deltaTime / _restartLerpSpeed + lerpPos);
             float t = _respawnAnimationCurve.Evaluate(lerpPos);
 
             transform.position = Vector3.Lerp(startPos, _spawnPosition, t);

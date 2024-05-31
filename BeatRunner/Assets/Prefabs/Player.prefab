@@ -276,6 +276,7 @@ MonoBehaviour:
   _networkBehaviours:
   - {fileID: 5467285084242854815}
   - {fileID: -5853129360333031233}
+  - {fileID: 1199030659213964841}
   - {fileID: 4665491517851878246}
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 0}
   <NestedRootNetworkBehaviours>k__BackingField: []
@@ -360,11 +361,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8bdfa787a0c230487c9c3b21b8b934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 2
   _addedNetworkObject: {fileID: -1370599907157453828}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: -1370599907157453828}
   _spawnPosition: {x: 0, y: 5, z: 0}
-  _restartLerpSpeed: 0
+  _restartLerpSpeed: 1.5
   _respawnAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -434,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604093a680e6d5a488206647cc35be23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 2
+  _componentIndexCache: 3
   _addedNetworkObject: {fileID: -1370599907157453828}
   _networkObjectCache: {fileID: -1370599907157453828}
   Target: {fileID: 5467285084242854812}
