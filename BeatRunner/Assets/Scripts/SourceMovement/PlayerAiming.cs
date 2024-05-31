@@ -36,7 +36,7 @@ public class PlayerAiming : NetworkBehaviour
 
 	private void Update()
 	{
-		if (base.IsOwner)
+		if (!base.IsOwner)
 			return;
 		
 		// Fix pausing
