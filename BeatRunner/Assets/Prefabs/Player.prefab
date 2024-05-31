@@ -167,7 +167,7 @@ Transform:
   m_GameObject: {fileID: 5467285084242854813}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.8200264, y: 3.54, z: 11.299115}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -192,21 +192,21 @@ MonoBehaviour:
   _networkObjectCache: {fileID: -1370599907157453828}
   Cam: {fileID: 3739622192143396194}
   CamScript: {fileID: 4665491517851878246}
-  colliderSize: {x: 1, y: 2.6, z: 1}
-  weight: 75
-  rigidbodyPushForce: 2
-  solidCollider: 0
-  viewTransform: {fileID: 1217767472598878372}
-  playerRotationTransform: {fileID: 5467285084242854812}
-  crouchingHeightMultiplier: 0.5
-  crouchingSpeed: 10
-  crouchingEnabled: 1
-  slidingEnabled: 0
-  laddersEnabled: 1
-  supportAngledLadders: 1
-  useStepOffset: 0
-  stepOffset: 0.35
-  movementConfig:
+  ColliderSize: {x: 1, y: 2, z: 1}
+  Weight: 75
+  RigidbodyPushForce: 2
+  SolidCollider: 0
+  ViewTransform: {fileID: 1217767472598878372}
+  PlayerRotationTransform: {fileID: 5467285084242854812}
+  CrouchingHeightMultiplier: 0.5
+  CrouchingSpeed: 10
+  CrouchingEnabled: 1
+  SlidingEnabled: 0
+  LaddersEnabled: 1
+  SupportAngledLadders: 1
+  UseStepOffset: 0
+  StepOffset: 0.35
+  MovementConfig:
     autoBhop: 1
     gravity: 20
     jumpForce: 6.5
@@ -214,11 +214,11 @@ MonoBehaviour:
     maxSpeed: 6
     maxVelocity: 50
     slopeLimit: 45
-    clampAirSpeed: 0
-    airCap: 1.2
-    airAcceleration: 28
+    clampAirSpeed: 1
+    airCap: 0.4
+    airAcceleration: 12
     airFriction: 0.4
-    walkSpeed: 20
+    walkSpeed: 7
     sprintSpeed: 12
     acceleration: 14
     deceleration: 10
@@ -281,7 +281,7 @@ MonoBehaviour:
   <SerializedRootNetworkBehaviour>k__BackingField: {fileID: 0}
   <NestedRootNetworkBehaviours>k__BackingField: []
   SerializedTransformProperties:
-    Position: {x: 5.8200264, y: 3.54, z: 11.299115}
+    Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     LocalScale: {x: 1, y: 1, z: 1}
   _isNetworked: 1

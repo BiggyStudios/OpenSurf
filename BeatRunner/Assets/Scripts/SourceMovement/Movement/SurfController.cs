@@ -1,38 +1,40 @@
-using UnityEngine;
+using Fragsurf.Movement;
 using Fragsurf.TraceUtil;
+using UnityEngine;
 
-namespace Fragsurf.Movement {
+namespace SourceMovement.Movement
+{
     public class SurfController {
 
         ///// Fields /////
 
-        [HideInInspector] public Transform playerTransform;
+        [HideInInspector] public Transform PlayerTransform;
         private ISurfControllable _surfer;
         private MovementConfig _config;
         private float _deltaTime;
 
-        public bool jumping = false;
-        public bool crouching = false;
-        public float speed = 0f;
+        public bool Jumping;
+        public bool Crouching;
+        public float Speed;
         
-        public Transform camera;
-        public float cameraYPos = 0f;
+        public Transform Camera;
+        public float CameraYPos = 0f;
 
-        private float slideSpeedCurrent = 0f;
-        private Vector3 slideDirection = Vector3.forward;
+        private float _slideSpeedCurrent;
+        private Vector3 _slideDirection = Vector3.forward;
 
-        private bool sliding = false;
-        private bool wasSliding = false;
-        private float slideDelay = 0f;
+        private bool _sliding;
+        private bool _wasSliding;
+        private float _slideDelay;
         
-        private bool uncrouchDown = false;
-        private float crouchLerp = 0f;
+        private bool _uncrouchDown;
+        private float _crouchLerp;
 
-        private float frictionMult = 1f;
+        private float _frictionMult = 1f;
 
         ///// Methods /////
 
-        Vector3 groundNormal = Vector3.up;
+        Vector3 _groundNormal = Vector3.up;
 
         /// <summary>
         /// 
@@ -58,7 +60,7 @@ namespace Fragsurf.Movement {
             } else if (!_surfer.moveData.underwater) {
 
                 if (_surfer.moveData.velocity.y <= 0f)
-                    jumping = false;
+                    Jumping = false;
 
                 // apply gravity
                 if (_surfer.groundObject == null) {
@@ -82,7 +84,7 @@ namespace Fragsurf.Movement {
             float yVel = _surfer.moveData.velocity.y;
             _surfer.moveData.velocity.y = 0f;
             _surfer.moveData.velocity = Vector3.ClampMagnitude (_surfer.moveData.velocity, _config.maxVelocity);
-            speed =  _surfer.moveData.velocity.magnitude;
+            Speed =  _surfer.moveData.velocity.magnitude;
             _surfer.moveData.velocity.y = yVel;
             
             if (_surfer.moveData.velocity.sqrMagnitude == 0f) {
@@ -132,7 +134,7 @@ namespace Fragsurf.Movement {
                     // AIR MOVEMENT
                     */
 
-                    wasSliding = false;
+                    _wasSliding = false;
 
                     // apply movement from input
                     _surfer.moveData.velocity += AirInputMovement ();
@@ -147,49 +149,49 @@ namespace Fragsurf.Movement {
                     */
 
                     // Sliding
-                    if (!wasSliding) {
+                    if (!_wasSliding) {
 
-                        slideDirection = new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z).normalized;
-                        slideSpeedCurrent = Mathf.Max (_config.maximumSlideSpeed, new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z).magnitude);
+                        _slideDirection = new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z).normalized;
+                        _slideSpeedCurrent = Mathf.Max (_config.maximumSlideSpeed, new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z).magnitude);
 
                     }
 
-                    sliding = false;
-                    if (_surfer.moveData.velocity.magnitude > _config.minimumSlideSpeed && _surfer.moveData.slidingEnabled && _surfer.moveData.crouching && slideDelay <= 0f) {
+                    _sliding = false;
+                    if (_surfer.moveData.velocity.magnitude > _config.minimumSlideSpeed && _surfer.moveData.slidingEnabled && _surfer.moveData.crouching && _slideDelay <= 0f) {
 
-                        if (!wasSliding)
-                            slideSpeedCurrent = Mathf.Clamp (slideSpeedCurrent * _config.slideSpeedMultiplier, _config.minimumSlideSpeed, _config.maximumSlideSpeed);
+                        if (!_wasSliding)
+                            _slideSpeedCurrent = Mathf.Clamp (_slideSpeedCurrent * _config.slideSpeedMultiplier, _config.minimumSlideSpeed, _config.maximumSlideSpeed);
 
-                        sliding = true;
-                        wasSliding = true;
+                        _sliding = true;
+                        _wasSliding = true;
                         SlideMovement ();
                         return;
 
                     } else {
 
-                        if (slideDelay > 0f)
-                            slideDelay -= _deltaTime;
+                        if (_slideDelay > 0f)
+                            _slideDelay -= _deltaTime;
 
-                        if (wasSliding)
-                            slideDelay = _config.slideDelay;
+                        if (_wasSliding)
+                            _slideDelay = _config.slideDelay;
 
-                        wasSliding = false;
+                        _wasSliding = false;
 
                     }
                     
-                    float fric = crouching ? _config.crouchFriction : _config.friction;
-                    float accel = crouching ? _config.crouchAcceleration : _config.acceleration;
-                    float decel = crouching ? _config.crouchDeceleration : _config.deceleration;
+                    float fric = Crouching ? _config.crouchFriction : _config.friction;
+                    float accel = Crouching ? _config.crouchAcceleration : _config.acceleration;
+                    float decel = Crouching ? _config.crouchDeceleration : _config.deceleration;
                     
                     // Get movement directions
-                    Vector3 forward = Vector3.Cross (groundNormal, -playerTransform.right);
-                    Vector3 right = Vector3.Cross (groundNormal, forward);
+                    Vector3 forward = Vector3.Cross (_groundNormal, -PlayerTransform.right);
+                    Vector3 right = Vector3.Cross (_groundNormal, forward);
                     
                     float speed = _surfer.moveData.sprinting ? _config.walkSpeed : _config.sprintSpeed;
-                    if (crouching)
+                    if (Crouching)
                         speed = _config.crouchSpeed;
 
-                    Vector3 _wishDir;
+                    Vector3 wishDir;
 
                     // Jump and friction
                     if (_surfer.moveData.wishJump) {
@@ -200,26 +202,26 @@ namespace Fragsurf.Movement {
 
                     } else {
 
-                        ApplyFriction (1.0f * frictionMult, true, true);
+                        ApplyFriction (1.0f * _frictionMult, true, true);
 
                     }
 
                     float forwardMove = _surfer.moveData.verticalAxis;
                     float rightMove = _surfer.moveData.horizontalAxis;
 
-                    _wishDir = forwardMove * forward + rightMove * right;
-                    _wishDir.Normalize ();
-                    Vector3 moveDirNorm = _wishDir;
+                    wishDir = forwardMove * forward + rightMove * right;
+                    wishDir.Normalize ();
+                    Vector3 moveDirNorm = wishDir;
 
-                    Vector3 forwardVelocity = Vector3.Cross (groundNormal, Quaternion.AngleAxis (-90, Vector3.up) * new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z));
+                    Vector3 forwardVelocity = Vector3.Cross (_groundNormal, Quaternion.AngleAxis (-90, Vector3.up) * new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z));
 
                     // Set the target speed of the player
-                    float _wishSpeed = _wishDir.magnitude;
-                    _wishSpeed *= speed;
+                    float wishSpeed = wishDir.magnitude;
+                    wishSpeed *= speed;
 
                     // Accelerate
                     float yVel = _surfer.moveData.velocity.y;
-                    Accelerate (_wishDir, _wishSpeed, accel * Mathf.Min (frictionMult, 1f), false);
+                    Accelerate (wishDir, wishSpeed, accel * Mathf.Min (_frictionMult, 1f), false);
 
                     float maxVelocityMagnitude = _config.maxVelocity;
                     _surfer.moveData.velocity = Vector3.ClampMagnitude (new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z), maxVelocityMagnitude);
@@ -229,7 +231,7 @@ namespace Fragsurf.Movement {
                     float yVelocityNew = forwardVelocity.normalized.y * new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z).magnitude;
 
                     // Apply the Y-movement from slopes
-                    _surfer.moveData.velocity.y = yVelocityNew * (_wishDir.y < 0f ? 1.2f : 1.0f);
+                    _surfer.moveData.velocity.y = yVelocityNew * (wishDir.y < 0f ? 1.2f : 1.0f);
                     float removableYVelocity = _surfer.moveData.velocity.y - yVelocityNew;
 
                 }
@@ -258,29 +260,29 @@ namespace Fragsurf.Movement {
             ApplyFriction (1f, true, false);
 
             // Get movement directions
-            Vector3 forward = Vector3.Cross (groundNormal, -playerTransform.right);
-            Vector3 right = Vector3.Cross (groundNormal, forward);
+            Vector3 forward = Vector3.Cross (_groundNormal, -PlayerTransform.right);
+            Vector3 right = Vector3.Cross (_groundNormal, forward);
 
             float speed = _config.underwaterSwimSpeed;
 
-            Vector3 _wishDir;
+            Vector3 wishDir;
 
             float forwardMove = _surfer.moveData.verticalAxis;
             float rightMove = _surfer.moveData.horizontalAxis;
 
-            _wishDir = forwardMove * forward + rightMove * right;
-            _wishDir.Normalize ();
-            Vector3 moveDirNorm = _wishDir;
+            wishDir = forwardMove * forward + rightMove * right;
+            wishDir.Normalize ();
+            Vector3 moveDirNorm = wishDir;
 
-            Vector3 forwardVelocity = Vector3.Cross (groundNormal, Quaternion.AngleAxis (-90, Vector3.up) * new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z));
+            Vector3 forwardVelocity = Vector3.Cross (_groundNormal, Quaternion.AngleAxis (-90, Vector3.up) * new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z));
 
             // Set the target speed of the player
-            float _wishSpeed = _wishDir.magnitude;
-            _wishSpeed *= speed;
+            float wishSpeed = wishDir.magnitude;
+            wishSpeed *= speed;
 
             // Accelerate
             float yVel = _surfer.moveData.velocity.y;
-            Accelerate (_wishDir, _wishSpeed, accel, false);
+            Accelerate (wishDir, wishSpeed, accel, false);
 
             float maxVelocityMagnitude = _config.maxVelocity;
             _surfer.moveData.velocity = Vector3.ClampMagnitude (new Vector3 (_surfer.moveData.velocity.x, 0f, _surfer.moveData.velocity.z), maxVelocityMagnitude);
@@ -296,8 +298,8 @@ namespace Fragsurf.Movement {
             _surfer.moveData.velocity.y = Mathf.Min (Mathf.Max (0f, yVelocityNew) + yVelStored, speed);
 
             // Jumping out of water
-            bool movingForwards = playerTransform.InverseTransformVector (_surfer.moveData.velocity).z > 0f;
-            Trace waterJumpTrace = TraceBounds (playerTransform.position, playerTransform.position + playerTransform.forward * 0.1f, SurfPhysics.groundLayerMask);
+            bool movingForwards = PlayerTransform.InverseTransformVector (_surfer.moveData.velocity).z > 0f;
+            Trace waterJumpTrace = TraceBounds (PlayerTransform.position, PlayerTransform.position + PlayerTransform.forward * 0.1f, SurfPhysics.groundLayerMask);
             if (waterJumpTrace.hitCollider != null && Vector3.Angle (Vector3.up, waterJumpTrace.planeNormal) >= _config.slopeLimit && Input.GetButton ("Jump") && !_surfer.moveData.cameraUnderwater && movingForwards)
                 _surfer.moveData.velocity.y = Mathf.Max (_surfer.moveData.velocity.y, _config.jumpForce);
 
@@ -401,65 +403,65 @@ namespace Fragsurf.Movement {
         private void Accelerate (Vector3 wishDir, float wishSpeed, float acceleration, bool yMovement) {
 
             // Initialise variables
-            float _addSpeed;
-            float _accelerationSpeed;
-            float _currentSpeed;
+            float addSpeed;
+            float accelerationSpeed;
+            float currentSpeed;
             
             // again, no idea
-            _currentSpeed = Vector3.Dot (_surfer.moveData.velocity, wishDir);
-            _addSpeed = wishSpeed - _currentSpeed;
+            currentSpeed = Vector3.Dot (_surfer.moveData.velocity, wishDir);
+            addSpeed = wishSpeed - currentSpeed;
 
             // If you're not actually increasing your speed, stop here.
-            if (_addSpeed <= 0)
+            if (addSpeed <= 0)
                 return;
 
             // won't bother trying to understand any of this, really
-            _accelerationSpeed = Mathf.Min (acceleration * _deltaTime * wishSpeed, _addSpeed);
+            accelerationSpeed = Mathf.Min (acceleration * _deltaTime * wishSpeed, addSpeed);
 
             // Add the velocity.
-            _surfer.moveData.velocity.x += _accelerationSpeed * wishDir.x;
-            if (yMovement) { _surfer.moveData.velocity.y += _accelerationSpeed * wishDir.y; }
-            _surfer.moveData.velocity.z += _accelerationSpeed * wishDir.z;
+            _surfer.moveData.velocity.x += accelerationSpeed * wishDir.x;
+            if (yMovement) { _surfer.moveData.velocity.y += accelerationSpeed * wishDir.y; }
+            _surfer.moveData.velocity.z += accelerationSpeed * wishDir.z;
 
         }
 
         private void ApplyFriction (float t, bool yAffected, bool grounded) {
 
             // Initialise variables
-            Vector3 _vel = _surfer.moveData.velocity;
-            float _speed;
-            float _newSpeed;
-            float _control;
-            float _drop;
+            Vector3 vel = _surfer.moveData.velocity;
+            float speed;
+            float newSpeed;
+            float control;
+            float drop;
 
             // Set Y to 0, speed to the magnitude of movement and drop to 0. I think drop is the amount of speed that is lost, but I just stole this from the internet, idk.
-            _vel.y = 0.0f;
-            _speed = _vel.magnitude;
-            _drop = 0.0f;
+            vel.y = 0.0f;
+            speed = vel.magnitude;
+            drop = 0.0f;
 
-            float fric = crouching ? _config.crouchFriction : _config.friction;
-            float accel = crouching ? _config.crouchAcceleration : _config.acceleration;
-            float decel = crouching ? _config.crouchDeceleration : _config.deceleration;
+            float fric = Crouching ? _config.crouchFriction : _config.friction;
+            float accel = Crouching ? _config.crouchAcceleration : _config.acceleration;
+            float decel = Crouching ? _config.crouchDeceleration : _config.deceleration;
 
             // Only apply friction if the player is grounded
             if (grounded) {
                 
                 // i honestly have no idea what this does tbh
-                _vel.y = _surfer.moveData.velocity.y;
-                _control = _speed < decel ? decel : _speed;
-                _drop = _control * fric * _deltaTime * t;
+                vel.y = _surfer.moveData.velocity.y;
+                control = speed < decel ? decel : speed;
+                drop = control * fric * _deltaTime * t;
 
             }
 
             // again, no idea, but comments look cool
-            _newSpeed = Mathf.Max (_speed - _drop, 0f);
-            if (_speed > 0.0f)
-                _newSpeed /= _speed;
+            newSpeed = Mathf.Max (speed - drop, 0f);
+            if (speed > 0.0f)
+                newSpeed /= speed;
 
             // Set the end-velocity
-            _surfer.moveData.velocity.x *= _newSpeed;
-            if (yAffected == true) { _surfer.moveData.velocity.y *= _newSpeed; }
-            _surfer.moveData.velocity.z *= _newSpeed;
+            _surfer.moveData.velocity.x *= newSpeed;
+            if (yAffected == true) { _surfer.moveData.velocity.y *= newSpeed; }
+            _surfer.moveData.velocity.z *= newSpeed;
 
         }
 
@@ -525,7 +527,7 @@ namespace Fragsurf.Movement {
                 _surfer.moveData.wishJump = false;
             
             _surfer.moveData.velocity.y += _config.jumpForce;
-            jumping = true;
+            Jumping = true;
 
         }
 
@@ -540,7 +542,7 @@ namespace Fragsurf.Movement {
 
             float groundSteepness = Vector3.Angle (Vector3.up, trace.planeNormal);
 
-            if (trace.hitCollider == null || groundSteepness > _config.slopeLimit || (jumping && _surfer.moveData.velocity.y > 0f)) {
+            if (trace.hitCollider == null || groundSteepness > _config.slopeLimit || (Jumping && _surfer.moveData.velocity.y > 0f)) {
 
                 SetGround (null);
 
@@ -551,7 +553,7 @@ namespace Fragsurf.Movement {
 
             } else {
 
-                groundNormal = trace.planeNormal;
+                _groundNormal = trace.planeNormal;
                 SetGround (trace.hitCollider.gameObject);
                 return true;
 
@@ -601,94 +603,57 @@ namespace Fragsurf.Movement {
 
         }
 
-        public void Crouch (ISurfControllable surfer, MovementConfig config, float deltaTime) {
-
+        public void Crouch (ISurfControllable surfer, MovementConfig config, float deltaTime)
+        {
             _surfer = surfer;
             _config = config;
             _deltaTime = deltaTime;
 
-            if (_surfer == null)
-                return;
-
-            if (_surfer.collider == null)
-                return;
+            if (_surfer == null) return;
+            if (_surfer.collider == null) return;
 
             bool grounded = _surfer.groundObject != null;
             bool wantsToCrouch = _surfer.moveData.crouching;
-
             float crouchingHeight = Mathf.Clamp (_surfer.moveData.crouchingHeight, 0.01f, 1f);
             float heightDifference = _surfer.moveData.defaultHeight - _surfer.moveData.defaultHeight * crouchingHeight;
+            BoxCollider boxCollider = (BoxCollider)_surfer.collider;
+            
+            if (grounded) _uncrouchDown = false;
 
-            if (grounded)
-                uncrouchDown = false;
-
-            // Crouching input
-            if (grounded)
-                crouchLerp = Mathf.Lerp (crouchLerp, wantsToCrouch ? 1f : 0f, _deltaTime * _surfer.moveData.crouchingSpeed);
-            else if (!grounded && !wantsToCrouch && crouchLerp < 0.95f)
-                crouchLerp = 0f;
-            else if (!grounded && wantsToCrouch)
-                crouchLerp = 1f;
-
+            _crouchLerp = Mathf.Lerp (_crouchLerp, wantsToCrouch ? 1f : 0f, _deltaTime * _surfer.moveData.crouchingSpeed);
+            var collSizeY = Mathf.Lerp(_surfer.moveData.defaultHeight, _surfer.moveData.defaultHeight * crouchingHeight, _crouchLerp);
+            boxCollider.size = new Vector3 (boxCollider.size.x, collSizeY, boxCollider.size.z);
+            
             // Collider and position changing
-            if (crouchLerp > 0.9f && !crouching) {
-                
-                // Begin crouching
-                crouching = true;
-                if (_surfer.collider.GetType () == typeof (BoxCollider)) {
-
-                    // Box collider
-                    BoxCollider boxCollider = (BoxCollider)_surfer.collider;
-                    boxCollider.size = new Vector3 (boxCollider.size.x, _surfer.moveData.defaultHeight * crouchingHeight, boxCollider.size.z);
-
-                } else if (_surfer.collider.GetType () == typeof (CapsuleCollider)) {
-
-                    // Capsule collider
-                    CapsuleCollider capsuleCollider = (CapsuleCollider)_surfer.collider;
-                    capsuleCollider.height = _surfer.moveData.defaultHeight * crouchingHeight;
-
-                }
+            if (_crouchLerp > 0.9f && !Crouching)
+            {
+                Crouching = true;
 
                 // Move position and stuff
                 _surfer.moveData.origin += heightDifference / 2 * (grounded ? Vector3.down : Vector3.up);
-                foreach (Transform child in playerTransform) {
-
+                foreach (Transform child in PlayerTransform)
+                {
                     if (child == _surfer.moveData.viewTransform)
                         continue;
 
                     child.localPosition = new Vector3 (child.localPosition.x, child.localPosition.y * crouchingHeight, child.localPosition.z);
-
                 }
 
-                uncrouchDown = !grounded;
+                _uncrouchDown = !grounded;
 
-            } else if (crouching) {
-
+            }
+            else if (Crouching)
+            {
                 // Check if the player can uncrouch
                 bool canUncrouch = true;
                 if (_surfer.collider.GetType () == typeof (BoxCollider)) {
 
                     // Box collider
-                    BoxCollider boxCollider = (BoxCollider)_surfer.collider;
                     Vector3 halfExtents = boxCollider.size * 0.5f;
                     Vector3 startPos = boxCollider.transform.position;
-                    Vector3 endPos = boxCollider.transform.position + (uncrouchDown ? Vector3.down : Vector3.up) * heightDifference;
+                    Vector3 endPos = boxCollider.transform.position + (_uncrouchDown ? Vector3.down : Vector3.up) * heightDifference;
 
                     Trace trace = Tracer.TraceBox (startPos, endPos, halfExtents, boxCollider.contactOffset, SurfPhysics.groundLayerMask);
-
-                    if (trace.hitCollider != null)
-                        canUncrouch = false;
-
-                } else if (_surfer.collider.GetType () == typeof (CapsuleCollider)) {
-
-                    // Capsule collider
-                    CapsuleCollider capsuleCollider = (CapsuleCollider)_surfer.collider;
-                    Vector3 point1 = capsuleCollider.center + Vector3.up * capsuleCollider.height * 0.5f;
-                    Vector3 point2 = capsuleCollider.center + Vector3.down * capsuleCollider.height * 0.5f;
-                    Vector3 startPos = capsuleCollider.transform.position;
-                    Vector3 endPos = capsuleCollider.transform.position + (uncrouchDown ? Vector3.down : Vector3.up) * heightDifference;
-
-                    Trace trace = Tracer.TraceCapsule (point1, point2, capsuleCollider.radius, startPos, endPos, capsuleCollider.contactOffset, SurfPhysics.groundLayerMask);
 
                     if (trace.hitCollider != null)
                         canUncrouch = false;
@@ -696,26 +661,13 @@ namespace Fragsurf.Movement {
                 }
 
                 // Uncrouch
-                if (canUncrouch && crouchLerp <= 0.9f) {
+                if (canUncrouch && _crouchLerp <= 0.9f) {
 
-                    crouching = false;
-                    if (_surfer.collider.GetType () == typeof (BoxCollider)) {
-
-                        // Box collider
-                        BoxCollider boxCollider = (BoxCollider)_surfer.collider;
-                        boxCollider.size = new Vector3 (boxCollider.size.x, _surfer.moveData.defaultHeight, boxCollider.size.z);
-
-                    } else if (_surfer.collider.GetType () == typeof (CapsuleCollider)) {
-
-                        // Capsule collider
-                        CapsuleCollider capsuleCollider = (CapsuleCollider)_surfer.collider;
-                        capsuleCollider.height = _surfer.moveData.defaultHeight;
-
-                    }
+                    Crouching = false;
 
                     // Move position and stuff
-                    _surfer.moveData.origin += heightDifference / 2 * (uncrouchDown ? Vector3.down : Vector3.up);
-                    foreach (Transform child in playerTransform) {
+                    _surfer.moveData.origin += heightDifference / 2 * (_uncrouchDown ? Vector3.down : Vector3.up);
+                    foreach (Transform child in PlayerTransform) {
 
                         child.localPosition = new Vector3 (child.localPosition.x, child.localPosition.y / crouchingHeight, child.localPosition.z);
 
@@ -724,36 +676,36 @@ namespace Fragsurf.Movement {
                 }
 
                 if (!canUncrouch)
-                    crouchLerp = 1f;
+                    _crouchLerp = 1f;
 
             }
 
             // Changing camera position
-            if (!crouching)
-                _surfer.moveData.viewTransform.localPosition = Vector3.Lerp (_surfer.moveData.viewTransformDefaultLocalPos, _surfer.moveData.viewTransformDefaultLocalPos * crouchingHeight + Vector3.down * heightDifference * 0.5f, crouchLerp);
+            if (!Crouching)
+                _surfer.moveData.viewTransform.localPosition = Vector3.Lerp (_surfer.moveData.viewTransformDefaultLocalPos, _surfer.moveData.viewTransformDefaultLocalPos * crouchingHeight + Vector3.down * heightDifference * 0.5f, _crouchLerp);
             else
-                _surfer.moveData.viewTransform.localPosition = Vector3.Lerp (_surfer.moveData.viewTransformDefaultLocalPos - Vector3.down * heightDifference * 0.5f, _surfer.moveData.viewTransformDefaultLocalPos * crouchingHeight, crouchLerp);
+                _surfer.moveData.viewTransform.localPosition = Vector3.Lerp (_surfer.moveData.viewTransformDefaultLocalPos - Vector3.down * heightDifference * 0.5f, _surfer.moveData.viewTransformDefaultLocalPos * crouchingHeight, _crouchLerp);
 
         }
 
         void SlideMovement () {
             
             // Gradually change direction
-            slideDirection += new Vector3 (groundNormal.x, 0f, groundNormal.z) * slideSpeedCurrent * _deltaTime;
-            slideDirection = slideDirection.normalized;
+            _slideDirection += new Vector3 (_groundNormal.x, 0f, _groundNormal.z) * (_slideSpeedCurrent * _deltaTime);
+            _slideDirection = _slideDirection.normalized;
 
             // Set direction
-            Vector3 slideForward = Vector3.Cross (groundNormal, Quaternion.AngleAxis (-90, Vector3.up) * slideDirection);
+            Vector3 slideForward = Vector3.Cross (_groundNormal, Quaternion.AngleAxis (-90, Vector3.up) * _slideDirection);
             
             // Set the velocity
-            slideSpeedCurrent -= _config.slideFriction * _deltaTime;
-            slideSpeedCurrent = Mathf.Clamp (slideSpeedCurrent, 0f, _config.maximumSlideSpeed);
-            slideSpeedCurrent -= (slideForward * slideSpeedCurrent).y * _deltaTime * _config.downhillSlideSpeedMultiplier; // Accelerate downhill (-y = downward, - * - = +)
+            _slideSpeedCurrent -= _config.slideFriction * _deltaTime;
+            _slideSpeedCurrent = Mathf.Clamp (_slideSpeedCurrent, 0f, _config.maximumSlideSpeed);
+            _slideSpeedCurrent -= (slideForward * _slideSpeedCurrent).y * _deltaTime * _config.downhillSlideSpeedMultiplier; // Accelerate downhill (-y = downward, - * - = +)
 
-            _surfer.moveData.velocity = slideForward * slideSpeedCurrent;
+            _surfer.moveData.velocity = slideForward * _slideSpeedCurrent;
             
             // Jump
-            if (_surfer.moveData.wishJump && slideSpeedCurrent < _config.minimumSlideSpeed * _config.slideSpeedMultiplier) {
+            if (_surfer.moveData.wishJump && _slideSpeedCurrent < _config.minimumSlideSpeed * _config.slideSpeedMultiplier) {
 
                 Jump ();
                 return;

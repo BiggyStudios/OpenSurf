@@ -1,11 +1,9 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FishNet.Object;
-using UnityEngine.Rendering;
+using Fragsurf.Movement;
+using UnityEngine;
 
-namespace Fragsurf.Movement {
+namespace SourceMovement.Movement {
 
     /// <summary>
     /// Easily add a surfable character to the scene
@@ -24,35 +22,36 @@ namespace Fragsurf.Movement {
         public PlayerAiming CamScript;
         
         [Header("Physics Settings")]
-        public Vector3 colliderSize = new Vector3 (1f, 2f, 1f);
-        [HideInInspector] public ColliderType collisionType { get { return ColliderType.Box; } } // Capsule doesn't work anymore; I'll have to figure out why some other time, sorry.
-        public float weight = 75f;
-        public float rigidbodyPushForce = 2f;
-        public bool solidCollider = false;
+        public Vector3 ColliderSize = new(1f, 2f, 1f);
+
+        public ColliderType CollisionType => ColliderType.Box;
+        public float Weight = 75f;
+        public float RigidbodyPushForce = 2f;
+        public bool SolidCollider;
 
         [Header("View Settings")]
-        public Transform viewTransform;
-        public Transform playerRotationTransform;
+        public Transform ViewTransform;
+        public Transform PlayerRotationTransform;
 
         [Header ("Crouching setup")]
-        public float crouchingHeightMultiplier = 0.5f;
-        public float crouchingSpeed = 10f;
-        float defaultHeight;
-        bool allowCrouch = true; // This is separate because you shouldn't be able to toggle crouching on and off during gameplay for various reasons
+        public float CrouchingHeightMultiplier = 0.5f;
+        public float CrouchingSpeed = 10f;
+        float _defaultHeight;
+        bool _allowCrouch = true; // This is separate because you shouldn't be able to toggle crouching on and off during gameplay for various reasons
 
         [Header ("Features")]
-        public bool crouchingEnabled = true;
-        public bool slidingEnabled = false;
-        public bool laddersEnabled = true;
-        public bool supportAngledLadders = true;
+        public bool CrouchingEnabled = true;
+        public bool SlidingEnabled = false;
+        public bool LaddersEnabled = true;
+        public bool SupportAngledLadders = true;
 
         [Header ("Step offset (can be buggy, enable at your own risk)")]
-        public bool useStepOffset = false;
-        public float stepOffset = 0.35f;
+        public bool UseStepOffset = false;
+        public float StepOffset = 0.35f;
 
         [Header ("Movement Config")]
         [SerializeField]
-        public MovementConfig movementConfig;
+        public MovementConfig MovementConfig;
         
         private GameObject _groundObject;
         private Vector3 _baseVelocity;
@@ -66,17 +65,17 @@ namespace Fragsurf.Movement {
         private MoveData _moveData = new MoveData ();
         private SurfController _controller = new SurfController ();
 
-        private Rigidbody rb;
+        private Rigidbody _rb;
 
-        private List<Collider> triggers = new List<Collider> ();
-        private int numberOfTriggers = 0;
+        private List<Collider> _triggers = new List<Collider> ();
+        private int _numberOfTriggers = 0;
 
-        private bool underwater = false;
+        private bool _underwater = false;
 
         ///// Properties /////
 
         public MoveType moveType { get { return MoveType.Walk; } }
-        public MovementConfig moveConfig { get { return movementConfig; } }
+        public MovementConfig MoveConfig { get { return MovementConfig; } }
         public MoveData moveData { get { return _moveData; } }
         public new Collider collider { get { return _collider; } }
 
@@ -89,25 +88,25 @@ namespace Fragsurf.Movement {
 
         public Vector3 baseVelocity { get { return _baseVelocity; } }
 
-        public Vector3 forward { get { return viewTransform.forward; } }
-        public Vector3 right { get { return viewTransform.right; } }
-        public Vector3 up { get { return viewTransform.up; } }
+        public Vector3 forward { get { return ViewTransform.forward; } }
+        public Vector3 right { get { return ViewTransform.right; } }
+        public Vector3 up { get { return ViewTransform.up; } }
 
-        Vector3 prevPosition;
+        Vector3 _prevPosition;
 
         ///// Methods /////
         
 		private void OnDrawGizmos()
 		{
 			Gizmos.color = Color.red;
-			Gizmos.DrawWireCube( transform.position, colliderSize );
+			Gizmos.DrawWireCube( transform.position, ColliderSize );
 		}
 
         public override void OnStartClient()
         {
             base.OnStartClient();
             
-            if (!base.IsOwner)
+            if (!IsOwner)
             {
                 Cam.SetActive(false);
             }
@@ -115,12 +114,12 @@ namespace Fragsurf.Movement {
 
         private void Awake () {
             
-            _controller.playerTransform = playerRotationTransform;
+            _controller.PlayerTransform = PlayerRotationTransform;
             
-            if (viewTransform != null) {
+            if (ViewTransform != null) {
 
-                _controller.camera = viewTransform;
-                _controller.cameraYPos = viewTransform.localPosition.y;
+                _controller.Camera = ViewTransform;
+                _controller.CameraYPos = ViewTransform.localPosition.y;
 
             }
 
@@ -138,49 +137,49 @@ namespace Fragsurf.Movement {
             // Water check
             _cameraWaterCheckObject = new GameObject ("Camera water check");
             _cameraWaterCheckObject.layer = gameObject.layer;
-            _cameraWaterCheckObject.transform.position = viewTransform.position;
+            _cameraWaterCheckObject.transform.position = ViewTransform.position;
 
-            SphereCollider _cameraWaterCheckSphere = _cameraWaterCheckObject.AddComponent<SphereCollider> ();
-            _cameraWaterCheckSphere.radius = 0.1f;
-            _cameraWaterCheckSphere.isTrigger = true;
+            SphereCollider cameraWaterCheckSphere = _cameraWaterCheckObject.AddComponent<SphereCollider> ();
+            cameraWaterCheckSphere.radius = 0.1f;
+            cameraWaterCheckSphere.isTrigger = true;
 
-            Rigidbody _cameraWaterCheckRb = _cameraWaterCheckObject.AddComponent<Rigidbody> ();
-            _cameraWaterCheckRb.useGravity = false;
-            _cameraWaterCheckRb.isKinematic = true;
+            Rigidbody cameraWaterCheckRb = _cameraWaterCheckObject.AddComponent<Rigidbody> ();
+            cameraWaterCheckRb.useGravity = false;
+            cameraWaterCheckRb.isKinematic = true;
 
             _cameraWaterCheck = _cameraWaterCheckObject.AddComponent<CameraWaterCheck> ();
 
-            prevPosition = transform.position;
+            _prevPosition = transform.position;
 
-            if (viewTransform == null)
-                viewTransform = Camera.main.transform;
+            if (ViewTransform == null)
+                ViewTransform = Camera.main.transform;
 
-            if (playerRotationTransform == null && transform.childCount > 0)
-                playerRotationTransform = transform.GetChild (0);
+            if (PlayerRotationTransform == null && transform.childCount > 0)
+                PlayerRotationTransform = transform.GetChild (0);
 
             _collider = gameObject.GetComponent<Collider> ();
 
             if (_collider != null)
-                GameObject.Destroy (_collider);
+                Destroy (_collider);
 
             //rigidbody is required to collide with triggers
-            rb = gameObject.GetComponent<Rigidbody> ();
-            if (rb == null)
-                rb = gameObject.AddComponent<Rigidbody> ();
+            _rb = gameObject.GetComponent<Rigidbody> ();
+            if (_rb == null)
+                _rb = gameObject.AddComponent<Rigidbody> ();
 
-            allowCrouch = crouchingEnabled;
+            _allowCrouch = CrouchingEnabled;
 
-            rb.isKinematic = true;
-            rb.useGravity = false;
-            rb.angularDrag = 0f;
-            rb.drag = 0f;
-            rb.mass = weight;
+            _rb.isKinematic = true;
+            _rb.useGravity = false;
+            _rb.angularDrag = 0f;
+            _rb.drag = 0f;
+            _rb.mass = Weight;
             
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible   = false;
 
 
-            switch (collisionType) {
+            switch (CollisionType) {
 
                 // Box collider
                 case ColliderType.Box:
@@ -188,9 +187,9 @@ namespace Fragsurf.Movement {
                 _collider = _colliderObject.AddComponent<BoxCollider> ();
 
                 var boxc = (BoxCollider)_collider;
-                boxc.size = colliderSize;
+                boxc.size = ColliderSize;
 
-                defaultHeight = boxc.size.y;
+                _defaultHeight = boxc.size.y;
 
                 break;
 
@@ -200,43 +199,43 @@ namespace Fragsurf.Movement {
                 _collider = _colliderObject.AddComponent<CapsuleCollider> ();
 
                 var capc = (CapsuleCollider)_collider;
-                capc.height = colliderSize.y;
-                capc.radius = colliderSize.x / 2f;
+                capc.height = ColliderSize.y;
+                capc.radius = ColliderSize.x / 2f;
 
-                defaultHeight = capc.height;
+                _defaultHeight = capc.height;
 
                 break;
 
             }
 
-            _moveData.slopeLimit = movementConfig.slopeLimit;
+            _moveData.slopeLimit = MovementConfig.slopeLimit;
 
-            _moveData.rigidbodyPushForce = rigidbodyPushForce;
+            _moveData.rigidbodyPushForce = RigidbodyPushForce;
 
-            _moveData.slidingEnabled = slidingEnabled;
-            _moveData.laddersEnabled = laddersEnabled;
-            _moveData.angledLaddersEnabled = supportAngledLadders;
+            _moveData.slidingEnabled = SlidingEnabled;
+            _moveData.laddersEnabled = LaddersEnabled;
+            _moveData.angledLaddersEnabled = SupportAngledLadders;
 
             _moveData.playerTransform = transform;
-            _moveData.viewTransform = viewTransform;
-            _moveData.viewTransformDefaultLocalPos = viewTransform.localPosition;
+            _moveData.viewTransform = ViewTransform;
+            _moveData.viewTransformDefaultLocalPos = ViewTransform.localPosition;
 
-            _moveData.defaultHeight = defaultHeight;
-            _moveData.crouchingHeight = crouchingHeightMultiplier;
-            _moveData.crouchingSpeed = crouchingSpeed;
+            _moveData.defaultHeight = _defaultHeight;
+            _moveData.crouchingHeight = CrouchingHeightMultiplier;
+            _moveData.crouchingSpeed = CrouchingSpeed;
             
-            _collider.isTrigger = !solidCollider;
+            _collider.isTrigger = !SolidCollider;
             _moveData.origin = transform.position;
             _startPosition = transform.position;
 
-            _moveData.useStepOffset = useStepOffset;
-            _moveData.stepOffset = stepOffset;
+            _moveData.useStepOffset = UseStepOffset;
+            _moveData.stepOffset = StepOffset;
 
         }
 
         private void Update()
         {
-            if (!base.IsOwner)
+            if (!IsOwner)
                 return;
             
             _colliderObject.transform.rotation = Quaternion.identity;
@@ -246,39 +245,39 @@ namespace Fragsurf.Movement {
             //UpdateTestBinds ();
             
             // Previous movement code
-            Vector3 positionalMovement = transform.position - prevPosition;
-            transform.position = prevPosition;
+            Vector3 positionalMovement = transform.position - _prevPosition;
+            transform.position = _prevPosition;
             moveData.origin += positionalMovement;
 
             // Triggers
-            if (numberOfTriggers != triggers.Count) {
-                numberOfTriggers = triggers.Count;
+            if (_numberOfTriggers != _triggers.Count) {
+                _numberOfTriggers = _triggers.Count;
 
-                underwater = false;
-                triggers.RemoveAll (item => item == null);
-                foreach (Collider trigger in triggers) {
+                _underwater = false;
+                _triggers.RemoveAll (item => item == null);
+                foreach (Collider trigger in _triggers) {
 
                     if (trigger == null)
                         continue;
 
                     if (trigger.GetComponentInParent<Water> ())
-                        underwater = true;
+                        _underwater = true;
 
                 }
 
             }
 
             _moveData.cameraUnderwater = _cameraWaterCheck.IsUnderwater ();
-            _cameraWaterCheckObject.transform.position = viewTransform.position;
-            moveData.underwater = underwater;
+            _cameraWaterCheckObject.transform.position = ViewTransform.position;
+            moveData.underwater = _underwater;
             
-            if (allowCrouch)
-                _controller.Crouch (this, movementConfig, Time.deltaTime);
+            if (_allowCrouch)
+                _controller.Crouch (this, MovementConfig, Time.deltaTime);
 
-            _controller.ProcessMovement (this, movementConfig, Time.deltaTime);
+            _controller.ProcessMovement (this, MovementConfig, Time.deltaTime);
 
             transform.position = moveData.origin;
-            prevPosition = transform.position;
+            _prevPosition = transform.position;
 
             _colliderObject.transform.rotation = Quaternion.identity;
         }
@@ -319,16 +318,16 @@ namespace Fragsurf.Movement {
             if (!moveLeft && !moveRight)
                 _moveData.sideMove = 0f;
             else if (moveLeft)
-                _moveData.sideMove = -moveConfig.acceleration;
+                _moveData.sideMove = -MoveConfig.acceleration;
             else if (moveRight)
-                _moveData.sideMove = moveConfig.acceleration;
+                _moveData.sideMove = MoveConfig.acceleration;
 
             if (!moveFwd && !moveBack)
                 _moveData.forwardMove = 0f;
             else if (moveFwd)
-                _moveData.forwardMove = moveConfig.acceleration;
+                _moveData.forwardMove = MoveConfig.acceleration;
             else if (moveBack)
-                _moveData.forwardMove = -moveConfig.acceleration;
+                _moveData.forwardMove = -MoveConfig.acceleration;
             
             if (Input.GetKeyDown(KeyCode.Space))
                 _moveData.wishJump = true;
@@ -371,15 +370,15 @@ namespace Fragsurf.Movement {
 
         private void OnTriggerEnter (Collider other) {
             
-            if (!triggers.Contains (other))
-                triggers.Add (other);
+            if (!_triggers.Contains (other))
+                _triggers.Add (other);
 
         }
 
         private void OnTriggerExit (Collider other) {
             
-            if (triggers.Contains (other))
-                triggers.Remove (other);
+            if (_triggers.Contains (other))
+                _triggers.Remove (other);
 
         }
 
