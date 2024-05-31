@@ -210,16 +210,16 @@ MonoBehaviour:
     gravity: 20
     jumpForce: 6.5
     friction: 6
-    maxSpeed: 10
-    maxVelocity: 80
+    maxSpeed: 6
+    maxVelocity: 50
     slopeLimit: 45
     clampAirSpeed: 0
-    airCap: 0
-    airAcceleration: 35
-    airFriction: 0.2
-    walkSpeed: 5
-    sprintSpeed: 8
-    acceleration: 24
+    airCap: 1.2
+    airAcceleration: 28
+    airFriction: 0.4
+    walkSpeed: 20
+    sprintSpeed: 12
+    acceleration: 14
     deceleration: 10
     crouchSpeed: 4
     crouchAcceleration: 8
