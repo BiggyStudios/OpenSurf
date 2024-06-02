@@ -22,16 +22,24 @@ public class PlayerManager : NetworkBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+            Restart();
+        
         if (transform.position.y < -50)
         {
-            if (_restartPlayerCoroutine != null)
-            {
-                StopCoroutine(_restartPlayerCoroutine);
-                _restartPlayerCoroutine = StartCoroutine(RestartPlayerRoutine());
-            }
+            Restart();
+        }
+    }
 
+    private void Restart()
+    {
+        if (_restartPlayerCoroutine != null)
+        {
+            StopCoroutine(_restartPlayerCoroutine);
             _restartPlayerCoroutine = StartCoroutine(RestartPlayerRoutine());
         }
+
+        _restartPlayerCoroutine = StartCoroutine(RestartPlayerRoutine());
     }
 
     private Coroutine _restartPlayerCoroutine;
@@ -49,5 +57,7 @@ public class PlayerManager : NetworkBehaviour
 
             yield return null;
         }
+
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }

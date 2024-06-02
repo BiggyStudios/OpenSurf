@@ -8,6 +8,10 @@ public class Bouncepad : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out PlayerMovement playerMovement))
-            playerMovement.gameObject.GetComponent<Rigidbody>().AddForce(_launchForce, ForceMode.Impulse);
+        {
+            Rigidbody playerRb = playerMovement.gameObject.GetComponent<Rigidbody>();
+            playerRb.velocity = Vector3.zero;
+            playerRb.AddForce(_launchForce, ForceMode.Impulse);
+        }
     }
 }
