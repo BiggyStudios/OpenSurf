@@ -1,6 +1,7 @@
 using System;
 using FishNet.Object;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -33,12 +34,13 @@ public class PlayerMovement : NetworkBehaviour
     
     public float jumpForce = 550f;
     
+    private bool _readyToJump = true;
+    
     private bool _playerRespawnining;
     private float _threshold = 0.01f;
     private Vector3 _crouchScale = new Vector3(1, 0.5f, 1);
     private Vector3 _playerScale;
     
-    private bool _readyToJump = true;
     private float _jumpCooldown = 0.25f;
     
     private float x, y;
@@ -205,7 +207,7 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    private void ResetJump()
+    public void ResetJump()
     {
         _readyToJump = true;
     }
