@@ -61,6 +61,7 @@ public class PlayerMovement : NetworkBehaviour
 
         if (!base.IsOwner)
         {
+            _cam.enabled = false;
             Destroy(_rb);
         }
     }
@@ -226,6 +227,7 @@ public class PlayerMovement : NetworkBehaviour
 
         playerCam.transform.localRotation = Quaternion.Euler(_xRotation, desiredX, CameraTilt);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+        _playerMesh.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }
 
     private void CounterMovement(float x, float y, Vector2 mag)

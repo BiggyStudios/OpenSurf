@@ -22,6 +22,9 @@ public class PlayerManager : NetworkBehaviour
 
     private void Update()
     {
+        if (!base.IsOwner)
+            return;
+        
         if (Input.GetKeyDown(KeyCode.R))
             Restart();
         

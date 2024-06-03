@@ -1,6 +1,7 @@
+using FishNet.Object;
 using UnityEngine;
 
-public class WallRunning : MonoBehaviour
+public class WallRunning : NetworkBehaviour
 {
     [SerializeField] private GameObject PlayerCamObject;
     [SerializeField] private Camera PlayerCam;
@@ -44,6 +45,9 @@ public class WallRunning : MonoBehaviour
 
     void Update()
     {
+        if (!base.IsOwner)
+            return;
+        
         if (PlayerMovementScript.WallRunningEnabled)
         {
             CheckForWall();
