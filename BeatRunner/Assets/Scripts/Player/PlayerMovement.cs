@@ -8,8 +8,11 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Rigidbody _rb;
     
     [SerializeField] private Camera _cam;
+    [SerializeField] private DynamicCamera _dynamicCamera;
 
     [SerializeField] private GameObject _playerMesh;
+    [SerializeField] private MeshRenderer _playerMeshRenderer;
+    [SerializeField] private MeshRenderer _glassesMeshRenderer;
 
     public bool WallRunningEnabled;
     public bool WallRunCameraEffects;
@@ -62,7 +65,15 @@ public class PlayerMovement : NetworkBehaviour
         if (!base.IsOwner)
         {
             _cam.enabled = false;
+            _playerMeshRenderer.enabled = true;
+            _glassesMeshRenderer.enabled = true;
             Destroy(_rb);
+        }
+
+        if (base.IsOwner)
+        {
+            _playerMeshRenderer.enabled = false;
+            _glassesMeshRenderer.enabled = false;
         }
     }
 
@@ -129,15 +140,12 @@ public class PlayerMovement : NetworkBehaviour
                 _rb.AddForce(orientation.transform.forward * slideForce);
             }
         }
-
-        _playerMesh.GetComponent<MeshRenderer>().enabled = false;
     }
 
     private void StopCrouch()
     {
         _playerMesh.transform.localScale = _playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-        _playerMesh.GetComponent<MeshRenderer>().enabled = true;
     }
 
     private void Movement()
@@ -194,6 +202,7 @@ public class PlayerMovement : NetworkBehaviour
         if (grounded && _readyToJump)
         {
             _readyToJump = false;
+            _dynamicCamera.OnJump();
 
             _rb.AddForce(Vector2.up * jumpForce * 1.5f);
             _rb.AddForce(_normalVector * jumpForce * 0.5f);
