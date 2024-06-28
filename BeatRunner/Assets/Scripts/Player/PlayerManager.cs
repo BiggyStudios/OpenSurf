@@ -60,7 +60,5 @@ public class PlayerManager : NetworkBehaviour
 
             yield return null;
         }
-
-        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }

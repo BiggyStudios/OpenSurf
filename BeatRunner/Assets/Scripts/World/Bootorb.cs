@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Bootball : MonoBehaviour
 {
+   /*
    private void OnTriggerEnter(Collider other)
    {
       if (other.TryGetComponent(out PlayerMovement playerMovement))
@@ -14,4 +15,5 @@ public class Bootball : MonoBehaviour
       if (other.TryGetComponent(out PlayerMovement playerMovement))
          playerMovement.grounded = false;
    }
+   */
 }

@@ -1,13 +1,25 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DynamicCamera : MonoBehaviour
 {
-   private Animator _animator;
+    [SerializeField] private AnimationCurve _movementCurve;
+    [SerializeField] private float _curveTime;
+    [SerializeField] private float _speed;
 
-   private void Start() => _animator = GetComponent<Animator>();
+    [HideInInspector] public Transform Target;
 
-   public void OnJump() => _animator.SetTrigger("Jump");
+    private void Update() => MoveCamera();
 
-   public void OnLand() => _animator.SetTrigger("Land");
+    private void MoveCamera()
+    {
+        float curvePos = (Time.time % _curveTime) / _curveTime;
+        float movementOffset = _movementCurve.Evaluate(curvePos);
+
+        Vector3 desiredPos = Target.position + new Vector3(0, movementOffset, 0);
+        Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, _speed * Time.deltaTime);
+
+        transform.position = smoothedPos;
+    }
 }

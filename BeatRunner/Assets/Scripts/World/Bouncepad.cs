@@ -1,4 +1,5 @@
 using System;
+using BananaUtils.OnScreenDebugger.Scripts;
 using UnityEngine;
 
 public class Bouncepad : MonoBehaviour
@@ -7,11 +8,6 @@ public class Bouncepad : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerMovement playerMovement))
-        {
-            Rigidbody playerRb = playerMovement.gameObject.GetComponent<Rigidbody>();
-            playerRb.velocity = Vector3.zero;
-            playerRb.AddForce(_launchForce, ForceMode.Impulse);
-        }
+        
     }
 }
