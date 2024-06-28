@@ -1,7 +1,7 @@
 [submodule "BeatRunner/Assets/NnUtils"]
 	path = BeatRunner/Assets/NnUtils
 	url = https://www.github.com/nnra6864/NnUtils.git
-	branch = master
+	branch = 2022
 [submodule "BeatRunner/Assets/BananaUtils"]
 	path = BeatRunner/Assets/BananaUtils
 	url = https://github.com/IckyTheBiggy/BananaUtils.git
