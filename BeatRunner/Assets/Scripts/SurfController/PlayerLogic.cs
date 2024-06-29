@@ -29,6 +29,8 @@ namespace P90brush
 
         #region =============================== Private Properties ===============================#
 
+        private PlayerManager _playerManager;
+        
         //Var set in Start() callback
         private Rigidbody _rb;
         private Collider _collider;
@@ -83,6 +85,7 @@ namespace P90brush
                 _playerMeshRenderer.enabled = true;
                 _glassesMeshRenderer.enabled = true;
                 Destroy(_rb);
+                this.enabled = false;
             }
 
             if (base.IsOwner)
@@ -95,6 +98,7 @@ namespace P90brush
         void Start()
         {
             // Setup RB
+            _playerManager = GetComponent<PlayerManager>();
             _rb = GetComponent<Rigidbody>();
             _rb.isKinematic = true;
             _rb.freezeRotation = true; //Encore utile ??
@@ -125,8 +129,7 @@ namespace P90brush
 
         void FixedUpdate() {
             if (InputData.ResetPressed) {
-                PlayerData.Velocity = Vector3.zero;
-                PlayerData.Origin = _startPosition;
+                _playerManager.Restart();
             }
 
             float fixedDeltaTime = Time.fixedDeltaTime;

@@ -166,7 +166,6 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: -1370599907157453828}
   _networkObjectCache: {fileID: -1370599907157453828}
-  _spawnPosition: {x: 0, y: 5, z: 0}
   _restartLerpSpeed: 1.5
   _respawnAnimationCurve:
     serializedVersion: 2
@@ -244,18 +243,18 @@ MonoBehaviour:
     Gravity: 24
     AutoBhop: 1
     AirCap: 0.575
-    AirAccel: 800
-    Accel: 10
+    AirAccel: 1600
+    Accel: 14
     Friction: 4
-    AirFriction: 0.25
+    AirFriction: 0.1
     StopSpeed: 1.905
     JumpPower: 8
     JumpHeight: 1.5
-    MaxSpeed: 8
-    MaxVelocity: 100
+    MaxSpeed: 12
+    MaxVelocity: 200
     StepSize: 0.5
-    XSens: 300
-    YSens: 300
+    XSens: 240
+    YSens: 240
     MoveLeft: 97
     MoveRight: 100
     MoveForward: 119

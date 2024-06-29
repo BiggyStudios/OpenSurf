@@ -1,5 +1,6 @@
 using System;
 using BananaUtils.OnScreenDebugger.Scripts;
+using P90brush;
 using UnityEngine;
 
 public class Bouncepad : MonoBehaviour
@@ -8,6 +9,9 @@ public class Bouncepad : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.TryGetComponent(out PlayerLogic playerLogic))
+        {
+            playerLogic.PlayerData.Velocity += _launchForce;
+        }
     }
 }
