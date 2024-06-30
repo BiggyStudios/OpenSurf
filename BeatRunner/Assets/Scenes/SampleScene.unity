@@ -636,27 +636,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7725755088834153449, guid: b8352c69f28770248bf34eb3274c40b2, type: 3}
   m_PrefabInstance: {fileID: 553685065}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &40919622
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40919614}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 74.42294, y: 41.748535, z: 77.469124}
-  m_Center: {x: -32.788563, y: 12.137787, z: 5.7561083}
 --- !u!114 &40919623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,7 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadDistance: 100
+  _loadDistance: 150
   _positionOfffset: 20
   _lerpSpeed: 4
 --- !u!1 &65284393 stripped
@@ -715,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadDistance: 100
+  _loadDistance: 150
   _positionOfffset: 20
   _lerpSpeed: 4
 --- !u!1 &116704761
@@ -799,7 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadDistance: 100
+  _loadDistance: 150
   _positionOfffset: 20
   _lerpSpeed: 4
 --- !u!43 &292260998
@@ -4870,9 +4849,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7725755088834153452, guid: b8352c69f28770248bf34eb3274c40b2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 40919622}
-    - targetCorrespondingSourceObject: {fileID: 7725755088834153452, guid: b8352c69f28770248bf34eb3274c40b2, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 40919623}
   m_SourcePrefab: {fileID: 100100000, guid: b8352c69f28770248bf34eb3274c40b2, type: 3}
 --- !u!1 &606581207
@@ -5488,7 +5464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadDistance: 100
+  _loadDistance: 150
   _positionOfffset: 20
   _lerpSpeed: 4
 --- !u!43 &868417067
@@ -5885,7 +5861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadDistance: 100
+  _loadDistance: 150
   _positionOfffset: 20
   _lerpSpeed: 4
 --- !u!1 &1450203985
@@ -9641,7 +9617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadDistance: 100
+  _loadDistance: 150
   _positionOfffset: 20
   _lerpSpeed: 4
 --- !u!43 &1858482455
@@ -10086,7 +10062,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 419605327837087760, guid: ac01df30f08664a69b1b159cff86cd47, type: 3}
       propertyPath: m_Volume
-      value: 0.034
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 419605327837087760, guid: ac01df30f08664a69b1b159cff86cd47, type: 3}
       propertyPath: m_Enabled
