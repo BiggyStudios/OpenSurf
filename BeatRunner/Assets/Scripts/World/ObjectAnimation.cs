@@ -21,6 +21,11 @@ public class ObjectAnimation : MonoBehaviour
     private Quaternion _startRotation;
     private Vector3 _randomPos;
     private Quaternion _randomRot;
+    private float _elapsedTime;
+
+    private Vector3 _startLerpPos;
+    private Vector3 _startLerpScale;
+    private Quaternion _startLerpRot;
 
     private void Start()
     {
@@ -54,58 +59,51 @@ public class ObjectAnimation : MonoBehaviour
         
         float distance = Vector3.Distance(PlayerManager.Instance.PlayerTransform.position, _startPosition);
 
-        if (distance <= _loadDistance && !_animated)
+        if (distance <= _loadDistance)
         {
-            AnimateObject(true);
-            _animated = true;
-        }
-
-        else if (distance > _loadDistance && _animated)
-        {
-            AnimateObject(false);
-            _animated = false;
-        }
-    }
-
-    private void AnimateObject(bool animate)
-    {
-        if (_animateCoroutine != null)
-        {
-            StopCoroutine(_animateCoroutine);
-            _animateCoroutine = StartCoroutine(AnimateRoutine(animate));
-        }
-
-        _animateCoroutine = StartCoroutine(AnimateRoutine(animate));
-    }
-    
-
-    private Coroutine _animateCoroutine;
-    private IEnumerator AnimateRoutine(bool animate)
-    {
-        Vector3 startPos = transform.position;
-        Vector3 startScale = transform.localScale;
-        Quaternion startRot = transform.rotation;
-        float lerpPos = 0f;
-
-        while (lerpPos < 1f)
-        {
-            lerpPos = Mathf.Clamp01(Time.deltaTime / _lerpSpeed + lerpPos);
+            if (!_animated)
+            {
+                _elapsedTime = 0f;
+                
+                _startLerpPos = transform.position;
+                _startLerpScale = transform.localScale;
+                _startLerpRot = transform.rotation;
+                
+                _animated = true;
+            }
+            
+            _elapsedTime += Time.deltaTime;
+            float lerpPos = _elapsedTime / _lerpSpeed;
             float t = _animationCurve.Evaluate(lerpPos);
 
-            transform.position =
-                animate ? Vector3.Lerp(startPos, _startPosition, t) : Vector3.Lerp(startPos, _randomPos, t);
-            
-            transform.localScale = 
-                animate ? Vector3.Lerp(startScale, _startScale, t) : Vector3.Lerp(startScale, Vector3.zero, t);
+            transform.position = Vector3.Lerp(_startLerpPos, _startPosition, t);
 
-            transform.rotation =
-                animate ? Quaternion.Lerp(startRot, _startRotation, t) : Quaternion.Lerp(startRot, _randomRot, t);
+            transform.localScale = Vector3.Lerp(_startLerpScale, _startScale, t);
 
-            yield return null;
+            transform.rotation = Quaternion.Lerp(_startLerpRot, _startRotation, t);
         }
 
-        transform.position = animate ? _startPosition : _randomPos;
-        transform.localScale = animate ? _startScale : Vector3.zero;
-        transform.rotation = animate ? _startRotation : _randomRot;
+        else if (distance > _loadDistance)
+        {
+            if (_animated)
+            {
+                _elapsedTime = 0f;
+                _startLerpPos = transform.position;
+                _startLerpScale = transform.localScale;
+                _startLerpRot = transform.rotation;
+                
+                _animated = false;
+            }
+            
+            _elapsedTime += Time.deltaTime;
+            float lerpPos = _elapsedTime / _lerpSpeed;
+            float t = _animationCurve.Evaluate(lerpPos);
+            
+            transform.position = Vector3.Lerp(_startLerpPos, _randomPos, t);
+            
+            transform.localScale = Vector3.Lerp(_startLerpScale, Vector3.zero, t);
+
+            transform.rotation = Quaternion.Lerp(_startLerpRot, _randomRot, t);
+        }
     }
 }

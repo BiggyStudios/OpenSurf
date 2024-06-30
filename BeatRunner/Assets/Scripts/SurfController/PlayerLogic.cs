@@ -11,11 +11,10 @@ namespace P90brush
         public float _walkSpeed = 80f;
         public float _jumpForce = 40f;
 
-        [SerializeField] private TMP_Text _speed;
-
         [Header("TEMP")] 
         [SerializeField] private MeshRenderer _glassesMeshRenderer;
         [SerializeField] private GameObject _ui;
+        [SerializeField] private TMP_Text _speed;
         
         [Header("Physics Settings")]
         public int _tickRate = 128;

@@ -3,6 +3,7 @@ using System.Collections;
 using FishNet.Object;
 using P90brush;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : NetworkBehaviour
 {
@@ -11,9 +12,14 @@ public class PlayerManager : NetworkBehaviour
     
     [Header("Values")] [SerializeField] private float _restartLerpSpeed;
     [SerializeField] private AnimationCurve _respawnAnimationCurve;
+
+    [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private Slider _fovSlider;
     
     private CapsuleCollider _capsuleCollider;
     private Vector3 _spawnPosition;
+    private bool _pauseMenuOpen;
+    private Camera _playerCam;
 
     private PlayerLogic _playerLogic;
 
@@ -36,6 +42,9 @@ public class PlayerManager : NetworkBehaviour
         _playerLogic = GetComponent<PlayerLogic>();
         _spawnPosition = transform.position;
         _capsuleCollider = GetComponent<CapsuleCollider>();
+        _playerCam = GetComponentInChildren<Camera>();
+
+        _fovSlider.value = _playerCam.fieldOfView;
     }
 
     private void Update()
@@ -47,6 +56,28 @@ public class PlayerManager : NetworkBehaviour
         {
             Restart();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !_pauseMenuOpen)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            _pauseMenuOpen = true;
+            _pauseMenu.SetActive(true);
+        }
+
+         else if (Input.GetKeyDown(KeyCode.Escape) && _pauseMenuOpen)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            
+            _pauseMenuOpen = false;
+            _pauseMenu.SetActive(false);
+        }
+
+
+        if (_pauseMenuOpen)
+            _playerCam.fieldOfView = _fovSlider.value;
     }
 
 
