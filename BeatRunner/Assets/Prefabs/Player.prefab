@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5512652028484515465}
   - component: {fileID: 4404288972215627156}
   - component: {fileID: 8893189470614260203}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
     AutoBhop: 1
     AirCap: 0.575
     AirAccel: 1600
-    Accel: 14
+    Accel: 8
     Friction: 4
     AirFriction: 0.1
     StopSpeed: 1.905

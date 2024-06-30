@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerManager : NetworkBehaviour
 {
+    public static PlayerManager Instance { get; private set; }
+    [HideInInspector] public Transform PlayerTransform;
+    
     [Header("Values")] [SerializeField] private float _restartLerpSpeed;
     [SerializeField] private AnimationCurve _respawnAnimationCurve;
 
@@ -17,6 +20,12 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+
+        if (base.IsOwner)
+        {
+            Instance = this;
+            PlayerTransform = transform;
+        }
 
         if (!base.IsOwner)
             Destroy(this);
@@ -34,7 +43,7 @@ public class PlayerManager : NetworkBehaviour
         if (!base.IsOwner)
             return;
 
-        if (transform.position.y < -50)
+        if (transform.position.y < -300)
         {
             Restart();
         }
