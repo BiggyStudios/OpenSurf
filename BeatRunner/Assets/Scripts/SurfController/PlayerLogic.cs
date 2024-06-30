@@ -1,4 +1,6 @@
-﻿using FishNet.Object;
+﻿using BananaUtils.OnScreenDebugger.Scripts;
+using FishNet.Object;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +11,11 @@ namespace P90brush
         public float _walkSpeed = 80f;
         public float _jumpForce = 40f;
 
+        [SerializeField] private TMP_Text _speed;
+
         [Header("TEMP")] 
-        [SerializeField] private MeshRenderer _playerMeshRenderer;
         [SerializeField] private MeshRenderer _glassesMeshRenderer;
+        [SerializeField] private GameObject _ui;
         
         [Header("Physics Settings")]
         public int _tickRate = 128;
@@ -82,15 +86,14 @@ namespace P90brush
             if (!base.IsOwner)
             {
                 _fpsCamera.enabled = false;
-                _playerMeshRenderer.enabled = true;
                 _glassesMeshRenderer.enabled = true;
                 Destroy(_rb);
+                Destroy(_ui);
                 this.enabled = false;
             }
 
             if (base.IsOwner)
             {
-                _playerMeshRenderer.enabled = false;
                 _glassesMeshRenderer.enabled = false;
             }
         }
@@ -125,6 +128,8 @@ namespace P90brush
             InputData.Update(moveConfig);
             UpdateHook();
             UpdateViewAngle();
+
+            _speed.text = PlayerData.Velocity.magnitude.ToString();
         }
 
         void FixedUpdate() {

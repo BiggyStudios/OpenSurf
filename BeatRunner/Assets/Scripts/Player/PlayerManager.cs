@@ -11,7 +11,7 @@ public class PlayerManager : NetworkBehaviour
     
     [Header("Values")] [SerializeField] private float _restartLerpSpeed;
     [SerializeField] private AnimationCurve _respawnAnimationCurve;
-
+    
     private CapsuleCollider _capsuleCollider;
     private Vector3 _spawnPosition;
 
