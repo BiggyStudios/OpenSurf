@@ -6,11 +6,13 @@ using UnityEngine;
 
 public class PlayerTimer : NetworkBehaviour
 {
+    [SerializeField] private LayerMask _finishLayer;
     [SerializeField] private TMP_Text _timerText;
 
     private void Update()
     {
         UpdateTimer();
+        CheckFinish();
     }
 
     private void UpdateTimer()
@@ -18,13 +20,18 @@ public class PlayerTimer : NetworkBehaviour
         PlayerManager.Instance.PlayerTime += Time.deltaTime;
         _timerText.text = PlayerManager.Instance.PlayerTime.ToString();
     }
-    
-    private void OnTriggerEnter(Collider other)
+
+    private void CheckFinish()
     {
-        if (other.CompareTag("FinishPlatform"))
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -transform.up, out hit, 2f))
         {
-            PlayerManager.Instance.Restart();
-            Scoreboard.SetTime(PlayerManager.Instance.Username, PlayerManager.Instance.PlayerTime);
+            if (hit.transform.CompareTag("FinishPlatform"))
+            {
+                PlayerManager.Instance.Restart();
+                Scoreboard.SetTime(PlayerManager.Instance.Username, PlayerManager.Instance.PlayerTime);
+            }
         }
+            
     }
 }
