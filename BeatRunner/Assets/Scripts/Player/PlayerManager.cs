@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using FishNet.Object;
 using P90brush;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +14,12 @@ public class PlayerManager : NetworkBehaviour
     [Header("Values")] [SerializeField] private float _restartLerpSpeed;
     [SerializeField] private AnimationCurve _respawnAnimationCurve;
 
+    [Header("UI")]
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private Slider _fovSlider;
+    [SerializeField] private TMP_Text _playerTimeText;
+
+    [HideInInspector] public float PlayerTime;
     
     private CapsuleCollider _capsuleCollider;
     private Vector3 _spawnPosition;
@@ -78,6 +83,15 @@ public class PlayerManager : NetworkBehaviour
 
         if (_pauseMenuOpen)
             _playerCam.fieldOfView = _fovSlider.value;
+
+        PlayerTime += Time.deltaTime;
+        
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        _playerTimeText.text = PlayerTime.ToString();
     }
 
 
@@ -113,6 +127,13 @@ public class PlayerManager : NetworkBehaviour
 
         _playerLogic.PlayerData.Origin = _spawnPosition;
         _playerLogic.PlayerData.Velocity = Vector3.zero;
+        PlayerTime = 0f;
         _capsuleCollider.enabled = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("FinishPlatform"))
+            Restart();
     }
 }
