@@ -2,14 +2,18 @@ using System;
 using System.Collections;
 using FishNet.Object;
 using P90brush;
+using BNNUtils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerManager : NetworkBehaviour
 {
     public static PlayerManager Instance { get; private set; }
     [HideInInspector] public Transform PlayerTransform;
+    [HideInInspector] public string Username;
+    [HideInInspector] public float PlayerTime;
     
     [Header("Values")] [SerializeField] private float _restartLerpSpeed;
     [SerializeField] private AnimationCurve _respawnAnimationCurve;
@@ -17,9 +21,7 @@ public class PlayerManager : NetworkBehaviour
     [Header("UI")]
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private Slider _fovSlider;
-    [SerializeField] private TMP_Text _playerTimeText;
-
-    [HideInInspector] public float PlayerTime;
+    [SerializeField] private TMP_InputField _username;
     
     private CapsuleCollider _capsuleCollider;
     private Vector3 _spawnPosition;
@@ -38,8 +40,18 @@ public class PlayerManager : NetworkBehaviour
             PlayerTransform = transform;
         }
 
+        Username = OwnerId.ToString();
+        Scoreboard.OnPlayerJoined(Username);
+
         if (!base.IsOwner)
             Destroy(this);
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        
+        Scoreboard.OnPlayerLeft(Username);
     }
 
     private void Start()
@@ -83,15 +95,6 @@ public class PlayerManager : NetworkBehaviour
 
         if (_pauseMenuOpen)
             _playerCam.fieldOfView = _fovSlider.value;
-
-        PlayerTime += Time.deltaTime;
-        
-        UpdateUI();
-    }
-
-    private void UpdateUI()
-    {
-        _playerTimeText.text = PlayerTime.ToString();
     }
 
 
@@ -104,6 +107,11 @@ public class PlayerManager : NetworkBehaviour
         }
 
         _restartPlayerCoroutine = StartCoroutine(RestartPlayerRoutine());
+    }
+
+    public void SetUsername()
+    {
+        Scoreboard.SetUsername(Instance.Username, _username.text);
     }
 
     private Coroutine _restartPlayerCoroutine;
@@ -129,11 +137,5 @@ public class PlayerManager : NetworkBehaviour
         _playerLogic.PlayerData.Velocity = Vector3.zero;
         PlayerTime = 0f;
         _capsuleCollider.enabled = true;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("FinishPlatform"))
-            Restart();
     }
 }
