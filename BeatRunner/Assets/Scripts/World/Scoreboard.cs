@@ -34,8 +34,6 @@ public class Scoreboard : NetworkBehaviour
         ScoreboardItemScript _playerScore = Instantiate(Instance._scorePrefab, Instance._scoreboardPanelTransform);
         Instance._playerScores.Add(playerID, _playerScore);
         _playerScore.Init(playerID);
-        
-        Instance.ExistingUsers.Add(playerID);
     }
 
     public static void OnPlayerLeft(string playerID)
@@ -47,38 +45,22 @@ public class Scoreboard : NetworkBehaviour
         }
     }
 
-    public static void SetTime(string playerID, float time)
-    {
-        Instance.SetTimeServerRpc(playerID, time);
-    }
+    public static void SetTime(string playerID, float time) => Instance.SetTimeServerRpc(playerID, time);
 
     [ServerRpc (RequireOwnership = false)]
-    private void SetTimeServerRpc(string playerID, float time)
-    { 
-        SetTimeObservers(playerID, time);
-    }
+    private void SetTimeServerRpc(string playerID, float time) => SetTimeObservers(playerID, time);
 
     [ObserversRpc]
-    private void SetTimeObservers(string playerID, float time)
-    {
-        Instance._playerScores[playerID].SetTime(time);
-    }
+    private void SetTimeObservers(string playerID, float time) => Instance._playerScores[playerID].SetTime(time);
 
-    public static void SetUsername(string playerID, string username)
-    {
-        Instance.SetUsernameServerRpc(playerID, username);
-    }
+    public static void SetUsername(string playerID, string username) => Instance.SetUsernameServerRpc(playerID, username);
 
     [ServerRpc(RequireOwnership = false)]
-    private void SetUsernameServerRpc(string playerID, string username)
-    {
-        Instance.SetUsernameObservers(playerID, username);
-    }
+    private void SetUsernameServerRpc(string playerID, string username) => Instance.SetUsernameObservers(playerID, username);
 
     [ObserversRpc]
     private void SetUsernameObservers(string playerID, string username)
     {
         Instance._playerScores[playerID].SetUsername(username);
     }
-
 }

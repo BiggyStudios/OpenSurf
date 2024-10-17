@@ -14,6 +14,7 @@ public class PlayerManager : NetworkBehaviour
     [HideInInspector] public Transform PlayerTransform;
     [HideInInspector] public string Username;
     [HideInInspector] public float PlayerTime;
+    [HideInInspector] public bool TimerActive;
     
     [Header("Values")] [SerializeField] private float _restartLerpSpeed;
     [SerializeField] private AnimationCurve _respawnAnimationCurve;
@@ -135,6 +136,7 @@ public class PlayerManager : NetworkBehaviour
 
         _playerLogic.PlayerData.Origin = _spawnPosition;
         _playerLogic.PlayerData.Velocity = Vector3.zero;
+        TimerActive = false;
         PlayerTime = 0f;
         _capsuleCollider.enabled = true;
     }

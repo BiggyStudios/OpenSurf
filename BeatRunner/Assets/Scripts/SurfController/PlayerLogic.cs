@@ -122,6 +122,9 @@ namespace P90brush
             if (PauseMenu.GameIsPaused) {
                 return;
             }
+            
+            if (InputData.JumpPressed && !PlayerManager.Instance.TimerActive)
+                PlayerManager.Instance.TimerActive = true;
 
             // Updates
             InputData.Update(moveConfig);
