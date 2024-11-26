@@ -9,14 +9,15 @@ using UnityEngine.Scripting;
 
 namespace FishNet.Object.Prediction
 {
-#if !PREDICTION_1
     [Preserve]
-    public static class PredictionRigidbodySerializers
+    [DefaultWriter]
+    public static class PredictionigidbodySerializers
     {
+        [DefaultWriter]
         public static void WriteEntryData(this Writer w, PredictionRigidbody.EntryData value)
         {
             PredictionRigidbody.ForceApplicationType appType = value.Type;
-            w.WriteByte((byte)appType);
+            w.WriteUInt8Unpacked((byte)appType);
             PredictionRigidbody.AllForceData data = value.Data;
 
             switch (appType)
@@ -46,15 +47,16 @@ namespace FishNet.Object.Prediction
             }
         }
 
+        [DefaultReader]
         public static PredictionRigidbody.EntryData ReadEntryData(this Reader r)
         {
-            PredictionRigidbody.EntryData fd = new PredictionRigidbody.EntryData();
+            PredictionRigidbody.EntryData fd = new();
 
-            PredictionRigidbody.ForceApplicationType appType = (PredictionRigidbody.ForceApplicationType)r.ReadByte();
+            PredictionRigidbody.ForceApplicationType appType = (PredictionRigidbody.ForceApplicationType)r.ReadUInt8Unpacked();
             fd.Type = appType;
 
             PredictionRigidbody.AllForceData data = new();
-            
+
             switch (appType)
             {
                 case PredictionRigidbody.ForceApplicationType.AddTorque:
@@ -85,15 +87,16 @@ namespace FishNet.Object.Prediction
             return fd;
         }
 
+        [DefaultWriter]
         public static void WritePredictionRigidbody(this Writer w, PredictionRigidbody pr)
         {
             w.Write(pr.Rigidbody.GetState());
             w.WriteList(pr.GetPendingForces());
         }
 
+        [DefaultReader]
         public static PredictionRigidbody ReadPredictionRigidbody(this Reader r)
         {
-
             List<PredictionRigidbody.EntryData> lst = CollectionCaches<PredictionRigidbody.EntryData>.RetrieveList();
 
             RigidbodyState rs = r.Read<RigidbodyState>();
@@ -104,6 +107,25 @@ namespace FishNet.Object.Prediction
             return pr;
         }
 
+        [DefaultDeltaWriter]
+        public static bool WriteDeltaEntryData(this Writer w, PredictionRigidbody.EntryData value)
+        {
+            w.WriteEntryData(value);
+            return true;
+        }
+
+        [DefaultDeltaReader]
+        public static PredictionRigidbody.EntryData ReadDeltaEntryData(this Reader r) => r.ReadEntryData();
+        
+        [DefaultDeltaWriter]
+        public static bool WriteDeltaPredictionRigidbody(this Writer w, PredictionRigidbody pr)
+        {
+            w.WritePredictionRigidbody(pr);
+            return true;
+        }
+        
+        [DefaultDeltaReader]
+        public static PredictionRigidbody ReadDeltaPredictionRigidbody(this Reader r) => r.ReadPredictionRigidbody();
     }
 
     [UseGlobalCustomSerializer]
@@ -156,7 +178,9 @@ namespace FishNet.Object.Prediction
                 Mode = mode;
             }
         }
+
         public interface IForceData { }
+
         //How the force was applied.
         [System.Flags]
         public enum ForceApplicationType : byte
@@ -180,6 +204,7 @@ namespace FishNet.Object.Prediction
                 Type = type;
                 Data = data;
             }
+
             public EntryData(EntryData fd)
             {
                 Type = fd.Type;
@@ -193,6 +218,10 @@ namespace FishNet.Object.Prediction
         /// Rigidbody which force is applied.
         /// </summary>
         public Rigidbody Rigidbody { get; private set; }
+        /// <summary>
+        /// Returns if there are any pending forces.
+        /// </summary>
+        public bool HasPendingForces => (_pendingForces != null && _pendingForces.Count > 0);
         #endregion
 
         #region Internal.
@@ -209,6 +238,12 @@ namespace FishNet.Object.Prediction
         /// </summary>
         [ExcludeSerialization]
         private List<EntryData> _pendingForces;
+
+        /// <summary>
+        /// Returns current pending forces.
+        /// Modifying this collection could cause undesirable results.
+        /// </summary>
+        public List<EntryData> GetPendingForces() => _pendingForces;
         #endregion
 
         ~PredictionRigidbody()
@@ -236,39 +271,37 @@ namespace FishNet.Object.Prediction
         /// </summary>
         public void AddForce(Vector3 force, ForceMode mode = ForceMode.Force)
         {
-            EntryData fd = new EntryData(ForceApplicationType.AddForce,
-                new AllForceData(force, mode));
+            EntryData fd = new(ForceApplicationType.AddForce, new(force, mode));
             _pendingForces.Add(fd);
         }
+
         public void AddRelativeForce(Vector3 force, ForceMode mode = ForceMode.Force)
         {
-            EntryData fd = new EntryData(ForceApplicationType.AddRelativeForce,
-                new AllForceData(force, mode));
+            EntryData fd = new(ForceApplicationType.AddRelativeForce, new(force, mode));
             _pendingForces.Add(fd);
-
         }
+
         public void AddTorque(Vector3 force, ForceMode mode = ForceMode.Force)
         {
-            EntryData fd = new EntryData(ForceApplicationType.AddTorque,
-                new AllForceData(force, mode));
+            EntryData fd = new(ForceApplicationType.AddTorque, new(force, mode));
             _pendingForces.Add(fd);
         }
+
         public void AddRelativeTorque(Vector3 force, ForceMode mode = ForceMode.Force)
         {
-            EntryData fd = new EntryData(ForceApplicationType.AddRelativeTorque,
-                new AllForceData(force, mode));
+            EntryData fd = new(ForceApplicationType.AddRelativeTorque, new(force, mode));
             _pendingForces.Add(fd);
         }
+
         public void AddExplosiveForce(float force, Vector3 position, float radius, float upwardsModifier = 0f, ForceMode mode = ForceMode.Force)
         {
-            EntryData fd = new EntryData(ForceApplicationType.AddExplosiveForce,
-                new AllForceData(force, position, radius, upwardsModifier, mode));
+            EntryData fd = new(ForceApplicationType.AddExplosiveForce, new(force, position, radius, upwardsModifier, mode));
             _pendingForces.Add(fd);
         }
+
         public void AddForceAtPosition(Vector3 force, Vector3 position, ForceMode mode = ForceMode.Force)
         {
-            EntryData fd = new EntryData(ForceApplicationType.AddForceAtPosition,
-                new AllForceData(force, position, mode));
+            EntryData fd = new(ForceApplicationType.AddForceAtPosition, new(force, position, mode));
             _pendingForces.Add(fd);
         }
 
@@ -278,7 +311,7 @@ namespace FishNet.Object.Prediction
         /// </summary>
         public void Velocity(Vector3 force)
         {
-            Rigidbody.velocity = force;
+            Rigidbody.linearVelocity = force;
             RemoveForces(true);
         }
 
@@ -308,7 +341,7 @@ namespace FishNet.Object.Prediction
                     case ForceApplicationType.AddForce:
                         Rigidbody.AddForce(data.Vector3Force, data.Mode);
                         break;
-                    case ForceApplicationType.AddRelativeTorque:                        
+                    case ForceApplicationType.AddRelativeTorque:
                         Rigidbody.AddRelativeTorque(data.Vector3Force, data.Mode);
                         break;
                     case ForceApplicationType.AddRelativeForce:
@@ -333,6 +366,7 @@ namespace FishNet.Object.Prediction
         {
             RemoveForces(velocity);
         }
+
         /// <summary>
         /// Clears pending velocity and angular velocity forces.
         /// </summary>
@@ -350,7 +384,7 @@ namespace FishNet.Object.Prediction
             if (pr._pendingForces != null)
             {
                 foreach (EntryData item in pr._pendingForces)
-                    _pendingForces.Add(new EntryData(item));
+                    _pendingForces.Add(new(item));
             }
             //Set state.
             Rigidbody.SetState(pr.RigidbodyState);
@@ -388,11 +422,8 @@ namespace FishNet.Object.Prediction
                     return (velocityApplicationTypes & apt) == apt;
                 }
             }
-
-
         }
 
-        internal List<EntryData> GetPendingForces() => _pendingForces;
         internal void SetReconcileData(RigidbodyState rs, List<EntryData> lst)
         {
             RigidbodyState = rs;
@@ -407,7 +438,4 @@ namespace FishNet.Object.Prediction
 
         public void InitializeState() { }
     }
-#endif
-
 }
-

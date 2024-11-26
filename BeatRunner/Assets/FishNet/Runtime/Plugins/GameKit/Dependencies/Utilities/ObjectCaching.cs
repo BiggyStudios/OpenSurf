@@ -1,5 +1,4 @@
 using GameKit.Dependencies.Utilities.Types;
-using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
@@ -24,7 +23,7 @@ namespace GameKit.Dependencies.Utilities
     /// <summary>
     /// Caches collections of multiple generics.
     /// </summary>
-    public static class ResettableCollectionCaches<T1, T2> where T1 : IResettable where T2 : IResettable
+    public static class ResettableCollectionCaches<T1, T2> where T1 : IResettable, new() where T2 : IResettable, new()
     {
         /// <summary>
         /// Retrieves a collection.
@@ -66,7 +65,7 @@ namespace GameKit.Dependencies.Utilities
     /// <summary>
     /// Caches collections of multiple generics.
     /// </summary>
-    public static class ResettableT1CollectionCaches<T1, T2> where T1 : IResettable
+    public static class ResettableT1CollectionCaches<T1, T2> where T1 : IResettable, new()
     {
         /// <summary>
         /// Retrieves a collection.
@@ -106,7 +105,7 @@ namespace GameKit.Dependencies.Utilities
     /// <summary>
     /// Caches collections of multiple generics.
     /// </summary>
-    public static class ResettableT2CollectionCaches<T1, T2> where T2 : IResettable
+    public static class ResettableT2CollectionCaches<T1, T2> where T2 : IResettable, new()
     {
         /// <summary>
         /// Retrieves a collection.
@@ -148,12 +147,12 @@ namespace GameKit.Dependencies.Utilities
     /// <summary>
     /// Caches collections of a single generic.
     /// </summary>
-    public static class ResettableCollectionCaches<T> where T : IResettable
+    public static class ResettableCollectionCaches<T> where T : IResettable, new()
     {
         /// <summary>
         /// Cache for ResettableRingBuffer.
         /// </summary>
-        private readonly static Stack<ResettableRingBuffer<T>> _resettableRingBufferCache = new Stack<ResettableRingBuffer<T>>();
+        private readonly static Stack<ResettableRingBuffer<T>> _resettableRingBufferCache = new();
 
         /// <summary>
         /// Retrieves a collection.
@@ -181,7 +180,16 @@ namespace GameKit.Dependencies.Utilities
         /// </summary>
         /// <returns></returns>
         public static HashSet<T> RetrieveHashSet() => CollectionCaches<T>.RetrieveHashSet();
-
+        /// <summary>
+        /// Retrieves a collection.
+        /// </summary>
+        /// <returns></returns>
+        public static Queue<T> RetrieveQueue() => CollectionCaches<T>.RetrieveQueue();
+        /// <summary>
+        /// Retrieves a collection.
+        /// </summary>
+        /// <returns></returns>
+        public static BasicQueue<T> RetrieveBasicQueue() => CollectionCaches<T>.RetrieveBasicQueue();
 
         /// <summary>
         /// Stores a collection and sets the original reference to default.
@@ -207,7 +215,7 @@ namespace GameKit.Dependencies.Utilities
             value.ResetState();
             _resettableRingBufferCache.Push(value);
         }
-        
+
         /// <summary>
         /// Stores a collection and sets the original reference to default.
         /// Method will not execute if value is null.
@@ -292,12 +300,73 @@ namespace GameKit.Dependencies.Utilities
             value.Clear();
             CollectionCaches<T>.Store(value);
         }
+        
+        /// <summary>
+        /// Stores a collection and sets the original reference to default.
+        /// Method will not execute if value is null.
+        /// </summary>
+        /// <param name="value">Value to store.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void StoreAndDefault(ref Queue<T> value)
+        {
+            if (value == null)
+                return;
+            
+            Store(value);
+            value = default;
+        }
+        /// <summary>
+        /// Stores a collection.
+        /// </summary>
+        /// <param name="value">Value to store.</param>
+        public static void Store(Queue<T> value)
+        {
+            foreach (T item in value)
+            {
+                item.ResetState();
+                ObjectCaches<T>.Store(item);
+            }
+            value.Clear();
+            CollectionCaches<T>.Store(value);
+        }
+          
+        /// <summary>
+        /// Stores a collection and sets the original reference to default.
+        /// Method will not execute if value is null.
+        /// </summary>
+        /// <param name="value">Value to store.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void StoreAndDefault(ref BasicQueue<T> value)
+        {
+            if (value == null)
+                return;
+            
+            Store(value);
+            value = default;
+        }
+        /// <summary>
+        /// Stores a collection.
+        /// </summary>
+        /// <param name="value">Value to store.</param>
+        public static void Store(BasicQueue<T> value)
+        {
+            while (value.TryDequeue(out T result))
+            {
+                result.ResetState();
+                ObjectCaches<T>.Store(result);
+            }
+
+            value.Clear();
+            CollectionCaches<T>.Store(value);
+        }
+
+
     }
 
     /// <summary>
     /// Caches objects of a single generic.
     /// </summary>
-    public static class ResettableObjectCaches<T> where T : IResettable
+    public static class ResettableObjectCaches<T> where T : IResettable, new()
     {
         /// <summary>
         /// Retrieves an instance of T.
@@ -344,7 +413,7 @@ namespace GameKit.Dependencies.Utilities
         /// <summary>
         /// Cache for dictionaries.
         /// </summary>
-        private readonly static Stack<Dictionary<T1, T2>> _dictionaryCache = new Stack<Dictionary<T1, T2>>();
+        private readonly static Stack<Dictionary<T1, T2>> _dictionaryCache = new();
 
         /// <summary>
         /// Retrieves a collection.
@@ -391,23 +460,23 @@ namespace GameKit.Dependencies.Utilities
         /// <summary>
         /// Cache for arrays.
         /// </summary>
-        private readonly static Stack<T[]> _arrayCache = new Stack<T[]>();
+        private readonly static Stack<T[]> _arrayCache = new();
         /// <summary>
         /// Cache for lists.
         /// </summary>
-        private readonly static Stack<List<T>> _listCache = new Stack<List<T>>();
+        private readonly static Stack<List<T>> _listCache = new();
         /// <summary>
         /// Cache for queues.
         /// </summary>
-        private readonly static Stack<Queue<T>> _queueCache = new Stack<Queue<T>>();
+        private readonly static Stack<Queue<T>> _queueCache = new();
         /// <summary>
         /// Cache for queues.
         /// </summary>
-        private readonly static Stack<BasicQueue<T>> _basicQueueCache = new Stack<BasicQueue<T>>();
+        private readonly static Stack<BasicQueue<T>> _basicQueueCache = new();
         /// <summary>
         /// Cache for hashset.
         /// </summary>
-        private readonly static Stack<HashSet<T>> _hashsetCache = new Stack<HashSet<T>>();
+        private readonly static Stack<HashSet<T>> _hashsetCache = new();
 
         /// <summary>
         /// Retrieves a collection.
@@ -633,12 +702,12 @@ namespace GameKit.Dependencies.Utilities
     /// <summary>
     /// Caches objects of a single generic.
     /// </summary>
-    public static class ObjectCaches<T>
+    public static class ObjectCaches<T> where T : new()
     {
         /// <summary>
         /// Stack to use.
         /// </summary>
-        private readonly static Stack<T> _stack = new Stack<T>();
+        private readonly static Stack<T> _stack = new();
 
         /// <summary>
         /// Returns a value from the stack or creates an instance when the stack is empty.
@@ -648,7 +717,7 @@ namespace GameKit.Dependencies.Utilities
         {
             T result;
             if (!_stack.TryPop(out result))
-                result = Activator.CreateInstance<T>();
+                result = new();// Activator.CreateInstance<T>();
 
             return result;
         }

@@ -12,7 +12,6 @@ namespace FishNet.Component.Prediction
 
     public abstract class NetworkCollider : NetworkBehaviour
     {
-#if !PREDICTION_1
         #region Types.
         private struct ColliderData : IResettable
         {
@@ -77,6 +76,12 @@ namespace FishNet.Component.Prediction
         [Range(0f, 100f)]
         [SerializeField]
         private float _additionalSize = 0.1f;
+        /// <summary>
+        /// Layers to trace on. This is used when value is not nothing.
+        /// </summary>
+        [Tooltip("Layers to trace on. This is used when value is not nothing.")]
+        [SerializeField]
+        private LayerMask _layers = (LayerMask)0;
 
         /// <summary>
         /// The colliders on this object.
@@ -174,7 +179,7 @@ namespace FishNet.Component.Prediction
         /// <summary>
         /// Cleans history up to, while excluding tick.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         private void CleanHistory(uint tick)
         {
             if (_useCache)
@@ -207,7 +212,7 @@ namespace FishNet.Component.Prediction
         /// <summary>
         /// Checks for any trigger changes;
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         private void CheckColliders(uint tick, bool replay)
         {
             //Should not be possible as tick always starts on 1.
@@ -261,11 +266,20 @@ namespace FishNet.Component.Prediction
             // The rotation of the object for box colliders.
             Quaternion rotation = transform.rotation;
 
-            //If layer changed then get new interactableLayers.
-            if (_lastGameObjectLayer != gameObject.layer)
+            //If layers are specified then do not use GOs layers, use specified.
+            if (_layers != (LayerMask)0)
             {
-                _lastGameObjectLayer = gameObject.layer;
-                _interactableLayers = Layers.GetInteractableLayersValue(_lastGameObjectLayer);
+                _interactableLayers = _layers;
+            }
+            //Use GOs layers.
+            else
+            {
+                int currentLayer = gameObject.layer;
+                if (_lastGameObjectLayer != currentLayer)
+                {
+                    _lastGameObjectLayer = currentLayer;
+                    _interactableLayers = Layers.GetInteractableLayersValue(currentLayer);
+                }
             }
 
             // Check each collider for triggers.
@@ -361,7 +375,7 @@ namespace FishNet.Component.Prediction
                      * correct location. */
                     void AddDataToIndex(int index)
                     {
-                        ColliderData colliderData = new ColliderData(tick, current);
+                        ColliderData colliderData = new(tick, current);
                         /* If insertIndex is the same tick then replace, otherwise
                          * put in front of. */
                         //Replace.
@@ -380,7 +394,7 @@ namespace FishNet.Component.Prediction
 
                 void AddToEnd()
                 {
-                    ColliderData colliderData = new ColliderData(tick, current);
+                    ColliderData colliderData = new(tick, current);
                     _colliderDataHistory.Add(colliderData);
                 }
 
@@ -468,7 +482,7 @@ namespace FishNet.Component.Prediction
         /// <summary>
         /// Resets this NetworkBehaviour so that it may be added to an object pool.
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public override void ResetState(bool asServer)
         {
             base.ResetState(asServer);
@@ -484,7 +498,6 @@ namespace FishNet.Component.Prediction
                 cd.ResetState();
             _colliderDataHistory.Clear();
         }
-#endif
     }
 
 

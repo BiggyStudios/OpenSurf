@@ -60,6 +60,8 @@ namespace FishNet.Object
         /// </summary>
         internal void InvokeSyncTypeOnStopCallbacks(bool asServer)
         {
+            // if (_syncTypes == null)
+            //     return;
             foreach (SyncBase item in _syncTypes.Values)
                 item.OnStopCallback(asServer);
         }
@@ -68,7 +70,6 @@ namespace FishNet.Object
         /// <summary>
         /// Invokes the OnStart/StopNetwork.
         /// </summary>
-        /// <param name="start"></param>
         internal void InvokeOnNetwork(bool start)
         {
             if (start)
@@ -85,7 +86,7 @@ namespace FishNet.Object
             }
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         internal virtual void OnStartNetwork_Internal()
         {
             _onStartNetworkCalled = true;
@@ -100,7 +101,7 @@ namespace FishNet.Object
         public virtual void OnStartNetwork() { }
 
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         internal virtual void OnStopNetwork_Internal()
         {
             _onStopNetworkCalled = true;
@@ -115,7 +116,7 @@ namespace FishNet.Object
         public virtual void OnStopNetwork() { }
 
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         internal void OnStartServer_Internal()
         {
             OnStartServerCalled = true;
@@ -128,7 +129,7 @@ namespace FishNet.Object
         public virtual void OnStartServer() { }
 
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         internal void OnStopServer_Internal()
         {
             OnStartServerCalled = false;
@@ -141,13 +142,10 @@ namespace FishNet.Object
         public virtual void OnStopServer() { }
 
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         internal void OnOwnershipServer_Internal(NetworkConnection prevOwner)
         {
-#if !PREDICTION_1
-            ResetPredictionTicks();
-#endif
-            CallClearReplicateCache(true);
+            ResetState_Prediction(true);
             OnOwnershipServer(prevOwner);
         }
         /// <summary>
@@ -169,7 +167,7 @@ namespace FishNet.Object
         public virtual void OnDespawnServer(NetworkConnection connection) { }
 
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         internal void OnStartClient_Internal()
         {
             OnStartClientCalled = true;
@@ -181,7 +179,7 @@ namespace FishNet.Object
         public virtual void OnStartClient() { }
 
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         internal void OnStopClient_Internal()
         {
             OnStartClientCalled = false;
@@ -192,46 +190,24 @@ namespace FishNet.Object
         /// </summary>
         public virtual void OnStopClient() { }
 
-#if !PREDICTION_1
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         internal void OnOwnershipClient_Internal(NetworkConnection prevOwner)
         {
             //If losing or gaining ownership then clear replicate cache.
             if (IsOwner || prevOwner == LocalConnection)
-                CallClearReplicateCache(false);
-
-            _lastReadReconcileTick = 0;
-            OnOwnershipClient(prevOwner);
-        }
-#else
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void OnOwnershipClient_Internal(NetworkConnection prevOwner)
-        {
-            //If losing or gaining ownership then clear replicate cache.
-            if (IsOwner || prevOwner == LocalConnection)
-                CallClearReplicateCache(false);
+            {
+                ResetState_Prediction(false);
+            }
 
             OnOwnershipClient(prevOwner);
         }
-#endif
+
         /// <summary>
         /// Called on the client after gaining or losing ownership.
         /// </summary>
         /// <param name="prevOwner">Previous owner of this object.</param>
         public virtual void OnOwnershipClient(NetworkConnection prevOwner) { }
 
-        /// <summary>
-        /// Calls ClearReplicateCache for prediction v1 or v2.
-        /// </summary>
-        private void CallClearReplicateCache(bool asServer)
-        {
-#if PREDICTION_1
-            ClearReplicateCache_Virtual(asServer);
-#else
-            ClearReplicateCache();
-#endif
-        }
     }
 
 

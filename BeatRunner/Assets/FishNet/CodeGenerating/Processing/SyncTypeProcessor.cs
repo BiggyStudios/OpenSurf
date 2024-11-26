@@ -303,9 +303,11 @@ namespace FishNet.CodeGenerating.Processing
             if (!IsSyncType(fieldDef))
                 return SyncType.Unset;
 
+            TypeDefinition fieldTypeDef = fieldDef.FieldType.CachedResolve(base.Session);
+
             ObjectHelper oh = base.GetClass<ObjectHelper>();
             string fdName = fieldDef.FieldType.Name;
-            if (fdName == oh.SyncVar_Name)
+            if (fdName == oh.SyncVar_Name || fieldTypeDef.ImplementsInterfaceRecursive<ISyncVar>(base.Session))
                 return SyncType.Variable;
             else if (fdName == oh.SyncList_Name)
                 return SyncType.List;
@@ -314,7 +316,7 @@ namespace FishNet.CodeGenerating.Processing
             else if (fdName == oh.SyncHashSet_Name)
                 return SyncType.HashSet;
             //Custom types must also implement ICustomSync.
-            else if (fieldDef.FieldType.CachedResolve(base.Session).ImplementsInterfaceRecursive<ICustomSync>(base.Session))
+            else if (fieldTypeDef.ImplementsInterfaceRecursive<ICustomSync>(base.Session))
                 return SyncType.Custom;
             else
                 return SyncType.Unhandled;
@@ -534,7 +536,7 @@ namespace FishNet.CodeGenerating.Processing
             //InitializeEarly.
             injectionMd = typeDef.GetMethod(NetworkBehaviourProcessor.NETWORKINITIALIZE_EARLY_INTERNAL_NAME);
             processor = injectionMd.Body.GetILProcessor();
-            insts = new List<Instruction>
+            insts = new()
             {
                 processor.Create(OpCodes.Ldarg_0), //this.
                 processor.Create(OpCodes.Ldfld, originalFieldDef),
@@ -548,7 +550,7 @@ namespace FishNet.CodeGenerating.Processing
             //InitializeLate.
             injectionMd = typeDef.GetMethod(NetworkBehaviourProcessor.NETWORKINITIALIZE_LATE_INTERNAL_NAME);
             processor = injectionMd.Body.GetILProcessor();
-            insts = new List<Instruction>
+            insts = new()
             {
                 processor.Create(OpCodes.Ldarg_0), //this.
                 processor.Create(OpCodes.Ldfld, originalFieldDef),

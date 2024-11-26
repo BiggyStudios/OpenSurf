@@ -53,7 +53,7 @@ namespace FishNet.Component.Prediction
 
             public void Update(Rigidbody rb)
             {
-                Velocity = rb.velocity;
+                Velocity = rb.linearVelocity;
                 AngularVelocity = rb.angularVelocity;
                 IsKinematic = rb.isKinematic;
                 DetectCollisions = rb.detectCollisions;
@@ -102,7 +102,7 @@ namespace FishNet.Component.Prediction
 
             public void Update(Rigidbody2D rb)
             {
-                Velocity = rb.velocity;
+                Velocity = rb.linearVelocity;
                 AngularVelocity = rb.angularVelocity;
                 Simulated = rb.simulated;
                 IsKinematic = rb.isKinematic;
@@ -122,11 +122,11 @@ namespace FishNet.Component.Prediction
         /// <summary>
         /// Rigidbody datas for found rigidbodies.
         /// </summary>
-        private List<RigidbodyData> _rigidbodyDatas = new List<RigidbodyData>();
+        private List<RigidbodyData> _rigidbodyDatas = new();
         /// <summary>
         /// Rigidbody2D datas for found rigidbodies;
         /// </summary>
-        private List<Rigidbody2DData> _rigidbody2dDatas = new List<Rigidbody2DData>();
+        private List<Rigidbody2DData> _rigidbody2dDatas = new();
         /// <summary>
         /// True to get rigidbodies in children of transform.
         /// </summary>
@@ -177,13 +177,13 @@ namespace FishNet.Component.Prediction
                 {
                     Rigidbody[] rbs = t.GetComponentsInChildren<Rigidbody>();
                     for (int i = 0; i < rbs.Length; i++)
-                        _rigidbodyDatas.Add(new RigidbodyData(rbs[i]));
+                        AddRigidbody(rbs[i]);
                 }
                 else
                 {
                     Rigidbody rb = t.GetComponent<Rigidbody>();
                     if (rb != null)
-                        _rigidbodyDatas.Add(new RigidbodyData(rb));
+                        AddRigidbody(rb);
                 }
             }
             //2D.
@@ -193,16 +193,28 @@ namespace FishNet.Component.Prediction
                 {
                     Rigidbody2D[] rbs = t.GetComponentsInChildren<Rigidbody2D>();
                     for (int i = 0; i < rbs.Length; i++)
-                        _rigidbody2dDatas.Add(new Rigidbody2DData(rbs[i]));
+                        AddRigidbody2D(rbs[i]);
                 }
                 else
                 {
                     Rigidbody2D rb = t.GetComponent<Rigidbody2D>();
                     if (rb != null)
-                        _rigidbody2dDatas.Add(new Rigidbody2DData(rb));
+                        AddRigidbody2D(rb);
                 }
             }
 
+            void AddRigidbody(Rigidbody rb)
+            {
+                if (!rb.TryGetComponent<OfflineRigidbody>(out _))
+                    _rigidbodyDatas.Add(new(rb));
+            }
+
+            void AddRigidbody2D(Rigidbody2D rb)
+            {
+                if (!rb.TryGetComponent<OfflineRigidbody>(out _))
+                    _rigidbody2dDatas.Add(new(rb));
+            }
+            
             _initialized = true;
         }
 
@@ -317,7 +329,7 @@ namespace FishNet.Component.Prediction
                     rb.collisionDetectionMode = rbData.CollisionDetectionMode;
                     if (!rb.isKinematic)
                     {
-                        rb.velocity = rbData.Velocity;
+                        rb.linearVelocity = rbData.Velocity;
                         rb.angularVelocity = rbData.AngularVelocity;
                     }
                     return true;
@@ -348,7 +360,7 @@ namespace FishNet.Component.Prediction
                     rb.collisionDetectionMode = rbData.CollisionDetectionMode;
                     if (!rb.isKinematic)
                     {
-                        rb.velocity = rbData.Velocity;
+                        rb.linearVelocity = rbData.Velocity;
                         rb.angularVelocity = rbData.AngularVelocity;
                     }
                     return true;

@@ -18,7 +18,7 @@ namespace FishNet.CodeGenerating.Processing
         /// <summary>
         /// Classes which have been processed for all NetworkBehaviour features.
         /// </summary>
-        private HashSet<TypeDefinition> _processedClasses = new HashSet<TypeDefinition>();
+        private HashSet<TypeDefinition> _processedClasses = new();
         #endregion
 
         #region Const.
@@ -34,10 +34,10 @@ namespace FishNet.CodeGenerating.Processing
             TypeDefinition copyTypeDef = typeDef;
 
             //TypeDefs which are using prediction.
-            List<TypeDefinition> _usesPredictionTypeDefs = new List<TypeDefinition>();
+            List<TypeDefinition> _usesPredictionTypeDefs = new();
 
             //Make collection of NBs to processor.
-            List<TypeDefinition> typeDefs = new List<TypeDefinition>();
+            List<TypeDefinition> typeDefs = new();
             do
             {
                 if (!HasClassBeenProcessed(copyTypeDef))
@@ -137,8 +137,6 @@ namespace FishNet.CodeGenerating.Processing
 
             /* If here then all inerited classes for firstTypeDef have
              * been processed. */
-            //Sets UsesPrediction in NetworkBehaviours.
-            SetUsesPrediction(_usesPredictionTypeDefs);
 
             return modified;
         }
@@ -265,7 +263,7 @@ namespace FishNet.CodeGenerating.Processing
 
                 if (created)
                 {
-                    List<Instruction> insts = new List<Instruction>();
+                    List<Instruction> insts = new();
                     ILProcessor processor = md.Body.GetILProcessor();
                     //Add check if already called.
                     //if (alreadyInitialized) return;
@@ -328,42 +326,14 @@ namespace FishNet.CodeGenerating.Processing
                 if (!alreadyHasBaseCall)
                 {
                     //Create instructions for base call.
-                    List<Instruction> instructions = new List<Instruction>
-                            {
+                    List<Instruction> instructions = new()
+                    {
                                 processor.Create(OpCodes.Ldarg_0), //this.
                                 processor.Create(OpCodes.Call, baseMr)
                             };
                     processor.InsertFirst(instructions);
                 }
             }
-        }
-
-
-        /// <summary>
-        /// Sets UsesPrediction to true on NetworkBehaviours.
-        /// </summary>
-        private void SetUsesPrediction(List<TypeDefinition> typeDefs)
-        {
-//#if !PREDICTION_1
-//            NetworkBehaviourHelper nbh = base.GetClass<NetworkBehaviourHelper>();
-
-//            foreach (TypeDefinition td in typeDefs)
-//            {
-//                MethodDefinition md = td.GetMethod(NETWORKINITIALIZE_EARLY_INTERNAL_NAME);
-//                ILProcessor processor = md.Body.GetILProcessor();
-
-//                int lastInstructionIndex = (md.Body.Instructions.Count - 1);
-//                //Remove opcode if present. It will be added back on after.
-//                if (lastInstructionIndex >= 0 && md.Body.Instructions[lastInstructionIndex].OpCode == OpCodes.Ret)
-//                    md.Body.Instructions.RemoveAt(lastInstructionIndex);
-
-//                //Set field.
-//                processor.Emit(OpCodes.Ldarg_0); //base.
-//                processor.Emit(OpCodes.Ldc_I4_1); //true.
-//                processor.Emit(OpCodes.Stfld, nbh.UsesPrediction_FieldRef);
-//                processor.Emit(OpCodes.Ret);
-//            }
-//#endif
         }
 
         /// <summary>
@@ -503,7 +473,7 @@ namespace FishNet.CodeGenerating.Processing
             {
                 created = true;
 
-                thisAwakeMethodDef = new MethodDefinition(NetworkBehaviourHelper.AWAKE_METHOD_NAME, MethodDefinitionExtensions.PUBLIC_VIRTUAL_ATTRIBUTES,
+                thisAwakeMethodDef = new(NetworkBehaviourHelper.AWAKE_METHOD_NAME, MethodDefinitionExtensions.PUBLIC_VIRTUAL_ATTRIBUTES,
                     typeDef.Module.TypeSystem.Void);
                 thisAwakeMethodDef.Body.InitLocals = true;
                 typeDef.Methods.Add(thisAwakeMethodDef);
@@ -517,7 +487,7 @@ namespace FishNet.CodeGenerating.Processing
 
             processor = thisAwakeMethodDef.Body.GetILProcessor();
             //Create instructions for base call.
-            List<Instruction> instructions = new List<Instruction>
+            List<Instruction> instructions = new()
             {
                 processor.Create(OpCodes.Ldarg_0), //this.
                 processor.Create(OpCodes.Call, networkInitializeMethodRef)

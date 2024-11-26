@@ -84,11 +84,19 @@ namespace FishNet.Transporting.Tugboat
         /// <summary>
         /// Server socket and handler.
         /// </summary>
-        private Server.ServerSocket _server = new Server.ServerSocket();
+        private Server.ServerSocket _server = new();
         /// <summary>
         /// Client socket and handler.
         /// </summary>
-        private Client.ClientSocket _client = new Client.ClientSocket();
+        private Client.ClientSocket _client = new();
+        /// <summary>
+        /// Current timeout for the client.
+        /// </summary>
+        private int _clientTimeout = MAX_TIMEOUT_SECONDS;
+        /// <summary>
+        /// Current timeout for the server.
+        /// </summary>
+        private int _serverTimeout = MAX_TIMEOUT_SECONDS;
         #endregion
 
         #region Const.
@@ -177,7 +185,6 @@ namespace FishNet.Transporting.Tugboat
         public override void HandleServerConnectionState(ServerConnectionStateArgs connectionStateArgs)
         {
             OnServerConnectionState?.Invoke(connectionStateArgs);
-            UpdateTimeout();
         }
         /// <summary>
         /// Handles a ConnectionStateArgs for a remote client.
@@ -257,7 +264,7 @@ namespace FishNet.Transporting.Tugboat
         /// </summary>
         /// <param name="channelId">Channel to use.</param>
         /// <param name="segment">Data to send.</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public override void SendToServer(byte channelId, ArraySegment<byte> segment)
         {
             SanitizeChannel(ref channelId);
@@ -269,7 +276,7 @@ namespace FishNet.Transporting.Tugboat
         /// <param name="channelId"></param>
         /// <param name="segment"></param>
         /// <param name="connectionId"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public override void SendToClient(byte channelId, ArraySegment<byte> segment, int connectionId)
         {
             SanitizeChannel(ref channelId);
@@ -307,7 +314,16 @@ namespace FishNet.Transporting.Tugboat
         /// Sets how long in seconds until either the server or client socket must go without data before being timed out.
         /// </summary>
         /// <param name="asServer">True to set the timeout for the server socket, false for the client socket.</param>
-        public override void SetTimeout(float value, bool asServer) { }
+        public override void SetTimeout(float value, bool asServer)
+        {
+            int timeoutValue = (int)Math.Ceiling(value);
+            if (asServer)
+                _serverTimeout = timeoutValue;
+            else
+                _clientTimeout = timeoutValue;
+
+            UpdateTimeout();
+        }
         /// <summary>
         /// Returns the maximum number of clients allowed to connect to the server. If the transport does not support this method the value -1 is returned.
         /// </summary>
@@ -475,9 +491,8 @@ namespace FishNet.Transporting.Tugboat
         /// </summary>
         private void UpdateTimeout()
         {
-            int timeout = MAX_TIMEOUT_SECONDS;
-            _client.UpdateTimeout(timeout);
-            _server.UpdateTimeout(timeout);
+            _client.UpdateTimeout(_clientTimeout);
+            _server.UpdateTimeout(_serverTimeout);
         }
         /// <summary>
         /// Stops the client.
