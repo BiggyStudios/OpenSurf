@@ -1,8 +1,10 @@
 /*
 !/.git/
 !/.gitignore
+!/.gitmodules
 !/Assets/
 !/ProjectSettings/
 !/Packages/
 !/Files/
 !/LICENSE
+!/README.md
