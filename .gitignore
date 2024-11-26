@@ -1,7 +1,8 @@
-/BeatRunner/*
-!/BeatRunner/Assets/
-!/BeatRunner/ProjectSettings/
-!/BeatRunner/Packages/
-!/BeatRunner/Assets.meta
-!/BeatRunner/ProjectSettings.meta
-!/BeatRunner/Packages.meta
+/*
+!/.git/
+!/.gitignore
+!/Assets/
+!/ProjectSettings/
+!/Packages/
+!/Files/
+!/LICENSE
