@@ -3,22 +3,32 @@ using UnityEngine;
 
 public class ScoreboardItemScript : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _nameText;
-    [SerializeField] private TextMeshProUGUI _timeText;
+    [SerializeField] private TextMeshProUGUI _usernameText;
+    [SerializeField] private TextMeshProUGUI _currentTimeText;
+    [SerializeField] private TextMeshProUGUI _bestTimeText;
 
-    public void Init(string name)
+    public void Init(string username)
     {
-        _nameText.text = name;
-        _timeText.text = "0";
+        _usernameText.text = username;
+        _currentTimeText.text = "---";
+        _bestTimeText.text = "---";
     }
 
-    public void SetUsername(string name)
+    public void UpdateTimes(float currentTime, float bestTime)
     {
-        _nameText.text = name;
+        _currentTimeText.text = FormatTime(currentTime);
+        _bestTimeText.text = FormatTime(bestTime);
     }
-    
-    public void SetTime(float time)
+
+    private string FormatTime(float time)
     {
-        _timeText.text = time.ToString();
+        if (time == float.MaxValue)
+            return "---";
+        
+        int mins = (int)(time / 60f);
+        int secs = (int)(time % 60f);
+        int milisecs = (int)((time * 100f) % 100f);
+
+        return $"{mins:00}:{secs:00}.{milisecs:00}";
     }
 }

@@ -5,16 +5,18 @@ using FishNet.Object;
 using BNNUtils;
 using TMPro;
 using UnityEngine;
+using System.Linq;
 
 public class Scoreboard : NetworkBehaviour
 {
     public static Scoreboard Instance;
 
     [SerializeField] private ScoreboardItemScript _scorePrefab;
-    [SerializeField] private Transform _scoreboardPanelTransform;
+    [SerializeField] private Transform _scoreboardContent;
+    [SerializeField] private bool _sortByBestTime = true;
 
-    [HideInInspector] public List<string> ExistingUsers;
-    private Dictionary<string, ScoreboardItemScript> _playerScores = new Dictionary<string, ScoreboardItemScript>();
+    private Dictionary<string, ScoreData> _playerScores = new Dictionary<string, ScoreData>();
+    private Dictionary<string, ScoreboardItemScript> _scoreboardItems = new Dictionary<string, ScoreboardItemScript>();
     
     private void Awake()
     {
@@ -29,38 +31,70 @@ public class Scoreboard : NetworkBehaviour
         }
     }
 
-    public static void OnPlayerJoined(string playerID)
+    public void AddPlayer(string playerID, string username)
     {
-        ScoreboardItemScript _playerScore = Instantiate(Instance._scorePrefab, Instance._scoreboardPanelTransform);
-        Instance._playerScores.Add(playerID, _playerScore);
-        _playerScore.Init(playerID);
+        if (_playerScores.ContainsKey(playerID))
+            return;
+
+        var scoreData = new ScoreData(playerID, username);
+        _playerScores.Add(playerID, scoreData);
+
+        var scoreboardItem = Instantiate(_scorePrefab, _scoreboardContent);
+        _scoreboardItems.Add(playerID, scoreboardItem);
+        scoreboardItem.Init(username);
     }
 
-    public static void OnPlayerLeft(string playerID)
+    public void RemovePlayer(string playerID)
     {
-        if (Instance._playerScores.TryGetValue(playerID, out ScoreboardItemScript playerScore))
+        if (!_playerScores.ContainsKey(playerID))
+            return;
+
+        _playerScores.Remove(playerID);
+
+        if (_scoreboardItems.TryGetValue(playerID, out var item))
         {
-            Destroy(playerScore.gameObject);
-            Instance._playerScores.Remove(playerID);
+            Destroy(item.gameObject);
+            _scoreboardItems.Remove(playerID);
         }
     }
 
-    public static void SetTime(string playerID, float time) => Instance.SetTimeServerRpc(playerID, time);
-
-    [ServerRpc (RequireOwnership = false)]
-    private void SetTimeServerRpc(string playerID, float time) => SetTimeObservers(playerID, time);
-
-    [ObserversRpc]
-    private void SetTimeObservers(string playerID, float time) => Instance._playerScores[playerID].SetTime(time);
-
-    public static void SetUsername(string playerID, string username) => Instance.SetUsernameServerRpc(playerID, username);
-
     [ServerRpc(RequireOwnership = false)]
-    private void SetUsernameServerRpc(string playerID, string username) => Instance.SetUsernameObservers(playerID, username);
+    public void UpdatePlayerTime(string playerID, float time)
+    {
+        if (!_playerScores.ContainsKey(playerID))
+            return;
+
+        var scoreData = _playerScores[playerID];
+        scoreData.CurrentTime = time;
+
+        if (time < scoreData.BestTime)
+            scoreData.BestTime = time;
+
+        UpdateScoreboardClientRpc(playerID, scoreData.CurrentTime, scoreData.BestTime);
+    }
 
     [ObserversRpc]
-    private void SetUsernameObservers(string playerID, string username)
+    private void UpdateScoreboardClientRpc(string playerID, float currentTime, float bestTime)
     {
-        Instance._playerScores[playerID].SetUsername(username);
+        if (_scoreboardItems.TryGetValue(playerID, out var item))
+        {
+            item.UpdateTimes(currentTime, bestTime);
+        }
+
+        if (_sortByBestTime)
+            SortScoreboard();
+    }
+
+    private void SortScoreboard()
+    {
+        var sortedPlayers = _playerScores.Values.OrderBy(x => x.BestTime).ToList();
+
+        for (int i = 0; i < sortedPlayers.Count; i++)
+        {
+            if (_scoreboardItems.TryGetValue(sortedPlayers[i].PlayerID, out var item))
+            {
+                item.transform.SetSiblingIndex(i);
+            }
+        }
     }
 }

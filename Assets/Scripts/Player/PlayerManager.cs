@@ -41,8 +41,8 @@ public class PlayerManager : NetworkBehaviour
             PlayerTransform = transform;
         }
 
-        Username = OwnerId.ToString();
-        Scoreboard.OnPlayerJoined(Username);
+        Username = $"Player_{OwnerId}";
+        Scoreboard.Instance.AddPlayer(OwnerId.ToString(), Username);
 
         if (!base.IsOwner)
             Destroy(this);
@@ -52,7 +52,7 @@ public class PlayerManager : NetworkBehaviour
     {
         base.OnStopClient();
         
-        Scoreboard.OnPlayerLeft(Username);
+        Scoreboard.Instance.RemovePlayer(OwnerId.ToString());
     }
 
     private void Start()
@@ -108,11 +108,6 @@ public class PlayerManager : NetworkBehaviour
         }
 
         _restartPlayerCoroutine = StartCoroutine(RestartPlayerRoutine());
-    }
-
-    public void SetUsername()
-    {
-        Scoreboard.SetUsername(Instance.Username, _username.text);
     }
 
     private Coroutine _restartPlayerCoroutine;
