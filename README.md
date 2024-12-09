@@ -1,7 +1,8 @@
 # BeatRunner
-![Screenshot](Files/Screenshots/2024-12-09_22-01.png)
 
 ## About
+
+![Screenshot](Files/Screenshots/2024-12-09_22-01.png)
 
 A Movement Game
 
