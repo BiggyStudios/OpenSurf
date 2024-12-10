@@ -1057,13 +1057,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerCam: {fileID: 5729860973589349047}
   _lr: {fileID: 3797751624615702137}
-  _maxDistance: 200
+  _maxDistance: 50
   _minDistance: 0.5
   _defaultLength: 6
   _defaultLengthPercent: 0.8
-  _retractingStrength: 20
+  _retractingStrength: 80
   _elasticExpandStrength: 80
-  _elasticCollapseStrength: 30
+  _elasticCollapseStrength: 60
   _elasticSmoothPercentage: 20
 --- !u!1 &5675759985078338502
 GameObject:

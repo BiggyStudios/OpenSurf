@@ -8,14 +8,22 @@ A Movement Game
 
 ## Roadmap
 
-- [ ] Full Multiplayer with Relay
-- [ ] Implementation for Making Custom Maps and Mods with Unity
-- [ ] Full System For Importing Maps And Mods Seemlessly
-- [ ] Different Movement Types(Source, Rigidbody, .Etc)
+- [ ] More Movement Mechanics
 - [ ] Better Music Visualizers Using VFX Graph and Different Types of Visualizers
+- [ ] Make Visualizers React to your Own Music Either Via Getting Background Music or Adding your Own Music
+- [ ] Implementation for Making Custom Maps and Mods with Unity
+- [ ] Full System For Importing Maps and Mods Seemlessly
+- [ ] Full Multiplayer with Relay
+- [ ] Different Movement Types(Source, Rigidbody, .Etc)
+
+## Modding
+See **[Modding](https://github.com/IckyTheBiggy/BeatRunner/wiki)**
+
+## Wiki
+Check out the **[Wiki](https://github.com/IckyTheBiggy/BeatRunner/wiki)** for full documentation
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md)(WIP)
+See **[Contributing](./CONTRIBUTING.md)**
 
 ## LICENSE
