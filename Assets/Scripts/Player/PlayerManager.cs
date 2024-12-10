@@ -1,12 +1,9 @@
-using System;
 using System.Collections;
 using FishNet.Object;
 using P90brush;
-using BNNUtils;
-using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 public class PlayerManager : NetworkBehaviour
 {
@@ -16,13 +13,17 @@ public class PlayerManager : NetworkBehaviour
     [HideInInspector] public float PlayerTime;
     [HideInInspector] public bool TimerActive;
     
-    [Header("Values")] [SerializeField] private float _restartLerpSpeed;
+    [Header("Values")] 
+    [SerializeField] private float _restartLerpSpeed;
     [SerializeField] private AnimationCurve _respawnAnimationCurve;
+
+    [Header("References")]
+    [SerializeField] private AudioMixer _masterMixer;
 
     [Header("UI")]
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private Slider _fovSlider;
-    [SerializeField] private TMP_InputField _username;
+    [SerializeField] private Slider _volSlider;
     
     private CapsuleCollider _capsuleCollider;
     private Vector3 _spawnPosition;
@@ -92,10 +93,6 @@ public class PlayerManager : NetworkBehaviour
             _pauseMenuOpen = false;
             _pauseMenu.SetActive(false);
         }
-
-
-        if (_pauseMenuOpen)
-            _playerCam.fieldOfView = _fovSlider.value;
     }
 
 
@@ -134,5 +131,15 @@ public class PlayerManager : NetworkBehaviour
         TimerActive = false;
         PlayerTime = 0f;
         _capsuleCollider.enabled = true;
+    }
+
+    public void SetFov()
+    {
+        _playerCam.fieldOfView = _fovSlider.value;
+    }
+
+    public void SetMusicVol()
+    {
+        _masterMixer.SetFloat("music", _volSlider.value);
     }
 }
