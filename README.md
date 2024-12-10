@@ -18,4 +18,3 @@ A Movement Game
 See [CONTRIBUTING.md](./CONTRIBUTING.md)(WIP)
 
 ## LICENSE
-Currently It's Apache 2.0 but, this is very much subject to change to AGPL-V3 soon
