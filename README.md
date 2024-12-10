@@ -10,8 +10,9 @@ A Movement Game
 
 - [ ] Full Multiplayer with Relay
 - [ ] Implementation for Making Custom Maps and Mods with Unity
+- [ ] Full System For Importing Maps And Mods Seemlessly
 - [ ] Different Movement Types(Source, Rigidbody, .Etc)
-- [ ] Better Music Visualizers Using VFX Graph And Different Types of Visualizers
+- [ ] Better Music Visualizers Using VFX Graph and Different Types of Visualizers
 
 ## Contributing
 
