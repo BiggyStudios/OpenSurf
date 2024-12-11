@@ -5,6 +5,7 @@ using UnityEngine;
 public class ModLoader : MonoBehaviour
 {
     public static ModLoader Instance { get; private set; }
+    [SerializeField] private Transform _mapTransform;
     private Dictionary<string, AssetBundle> _loadedMods = new Dictionary<string, AssetBundle>();
 
     private void Awake()
@@ -71,7 +72,9 @@ public class ModLoader : MonoBehaviour
         var mapConfig = bundle.LoadAsset<MapModConfig>("ModConfig");
         if (mapConfig != null && mapConfig.MapPrefab != null)
         {
-            Instantiate(mapConfig.MapPrefab, Vector3.zero, Quaternion.identity);
+            _mapTransform.GetComponentInChildren<MapScript>().DestoryMap();
+            var map = Instantiate(mapConfig.MapPrefab, Vector3.zero, Quaternion.identity);
+            map.transform.SetParent(_mapTransform);
             Debug.Log($"Loaded map: {mapConfig.ModName}");
         }
 
