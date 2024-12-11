@@ -16,11 +16,8 @@ A Movement Game
 - [ ] Full Multiplayer with Relay
 - [ ] Different Movement Types(Source, Rigidbody, .Etc)
 
-## Modding
-See **[Modding](https://github.com/IckyTheBiggy/BeatRunner/wiki)**
-
 ## Wiki
-Check out the **[Wiki](https://github.com/IckyTheBiggy/BeatRunner/wiki)** for full documentation
+Check out the **[Wiki](https://github.com/IckyTheBiggy/BeatRunner/wiki)** for full documentation on modding .etc
 
 ## Contributing
 

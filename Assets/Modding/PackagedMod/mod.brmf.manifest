@@ -1,0 +1,43 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.23f1
+CRC: 2954259926
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fbc14d2d5c6e5a7d2add1f88e291f77b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 847e07d4e0f4ea32f0fed6d4700d7ac7
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 08ae014cc0d879b30112d8e4b450588a
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 81
+  Script: {instanceID: 0}
+- Class: 89
+  Script: {instanceID: 0}
+- Class: 104
+  Script: {instanceID: 0}
+- Class: 108
+  Script: {instanceID: 0}
+- Class: 157
+  Script: {instanceID: 0}
+- Class: 196
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Modding/Mod/Scenes/Scene.unity
+Dependencies: []
