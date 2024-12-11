@@ -1,52 +1,66 @@
 using System.IO;
+using System.IO.Compression;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class ModCreator : EditorWindow
 {
-        [MenuItem("Modding/Create/New Mod")]
-        public static void CreateMod()
+    private ModManifest _manifest = new ModManifest();
+
+    [MenuItem("Modding/Mod Creator")]
+    public static void ShowWindow()
     {
-        AssetDatabase.CreateFolder("Assets/Modding", "Mod");
-        AssetDatabase.CreateFolder("Assets/Modding/Mod", "Assets");
-        AssetDatabase.CreateFolder("Assets/Modding/Mod", "Prefabs");
-        AssetDatabase.CreateFolder("Assets/Modding/Mod", "Scenes");
-        AssetDatabase.CreateFolder("Assets/Modding/Mod", "Scripts");
+        GetWindow<ModCreator>("Mod Creator");
     }
 
-    [MenuItem("Modding/Package Mod")]
-    public static void PackageMod()
+    private void OnGUI()
     {
-        string modFolder = "Assets/Modding/Mod";
-        string outputFolder = "Assets/Modding/PackagedMod";
+        GUILayout.Label("Mod Settings", EditorStyles.boldLabel);
 
-        if (!Directory.Exists(outputFolder))
-            Directory.CreateDirectory(outputFolder);
+        _manifest.ModID = EditorGUILayout.TextField("Mod ID", _manifest.ModID);
+        _manifest.ModName = EditorGUILayout.TextField("Mod Name", _manifest.ModName);
+        _manifest.Version = EditorGUILayout.TextField("Version", _manifest.Version);
+        _manifest.EntryPoint = EditorGUILayout.TextField("Entry Point", _manifest.EntryPoint);
+        _manifest.MinGameVersion = EditorGUILayout.TextField("Min Game Version", _manifest.MinGameVersion);
 
-        string bundleName = "mod.brmf";
-
-        AssignBundleNames(modFolder, bundleName);
-
-        BuildPipeline.BuildAssetBundles(outputFolder, BuildAssetBundleOptions.None, BuildTarget.StandaloneLinux64);
-
-        Debug.Log("Successfully packaged mod");
-    }
-
-    private static void AssignBundleNames(string folderPath, string bundleName)
-    {
-        string[] assetPaths = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories);
-
-        foreach (string assetPath in assetPaths)
+        if (GUILayout.Button("Package Mod"))
         {
-            if (assetPath.EndsWith(".meta")) continue;
-            string relativePath = assetPath.Replace(Application.dataPath, "Assets");
+            PackageMod();
+        }
+    }
 
-            AssetImporter importer = AssetImporter.GetAtPath(relativePath);
-            if (importer != null)
-            {
-                importer.assetBundleName = bundleName;
-            }
+    private void PackageMod()
+    {
+        string outputPath = EditorUtility.SaveFilePanel("Save Mod Package", "", $"{_manifest.ModID}.brmf", "brmf");
+
+        if (string.IsNullOrEmpty(outputPath))
+            return;
+        
+        string tempDir = Path.Combine(Path.GetTempPath(), "ModPackaging");
+        if (Directory.Exists(tempDir))
+            Directory.Delete(tempDir, true);
+        Directory.CreateDirectory(tempDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(tempDir, "manifest.json"), JsonConvert.SerializeObject(_manifest, Formatting.Indented));
+
+            BuildPipeline.BuildAssetBundles(tempDir, BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
+
+            if (File.Exists(outputPath))
+                File.Delete(outputPath);
+
+            ZipFile.CreateFromDirectory(tempDir, outputPath);
+
+            Debug.Log($"Mod packaged successfully to: {outputPath}");
+        }
+
+        finally
+        {
+            if (Directory.Exists(tempDir))
+                Directory.Delete(tempDir, true);
         }
     }
 }

@@ -15,7 +15,7 @@ A Movement Game
 - [ ] Full System For Importing Maps and Mods Seemlessly
 - [ ] Full Multiplayer with Relay
 - [ ] Different Movement Types(Source, Rigidbody, .Etc)
-- [ ] Possibly Make Some Kind Of Movement PVP Mode
+- [ ] Possibly Make Some Kind of Movement PVP Mode
 
 ## Wiki
 Check out the **[Wiki](https://github.com/IckyTheBiggy/BeatRunner/wiki)** for full documentation on modding .etc
