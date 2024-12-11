@@ -1,157 +1,89 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using Newtonsoft.Json;
 using UnityEngine;
 
 public class ModLoader : MonoBehaviour
 {
     public static ModLoader Instance { get; private set; }
-
-    private const string MOD_EXTENTION = ".brmf";
-    private readonly Dictionary<string, IMod> _loadedMods = new Dictionary<string, IMod>();
-    private readonly Dictionary<string, AssetBundle> _modAssets = new Dictionary<string, AssetBundle>();
-
-    public string ModsDirectory => Path.Combine(Application.dataPath, "../Mods");
+    private Dictionary<string, AssetBundle> _loadedMods = new Dictionary<string, AssetBundle>();
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Directory.CreateDirectory(ModsDirectory);
+        Instance = this;
         LoadMods();
     }
 
     private void LoadMods()
     {
-        string[] modFiles = Directory.GetFiles(ModsDirectory, $"*{MOD_EXTENTION}", SearchOption.TopDirectoryOnly);
+        string modPath = Path.Combine(Application.dataPath, "../Mods");
+        Directory.CreateDirectory(modPath);
 
-        foreach (string modFile in modFiles)
+        foreach (string bundlePath in Directory.GetFiles(modPath, "*.brmf"))
         {
             try
             {
-                LoadMod(modFile);
+                LoadMod(bundlePath);
             }
 
-            catch (Exception e)
+            catch (System.Exception e)
             {
-                Debug.LogError($"Failed to load mod {modFile}: {e.Message}");
+                Debug.LogError($"Failed to load map {bundlePath}: {e.Message}");
             }
         }
-
-        InitializeMods();
     }
 
-    private void LoadMod(string modPath)
+    private void LoadMod(string bundlePath)
     {
-        using (var archive = System.IO.Compression.ZipFile.OpenRead(modPath))
+        Debug.Log($"Loading bundle: {bundlePath}");
+        var bundle = AssetBundle.LoadFromFile(bundlePath);
+
+        if (bundle == null)
         {
-            var manifestEntry = archive.GetEntry("manifest.json");
-            if (manifestEntry == null)
-                throw new Exception("Mod manifest not found");
-
-            ModManifest manifest;
-            using (var reader = new StreamReader(manifestEntry.Open()))
-            {
-                manifest = JsonConvert.DeserializeObject<ModManifest>(reader.ReadToEnd());
-            }
-
-            var assemblyEntry = archive.GetEntry("mod.dll");
-            if (assemblyEntry != null)
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    using (var assemblyStream = assemblyEntry.Open())
-                    {
-                        assemblyStream.CopyTo(memoryStream);
-                    }
-
-                    Assembly assembly = Assembly.Load(memoryStream.ToArray());
-                    LoadModAssembly(assembly, manifest);
-                }
-            }
-
-            var assetsEntry = archive.GetEntry("assets");
-            if (assemblyEntry != null)
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    using (var assetStream = assetsEntry.Open())
-                    {
-                        assetStream.CopyTo(memoryStream);
-                    }
-
-                    var assetBundle = AssetBundle.LoadFromMemory(memoryStream.ToArray());
-                    _modAssets[manifest.ModID] = assetBundle;
-                }
-            }
+            Debug.LogError($"No ModConfig found in {bundlePath}");
+            return;
         }
-    }
 
-    private void LoadModAssembly(Assembly assembly, ModManifest manifest)
-    {
-        Type modType = assembly.GetType(manifest.EntryPoint);
-        if (modType == null || !typeof(IMod).IsAssignableFrom(modType))
-            throw new Exception($"Invalid mod entry point: {manifest.EntryPoint}");
-        
-        IMod mod = (IMod)Activator.CreateInstance(modType);
-        _loadedMods[manifest.ModID] = mod;
-    }
-
-    private void InitializeMods()
-    {
-        foreach (var mod in _loadedMods.Values)
+        var config = bundle.LoadAsset<ModConfig>("ModConfig");
+        if (config == null)
         {
-            try
-            {
-                mod.Initialize();
-                mod.OnEnabled();
-            }
-
-            catch (Exception e)
-            {
-                Debug.LogError($"Failed to initialize mod {mod.ModID}: {e.Message}");
-            }
+            Debug.LogError($"No ModConfig found in {bundlePath}");
+            return;
         }
+
+        _loadedMods.Add(config.ModID, bundle);
+
+        switch (config.ModType)
+        {
+            case ModTypes.Map:
+                LoadMapMod(bundle);
+            break;
+
+            default:
+                Debug.LogWarning($"Unknown mod type: {config.ModType}");
+            break;
+        }
+
+        Debug.Log($"Loaded {config.ModType} mod: {config.ModName} v{config.Version}");
     }
 
-    public T GetModAsset<T>(string modID, string assetName) where T : UnityEngine.Object
+    private void LoadMapMod(AssetBundle bundle)
     {
-        if (_modAssets.TryGetValue(modID, out var bundle))
+        var mapConfig = bundle.LoadAsset<MapModConfig>("ModConfig");
+        if (mapConfig != null && mapConfig.MapPrefab != null)
         {
-            return bundle.LoadAsset<T>(assetName);
+            Instantiate(mapConfig.MapPrefab, Vector3.zero, Quaternion.identity);
+            Debug.Log($"Loaded map: {mapConfig.ModName}");
         }
 
-        return null;
+        else
+        {
+            Debug.LogError("Failed to load map config or prefab");
+        }
     }
 
     private void OnDestroy()
     {
-        foreach (var mod in _loadedMods.Values)
-        {
-            try
-            {
-                mod.OnDisabled();
-            }
-
-            catch (Exception e)
-            {
-                Debug.LogError($"Error disabling mod {mod.ModID}: {e.Message}");
-            }
-        }
-
-        foreach (var bundle in _modAssets.Values)
+        foreach (var bundle in _loadedMods.Values)
         {
             bundle.Unload(true);
         }

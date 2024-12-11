@@ -1,7 +1,0 @@
-{
-    "ModID": "com.example.testmod",
-    "ModName": "Test Mod",
-    "Version": "1.0.0",
-    "EntryPoint": "TestMod",
-    "MinGameVersion": "1.0.0"
-}

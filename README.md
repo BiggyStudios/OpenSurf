@@ -18,7 +18,7 @@ A Movement Game
 - [ ] Possibly Make Some Kind of Movement PVP Mode
 
 ## Wiki
-Check out the **[Wiki](https://github.com/IckyTheBiggy/BeatRunner/wiki)** for full documentation on modding etc.
+Check out the **[Wiki](https://github.com/IckyTheBiggy/BeatRunner/wiki)** for full documentation on mapping etc.
 
 ## Contributing
 

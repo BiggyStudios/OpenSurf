@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7875c7fcd3d107c88ed8e8baafb628, type: 3}
+  m_Name: MapConfig
+  m_EditorClassIdentifier: 
+  ModID: com.example.testmap
+  ModName: Test Map
+  Version: 1.0.0
+  ModType: 0
+  MapPrefab: {fileID: 3877309414017956378, guid: ebbdd2d72a331ee80864713c8bb845cf, type: 3}
