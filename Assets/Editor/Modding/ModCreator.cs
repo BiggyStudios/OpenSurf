@@ -9,11 +9,10 @@ public class ModCreator : EditorWindow
         public static void CreateMod()
     {
         AssetDatabase.CreateFolder("Assets/Modding", "Mod");
-        var modScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects);
         AssetDatabase.CreateFolder("Assets/Modding/Mod", "Assets");
+        AssetDatabase.CreateFolder("Assets/Modding/Mod", "Prefabs");
         AssetDatabase.CreateFolder("Assets/Modding/Mod", "Scenes");
         AssetDatabase.CreateFolder("Assets/Modding/Mod", "Scripts");
-        EditorSceneManager.SaveScene(modScene, "Assets/Modding/Mod/Scenes/Scene.unity");
     }
 
     [MenuItem("Modding/Package Mod")]
@@ -25,7 +24,7 @@ public class ModCreator : EditorWindow
         if (!Directory.Exists(outputFolder))
             Directory.CreateDirectory(outputFolder);
 
-        string bundleName = "Mod.brmf";
+        string bundleName = "mod.brmf";
 
         AssignBundleNames(modFolder, bundleName);
 

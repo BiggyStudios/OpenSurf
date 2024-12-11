@@ -4,38 +4,45 @@ using System.IO;
 public class ModLoader : MonoBehaviour
 {
     private void Start()
-    {
-        string modPath = Path.Combine(Application.streamingAssetsPath, "Mods/mod.brmf");
+    {   
+        string modFolderPath = Path.Combine(Application.dataPath, "../Mods/");
+        string modPath = Path.Combine(Application.dataPath, "../Mods/mod.brmf");
 
-        if (File.Exists(modPath))
+        if (!Directory.Exists(modFolderPath))
+            Directory.CreateDirectory(modFolderPath);
+        else
         {
-            AssetBundle mod = AssetBundle.LoadFromFile(modPath);
-
-            if (mod != null)
+            if (File.Exists(modPath))
             {
-                Debug.Log("Mod bundle loaded successfully");
+                AssetBundle mod = AssetBundle.LoadFromFile(modPath);
 
-                GameObject prefab = mod.LoadAsset<GameObject>("TestPrefab");
-                if (prefab != null)
+                if (mod != null)
                 {
-                    Instantiate(prefab);
+                    Debug.Log("Mod bundle loaded successfully");
+
+                    GameObject prefab = mod.LoadAsset<GameObject>("TestPrefab");
+                    if (prefab != null)
+                    {
+                        var obj = Instantiate(prefab);
+                        obj.transform.position = new Vector3(0f, 100f, 0f);
+                    }
+
+                    else
+                    {
+                        Debug.LogError("Prefab not found");
+                    }
                 }
 
                 else
                 {
-                    Debug.LogError("Prefab not found");
+                    Debug.LogError("Failed to load mod bundle");
                 }
             }
 
             else
             {
-                Debug.LogError("Failed to load mod bundle");
+                Debug.LogError("Mod bundle not found");
             }
         }
-
-        else
-        {
-            Debug.LogError("Mod bundle not found");
         }
-    }
 }
