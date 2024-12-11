@@ -1,5 +1,9 @@
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -47,14 +51,19 @@ public class ModCreator : EditorWindow
         {
             File.WriteAllText(Path.Combine(tempDir, "manifest.json"), JsonConvert.SerializeObject(_manifest, Formatting.Indented));
 
-            BuildPipeline.BuildAssetBundles(tempDir, BuildAssetBundleOptions.None, EditorUserBuildSettings.activeBuildTarget);
+            string[] scriptPaths = Directory.GetFiles("Assets/Mods", "*.cs", SearchOption.AllDirectories);
+            if (scriptPaths.Length > 0)
+            {
+                string dllPath = Path.Combine(tempDir, "mod.dll");
+                BuildModDLL(scriptPaths, dllPath);
+            }
 
             if (File.Exists(outputPath))
                 File.Delete(outputPath);
 
             ZipFile.CreateFromDirectory(tempDir, outputPath);
 
-            Debug.Log($"Mod packaged successfully to: {outputPath}");
+            UnityEngine.Debug.Log($"Mod packaged successfully to: {outputPath}");
         }
 
         finally
@@ -62,5 +71,111 @@ public class ModCreator : EditorWindow
             if (Directory.Exists(tempDir))
                 Directory.Delete(tempDir, true);
         }
+    }
+
+    private void BuildModDLL(string[] scriptPaths, string outputPath)
+    {
+        string compilerPath = GetCompilerPath();
+
+        if (string.IsNullOrEmpty(compilerPath))
+        {
+            UnityEngine.Debug.LogError("Could not find C# compiler (csc.exe)");
+            return;
+        }
+
+        StringBuilder args = new StringBuilder();
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            args.Append("/target:library ");
+            args.Append($"/out:\"{outputPath}\" ");
+            args.Append($"/reference:\"{Path.Combine(EditorApplication.applicationContentsPath, "Managed/UnityEngine.dll")}\" ");
+            args.Append($"/reference:\"{Path.Combine(EditorApplication.applicationContentsPath, "Managed/UnityEngine.CoreModule.dll")}\" ");
+        }
+
+        else
+        {
+            args.Append("-target:library ");
+            args.Append($"-out:\"{outputPath}\" ");
+            args.Append($"-reference:\"{Path.Combine(EditorApplication.applicationContentsPath, "Managed/UnityEngine.dll")}\" ");
+            args.Append($"-reference:\"{Path.Combine(EditorApplication.applicationContentsPath, "Managed/UnityEngine.CoreModule.dll")}\" ");
+        }
+
+        foreach (string scriptPath in scriptPaths)
+        {
+            args.Append($"\"{scriptPaths}\" ");
+        }
+
+        ProcessStartInfo startInfo = new ProcessStartInfo
+        {
+            FileName = compilerPath,
+            Arguments = args.ToString(),
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            CreateNoWindow = true
+        };
+
+        using (Process process = Process.Start(startInfo))
+        {
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+            process.WaitForExit();
+
+            if (process.ExitCode != 0)
+            {
+                UnityEngine.Debug.LogError($"Compilation failed:\n{error}");
+                throw new System.Exception("Failed to build DLL");
+            }
+
+            else if (!string.IsNullOrEmpty(output))
+            {
+                UnityEngine.Debug.Log($"Compiler output:\n{output}");
+            }
+        }
+    }
+
+    private string GetCompilerPath()
+    {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            return Path.Combine(System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory(), "csc.exe");
+        }
+
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            string[] possiblePaths =
+            {
+                "/usr/bin/mcs",
+                "/usr/bin/csc",
+                "/usr/local/bin/mcs",
+                "/usr/local/bin/csc"
+            };
+
+            foreach (string path in possiblePaths)
+            {
+                if (File.Exists(path))
+                    return path;
+            }
+        }
+        
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+        {
+            string[] possiblePaths =
+            {
+                "/usr/local/bin/mcs",
+                "/usr/local/bin/csc",
+                "/usr/bin/mcs",
+                "/usr/bin/csc"
+            };
+
+            foreach (string path in possiblePaths)
+            {
+                if (File.Exists(path))
+                    return path;
+            }
+        }
+
+        return null;
     }
 }
