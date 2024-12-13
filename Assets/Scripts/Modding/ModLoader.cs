@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.IO;
+using P90brush;
 using UnityEngine;
 
 public class ModLoader : MonoBehaviour
 {
     public static ModLoader Instance { get; private set; }
+    public static MovementConfig MapMovementConfig;
     [SerializeField] private Transform _mapTransform;
     private Dictionary<string, AssetBundle> _loadedMods = new Dictionary<string, AssetBundle>();
 
@@ -70,6 +72,7 @@ public class ModLoader : MonoBehaviour
     private void LoadMapMod(AssetBundle bundle)
     {
         var mapConfig = bundle.LoadAsset<MapModConfig>("ModConfig");
+        MapMovementConfig = mapConfig.MapMovementConfig;
         if (mapConfig != null && mapConfig.MapPrefab != null)
         {
             _mapTransform.GetComponentInChildren<MapScript>().DestoryMap();

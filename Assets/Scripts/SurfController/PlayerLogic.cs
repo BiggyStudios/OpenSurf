@@ -116,6 +116,9 @@ namespace P90brush
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            if (ModLoader.MapMovementConfig != null)
+                moveConfig = ModLoader.MapMovementConfig;
         }
 
         void Update() {
