@@ -899,8 +899,8 @@ MonoBehaviour:
     MaxSpeed: 8
     MaxVelocity: 200
     StepSize: 0.5
-    XSens: 60
-    YSens: 60
+    XSens: 20
+    YSens: 20
     MoveLeft: 97
     MoveRight: 100
     MoveForward: 119
@@ -933,7 +933,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.6
+  m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4538162245604852799
@@ -1093,7 +1093,7 @@ Transform:
   m_GameObject: {fileID: 5675759985078338502}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.82, z: 0.42}
+  m_LocalPosition: {x: 0, y: 1.002, z: 0.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2234,7 +2234,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1983991460593628580}

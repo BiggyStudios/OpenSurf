@@ -74,8 +74,8 @@ namespace P90brush
 
 
             #region Catch Mouse mouvement
-            this.MouseX = (Input.GetAxis("Mouse X") * MoveConfig.XSens * .02f);
-            this.MouseY = Input.GetAxis("Mouse Y") * MoveConfig.YSens * .02f;
+            this.MouseX = (Input.GetAxisRaw("Mouse X") * MoveConfig.XSens * 0.2f);
+            this.MouseY = Input.GetAxisRaw("Mouse Y") * MoveConfig.YSens * 0.2f;
             #endregion
         }
     }
