@@ -888,19 +888,19 @@ MonoBehaviour:
   moveConfig:
     Gravity: 24
     AutoBhop: 1
-    AirCap: 1.8
-    AirAccel: 1600
-    Accel: 8
-    Friction: 8
-    AirFriction: 0.1
+    AirCap: 0.575
+    AirAccel: 800
+    Accel: 10
+    Friction: 4
+    AirFriction: 0.25
     StopSpeed: 1.905
     JumpPower: 8
     JumpHeight: 1.5
-    MaxSpeed: 12
+    MaxSpeed: 8
     MaxVelocity: 200
     StepSize: 0.5
-    XSens: 240
-    YSens: 240
+    XSens: 60
+    YSens: 60
     MoveLeft: 97
     MoveRight: 100
     MoveForward: 119
