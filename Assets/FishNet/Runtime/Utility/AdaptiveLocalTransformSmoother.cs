@@ -1,4 +1,4 @@
-﻿//Remove on V5
+//Remove on V5
 //using FishNet.Managing;
 //using FishNet.Managing.Timing;
 //using FishNet.Utility.Extension;
@@ -169,7 +169,7 @@
 //        /// </summary>
 //        private int MAXIMUM_QUEUED_OVER_INTERPOLATION = 3;
 //        #endregion
-        
+
 //        ~ChildTransformTickSmoother()
 //        {
 //            //This is a last resort for if something didnt deinitialize right.

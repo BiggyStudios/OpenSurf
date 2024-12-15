@@ -1,10 +1,12 @@
-﻿using FishNet.Component.Observing;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+using FishNet.Component.Observing;
 using FishNet.Connection;
 using FishNet.Object;
 using FishNet.Observing;
 using FishNet.Utility;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 using UnityEngine.Serialization;
 

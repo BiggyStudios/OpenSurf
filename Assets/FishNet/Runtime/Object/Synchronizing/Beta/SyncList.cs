@@ -1,13 +1,16 @@
-﻿#if !FISHNET_STABLE_MODE
-using FishNet.Documenting;
-using FishNet.Managing;
-using FishNet.Object.Synchronizing.Internal;
-using FishNet.Serializing;
-using GameKit.Dependencies.Utilities;
+#if !FISHNET_STABLE_MODE
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+using FishNet.Managing;
+using FishNet.Object.Synchronizing.Internal;
+using FishNet.Serializing;
+
+using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Object.Synchronizing

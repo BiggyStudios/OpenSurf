@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Runtime.CompilerServices;
 
@@ -13,42 +13,42 @@ namespace LiteNetLib.Utils
 
         public byte[] RawData
         {
-            
+
             get => _data;
         }
         public int RawDataSize
         {
-            
+
             get => _dataSize;
         }
         public int UserDataOffset
         {
-            
+
             get => _offset;
         }
         public int UserDataSize
         {
-            
+
             get => _dataSize - _offset;
         }
         public bool IsNull
         {
-            
+
             get => _data == null;
         }
         public int Position
         {
-            
+
             get => _position;
         }
         public bool EndOfData
         {
-            
+
             get => _position == _dataSize;
         }
         public int AvailableBytes
         {
-            
+
             get => _dataSize - _position;
         }
 
@@ -238,7 +238,7 @@ namespace LiteNetLib.Utils
             }
             return result;
         }
-        
+
         public bool[] GetBoolArray()
         {
             return GetArray<bool>(1);
@@ -449,7 +449,7 @@ namespace LiteNetLib.Utils
         }
 
 #if LITENETLIB_SPANS || NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1 || NETCOREAPP3_1 || NET5_0 || NETSTANDARD2_1
-        
+
         public ReadOnlySpan<byte> GetRemainingBytesSpan()
         {
             return new ReadOnlySpan<byte>(_data, _position, _dataSize - _position);
@@ -739,7 +739,8 @@ namespace LiteNetLib.Utils
 
         public bool TryGetStringArray(out string[] result)
         {
-            if (!TryGetUShort(out ushort strArrayLength)) {
+            if (!TryGetUShort(out ushort strArrayLength))
+            {
                 result = null;
                 return false;
             }

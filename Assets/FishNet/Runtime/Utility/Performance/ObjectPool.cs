@@ -1,7 +1,9 @@
-﻿using FishNet.Managing;
+using System;
+
+using FishNet.Managing;
 using FishNet.Managing.Object;
 using FishNet.Object;
-using System;
+
 using UnityEngine;
 
 namespace FishNet.Utility.Performance

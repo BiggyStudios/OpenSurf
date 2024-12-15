@@ -1,7 +1,9 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System;
+
+using FishNet.CodeGenerating.Extension;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Rocks;
-using System;
 
 namespace FishNet.CodeGenerating.Helping.Extension
 {

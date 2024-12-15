@@ -1,8 +1,10 @@
-﻿using FishNet.Connection;
+using System.Collections.Generic;
+
+using FishNet.Connection;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Scened;
 using FishNet.Object;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace FishNet.Example.Scened

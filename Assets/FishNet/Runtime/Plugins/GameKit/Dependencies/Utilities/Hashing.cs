@@ -1,4 +1,4 @@
-﻿namespace GameKit.Dependencies.Utilities
+namespace GameKit.Dependencies.Utilities
 {
 
     public static class Hashing

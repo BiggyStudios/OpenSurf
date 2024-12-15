@@ -1,4 +1,5 @@
-﻿using MonoFN.Cecil;
+using MonoFN.Cecil;
+
 using SR = System.Reflection;
 
 

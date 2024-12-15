@@ -1,4 +1,4 @@
-﻿//using FishNet.CodeGenerating.Helping.Extension;
+//using FishNet.CodeGenerating.Helping.Extension;
 //using FishNet.CodeGenerating.Processing;
 //using FishNet.Object.Synchronizing;
 //using FishNet.Object.Synchronizing.Internal;

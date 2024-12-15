@@ -1,4 +1,4 @@
-﻿using FishNet.Documenting;
+using FishNet.Documenting;
 using FishNet.Managing;
 using FishNet.Object;
 

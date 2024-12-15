@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace BNNUtils.StatDebugger
@@ -31,7 +32,7 @@ namespace BNNUtils.StatDebugger
 
             string text =
                 string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
-            
+
             GUI.Label(rect, text, style);
         }
     }

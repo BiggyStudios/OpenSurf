@@ -1,6 +1,8 @@
-﻿using FishNet.Documenting;
-using FishNet.Managing.Logging;
 using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+using FishNet.Managing.Logging;
+
 using UnityEngine;
 
 namespace FishNet.Managing
@@ -90,7 +92,7 @@ namespace FishNet.Managing
         /// <summary>
         /// True if can log for loggingType.
         /// </summary>
-        
+
         internal static bool CanLog(this NetworkManager networkManager, LoggingType loggingType)
         {
             if (GetNetworkManager(ref networkManager))
@@ -102,7 +104,7 @@ namespace FishNet.Managing
         /// <summary>
         /// Performs a log using the loggingType, should logging settings permit it.
         /// </summary>
-        
+
         public static void Log(this NetworkManager networkManager, LoggingType loggingType, string value)
         {
             if (loggingType == LoggingType.Common)
@@ -116,7 +118,7 @@ namespace FishNet.Managing
         /// <summary>
         /// Performs a common log, should logging settings permit it.
         /// </summary>
-        
+
         public static void Log(this NetworkManager networkManager, string message)
         {
             if (GetNetworkManager(ref networkManager))
@@ -127,7 +129,7 @@ namespace FishNet.Managing
         /// <summary>
         /// Performs a warning log, should logging settings permit it.
         /// </summary>
-        
+
         public static void LogWarning(this NetworkManager networkManager, string message)
         {
             if (GetNetworkManager(ref networkManager))
@@ -139,7 +141,7 @@ namespace FishNet.Managing
         /// <summary>
         /// Performs an error log, should logging settings permit it.
         /// </summary>
-        
+
         public static void LogError(this NetworkManager networkManager, string message)
         {
             if (GetNetworkManager(ref networkManager))
@@ -165,22 +167,22 @@ namespace FishNet.Managing
         /// <summary>
         /// Performs a common log, should logging settings permit it.
         /// </summary>
-        
+
         public static void Log(string msg) => NetworkManagerExtensions.Log(null, msg);
         /// <summary>
         /// Performs a warning log, should logging settings permit it.
         /// </summary>
-        
+
         public static void LogWarning(string msg) => NetworkManagerExtensions.LogWarning(null, msg);
         /// <summary>
         /// Performs an error log, should logging settings permit it.
         /// </summary>
-        
+
         public static void LogError(string msg) => NetworkManagerExtensions.LogError(null, msg);
         /// <summary>
         /// True if can log for loggingType.
         /// </summary>
-        
+
         public static bool CanLog(LoggingType lt) => NetworkManagerExtensions.CanLog(null, lt);
 
 

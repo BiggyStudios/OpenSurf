@@ -1,4 +1,4 @@
-﻿//using System; //Remove on V5
+//using System; //Remove on V5
 
 //namespace FishNet.Utility.Performance
 //{

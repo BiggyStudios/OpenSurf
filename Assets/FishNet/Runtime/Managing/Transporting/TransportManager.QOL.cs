@@ -1,6 +1,7 @@
-﻿using FishNet.Connection;
+using FishNet.Connection;
 using FishNet.Transporting;
 using FishNet.Transporting.Multipass;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Transporting

@@ -1,5 +1,6 @@
-using GameKit.Dependencies.Utilities.Types.CanvasContainers;
 using System.Collections.Generic;
+
+using GameKit.Dependencies.Utilities.Types.CanvasContainers;
 
 
 namespace GameKit.Dependencies.Utilities.Types.OptionMenuButtons

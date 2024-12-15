@@ -1,22 +1,24 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 
-using FishNet.Configuring;
 using System.IO;
-using UnityEngine;
 using System.Xml.Serialization;
 
+using FishNet.Configuring;
 using FishNet.Editing.PrefabCollectionGenerator;
-using UnityEditor.Compilation;
-using UnityEditor.Build.Reporting;
+
 using UnityEditor;
 using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
+using UnityEditor.Compilation;
+
+using UnityEngine;
 
 namespace FishNet.Configuring
 {
 
 
     public class CodeStripping
-    
+
     {
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace FishNet.Configuring
         {
             get
             {
-                
+
 
                 /* This is to protect non pro users from enabling this
                  * without the extra logic code.  */
@@ -51,7 +53,7 @@ namespace FishNet.Configuring
         {
             get
             {
-                
+
 
                 /* This is to protect non pro users from enabling this
                  * without the extra logic code.  */
@@ -75,7 +77,7 @@ namespace FishNet.Configuring
             CompilationPipeline.compilationStarted += CompilationPipelineOnCompilationStarted;
             CompilationPipeline.compilationFinished += CompilationPipelineOnCompilationFinished;
 
-            
+
         }
         /* Solution for builds ending with errors and not triggering OnPostprocessBuild.
         * Link: https://gamedev.stackexchange.com/questions/181611/custom-build-failure-callback
@@ -95,20 +97,20 @@ namespace FishNet.Configuring
             CompilationPipeline.compilationStarted -= CompilationPipelineOnCompilationStarted;
             CompilationPipeline.compilationFinished -= CompilationPipelineOnCompilationFinished;
 
-           // BuildingEnded();
+            // BuildingEnded();
         }
 
         private void BuildingEnded()
         {
-            
+
 
             Generator.IgnorePostProcess = false;
         }
 
         public void OnPostprocessBuild(BuildReport report)
         {
-            
-                BuildingEnded();
+
+            BuildingEnded();
         }
     }
 

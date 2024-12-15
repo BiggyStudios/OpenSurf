@@ -8,37 +8,41 @@
 // Licensed under the MIT/X11 license.
 //
 
-using MonoFN.Collections.Generic;
 using System.Threading;
 
-namespace MonoFN.Cecil {
+using MonoFN.Collections.Generic;
 
-	public interface ICustomAttributeProvider : IMetadataTokenProvider {
+namespace MonoFN.Cecil
+{
 
-		Collection<CustomAttribute> CustomAttributes { get; }
+    public interface ICustomAttributeProvider : IMetadataTokenProvider
+    {
 
-		bool HasCustomAttributes { get; }
-	}
+        Collection<CustomAttribute> CustomAttributes { get; }
 
-	static partial class Mixin {
+        bool HasCustomAttributes { get; }
+    }
 
-		public static bool GetHasCustomAttributes (
-			this ICustomAttributeProvider self,
-			ModuleDefinition module)
-		{
-			return module.HasImage () && module.Read (self, (provider, reader) => reader.HasCustomAttributes (provider));
-		}
+    static partial class Mixin
+    {
 
-		public static Collection<CustomAttribute> GetCustomAttributes (
-			this ICustomAttributeProvider self,
-			ref Collection<CustomAttribute> variable,
-			ModuleDefinition module)
-		{
-			if (module.HasImage ())
-				return module.Read (ref variable, self, (provider, reader) => reader.ReadCustomAttributes (provider));
+        public static bool GetHasCustomAttributes(
+            this ICustomAttributeProvider self,
+            ModuleDefinition module)
+        {
+            return module.HasImage() && module.Read(self, (provider, reader) => reader.HasCustomAttributes(provider));
+        }
 
-			Interlocked.CompareExchange (ref variable, new Collection<CustomAttribute> (), null);
-			return variable;
-		}
-	}
+        public static Collection<CustomAttribute> GetCustomAttributes(
+            this ICustomAttributeProvider self,
+            ref Collection<CustomAttribute> variable,
+            ModuleDefinition module)
+        {
+            if (module.HasImage())
+                return module.Read(ref variable, self, (provider, reader) => reader.ReadCustomAttributes(provider));
+
+            Interlocked.CompareExchange(ref variable, new Collection<CustomAttribute>(), null);
+            return variable;
+        }
+    }
 }

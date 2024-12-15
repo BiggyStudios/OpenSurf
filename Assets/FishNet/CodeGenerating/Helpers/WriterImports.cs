@@ -1,11 +1,13 @@
-﻿using FishNet.CodeGenerating.Extension;
-using FishNet.CodeGenerating.Helping.Extension;
-using FishNet.Object;
-using FishNet.Serializing;
-using MonoFN.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+
+using FishNet.CodeGenerating.Extension;
+using FishNet.CodeGenerating.Helping.Extension;
+using FishNet.Object;
+using FishNet.Serializing;
+
+using MonoFN.Cecil;
 
 namespace FishNet.CodeGenerating.Helping
 {
@@ -78,7 +80,7 @@ namespace FishNet.CodeGenerating.Helping
                 if (methodInfo.Name == nameof(PooledWriter.Store))
                     PooledWriter_Dispose_MethodRef = base.ImportReference(methodInfo);
                 else if (methodInfo.Name == nameof(PooledWriter.WriteUnsignedPackedWhole))
-                { 
+                {
                     //todo: check if signed or not and set to signed/unsigned variable.
                     //do the same changes for methods which call these.
                     //Writer_WritePackedWhole_MethodRef = base.ImportReference(methodInfo);

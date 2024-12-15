@@ -1,7 +1,8 @@
-﻿using FishNet.CodeGenerating.Helping.Extension;
+using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.Object;
 using FishNet.Object.Helping;
 using FishNet.Object.Prediction;
+
 using MonoFN.Cecil;
 
 

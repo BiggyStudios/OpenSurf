@@ -1,5 +1,6 @@
-﻿
+
 using System;
+
 using UnityEngine;
 
 namespace FishNet.Serializing.Helping
@@ -25,7 +26,7 @@ namespace FishNet.Serializing.Helping
             ComponentType largestComponent = ComponentType.X;
             float largestAbs = absX;
             float largest = quaternion.x;
-            
+
             if (absY > largestAbs)
             {
                 largestAbs = absY;

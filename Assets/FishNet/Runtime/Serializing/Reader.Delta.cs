@@ -1,9 +1,11 @@
 using System;
-using FishNet.CodeGenerating;
 using System.Runtime.CompilerServices;
+
+using FishNet.CodeGenerating;
 using FishNet.Managing;
 using FishNet.Object;
 using FishNet.Object.Prediction;
+
 using UnityEngine;
 
 namespace FishNet.Serializing
@@ -454,7 +456,7 @@ namespace FishNet.Serializing
         public T ReadDelta<T>(T prev)
         {
             Func<Reader, T, T> del = GenericDeltaReader<T>.Read;
-            
+
             if (del == null)
             {
                 NetworkManager.LogError($"Read delta method not found for {typeof(T).FullName}. Use a supported type or create a custom serializer.");

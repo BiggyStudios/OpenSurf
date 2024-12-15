@@ -1,6 +1,8 @@
-﻿using FishNet.Documenting;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Logging

@@ -1,4 +1,4 @@
-﻿namespace FishNet.Object.Helping
+namespace FishNet.Object.Helping
 {
     public enum RpcType : int
     {

@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class TPTrigger : MonoBehaviour
@@ -34,7 +35,7 @@ public class TPTrigger : MonoBehaviour
                 // TODO: Add Rotation ?
                 break;
             }
-        } 
+        }
     }
 
     private void LateUpdate()

@@ -1,10 +1,11 @@
-﻿using FishNet.Managing;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.Documenting;
+using FishNet.Managing;
 using FishNet.Object.Synchronizing;
 using FishNet.Object.Synchronizing.Internal;
 using FishNet.Serializing;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace FishNet.Example.CustomSyncObject
 {
@@ -213,7 +214,7 @@ namespace FishNet.Example.CustomSyncObject
 
                 if (canModifyValues)
                     Value = next;
-                
+
                 if (newChangeId)
                     OnChange?.Invoke(operation, prev, next, asServer);
             }

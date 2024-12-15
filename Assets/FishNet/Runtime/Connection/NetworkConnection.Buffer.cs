@@ -1,11 +1,13 @@
-﻿using FishNet.Broadcast;
+using System;
+using System.Collections.Generic;
+
+using FishNet.Broadcast;
 using FishNet.Managing;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Transporting;
 using FishNet.Object;
 using FishNet.Transporting;
-using System;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace FishNet.Connection

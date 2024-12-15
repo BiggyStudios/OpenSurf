@@ -1,5 +1,6 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using UnityEditor;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Timing.Editing
@@ -17,7 +18,7 @@ namespace FishNet.Managing.Timing.Editing
         private SerializedProperty _maximumFrameTicks;
         private SerializedProperty _pingInterval;
         //private SerializedProperty _timingInterval;
-        private SerializedProperty _physicsMode;        
+        private SerializedProperty _physicsMode;
 
         protected virtual void OnEnable()
         {

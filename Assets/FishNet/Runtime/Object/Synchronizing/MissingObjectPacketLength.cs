@@ -1,4 +1,4 @@
-﻿namespace FishNet.Object
+namespace FishNet.Object
 {
 
     internal enum MissingObjectPacketLength : int

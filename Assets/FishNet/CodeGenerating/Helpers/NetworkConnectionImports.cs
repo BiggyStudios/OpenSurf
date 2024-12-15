@@ -1,7 +1,9 @@
-﻿using FishNet.Connection;
-using MonoFN.Cecil;
 using System;
 using System.Reflection;
+
+using FishNet.Connection;
+
+using MonoFN.Cecil;
 
 namespace FishNet.CodeGenerating.Helping
 {

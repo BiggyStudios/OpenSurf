@@ -1,9 +1,11 @@
-﻿using FishNet.Documenting;
+using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+using FishNet.Managing;
 using FishNet.Object.Synchronizing;
 using FishNet.Object.Synchronizing.Internal;
 using FishNet.Serializing;
-using System.Runtime.CompilerServices;
-using FishNet.Managing;
+
 using UnityEngine;
 
 namespace FishNet.Example.ComponentStateSync
@@ -130,7 +132,7 @@ namespace FishNet.Example.ComponentStateSync
         protected internal override void Read(PooledReader reader, bool asServer)
         {
             base.SetReadArguments(reader, asServer, out bool newChangeId, out bool _, out bool canModifyValues);
-            
+
             bool prevValue = GetState();
             bool nextValue = reader.ReadBoolean();
 

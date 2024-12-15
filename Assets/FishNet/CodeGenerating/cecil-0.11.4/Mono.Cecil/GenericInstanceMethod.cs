@@ -8,70 +8,82 @@
 // Licensed under the MIT/X11 license.
 //
 
-using MonoFN.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace MonoFN.Cecil {
+using MonoFN.Collections.Generic;
 
-	public sealed class GenericInstanceMethod : MethodSpecification, IGenericInstance, IGenericContext {
+namespace MonoFN.Cecil
+{
 
-		Collection<TypeReference> arguments;
+    public sealed class GenericInstanceMethod : MethodSpecification, IGenericInstance, IGenericContext
+    {
 
-		public bool HasGenericArguments {
-			get { return !arguments.IsNullOrEmpty (); }
-		}
+        Collection<TypeReference> arguments;
 
-		public Collection<TypeReference> GenericArguments {
-			get {
-				if (arguments == null)
-					Interlocked.CompareExchange (ref arguments, new Collection<TypeReference> (), null);
+        public bool HasGenericArguments
+        {
+            get { return !arguments.IsNullOrEmpty(); }
+        }
 
-				return arguments;
-			}
-		}
+        public Collection<TypeReference> GenericArguments
+        {
+            get
+            {
+                if (arguments == null)
+                    Interlocked.CompareExchange(ref arguments, new Collection<TypeReference>(), null);
 
-		public override bool IsGenericInstance {
-			get { return true; }
-		}
+                return arguments;
+            }
+        }
 
-		IGenericParameterProvider IGenericContext.Method {
-			get { return ElementMethod; }
-		}
+        public override bool IsGenericInstance
+        {
+            get { return true; }
+        }
 
-		IGenericParameterProvider IGenericContext.Type {
-			get { return ElementMethod.DeclaringType; }
-		}
+        IGenericParameterProvider IGenericContext.Method
+        {
+            get { return ElementMethod; }
+        }
 
-		public override bool ContainsGenericParameter {
-			get { return this.ContainsGenericParameter () || base.ContainsGenericParameter; }
-		}
+        IGenericParameterProvider IGenericContext.Type
+        {
+            get { return ElementMethod.DeclaringType; }
+        }
 
-		public override string FullName {
-			get {
-				var signature = new StringBuilder ();
-				var method = this.ElementMethod;
-				signature.Append (method.ReturnType.FullName)
-					.Append (" ")
-					.Append (method.DeclaringType.FullName)
-					.Append ("::")
-					.Append (method.Name);
-				this.GenericInstanceFullName (signature);
-				this.MethodSignatureFullName (signature);
-				return signature.ToString ();
+        public override bool ContainsGenericParameter
+        {
+            get { return this.ContainsGenericParameter() || base.ContainsGenericParameter; }
+        }
 
-			}
-		}
+        public override string FullName
+        {
+            get
+            {
+                var signature = new StringBuilder();
+                var method = this.ElementMethod;
+                signature.Append(method.ReturnType.FullName)
+                    .Append(" ")
+                    .Append(method.DeclaringType.FullName)
+                    .Append("::")
+                    .Append(method.Name);
+                this.GenericInstanceFullName(signature);
+                this.MethodSignatureFullName(signature);
+                return signature.ToString();
 
-		public GenericInstanceMethod (MethodReference method)
-			: base (method)
-		{
-		}
+            }
+        }
 
-		internal GenericInstanceMethod (MethodReference method, int arity)
-			: this (method)
-		{
-			this.arguments = new Collection<TypeReference> (arity);
-		}
-	}
+        public GenericInstanceMethod(MethodReference method)
+            : base(method)
+        {
+        }
+
+        internal GenericInstanceMethod(MethodReference method, int arity)
+            : this(method)
+        {
+            this.arguments = new Collection<TypeReference>(arity);
+        }
+    }
 }

@@ -1,7 +1,8 @@
-using FishNet.Documenting;
-using FishNet.Utility;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+using FishNet.Utility;
 
 [assembly: InternalsVisibleTo(UtilityConstants.GENERATED_ASSEMBLY_NAME)]
 //Required for internal tests.
@@ -14,7 +15,7 @@ namespace FishNet.Serializing
     [APIExclude]
     public static class GenericReader<T>
     {
-        public static Func<Reader, T> Read { get; set; }        
+        public static Func<Reader, T> Read { get; set; }
         /// <summary>
         /// True if this type has a custom writer.
         /// </summary>
@@ -32,7 +33,7 @@ namespace FishNet.Serializing
             //If not generated then unset any generated delta serializer.
             if (!isGenerated && GenericDeltaReader<T>.HasCustomSerializer)
                 GenericDeltaReader<T>.Read = null;
-            
+
             //Set has custom serializer if value being used is not a generated method.
             HasCustomSerializer = !isGenerated;
             Read = value;

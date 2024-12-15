@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities
 {
@@ -13,7 +13,7 @@ namespace GameKit.Dependencies.Utilities
         /// <param name="duration">How long it should take to move to goal.</param>
         /// <param name="interval">A multiplier applied towards interval. Typically this is used for ticks passed.</param>
         /// <returns></returns>
-        public static float GetRate(this Quaternion a, Quaternion goal, float duration, out float angle,  uint interval = 1, float tolerance = 0f)
+        public static float GetRate(this Quaternion a, Quaternion goal, float duration, out float angle, uint interval = 1, float tolerance = 0f)
         {
             angle = a.Angle(goal, true);
             return angle / (duration * interval);

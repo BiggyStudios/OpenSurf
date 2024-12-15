@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
 using UnityEngine;
+
 using Random = UnityEngine.Random;
 
 namespace NnUtils.Scripts
@@ -12,14 +14,14 @@ namespace NnUtils.Scripts
     {
         [SerializeField] private List<ChanceItem<T>> _list;
         private int _maxChance;
-        
+
         public void Add(ChanceItem<T> obj)
         {
             _list.Add(obj);
             CalculateChances();
             obj.OnChanceAmountChanged += CalculateChances;
         }
-        
+
         public void Remove(ChanceItem<T> obj)
         {
             _list.Remove(obj);
@@ -32,7 +34,7 @@ namespace NnUtils.Scripts
             _list.Clear();
             _maxChance = 0;
         }
-        
+
         public ChanceItem<T> GetObject() => _list.First(x =>
         {
             if (_maxChance == 0) throw new Exception("Chance list is empty");

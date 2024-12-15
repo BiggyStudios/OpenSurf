@@ -1,9 +1,12 @@
-﻿using FishNet.Managing.Object;
-using FishNet.Object;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+using FishNet.Managing.Object;
+using FishNet.Object;
+
 using UnityEngine;
+
 using UnityComponent = UnityEngine.Component;
 
 
@@ -289,7 +292,7 @@ namespace FishNet.Managing
         /// <typeparam name="T">Type to register.</typeparam>
         /// <param name="component">Reference of the component being registered.</param>
         /// <returns>True if was able to register, false if an instance is already registered.</returns>
-        
+
         public bool TryRegisterInstance<T>(T component) where T : UnityComponent
         {
             string tName = GetInstanceName<T>();

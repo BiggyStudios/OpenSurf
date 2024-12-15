@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 using Edgegap.Editor.Api.Models.Results;
 
 namespace Edgegap.Editor.Api
@@ -12,8 +13,8 @@ namespace Edgegap.Editor.Api
     public class EdgegapIpApi : EdgegapApiBase
     {
         public EdgegapIpApi(
-            ApiEnvironment apiEnvironment, 
-            string apiToken, 
+            ApiEnvironment apiEnvironment,
+            string apiToken,
             EdgegapWindowMetadata.LogLevel logLevel = EdgegapWindowMetadata.LogLevel.Error)
             : base(apiEnvironment, apiToken, logLevel)
         {
@@ -39,7 +40,7 @@ namespace Edgegap.Editor.Api
             bool isSuccess = response.StatusCode == HttpStatusCode.OK; // 200
             if (!isSuccess)
                 return result;
-            
+
             return result;
         }
         #endregion // API Methods

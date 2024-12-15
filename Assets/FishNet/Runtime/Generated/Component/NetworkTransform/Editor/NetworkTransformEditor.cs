@@ -1,8 +1,12 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using FishNet.Editing;
+
 using GameKit.Dependencies.Utilities;
+
 using UnityEditor;
+
 using UnityEngine;
+
 using GameKitEditing = GameKit.Dependencies.Utilities.Editing;
 
 namespace FishNet.Component.Transforming.Editing
@@ -56,7 +60,7 @@ namespace FishNet.Component.Transforming.Editing
             GameKitEditing.AddObjectField("Script:", MonoScript.FromMonoBehaviour((NetworkTransform)target), typeof(NetworkTransform), false, EditorLayoutEnableType.Disabled);
 
             bool isPro = false;
-            
+
             if (isPro)
                 EditorGUILayout.HelpBox(EditingConstants.PRO_ASSETS_UNLOCKED_TEXT, MessageType.None);
             else

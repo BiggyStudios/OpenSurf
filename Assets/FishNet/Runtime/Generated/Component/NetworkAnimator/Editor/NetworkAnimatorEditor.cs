@@ -1,9 +1,12 @@
-﻿#if UNITY_EDITOR
-using FishNet.Editing;
+#if UNITY_EDITOR
 using System.Collections.Generic;
+
+using FishNet.Editing;
 using FishNet.Managing;
+
 using UnityEditor;
 using UnityEditor.Animations;
+
 using UnityEngine;
 
 namespace FishNet.Component.Animating.Editing
@@ -42,9 +45,9 @@ namespace FishNet.Component.Animating.Editing
             EditorGUILayout.ObjectField("Script:", MonoScript.FromMonoBehaviour(na), typeof(NetworkAnimator), false);
             GUI.enabled = true;
 
-            
+
 #pragma warning disable CS0162 // Unreachable code detected
-                EditorGUILayout.HelpBox(EditingConstants.PRO_ASSETS_LOCKED_TEXT, MessageType.Warning);
+            EditorGUILayout.HelpBox(EditingConstants.PRO_ASSETS_LOCKED_TEXT, MessageType.Warning);
 #pragma warning restore CS0162 // Unreachable code detected
 
             //Animator

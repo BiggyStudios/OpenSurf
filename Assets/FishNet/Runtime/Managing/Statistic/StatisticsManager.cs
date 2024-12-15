@@ -16,7 +16,7 @@ namespace FishNet.Managing.Statistic
         {
             NetworkTraffic.InitializeOnce_Internal(manager);
         }
-  
+
     }
 
 }

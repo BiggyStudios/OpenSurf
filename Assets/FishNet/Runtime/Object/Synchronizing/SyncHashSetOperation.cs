@@ -1,4 +1,4 @@
-﻿
+
 using FishNet.Documenting;
 
 namespace FishNet.Object.Synchronizing

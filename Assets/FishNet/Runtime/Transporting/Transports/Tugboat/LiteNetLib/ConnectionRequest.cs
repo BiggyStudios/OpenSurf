@@ -1,5 +1,6 @@
-﻿using System.Net;
+using System.Net;
 using System.Threading;
+
 using LiteNetLib.Utils;
 
 namespace LiteNetLib

@@ -1,6 +1,9 @@
 using System.Collections;
+
 using FishNet.Object;
+
 using P90brush;
+
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -12,8 +15,8 @@ public class PlayerManager : NetworkBehaviour
     [HideInInspector] public string Username;
     [HideInInspector] public float PlayerTime;
     [HideInInspector] public bool TimerActive;
-    
-    [Header("Values")] 
+
+    [Header("Values")]
     [SerializeField] private float _restartLerpSpeed;
     [SerializeField] private AnimationCurve _respawnAnimationCurve;
 
@@ -24,7 +27,7 @@ public class PlayerManager : NetworkBehaviour
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private Slider _fovSlider;
     [SerializeField] private Slider _volSlider;
-    
+
     private CapsuleCollider _capsuleCollider;
     private Vector3 _spawnPosition;
     private bool _pauseMenuOpen;
@@ -52,7 +55,7 @@ public class PlayerManager : NetworkBehaviour
     public override void OnStopClient()
     {
         base.OnStopClient();
-        
+
         Scoreboard.Instance.RemovePlayer(OwnerId.ToString());
     }
 
@@ -85,11 +88,11 @@ public class PlayerManager : NetworkBehaviour
             _pauseMenu.SetActive(true);
         }
 
-         else if (Input.GetKeyDown(KeyCode.Escape) && _pauseMenuOpen)
+        else if (Input.GetKeyDown(KeyCode.Escape) && _pauseMenuOpen)
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            
+
             _pauseMenuOpen = false;
             _pauseMenu.SetActive(false);
         }

@@ -1,4 +1,4 @@
-﻿// namespace FishNet.Managing.Object //Remove in V5
+// namespace FishNet.Managing.Object //Remove in V5
 // {
 //     public enum SpawnParentType : byte
 //     {

@@ -1,4 +1,4 @@
-﻿namespace FishNet.Managing.Logging
+namespace FishNet.Managing.Logging
 {
     /// <summary>
     /// Type of logging being filtered.

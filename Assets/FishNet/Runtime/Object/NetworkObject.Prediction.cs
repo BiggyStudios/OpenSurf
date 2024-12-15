@@ -1,14 +1,17 @@
-﻿#define NEW_RECONCILE_TEST
+#define NEW_RECONCILE_TEST
 using System;
+using System.Collections.Generic;
+
 using FishNet.Component.Prediction;
 using FishNet.Component.Transforming;
+using FishNet.Connection;
 using FishNet.Managing;
+using FishNet.Managing.Server;
 using FishNet.Managing.Timing;
 using FishNet.Object.Prediction;
+
 using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
-using FishNet.Connection;
-using FishNet.Managing.Server;
+
 using UnityEngine;
 
 namespace FishNet.Object

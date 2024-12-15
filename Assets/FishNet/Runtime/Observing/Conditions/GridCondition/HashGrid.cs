@@ -1,7 +1,9 @@
-﻿using FishNet.Managing;
-using FishNet.Object;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+using FishNet.Managing;
+using FishNet.Object;
+
 using UnityEngine;
 
 namespace FishNet.Component.Observing
@@ -80,12 +82,15 @@ namespace FishNet.Component.Observing
         /// <summary>
         /// Axes of world space to base the grid on.
         /// </summary>
-        [Tooltip("Axes of world space to base the grid on.")] [SerializeField]
+        [Tooltip("Axes of world space to base the grid on.")]
+        [SerializeField]
         private GridAxes _gridAxes = GridAxes.XY;
         /// <summary>
         /// Accuracy of the grid. Objects will be considered nearby if they are within this number of units. Lower values may be more expensive.
         /// </summary>
-        [Tooltip("Accuracy of the grid. Objects will be considered nearby if they are within this number of units. Lower values may be more expensive.")] [Range(1, ushort.MaxValue)] [SerializeField]
+        [Tooltip("Accuracy of the grid. Objects will be considered nearby if they are within this number of units. Lower values may be more expensive.")]
+        [Range(1, ushort.MaxValue)]
+        [SerializeField]
         private ushort _accuracy = 10;
 
         #endregion
@@ -254,7 +259,7 @@ namespace FishNet.Component.Observing
         /// <summary>
         /// Gets a GridEntry for a NetworkObject, creating the entry if needed.
         /// </summary>
-        
+
         internal GridEntry GetGridEntry(NetworkObject nob)
         {
             Vector2Int pos = GetHashGridPosition(nob);

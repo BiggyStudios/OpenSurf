@@ -1,11 +1,15 @@
-﻿using FishNet.CodeGenerating.Helping;
+using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.ILCore;
 using FishNet.CodeGenerating.Processing;
 using FishNet.CodeGenerating.Processing.Rpc;
+
 using MonoFN.Cecil;
+
 using System.Collections.Generic;
 using System.Linq;
+
 using Unity.CompilationPipeline.Common.Diagnostics;
+
 #if !UNITY_2020_1_OR_NEWER
 using UnityEngine;
 #endif

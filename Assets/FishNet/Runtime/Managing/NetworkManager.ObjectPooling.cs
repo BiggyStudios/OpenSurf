@@ -1,7 +1,9 @@
-﻿using FishNet.Object;
-using FishNet.Utility.Performance;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Object;
+using FishNet.Utility.Performance;
+
 using UnityEngine;
 
 namespace FishNet.Managing
@@ -11,25 +13,25 @@ namespace FishNet.Managing
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.       
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(NetworkObject prefab, Transform parent, bool asServer)
             => GetPooledInstantiated(prefab.PrefabId, prefab.SpawnableCollectionId, ObjectPoolRetrieveOption.MakeActive, parent, position: null, rotation: null, scale: null, asServer);
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.       
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(NetworkObject prefab, bool asServer)
             => GetPooledInstantiated(prefab.PrefabId, prefab.SpawnableCollectionId, ObjectPoolRetrieveOption.MakeActive, parent: null, position: null, rotation: null, scale: null, asServer);
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.       
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(NetworkObject prefab, Vector3 position, Quaternion rotation, bool asServer)
             => GetPooledInstantiated(prefab.PrefabId, prefab.SpawnableCollectionId, ObjectPoolRetrieveOption.MakeActive, parent: null, position, rotation, scale: null, asServer);
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.       
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(GameObject prefab, bool asServer)
         {
             if (SetPrefabInformation(prefab, out _, out int prefabId, out ushort collectionId))
@@ -40,7 +42,7 @@ namespace FishNet.Managing
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.       
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(GameObject prefab, Transform parent, bool asServer)
         {
             if (SetPrefabInformation(prefab, out _, out int prefabId, out ushort collectionId))
@@ -51,7 +53,7 @@ namespace FishNet.Managing
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.       
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(GameObject prefab, Vector3 position, Quaternion rotation, bool asServer)
         {
             if (SetPrefabInformation(prefab, out _, out int prefabId, out ushort collectionId))
@@ -62,13 +64,13 @@ namespace FishNet.Managing
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.       
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(NetworkObject prefab, Vector3 position, Quaternion rotation, Transform parent, bool asServer)
             => GetPooledInstantiated(prefab.PrefabId, prefab.SpawnableCollectionId, ObjectPoolRetrieveOption.MakeActive, parent, position, rotation, scale: null, asServer);
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.       
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent, bool asServer)
         {
             if (SetPrefabInformation(prefab, out _, out int prefabId, out ushort collectionId))
@@ -79,13 +81,13 @@ namespace FishNet.Managing
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(int prefabId, ushort collectionId, bool asServer)
             => GetPooledInstantiated(prefabId, collectionId, ObjectPoolRetrieveOption.MakeActive, parent: null, position: null, rotation: null, scale: null, asServer: asServer);
         /// <summary>
         /// Returns an instantiated or pooled object using supplied values. When a value is not specified it uses default values to the prefab or NetworkManager.
         /// </summary>
-        
+
         public NetworkObject GetPooledInstantiated(int prefabId, ushort collectionId, Vector3 position, Quaternion rotation, bool asServer)
             => GetPooledInstantiated(prefabId, collectionId, ObjectPoolRetrieveOption.MakeActive, parent: null, position, rotation, scale: null, asServer);
         /// <summary>

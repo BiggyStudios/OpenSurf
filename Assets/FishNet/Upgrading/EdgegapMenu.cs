@@ -1,4 +1,4 @@
-﻿// #if !EDGEGAP_PLUGIN_SERVERS
+// #if !EDGEGAP_PLUGIN_SERVERS
 // #if UNITY_EDITOR
 // using FishNet.Documenting;
 // using UnityEditor;

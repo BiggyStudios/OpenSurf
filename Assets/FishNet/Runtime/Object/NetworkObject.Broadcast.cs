@@ -1,6 +1,7 @@
-﻿using FishNet.Broadcast;
+using FishNet.Broadcast;
 using FishNet.Managing;
 using FishNet.Transporting;
+
 using UnityEngine;
 
 namespace FishNet.Object

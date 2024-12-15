@@ -1,10 +1,12 @@
-﻿using FishNet.Managing.Server;
-using FishNet.Object.Helping;
-using FishNet.Serializing;
-using FishNet.Transporting;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+
+using FishNet.Managing.Server;
+using FishNet.Object.Helping;
+using FishNet.Serializing;
+using FishNet.Transporting;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -25,7 +27,7 @@ namespace FishNet.Object
         /// </summary>
         internal const int RPCLINK_RESERVED_BYTES = 2;
         #endregion
-        
+
         /// <summary>
         /// Initializes RpcLinks. This will only call once even as host.
         /// </summary>
@@ -101,7 +103,7 @@ namespace FishNet.Object
         /// <summary>
         /// Creates a PooledWriter and writes the header for a rpc.
         /// </summary>
-        
+
         private PooledWriter CreateLinkedRpc(RpcLinkType link, PooledWriter methodWriter, Channel channel)
         {
             int rpcHeaderBufferLength = GetEstimatedRpcHeaderLength();
@@ -141,7 +143,7 @@ namespace FishNet.Object
 
             writer.WriteNetworkBehaviourId(this);
             writer.WriteUInt16((ushort)rpcLinksCount);
-            
+
             foreach (KeyValuePair<uint, RpcLinkType> item in _rpcLinks)
             {
                 //RpcLink index.

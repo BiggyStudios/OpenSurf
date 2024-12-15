@@ -1,7 +1,10 @@
-﻿using FishNet.CodeGenerating.Helping.Extension;
-using MonoFN.Cecil;
 using System;
 using System.Collections.Generic;
+
+using FishNet.CodeGenerating.Helping.Extension;
+
+using MonoFN.Cecil;
+
 using UnityEngine;
 
 namespace FishNet.CodeGenerating.Helping

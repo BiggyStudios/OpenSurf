@@ -1,8 +1,10 @@
-﻿using FishNet.Connection;
-using FishNet.Object;
-using FishNet.Observing;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
+using FishNet.Object;
+using FishNet.Observing;
+
 using UnityEngine;
 
 namespace FishNet.Component.Observing

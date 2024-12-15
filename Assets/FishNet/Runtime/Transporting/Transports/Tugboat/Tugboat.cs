@@ -1,8 +1,11 @@
-using FishNet.Managing;
-using FishNet.Managing.Transporting;
-using LiteNetLib.Layers;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Managing;
+using FishNet.Managing.Transporting;
+
+using LiteNetLib.Layers;
+
 using UnityEngine;
 
 namespace FishNet.Transporting.Tugboat
@@ -264,7 +267,7 @@ namespace FishNet.Transporting.Tugboat
         /// </summary>
         /// <param name="channelId">Channel to use.</param>
         /// <param name="segment">Data to send.</param>
-        
+
         public override void SendToServer(byte channelId, ArraySegment<byte> segment)
         {
             SanitizeChannel(ref channelId);
@@ -276,7 +279,7 @@ namespace FishNet.Transporting.Tugboat
         /// <param name="channelId"></param>
         /// <param name="segment"></param>
         /// <param name="connectionId"></param>
-        
+
         public override void SendToClient(byte channelId, ArraySegment<byte> segment, int connectionId)
         {
             SanitizeChannel(ref channelId);

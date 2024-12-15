@@ -14,5 +14,5 @@ public class ScoreData
         Username = username;
         BestTime = float.MaxValue;
         CurrentTime = 0f;
-    } 
+    }
 }

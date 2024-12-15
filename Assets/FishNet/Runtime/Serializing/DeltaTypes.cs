@@ -83,7 +83,7 @@ namespace FishNet.Serializing
         /// </summary>
         YInt32 = 128,
     }
-    
+
     [System.Flags]
     internal enum DeltaWholeType : byte
     {
@@ -117,7 +117,7 @@ namespace FishNet.Serializing
         /// </summary>
         NextValueIsLarger = 32,
     }
-    
+
     [System.Flags]
     internal enum UDeltaPrecisionType : byte
     {
@@ -151,17 +151,17 @@ namespace FishNet.Serializing
         /// </summary>
         NextValueIsLarger = 128,
     }
- 
+
     internal static class DeltaTypeExtensions
     {
         public static bool FastContains(this UDeltaPrecisionType whole, UDeltaPrecisionType part) => (whole & part) == part;
-        
+
         public static bool FastContains(this UDeltaPrecisionType whole, UDeltaPrecisionType part, int shift) => FastContains((int)whole, (int)part, shift);
 
         public static bool FastContains(this DeltaVector3Type whole, DeltaVector3Type part) => (whole & part) == part;
-        
+
         public static bool FastContains(this DeltaVector3Type whole, DeltaVector3Type part, int shift) => FastContains((int)whole, (int)part, shift);
-        
+
         public static bool FastContains(this DeltaVector2Type whole, DeltaVector2Type part) => (whole & part) == part;
 
         private static bool FastContains(int whole, int part, int shift)

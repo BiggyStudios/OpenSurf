@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities.ObjectPooling
@@ -127,7 +128,7 @@ namespace GameKit.Dependencies.Utilities.ObjectPooling
             _lastAccessedTime = Time.time;
             int index = Entries.IndexOf(item);
             if (index == -1)
-            { 
+            {
                 return false;
             }
             else

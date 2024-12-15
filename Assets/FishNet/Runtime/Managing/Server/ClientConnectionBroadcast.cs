@@ -1,9 +1,11 @@
-﻿using FishNet.Broadcast;
+using System.Collections.Generic;
+
+using FishNet.Broadcast;
 using FishNet.CodeGenerating;
 using FishNet.Serializing;
 using FishNet.Utility.Performance;
+
 using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
 
 namespace FishNet.Managing.Server
 {
@@ -19,7 +21,7 @@ namespace FishNet.Managing.Server
         public List<int> Values;
     }
 
-    
+
     internal static class ConnectedClientsBroadcastSerializers
     {
         public static void WriteConnectedClientsBroadcast(this Writer writer, ConnectedClientsBroadcast value)

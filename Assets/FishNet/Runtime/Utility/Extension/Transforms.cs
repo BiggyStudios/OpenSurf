@@ -1,6 +1,8 @@
-﻿using FishNet.Documenting;
-using FishNet.Object;
 using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+using FishNet.Object;
+
 using UnityEngine;
 
 namespace FishNet.Utility.Extension
@@ -20,7 +22,7 @@ namespace FishNet.Utility.Extension
         /// <summary>
         /// Sets values of TransformProperties to a transforms world properties.
         /// </summary>
-        
+
         public static TransformProperties GetWorldProperties(this Transform t, TransformProperties offset)
         {
             TransformProperties tp = new(t.position, t.rotation, t.localScale);

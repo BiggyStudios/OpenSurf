@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 namespace P90brush
 {
@@ -8,13 +9,16 @@ namespace P90brush
 
         public Transform _outPortal;
         // Start is called before the first frame update
-        void Start() {
+        void Start()
+        {
 
         }
 
-        private void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other)
+        {
             ISurfControllable surfer = other.GetComponent<ISurfControllable>();
-            if (surfer != null) {
+            if (surfer != null)
+            {
                 float mag = surfer.PlayerData.Velocity.magnitude;
 
                 //Set Position
@@ -30,7 +34,8 @@ namespace P90brush
         }
 
         // Update is called once per frame
-        void Update() {
+        void Update()
+        {
 
         }
     }

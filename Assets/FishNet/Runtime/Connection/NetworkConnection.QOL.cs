@@ -1,8 +1,10 @@
-﻿using FishNet.Managing;
+using System;
+
+using FishNet.Managing;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Server;
 using FishNet.Serializing;
-using System;
+
 using UnityEngine;
 
 namespace FishNet.Connection

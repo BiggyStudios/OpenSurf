@@ -1,5 +1,7 @@
-using GameKit.Dependencies.Utilities.Types;
 using System.Collections.Generic;
+
+using GameKit.Dependencies.Utilities.Types;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities

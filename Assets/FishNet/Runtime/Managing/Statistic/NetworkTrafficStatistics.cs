@@ -2,6 +2,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Statistic

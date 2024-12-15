@@ -1,4 +1,4 @@
-﻿//using FishNet.Connection; //remove on v5
+//using FishNet.Connection; //remove on v5
 //using FishNet.Serializing;
 //using FishNet.Transporting;
 //using GameKit.Dependencies.Utilities;

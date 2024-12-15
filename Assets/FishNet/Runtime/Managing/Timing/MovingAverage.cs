@@ -1,5 +1,6 @@
-﻿using FishNet.Documenting;
 using System;
+
+using FishNet.Documenting;
 
 namespace FishNet.Managing.Timing
 {

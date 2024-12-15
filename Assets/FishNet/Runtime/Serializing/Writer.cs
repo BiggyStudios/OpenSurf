@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.CodeGenerating;
 using FishNet.Connection;
 using FishNet.Managing;
@@ -6,11 +10,10 @@ using FishNet.Object.Prediction;
 using FishNet.Serializing.Helping;
 using FishNet.Transporting;
 using FishNet.Utility;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using GameKit.Dependencies.Utilities.Types;
+
 using UnityEngine;
 
 [assembly: InternalsVisibleTo(UtilityConstants.GENERATED_ASSEMBLY_NAME)]
@@ -956,7 +959,7 @@ namespace FishNet.Serializing
                 WriteNetworkObject(nob);
             }
         }
-        
+
         /// <summary>
         /// Writes a NetworkObject.ObjectId.
         /// </summary>
@@ -980,7 +983,7 @@ namespace FishNet.Serializing
             else
             {
                 bool spawned = nob.IsSpawned;
-               
+
                 if (spawned)
                     WriteNetworkObjectId(nob.ObjectId);
                 else
@@ -1013,12 +1016,12 @@ namespace FishNet.Serializing
             WriteNetworkObjectId(nob.ObjectId);
             WriteUInt8Unpacked((byte)dt);
         }
-        
+
         /// <summary>
         /// Writes an objectId.
         /// </summary>
         public void WriteNetworkObjectId(int objectId) => WriteSignedPackedWhole(objectId);
-        
+
         /// <summary>
         /// Writes a NetworkBehaviour.
         /// </summary>

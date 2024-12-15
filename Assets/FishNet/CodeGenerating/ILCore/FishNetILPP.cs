@@ -1,4 +1,10 @@
-﻿using FishNet.Broadcast;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+
+using FishNet.Broadcast;
 using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.Helping.Extension;
@@ -7,13 +13,10 @@ using FishNet.CodeGenerating.Processing.Rpc;
 using FishNet.Configuring;
 using FishNet.Editing.Upgrading;
 using FishNet.Serializing.Helping;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+
 using Unity.CompilationPipeline.Common.ILPostProcessing;
 
 namespace FishNet.CodeGenerating.ILCore
@@ -63,8 +66,8 @@ namespace FishNet.CodeGenerating.ILCore
             if (!session.Initialize(assemblyDef.MainModule))
                 return null;
 
-            
-            
+
+
             bool modified = false;
 
             bool fnAssembly = IsFishNetAssembly(compiledAssembly);
@@ -236,7 +239,7 @@ namespace FishNet.CodeGenerating.ILCore
 
             return modified;
         }
-        
+
         /// <summary>
         /// Creates serializers for types that use IncludeSerialization attribute.
         /// </summary>
@@ -339,7 +342,7 @@ namespace FishNet.CodeGenerating.ILCore
             bool modified = false;
 
             bool codeStripping = false;
-            
+
             List<TypeDefinition> allTypeDefs = session.Module.Types.ToList();
 
             /* First pass, potentially only pass.
@@ -353,7 +356,7 @@ namespace FishNet.CodeGenerating.ILCore
                 modified |= session.GetClass<QolAttributeProcessor>().Process(td, codeStripping);
             }
 
-            
+
 
             return modified;
         }

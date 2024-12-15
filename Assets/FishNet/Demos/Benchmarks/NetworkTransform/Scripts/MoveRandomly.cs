@@ -1,6 +1,9 @@
-﻿using System;
+using System;
+
 using FishNet.Utility.Template;
+
 using UnityEngine;
+
 using Random = UnityEngine.Random;
 
 namespace FishNet.Demo.Benchmarks.NetworkTransforms
@@ -9,7 +12,7 @@ namespace FishNet.Demo.Benchmarks.NetworkTransforms
     {
         [SerializeField]
         private bool _isActive = true;
-        
+
         [Header("Changes")]
         [SerializeField]
         [Range(0, 3)]
@@ -42,7 +45,7 @@ namespace FishNet.Demo.Benchmarks.NetworkTransforms
         {
             if (_moveInUpdate)
                 return;
-            
+
             float delta = (float)base.TimeManager.TickDelta;
             Move(delta);
         }
@@ -56,15 +59,15 @@ namespace FishNet.Demo.Benchmarks.NetworkTransforms
         }
 
         private void Move(float delta)
-        {        
+        {
             if (!_isActive)
                 return;
             if (!base.IsServerInitialized)
                 return;
-            
+
             transform.position = Vector3.MoveTowards(transform.position, _goalPosition, _moveRate * delta);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, _goalRotation, _rotateRate * delta);
-            
+
             if (transform.position == _goalPosition)
                 RandomizeGoal();
         }
@@ -94,7 +97,7 @@ namespace FishNet.Demo.Benchmarks.NetworkTransforms
                 _goalPosition = goal;
             }
 
-            if (_rotationChance > 0f) 
+            if (_rotationChance > 0f)
             {
                 if (Random.Range(0f, 1f) <= _rotationChance)
                 {

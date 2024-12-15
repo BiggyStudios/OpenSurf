@@ -1,7 +1,8 @@
-﻿using System.Collections.Concurrent;
+using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Sockets;
+
 using LiteNetLib.Utils;
 
 namespace LiteNetLib
@@ -28,7 +29,7 @@ namespace LiteNetLib
 
         void INatPunchListener.OnNatIntroductionRequest(IPEndPoint localEndPoint, IPEndPoint remoteEndPoint, string token)
         {
-            if(NatIntroductionRequest != null)
+            if (NatIntroductionRequest != null)
                 NatIntroductionRequest(localEndPoint, remoteEndPoint, token);
         }
 
@@ -220,7 +221,7 @@ namespace LiteNetLib
             NetDebug.Write(NetLogLevel.Trace, "[NAT] introduction received");
 
             // send internal punch
-            var punchPacket = new NatPunchPacket {Token = req.Token};
+            var punchPacket = new NatPunchPacket { Token = req.Token };
             Send(punchPacket, req.Internal);
             NetDebug.Write(NetLogLevel.Trace, $"[NAT] internal punch sent to {req.Internal}");
 
@@ -242,7 +243,7 @@ namespace LiteNetLib
             NetDebug.Write(NetLogLevel.Trace, $"[NAT] punch received from {senderEndPoint} - additional info: {req.Token}");
 
             //Release punch success to client; enabling him to Connect() to Sender if token is ok
-            if(UnsyncedEvents)
+            if (UnsyncedEvents)
             {
                 _natPunchListener.OnNatIntroductionSuccess(
                     senderEndPoint,

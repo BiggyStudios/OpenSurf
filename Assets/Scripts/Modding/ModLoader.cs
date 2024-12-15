@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
+
 using P90brush;
+
 using UnityEngine;
 
 public class ModLoader : MonoBehaviour
@@ -59,11 +61,11 @@ public class ModLoader : MonoBehaviour
         {
             case ModTypes.Map:
                 LoadMapMod(bundle);
-            break;
+                break;
 
             default:
                 Debug.LogWarning($"Unknown mod type: {config.ModType}");
-            break;
+                break;
         }
 
         Debug.Log($"Loaded {config.ModType} mod: {config.ModName} v{config.Version}");

@@ -1,12 +1,14 @@
-﻿using FishNet.CodeGenerating.Helping.Extension;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+
+using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.Connection;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using FishNet.Object.Synchronizing.Internal;
+
 using MonoFN.Cecil;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace FishNet.CodeGenerating.Helping
 {

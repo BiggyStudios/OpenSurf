@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+
 using UnityEngine.SceneManagement;
 
 namespace FishNet.Managing.Scened

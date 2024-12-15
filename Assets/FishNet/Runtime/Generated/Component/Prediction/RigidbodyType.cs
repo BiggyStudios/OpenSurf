@@ -1,4 +1,4 @@
-﻿namespace FishNet.Component.Prediction
+namespace FishNet.Component.Prediction
 {
     /// <summary>
     /// Type of prediction movement being used.

@@ -8,76 +8,90 @@
 // Licensed under the MIT/X11 license.
 //
 
-using MonoFN.Collections.Generic;
 using System;
 
-namespace MonoFN.Cecil {
+using MonoFN.Collections.Generic;
 
-	public abstract class MethodSpecification : MethodReference {
+namespace MonoFN.Cecil
+{
 
-		readonly MethodReference method;
+    public abstract class MethodSpecification : MethodReference
+    {
 
-		public MethodReference ElementMethod {
-			get { return method; }
-		}
+        readonly MethodReference method;
 
-		public override string Name {
-			get { return method.Name; }
-			set { throw new InvalidOperationException (); }
-		}
+        public MethodReference ElementMethod
+        {
+            get { return method; }
+        }
 
-		public override MethodCallingConvention CallingConvention {
-			get { return method.CallingConvention; }
-			set { throw new InvalidOperationException (); }
-		}
+        public override string Name
+        {
+            get { return method.Name; }
+            set { throw new InvalidOperationException(); }
+        }
 
-		public override bool HasThis {
-			get { return method.HasThis; }
-			set { throw new InvalidOperationException (); }
-		}
+        public override MethodCallingConvention CallingConvention
+        {
+            get { return method.CallingConvention; }
+            set { throw new InvalidOperationException(); }
+        }
 
-		public override bool ExplicitThis {
-			get { return method.ExplicitThis; }
-			set { throw new InvalidOperationException (); }
-		}
+        public override bool HasThis
+        {
+            get { return method.HasThis; }
+            set { throw new InvalidOperationException(); }
+        }
 
-		public override MethodReturnType MethodReturnType {
-			get { return method.MethodReturnType; }
-			set { throw new InvalidOperationException (); }
-		}
+        public override bool ExplicitThis
+        {
+            get { return method.ExplicitThis; }
+            set { throw new InvalidOperationException(); }
+        }
 
-		public override TypeReference DeclaringType {
-			get { return method.DeclaringType; }
-			set { throw new InvalidOperationException (); }
-		}
+        public override MethodReturnType MethodReturnType
+        {
+            get { return method.MethodReturnType; }
+            set { throw new InvalidOperationException(); }
+        }
 
-		public override ModuleDefinition Module {
-			get { return method.Module; }
-		}
+        public override TypeReference DeclaringType
+        {
+            get { return method.DeclaringType; }
+            set { throw new InvalidOperationException(); }
+        }
 
-		public override bool HasParameters {
-			get { return method.HasParameters; }
-		}
+        public override ModuleDefinition Module
+        {
+            get { return method.Module; }
+        }
 
-		public override Collection<ParameterDefinition> Parameters {
-			get { return method.Parameters; }
-		}
+        public override bool HasParameters
+        {
+            get { return method.HasParameters; }
+        }
 
-		public override bool ContainsGenericParameter {
-			get { return method.ContainsGenericParameter; }
-		}
+        public override Collection<ParameterDefinition> Parameters
+        {
+            get { return method.Parameters; }
+        }
 
-		internal MethodSpecification (MethodReference method)
-		{
-			Mixin.CheckMethod (method);
+        public override bool ContainsGenericParameter
+        {
+            get { return method.ContainsGenericParameter; }
+        }
 
-			this.method = method;
-			this.token = new MetadataToken (TokenType.MethodSpec);
-		}
+        internal MethodSpecification(MethodReference method)
+        {
+            Mixin.CheckMethod(method);
 
-		public sealed override MethodReference GetElementMethod ()
-		{
-			return method.GetElementMethod ();
-		}
-	}
+            this.method = method;
+            this.token = new MetadataToken(TokenType.MethodSpec);
+        }
+
+        public sealed override MethodReference GetElementMethod()
+        {
+            return method.GetElementMethod();
+        }
+    }
 }

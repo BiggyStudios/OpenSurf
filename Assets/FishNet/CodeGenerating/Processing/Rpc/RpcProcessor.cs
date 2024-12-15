@@ -1,19 +1,23 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.Configuring;
 using FishNet.Connection;
 using FishNet.Managing.Logging;
+using FishNet.Object;
 using FishNet.Object.Helping;
 using FishNet.Transporting;
+
+using GameKit.Dependencies.Utilities;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
-using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using UnityEngine;
-using FishNet.Object;
 
 namespace FishNet.CodeGenerating.Processing.Rpc
 {
@@ -267,7 +271,7 @@ namespace FishNet.CodeGenerating.Processing.Rpc
         {
             intentionallyNull = false;
 
-            
+
 
             string methodName = $"{WRITER_PREFIX}{GetRpcMethodName(cr)}";
             /* If method already exist then clear it. This
@@ -377,8 +381,8 @@ namespace FishNet.CodeGenerating.Processing.Rpc
             /* Creates basic ServerRpc and ClientRpc
              * conditions such as if requireOwnership ect..
              * or if (!base.isClient) */
-            
-                CreateClientRpcConditionsForServer(writerMd, cr.Attribute);
+
+            CreateClientRpcConditionsForServer(writerMd, cr.Attribute);
 
             VariableDefinition channelVariableDef = CreateAndPopulateChannelVariable(writerMd, channelParameterDef);
             /* Create a local PooledWriter variable. */
@@ -435,8 +439,8 @@ namespace FishNet.CodeGenerating.Processing.Rpc
             /* Creates basic ServerRpc
              * conditions such as if requireOwnership ect..
              * or if (!base.isClient) */
-            
-                CreateServerRpcConditionsForClient(writerMd, cr.Attribute);
+
+            CreateServerRpcConditionsForClient(writerMd, cr.Attribute);
 
             VariableDefinition channelVariableDef = CreateAndPopulateChannelVariable(writerMd, channelParameterDef);
             //Create a local PooledWriter variable.
@@ -501,7 +505,7 @@ namespace FishNet.CodeGenerating.Processing.Rpc
             MethodDefinition logicMd = cr.LogicMethodDef;
             CustomAttribute rpcAttribute = cr.Attribute;
 
-            
+
 
             string methodName = $"{READER_PREFIX}{GetRpcMethodName(cr)}";
             /* If method already exist then just return it. This
@@ -876,7 +880,7 @@ namespace FishNet.CodeGenerating.Processing.Rpc
             TypeDefinition typeDef = cr.TypeDef;
             MethodDefinition originalMd = cr.OriginalMethodDef;
 
-            
+
 
             //Methodname for logic methods do not use prefixes because there can be only one.
             string methodName = $"{LOGIC_PREFIX}{GetMethodNameAsParameters(originalMd)}";
@@ -933,7 +937,7 @@ namespace FishNet.CodeGenerating.Processing.Rpc
             * entry. */
             MethodDefinition originalMd = createdRpcs[0].OriginalMethodDef;
 
-            
+
 
             ILProcessor processor = originalMd.Body.GetILProcessor();
             originalMd.Body.Instructions.Clear();

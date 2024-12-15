@@ -1,4 +1,4 @@
-﻿namespace FishNet.Serializing.Helping
+namespace FishNet.Serializing.Helping
 {
     public enum ComponentType : uint
     {

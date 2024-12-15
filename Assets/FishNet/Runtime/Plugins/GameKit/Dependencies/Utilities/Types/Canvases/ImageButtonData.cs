@@ -1,4 +1,5 @@
 using System;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities.Types.CanvasContainers

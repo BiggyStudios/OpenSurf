@@ -8,22 +8,24 @@
 // Licensed under the MIT/X11 license.
 //
 
-namespace MonoFN.Cecil.Metadata {
+namespace MonoFN.Cecil.Metadata
+{
 
-	enum CodedIndex {
-		TypeDefOrRef,
-		HasConstant,
-		HasCustomAttribute,
-		HasFieldMarshal,
-		HasDeclSecurity,
-		MemberRefParent,
-		HasSemantics,
-		MethodDefOrRef,
-		MemberForwarded,
-		Implementation,
-		CustomAttributeType,
-		ResolutionScope,
-		TypeOrMethodDef,
-		HasCustomDebugInformation,
-	}
+    enum CodedIndex
+    {
+        TypeDefOrRef,
+        HasConstant,
+        HasCustomAttribute,
+        HasFieldMarshal,
+        HasDeclSecurity,
+        MemberRefParent,
+        HasSemantics,
+        MethodDefOrRef,
+        MemberForwarded,
+        Implementation,
+        CustomAttributeType,
+        ResolutionScope,
+        TypeOrMethodDef,
+        HasCustomDebugInformation,
+    }
 }

@@ -1,13 +1,16 @@
-﻿using FishNet.Broadcast;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+using FishNet.Broadcast;
 using FishNet.Broadcast.Helping;
 using FishNet.Managing.Utility;
 using FishNet.Serializing;
 using FishNet.Serializing.Helping;
 using FishNet.Transporting;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Client
@@ -61,7 +64,7 @@ namespace FishNet.Managing.Client
         /// <summary>
         /// Parses a received broadcast.
         /// </summary>
-        
+
         private void ParseBroadcast(PooledReader reader, Channel channel)
         {
             ushort key = reader.ReadUInt16();

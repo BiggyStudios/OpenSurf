@@ -10,7 +10,7 @@ namespace NnUtils.Scripts
             Warning,
             Error
         }
-        
+
         #region Log
         public static void Log(params object[] input)
         {

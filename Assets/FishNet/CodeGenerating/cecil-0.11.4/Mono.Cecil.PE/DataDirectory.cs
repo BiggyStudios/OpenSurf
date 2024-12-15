@@ -10,21 +10,24 @@
 
 using RVA = System.UInt32;
 
-namespace MonoFN.Cecil.PE {
+namespace MonoFN.Cecil.PE
+{
 
-	struct DataDirectory {
+    struct DataDirectory
+    {
 
-		public readonly RVA VirtualAddress;
-		public readonly uint Size;
+        public readonly RVA VirtualAddress;
+        public readonly uint Size;
 
-		public bool IsZero {
-			get { return VirtualAddress == 0 && Size == 0; }
-		}
+        public bool IsZero
+        {
+            get { return VirtualAddress == 0 && Size == 0; }
+        }
 
-		public DataDirectory (RVA rva, uint size)
-		{
-			this.VirtualAddress = rva;
-			this.Size = size;
-		}
-	}
+        public DataDirectory(RVA rva, uint size)
+        {
+            this.VirtualAddress = rva;
+            this.Size = size;
+        }
+    }
 }

@@ -1,11 +1,15 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
+using System.Collections.Generic;
+
 using FishNet.Editing.PrefabCollectionGenerator;
 using FishNet.Object;
 using FishNet.Utility.Extension;
+
 using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
+
 using UnityEditor;
 using UnityEditor.SceneManagement;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,7 +24,7 @@ namespace FishNet.Editing
             SettingsService.OpenProjectSettings("Project/Fish-Networking/Configuration");
         }
 
-    } 
+    }
 
     public class DeveloperMenu : MonoBehaviour
     {
@@ -51,7 +55,7 @@ namespace FishNet.Editing
         }
 #endif
         #endregion
-    
+
         #region QOL Attributes
 #if DISABLE_QOL_ATTRIBUTES
         [MenuItem("Tools/Fish-Networking/Utility/Quality of Life Attributes/Enable", false, -999)]
@@ -103,9 +107,10 @@ namespace FishNet.Editing
 
     }
 
-    
 
-    public class RebuildSelectedSceneIdsMenu : MonoBehaviour {
+
+    public class RebuildSelectedSceneIdsMenu : MonoBehaviour
+    {
         /// <summary>
         /// Rebuilds sceneIds for open scenes.
         /// </summary>
@@ -114,7 +119,8 @@ namespace FishNet.Editing
         {
             SceneAsset[] selectedScenes = Selection.GetFiltered<SceneAsset>(SelectionMode.Assets);
             //Thanks FREEZX
-            for (int i = 0; i < selectedScenes.Length; ++i) {
+            for (int i = 0; i < selectedScenes.Length; ++i)
+            {
                 string path = AssetDatabase.GetAssetPath(selectedScenes[i]);
                 Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
                 RebuildSceneIdMenu.RebuildSceneIds();
@@ -236,7 +242,7 @@ namespace FishNet.Editing
                 if (count > 0)
                     removed += count;
             }
-            
+
             Debug.Log($"Removed {removed} duplicate NetworkObjects.");
             if (removed > 0)
                 RebuildSceneIdMenu.RebuildSceneIds();

@@ -1,18 +1,22 @@
-﻿using FishNet.Connection;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+using FishNet.Connection;
 using FishNet.Managing.Client;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Server;
 using FishNet.Object;
 using FishNet.Serializing.Helping;
 using FishNet.Transporting;
+
 using GameKit.Dependencies.Utilities;
 using GameKit.Dependencies.Utilities.Types;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace FishNet.Managing.Scened
@@ -1239,7 +1243,7 @@ namespace FishNet.Managing.Scened
                             Scene activeScene = UnitySceneManager.GetActiveScene();
                             setToFirstLookup |= (activeScene == GetMovedObjectsScene());
                         }
-                        
+
                         if (setToFirstLookup)
                             preferredActiveScene = sceneLoadData.GetFirstLookupScene();
                     }

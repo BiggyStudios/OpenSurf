@@ -1,20 +1,24 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+
 using FishNet.Connection;
 using FishNet.Documenting;
 using FishNet.Managing;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Server;
+using FishNet.Managing.Timing;
 using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Transporting;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using FishNet.Managing.Timing;
+
 using UnityEngine;
 using UnityEngine.Scripting;
+
 using static FishNet.Object.NetworkObject;
 
 namespace FishNet.Component.Transforming
@@ -1587,16 +1591,16 @@ namespace FishNet.Component.Transforming
                 //No more in buffer, see if can extrapolate.
                 else
                 {
-                    
-                        /* If everything matches up then end queue.
-                         * Otherwise let it play out until stuff
-                         * aligns. Generally the time remaining is enough
-                         * but every once in awhile something goes funky
-                         * and it's thrown off. */
-                        if (!HasChanged(td))
-                            _currentGoalData = null;
-                        OnInterpolationComplete?.Invoke();
-                        
+
+                    /* If everything matches up then end queue.
+                     * Otherwise let it play out until stuff
+                     * aligns. Generally the time remaining is enough
+                     * but every once in awhile something goes funky
+                     * and it's thrown off. */
+                    if (!HasChanged(td))
+                        _currentGoalData = null;
+                    OnInterpolationComplete?.Invoke();
+
                 }
             }
         }
@@ -2113,7 +2117,7 @@ namespace FishNet.Component.Transforming
             //Default value.
             next.ExtrapolationState = TransformData.ExtrapolateState.Disabled;
 
-            
+
         }
 
         /// <summary>

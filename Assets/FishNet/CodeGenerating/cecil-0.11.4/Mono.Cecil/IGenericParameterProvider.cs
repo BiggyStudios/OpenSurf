@@ -8,51 +8,57 @@
 // Licensed under the MIT/X11 license.
 //
 
-using MonoFN.Collections.Generic;
 using System.Threading;
 
-namespace MonoFN.Cecil {
+using MonoFN.Collections.Generic;
 
-	public interface IGenericParameterProvider : IMetadataTokenProvider {
+namespace MonoFN.Cecil
+{
 
-		bool HasGenericParameters { get; }
-		bool IsDefinition { get; }
-		ModuleDefinition Module { get; }
-		Collection<GenericParameter> GenericParameters { get; }
-		GenericParameterType GenericParameterType { get; }
-	}
+    public interface IGenericParameterProvider : IMetadataTokenProvider
+    {
 
-	public enum GenericParameterType {
-		Type,
-		Method
-	}
+        bool HasGenericParameters { get; }
+        bool IsDefinition { get; }
+        ModuleDefinition Module { get; }
+        Collection<GenericParameter> GenericParameters { get; }
+        GenericParameterType GenericParameterType { get; }
+    }
 
-	interface IGenericContext {
+    public enum GenericParameterType
+    {
+        Type,
+        Method
+    }
 
-		bool IsDefinition { get; }
-		IGenericParameterProvider Type { get; }
-		IGenericParameterProvider Method { get; }
-	}
+    interface IGenericContext
+    {
 
-	static partial class Mixin {
+        bool IsDefinition { get; }
+        IGenericParameterProvider Type { get; }
+        IGenericParameterProvider Method { get; }
+    }
 
-		public static bool GetHasGenericParameters (
-			this IGenericParameterProvider self,
-			ModuleDefinition module)
-		{
-			return module.HasImage () && module.Read (self, (provider, reader) => reader.HasGenericParameters (provider));
-		}
+    static partial class Mixin
+    {
 
-		public static Collection<GenericParameter> GetGenericParameters (
-			this IGenericParameterProvider self,
-			ref Collection<GenericParameter> collection,
-			ModuleDefinition module)
-		{
-			if (module.HasImage ())
-				return module.Read (ref collection, self, (provider, reader) => reader.ReadGenericParameters (provider));
+        public static bool GetHasGenericParameters(
+            this IGenericParameterProvider self,
+            ModuleDefinition module)
+        {
+            return module.HasImage() && module.Read(self, (provider, reader) => reader.HasGenericParameters(provider));
+        }
 
-			Interlocked.CompareExchange (ref collection, new GenericParameterCollection (self), null);
-			return collection;
-		}
-	}
+        public static Collection<GenericParameter> GetGenericParameters(
+            this IGenericParameterProvider self,
+            ref Collection<GenericParameter> collection,
+            ModuleDefinition module)
+        {
+            if (module.HasImage())
+                return module.Read(ref collection, self, (provider, reader) => reader.ReadGenericParameters(provider));
+
+            Interlocked.CompareExchange(ref collection, new GenericParameterCollection(self), null);
+            return collection;
+        }
+    }
 }

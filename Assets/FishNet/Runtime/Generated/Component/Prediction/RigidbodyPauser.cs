@@ -1,6 +1,9 @@
-﻿using FishNet.Managing;
-using GameKit.Dependencies.Utilities;
 using System.Collections.Generic;
+
+using FishNet.Managing;
+
+using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Component.Prediction
@@ -214,7 +217,7 @@ namespace FishNet.Component.Prediction
                 if (!rb.TryGetComponent<OfflineRigidbody>(out _))
                     _rigidbody2dDatas.Add(new(rb));
             }
-            
+
             _initialized = true;
         }
 

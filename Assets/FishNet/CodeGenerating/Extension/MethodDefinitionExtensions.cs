@@ -1,8 +1,10 @@
-﻿using FishNet.CodeGenerating.Helping;
+using System.Collections.Generic;
+
+using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.Helping.Extension;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
-using System.Collections.Generic;
 
 namespace FishNet.CodeGenerating.Extension
 {
@@ -211,7 +213,7 @@ namespace FishNet.CodeGenerating.Extension
         public static MethodDefinition CreateCopy(this MethodDefinition copiedMd, CodegenSession session, string nameOverride = null, MethodAttributes? attributesOverride = null)
         {
             session.ImportReference(copiedMd.ReturnType);
-            
+
             MethodAttributes attr = (attributesOverride.HasValue) ? attributesOverride.Value : copiedMd.Attributes;
             string name = (nameOverride == null) ? copiedMd.Name : nameOverride;
             MethodDefinition result = new(name, attr, copiedMd.ReturnType);

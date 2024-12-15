@@ -1,9 +1,11 @@
+using System;
+
 using FishNet.Connection;
 using FishNet.Documenting;
 using FishNet.Object;
 using FishNet.Serializing.Helping;
 using FishNet.Transporting;
-using System;
+
 using UnityEngine;
 
 namespace FishNet.Serializing

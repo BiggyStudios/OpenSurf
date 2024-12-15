@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+
 using UnityEngine;
 
 namespace NnUtils.Scripts
@@ -19,10 +20,10 @@ namespace NnUtils.Scripts
         }
         public int ChanceAmountSilent { set => _weight = value; }
         [SerializeField] public float Chance;
-        [SerializeField] [HideInInspector] public Vector2Int WeightRange;
+        [SerializeField][HideInInspector] public Vector2Int WeightRange;
         public Action OnChanceAmountChanged;
     }
-    
+
     [Serializable]
     public class ChanceItem<T> : ChanceItem
     {

@@ -1,7 +1,9 @@
-using FishNet.Managing;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+using FishNet.Managing;
+
 using GameKit.Dependencies.Utilities;
 
 namespace FishNet.Serializing
@@ -15,7 +17,7 @@ namespace FishNet.Serializing
         internal PooledReader(byte[] bytes, NetworkManager networkManager, Reader.DataSource source = Reader.DataSource.Unset) : base(bytes, networkManager, null, source) { }
         internal PooledReader(ArraySegment<byte> segment, NetworkManager networkManager, Reader.DataSource source = Reader.DataSource.Unset) : base(segment, networkManager, null, source) { }
         public void Store() => ReaderPool.Store(this);
-        
+
         public void ResetState() => Store();
         public void InitializeState() { }
     }
@@ -36,7 +38,7 @@ namespace FishNet.Serializing
         /// Get the next reader in the pool
         /// <para>If pool is empty, creates a new Reader</para>
         /// </summary>
-        
+
         public static PooledReader Retrieve(byte[] bytes, NetworkManager networkManager, Reader.DataSource source = Reader.DataSource.Unset)
         {
             return Retrieve(new ArraySegment<byte>(bytes), networkManager, source);

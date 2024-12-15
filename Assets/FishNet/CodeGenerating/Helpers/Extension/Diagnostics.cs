@@ -1,9 +1,11 @@
-﻿using MonoFN.Cecil;
-using MonoFN.Cecil.Cil;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+using MonoFN.Cecil;
+using MonoFN.Cecil.Cil;
+
 using Unity.CompilationPipeline.Common.Diagnostics;
 
 namespace FishNet.CodeGenerating.Helping

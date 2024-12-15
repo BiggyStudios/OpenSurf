@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
+
 using Random = UnityEngine.Random;
 
 namespace NnUtils.Scripts
@@ -72,7 +74,7 @@ namespace NnUtils.Scripts
             else lerpPos = Mathf.Clamp01(lerpPos -= (unscaled ? Time.unscaledDeltaTime : Time.deltaTime) / lerpTime);
             return Easings.Ease(lerpPos, easingType);
         }
-        
+
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
             T component = gameObject.GetComponent<T>();
@@ -88,7 +90,7 @@ namespace NnUtils.Scripts
             if (!startIf()) return;
             target = sender.StartCoroutine(routine);
         }
-        
+
         public static void RestartRoutine(this MonoBehaviour sender, ref Coroutine target, IEnumerator routine)
         {
             if (target != null) sender.StopCoroutine(target);
@@ -119,7 +121,7 @@ namespace NnUtils.Scripts
             if (Input.touchCount > touchIndex) pos = Input.GetTouch(touchIndex).position;
             return pos;
         }
-        
+
         public static Quaternion VectorToQuaternion(Vector3 vec) => Quaternion.Euler(vec.x, vec.y, vec.z);
 
         public static float RadialSelection()
@@ -131,7 +133,7 @@ namespace NnUtils.Scripts
             angle += angle < 0 ? 360 : 0;
             return 360 - angle;
         }
-        
+
         public static float RadialSelection(Vector2 centerPos)
         {
             Vector2 mousePos = Input.mousePosition;

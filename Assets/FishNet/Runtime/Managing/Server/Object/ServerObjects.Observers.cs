@@ -1,12 +1,15 @@
-﻿using FishNet.Connection;
+using System.Collections.Generic;
+
+using FishNet.Connection;
 using FishNet.Managing.Object;
 using FishNet.Managing.Timing;
 using FishNet.Object;
 using FishNet.Observing;
 using FishNet.Serializing;
 using FishNet.Transporting;
+
 using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Server

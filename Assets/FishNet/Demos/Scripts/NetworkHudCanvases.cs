@@ -1,5 +1,6 @@
-﻿using FishNet.Managing;
+using FishNet.Managing;
 using FishNet.Transporting;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

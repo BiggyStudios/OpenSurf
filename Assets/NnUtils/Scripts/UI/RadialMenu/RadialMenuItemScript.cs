@@ -1,4 +1,5 @@
 using System.Collections;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,17 +51,17 @@ namespace NnUtils.Scripts.UI.RadialMenu
 
         public virtual void Enter()
         {
-            
+
         }
 
         public virtual void Leave()
         {
-            
+
         }
 
         public virtual void Down()
         {
-            
+
         }
 
         public virtual void Up()

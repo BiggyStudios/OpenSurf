@@ -1,12 +1,15 @@
-﻿using FishNet.Connection;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
 using FishNet.Documenting;
 using FishNet.Managing.Server;
 using FishNet.Object;
 using FishNet.Transporting;
 using FishNet.Utility.Performance;
+
 using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -294,7 +297,7 @@ namespace FishNet.Observing
         internal ObserverStateChange RebuildObservers(NetworkConnection connection, bool timedOnly)
         {
             bool currentlyAdded = (_networkObject.Observers.Contains(connection));
-            
+
             //True if all conditions are met.
             bool allConditionsMet = true;
             /* If cnnection is owner then they can see the object. */
@@ -314,7 +317,7 @@ namespace FishNet.Observing
                 if (parentVisible && !_lastParentVisible)
                     timedOnly = false;
                 _lastParentVisible = parentVisible;
-                    
+
                 //If parent is not visible no further checks are required.
                 if (!parentVisible)
                 {

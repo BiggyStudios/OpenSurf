@@ -1,6 +1,9 @@
 using System.Globalization;
+
 using TMPro;
+
 using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +15,7 @@ namespace NnUtils.Scripts.UI
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private RectMask2D _mask;
         [SerializeField] private TMP_Text _valueText;
-        [HideInInspector] [SerializeField] private string _textFormat = "value/max";
+        [HideInInspector][SerializeField] private string _textFormat = "value/max";
         public string TextFormat
         {
             get => _textFormat;
@@ -23,7 +26,7 @@ namespace NnUtils.Scripts.UI
             }
         }
 
-        [HideInInspector] [SerializeField] private float _min, _max = 1;
+        [HideInInspector][SerializeField] private float _min, _max = 1;
         public float Min
         {
             get => _min;
@@ -47,7 +50,7 @@ namespace NnUtils.Scripts.UI
             }
         }
 
-        [HideInInspector] [SerializeField] private float _value;
+        [HideInInspector][SerializeField] private float _value;
         public float Value
         {
             get => _value;
@@ -68,7 +71,7 @@ namespace NnUtils.Scripts.UI
 #endif
             }
         }
-        
+
         private void Reset()
         {
             _rectTransform = GetComponent<RectTransform>();

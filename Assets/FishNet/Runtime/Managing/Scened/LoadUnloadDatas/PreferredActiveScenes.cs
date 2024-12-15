@@ -1,4 +1,4 @@
-﻿
+
 namespace FishNet.Managing.Scened
 {
     public struct PreferredScene

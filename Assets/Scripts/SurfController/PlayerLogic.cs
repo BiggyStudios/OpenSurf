@@ -1,6 +1,9 @@
-﻿using BananaUtils.OnScreenDebugger.Scripts;
+using BananaUtils.OnScreenDebugger.Scripts;
+
 using FishNet.Object;
+
 using TMPro;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,15 +14,15 @@ namespace P90brush
         public float _walkSpeed = 80f;
         public float _jumpForce = 40f;
 
-        [Header("TEMP")] 
+        [Header("TEMP")]
         [SerializeField] private MeshRenderer _glassesMeshRenderer;
         [SerializeField] private GameObject _ui;
         [SerializeField] private TMP_Text _speed;
-        
+
         [Header("Physics Settings")]
         public int _tickRate = 128;
         public Camera _fpsCamera;
-        
+
 
         [Header("Movement Config")]
         [SerializeField]
@@ -33,7 +36,7 @@ namespace P90brush
         #region =============================== Private Properties ===============================#
 
         private PlayerManager _playerManager;
-        
+
         //Var set in Start() callback
         private Rigidbody _rb;
         private Collider _collider;
@@ -49,7 +52,8 @@ namespace P90brush
 
         #region =============================== ISurfControllable Impl ===============================#
 
-        public MovementConfig MoveConfig {
+        public MovementConfig MoveConfig
+        {
             get { return moveConfig; }
         }
 
@@ -57,23 +61,22 @@ namespace P90brush
 
         public InputData InputData { get; } = new InputData();
 
-        public Collider Collider {
+        public Collider Collider
+        {
             get { return _collider; }
         }
 
         public Vector3 BaseVelocity { get; }
 
-        public Camera FpsCamera {
+        public Camera FpsCamera
+        {
             get { return _fpsCamera; }
         }
 
         #endregion ===================================================================================#
 
-        private void Awake() {
-            // Setup V-Sync
-            Application.targetFrameRate = 144;
-            QualitySettings.vSyncCount = 1;
-
+        private void Awake()
+        {
             // Setup TickRate
             Time.fixedDeltaTime = 1f / _tickRate;
         }
@@ -81,7 +84,7 @@ namespace P90brush
         public override void OnStartClient()
         {
             base.OnStartClient();
-        
+
             if (!base.IsOwner)
             {
                 _fpsCamera.enabled = false;
@@ -121,11 +124,13 @@ namespace P90brush
                 moveConfig = ModLoader.MapMovementConfig;
         }
 
-        void Update() {
-            if (PauseMenu.GameIsPaused) {
+        void Update()
+        {
+            if (PauseMenu.GameIsPaused)
+            {
                 return;
             }
-            
+
             if (InputData.JumpPressed && !PlayerManager.Instance.TimerActive)
                 PlayerManager.Instance.TimerActive = true;
 
@@ -137,8 +142,10 @@ namespace P90brush
             _speed.text = PlayerData.Velocity.magnitude.ToString();
         }
 
-        void FixedUpdate() {
-            if (InputData.ResetPressed) {
+        void FixedUpdate()
+        {
+            if (InputData.ResetPressed)
+            {
                 _playerManager.Restart();
             }
 
@@ -149,7 +156,8 @@ namespace P90brush
             ApplyPlayerMovement();
         }
 
-        private void LateUpdate() {
+        private void LateUpdate()
+        {
             ApplyMouseMovement();
         }
 
@@ -167,11 +175,13 @@ namespace P90brush
             PlayerData.ViewAngles = rot;
         }
 
-        private void ApplyPlayerMovement() {
+        private void ApplyPlayerMovement()
+        {
             transform.position = PlayerData.Origin;
         }
 
-        private void ApplyMouseMovement() {
+        private void ApplyMouseMovement()
+        {
             // Get the rotation you will be at next as a Quaternion
             Quaternion yQuaternion = Quaternion.AngleAxis(PlayerData.ViewAngles.x, Vector3.right);
             Quaternion xQuaternion = Quaternion.AngleAxis(PlayerData.ViewAngles.y, Vector3.up);

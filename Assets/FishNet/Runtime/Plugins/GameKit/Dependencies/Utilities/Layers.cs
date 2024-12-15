@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities

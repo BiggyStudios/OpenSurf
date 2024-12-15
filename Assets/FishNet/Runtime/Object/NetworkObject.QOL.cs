@@ -1,4 +1,8 @@
-﻿using FishNet.CodeAnalysis.Annotations;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+using FishNet.CodeAnalysis.Annotations;
 using FishNet.Component.ColliderRollback;
 using FishNet.Connection;
 using FishNet.Managing;
@@ -10,10 +14,9 @@ using FishNet.Managing.Server;
 using FishNet.Managing.Timing;
 using FishNet.Managing.Transporting;
 using FishNet.Serializing.Helping;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -289,7 +292,7 @@ namespace FishNet.Object
                 NetworkManager.ServerManager.Spawn(nob, ownerConnection, scene);
         }
 
-        
+
         [Obsolete("Use SetLocalOwnership(NetworkConnection, bool).")]
         public void SetLocalOwnership(NetworkConnection caller) => SetLocalOwnership(caller, includeNested: false);
 
@@ -310,10 +313,10 @@ namespace FishNet.Object
             if (includeNested)
             {
                 List<NetworkObject> allNested = RetrieveNestedNetworkObjects(recursive: true);
-                
+
                 foreach (NetworkObject nob in allNested)
                     nob.SetLocalOwnership(caller, includeNested: true);
-                
+
                 CollectionCaches<NetworkObject>.Store(allNested);
             }
         }

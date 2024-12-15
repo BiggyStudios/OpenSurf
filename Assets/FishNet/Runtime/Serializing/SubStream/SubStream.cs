@@ -1,5 +1,7 @@
 using System;
+
 using FishNet.Managing;
+
 using GameKit.Dependencies.Utilities;
 
 namespace FishNet.Serializing

@@ -1,6 +1,8 @@
-using IO.Swagger.Model;
 using System;
 using System.Linq;
+
+using IO.Swagger.Model;
+
 using UnityEngine;
 
 namespace Edgegap

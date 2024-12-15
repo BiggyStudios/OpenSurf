@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,8 @@ namespace P90brush
         private float _totalDuration = 0f;
         private float _timer = 0f;
 
-        public bool IsSlowMotion {
+        public bool IsSlowMotion
+        {
             get { return _isSlowMotion; }
             set
             {

@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text;
+
 using GameKit.Dependencies.Utilities.Types;
 
 namespace GameKit.Dependencies.Utilities

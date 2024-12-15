@@ -1,10 +1,12 @@
-﻿using FishNet.Connection;
-using FishNet.Example.Authenticating;
-using FishNet.Managing;
-using FishNet.Transporting;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+
+using FishNet.Connection;
+using FishNet.Example.Authenticating;
+using FishNet.Managing;
+using FishNet.Transporting;
+
 using UnityEngine;
 
 namespace FishNet.Authenticating
@@ -95,14 +97,14 @@ namespace FishNet.Authenticating
         /// </summary>
         /// <param name="conn">Connection authenticating.</param>
         /// <param name="authenticated">True if authentication passed.</param>
-        protected abstract void OnHostAuthenticationResult(NetworkConnection conn, bool authenticated);    
+        protected abstract void OnHostAuthenticationResult(NetworkConnection conn, bool authenticated);
 
         /// <summary>
         /// Sets a host hash of length.
         /// </summary>
         /// https://stackoverflow.com/questions/32932679/using-rngcryptoserviceprovider-to-generate-random-string
         private void SetHostHash(int length)
-        {            
+        {
             if (length <= 0)
             {
                 _hostHash = string.Empty;

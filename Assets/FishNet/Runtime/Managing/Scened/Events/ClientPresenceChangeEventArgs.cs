@@ -1,4 +1,5 @@
-﻿using FishNet.Connection;
+using FishNet.Connection;
+
 using UnityEngine.SceneManagement;
 
 namespace FishNet.Managing.Scened

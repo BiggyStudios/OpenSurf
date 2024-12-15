@@ -1,10 +1,14 @@
-using FishNet.Object;
-using GameKit.Dependencies.Utilities;
-using GameKit.Dependencies.Utilities.Types;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+using FishNet.Object;
+
+using GameKit.Dependencies.Utilities;
+using GameKit.Dependencies.Utilities.Types;
+
 using UnityEngine;
+
 using TimeManagerCls = FishNet.Managing.Timing.TimeManager;
 
 namespace FishNet.Component.Prediction
@@ -179,7 +183,7 @@ namespace FishNet.Component.Prediction
         /// <summary>
         /// Cleans history up to, while excluding tick.
         /// </summary>
-        
+
         private void CleanHistory(uint tick)
         {
             if (_useCache)
@@ -212,7 +216,7 @@ namespace FishNet.Component.Prediction
         /// <summary>
         /// Checks for any trigger changes;
         /// </summary>
-        
+
         private void CheckColliders(uint tick, bool replay)
         {
             //Should not be possible as tick always starts on 1.
@@ -482,7 +486,7 @@ namespace FishNet.Component.Prediction
         /// <summary>
         /// Resets this NetworkBehaviour so that it may be added to an object pool.
         /// </summary>
-        
+
         public override void ResetState(bool asServer)
         {
             base.ResetState(asServer);

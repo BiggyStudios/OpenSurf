@@ -1,4 +1,7 @@
-﻿#if !FISHNET_STABLE_MODE
+#if !FISHNET_STABLE_MODE
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
 using FishNet.CodeGenerating;
 using FishNet.Documenting;
 using FishNet.Managing;
@@ -6,8 +9,7 @@ using FishNet.Object.Helping;
 using FishNet.Object.Synchronizing.Internal;
 using FishNet.Serializing;
 using FishNet.Serializing.Helping;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+
 using UnityEngine;
 
 namespace FishNet.Object.Synchronizing
@@ -418,7 +420,7 @@ namespace FishNet.Object.Synchronizing
             //     if (!_valueSetAfterInitialized)
             //         return;
             // }
-            
+
             if (!_valueSetAfterInitialized)
                 return;
 

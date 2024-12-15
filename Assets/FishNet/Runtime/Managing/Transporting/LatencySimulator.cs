@@ -1,8 +1,10 @@
-﻿using FishNet.Connection;
-using FishNet.Transporting;
-using FishNet.Utility.Performance;
 using System;
 using System.Collections.Generic;
+
+using FishNet.Connection;
+using FishNet.Transporting;
+using FishNet.Utility.Performance;
+
 using UnityEngine;
 
 //Thanks to TiToMoskito originally creating this as a Transport.
@@ -177,7 +179,7 @@ namespace FishNet.Managing.Transporting
         {
             bool enabled = GetEnabled();
             if (_transport != null && enabled)
-            { 
+            {
                 IterateAndStore(_toServerReliable);
                 IterateAndStore(_toServerUnreliable);
                 IterateAndStore(_toClientReliable);

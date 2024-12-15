@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+
 using UnityEngine.SceneManagement;
 
 namespace FishNet.Serializing.Helping
@@ -16,7 +17,7 @@ namespace FishNet.Serializing.Helping
         /// </summary>
         public static Func<T, T, bool> Compare { get; set; }
     }
-     
+
 
     public class Comparers
     {

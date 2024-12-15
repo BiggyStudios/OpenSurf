@@ -1,6 +1,7 @@
-using FishNet.Documenting;
 using System;
 using System.Text;
+
+using FishNet.Documenting;
 
 namespace FishNet.Serializing
 {

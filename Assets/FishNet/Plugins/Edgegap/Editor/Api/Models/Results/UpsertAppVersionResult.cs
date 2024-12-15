@@ -48,7 +48,7 @@ namespace Edgegap.Editor.Api.Models.Results
 
             [JsonProperty("req_video")]
             public int? ReqVideo { get; set; }
-            
+
             [JsonProperty("max_duration")]
             public int? MaxDuration { get; set; }
 

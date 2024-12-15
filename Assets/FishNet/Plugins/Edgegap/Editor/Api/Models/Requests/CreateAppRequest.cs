@@ -12,17 +12,17 @@ namespace Edgegap.Editor.Api.Models.Requests
         [JsonProperty("name")]
         public string AppName { get; set; }
         #endregion // Required
-        
-        
+
+
         #region Optional
         /// <summary>*If the application can be deployed.</summary>
         [JsonProperty("is_active")]
         public bool IsActive { get; set; }
-        
+
         /// <summary>*Image base64 string.</summary>
         [JsonProperty("image")]
         public string Image { get; set; }
-        
+
         /// <summary>If the telemetry agent is installed on the versions of this app.</summary>
         [JsonProperty("is_telemetry_agent_active")]
         public bool IsTelemetryAgentActive { get; set; }
@@ -33,7 +33,7 @@ namespace Edgegap.Editor.Api.Models.Requests
         public CreateAppRequest()
         {
         }
-        
+
         /// <summary>Init with required info</summary>
         /// <param name="appName">The application name</param>
         /// <param name="isActive">If the application can be deployed</param>

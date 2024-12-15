@@ -1,4 +1,4 @@
-﻿using GameKit.Dependencies.Utilities;
+using GameKit.Dependencies.Utilities;
 
 namespace FishNet.Object
 {
@@ -20,7 +20,7 @@ namespace FishNet.Object
         /// <param name="whole">Value checked against.</param>
         /// <param name="part">Value checked if whole contains.</param>
         /// <returns></returns>
-        public static bool FastContains(this TransformPropertiesFlag whole, TransformPropertiesFlag part) => (whole & part) == part;        
+        public static bool FastContains(this TransformPropertiesFlag whole, TransformPropertiesFlag part) => (whole & part) == part;
     }
 }
 

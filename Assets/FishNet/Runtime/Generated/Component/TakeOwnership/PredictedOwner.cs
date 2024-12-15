@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 using FishNet.CodeGenerating;
 using FishNet.Connection;
 using FishNet.Managing;
@@ -8,7 +9,9 @@ using FishNet.Managing.Logging;
 using FishNet.Managing.Server;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
+
 using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Component.Ownership
@@ -37,7 +40,8 @@ namespace FishNet.Component.Ownership
         /// <summary>
         /// True if to enable this component.
         /// </summary>
-        [Tooltip("True if to enable this component.")] [SerializeField]
+        [Tooltip("True if to enable this component.")]
+        [SerializeField]
         private bool _allowTakeOwnership = true;
         private readonly SyncVar<bool> _allowTakeOwnershipSyncVar = new();
 
@@ -82,7 +86,7 @@ namespace FishNet.Component.Ownership
         }
 
         [Client]
-        
+
         [Obsolete("Use TakeOwnership(bool).")]
         public virtual void TakeOwnership() => TakeOwnership(includeNested: true);
 
@@ -122,9 +126,9 @@ namespace FishNet.Component.Ownership
         {
             OnTakeOwnership(caller, includeNested);
         }
-        
+
         [Server]
-        
+
         [Obsolete("Use OnTakeOwnership(bool).")]
         protected virtual void OnTakeOwnership(NetworkConnection caller) => OnTakeOwnership(caller, includeNested: false);
 
@@ -149,7 +153,7 @@ namespace FishNet.Component.Ownership
             if (includeNested)
             {
                 List<NetworkObject> allNested = base.NetworkObject.RetrieveNestedNetworkObjects(recursive: true);
-                
+
                 foreach (NetworkObject nob in allNested)
                 {
                     PredictedOwner po = nob.PredictedOwner;

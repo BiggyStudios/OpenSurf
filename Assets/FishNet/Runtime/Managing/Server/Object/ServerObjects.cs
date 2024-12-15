@@ -1,21 +1,24 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+
 using FishNet.Connection;
+using FishNet.Managing.Logging;
 using FishNet.Managing.Object;
 using FishNet.Managing.Timing;
 using FishNet.Object;
+using FishNet.Object.Synchronizing;
 using FishNet.Serializing;
+using FishNet.Serializing.Helping;
 using FishNet.Transporting;
 using FishNet.Utility.Extension;
+using FishNet.Utility.Performance;
+
 using GameKit.Dependencies.Utilities;
 using GameKit.Dependencies.Utilities.Types;
-using System;
-using System.Collections.Generic;
-using FishNet.Managing.Logging;
-using FishNet.Object.Synchronizing;
-using FishNet.Serializing.Helping;
-using FishNet.Utility.Performance;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -634,7 +637,7 @@ namespace FishNet.Managing.Server
         internal void ReadSpawn(PooledReader reader, NetworkConnection conn)
         {
             List<NetworkObject> spawnedNobs = null;
-            
+
             ushort spawnLength = reader.ReadUInt16Unpacked();
 
             int readStartPosition = reader.Position;
@@ -727,15 +730,15 @@ namespace FishNet.Managing.Server
                 return;
             }
 
-            
+
             spawnedNobs = CollectionCaches<NetworkObject>.RetrieveList();
-            
+
             //Once here everything is good.
             SendResponse(true, objectId);
 
 
             List<NetworkConnection> conns = RetrieveAuthenticatedConnections();
-            
+
             RebuildObservers(spawnedNobs, conns);
             CollectionCaches<NetworkObject>.Store(spawnedNobs);
             CollectionCaches<NetworkConnection>.Store(conns);
@@ -997,7 +1000,7 @@ namespace FishNet.Managing.Server
             HashSet<NetworkConnection> observers = nob.Observers;
             if (observers.Count == 0)
                 return;
-            
+
             PooledWriter everyoneWriter = WriterPool.Retrieve();
             WriteDespawn(nob, despawnType, everyoneWriter);
 

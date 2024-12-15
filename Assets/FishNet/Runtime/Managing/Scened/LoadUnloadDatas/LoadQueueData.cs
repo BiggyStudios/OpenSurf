@@ -1,6 +1,7 @@
-﻿using FishNet.Connection;
-using FishNet.Utility;
 using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
+using FishNet.Utility;
 
 [assembly: InternalsVisibleTo(UtilityConstants.GENERATED_ASSEMBLY_NAME)]
 namespace FishNet.Managing.Scened

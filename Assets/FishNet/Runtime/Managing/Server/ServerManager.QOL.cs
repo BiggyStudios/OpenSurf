@@ -1,12 +1,14 @@
-﻿using FishNet.Connection;
+using System;
+using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Transporting;
 using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Transporting;
 using FishNet.Transporting.Multipass;
-using System;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Server
@@ -90,7 +92,7 @@ namespace FishNet.Managing.Server
         /// </summary>
         /// <param name="go">GameObject instance to spawn.</param>
         /// <param name="ownerConnection">Connection to give ownership to.</param>
-        
+
         public void Spawn(GameObject go, NetworkConnection ownerConnection = null, UnityEngine.SceneManagement.Scene scene = default)
         {
             if (go == null)
@@ -124,7 +126,7 @@ namespace FishNet.Managing.Server
         /// </summary>
         /// <param name="go">GameObject instance to despawn.</param>
         /// <param name="cacheOnDespawnOverride">Overrides the default DisableOnDespawn value for this single despawn. Scene objects will never be destroyed.</param>
-        
+
         public void Despawn(GameObject go, DespawnType? despawnType = null)
         {
             if (go == null)

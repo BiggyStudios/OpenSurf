@@ -1,4 +1,4 @@
-﻿namespace GameKit.Dependencies.Utilities.Types
+namespace GameKit.Dependencies.Utilities.Types
 {
 
 

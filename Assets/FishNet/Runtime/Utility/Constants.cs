@@ -1,4 +1,4 @@
-﻿namespace FishNet.Utility
+namespace FishNet.Utility
 {
     internal static class UtilityConstants
     {

@@ -1,6 +1,8 @@
-﻿using FishNet.Connection;
 using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
 using FishNet.Serializing;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -24,7 +26,7 @@ namespace FishNet.Object
         /// <summary>
         /// Called after all data is synchronized with this NetworkObject.
         /// </summary>
-        
+
         private void InvokeStartCallbacks(bool asServer, bool invokeSyncTypeCallbacks)
         {
             /* Note: When invoking OnOwnership here previous owner will
@@ -134,7 +136,7 @@ namespace FishNet.Object
             }
 
             bool invokeOnNetwork = asServer || (clientStartCalled && !IsServerStarted);
-        
+
             if (invokeOnNetwork)
             {
                 for (int i = 0; i < NetworkBehaviours.Count; i++)

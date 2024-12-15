@@ -1,7 +1,8 @@
-using FishNet.Documenting;
-using FishNet.Utility;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+using FishNet.Utility;
 
 [assembly: InternalsVisibleTo(UtilityConstants.GENERATED_ASSEMBLY_NAME)]
 namespace FishNet.Serializing
@@ -32,7 +33,7 @@ namespace FishNet.Serializing
             //TODO Make it so DefaultDeltaReader methods are picked up by codegen.
             if (isGenerated && GenericReader<T>.HasCustomSerializer)
                 return;
-            
+
             //Set has custom serializer if value being used is not a generated method.
             HasCustomSerializer = !isGenerated;
             Read = value;

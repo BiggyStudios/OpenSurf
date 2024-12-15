@@ -8,10 +8,12 @@
 // Licensed under the MIT/X11 license.
 //
 
-namespace MonoFN.Cecil {
+namespace MonoFN.Cecil
+{
 
-	public interface IMetadataTokenProvider {
+    public interface IMetadataTokenProvider
+    {
 
-		MetadataToken MetadataToken { get; set; }
-	}
+        MetadataToken MetadataToken { get; set; }
+    }
 }

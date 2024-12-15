@@ -1,6 +1,7 @@
-﻿using FishNet.Managing.Logging;
+using FishNet.Managing.Logging;
 using FishNet.Managing.Scened;
 using FishNet.Object;
+
 using UnityEngine;
 
 namespace FishNet.Example.Scened

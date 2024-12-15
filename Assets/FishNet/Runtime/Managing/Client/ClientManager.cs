@@ -1,6 +1,9 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+
 using FishNet.Connection;
 using FishNet.Managing.Debugging;
 using FishNet.Managing.Logging;
@@ -10,9 +13,9 @@ using FishNet.Managing.Transporting;
 using FishNet.Serializing;
 using FishNet.Transporting;
 using FishNet.Transporting.Multipass;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Client

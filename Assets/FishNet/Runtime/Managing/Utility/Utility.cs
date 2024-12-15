@@ -1,4 +1,4 @@
-﻿using FishNet.Object;
+using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Transporting;
 

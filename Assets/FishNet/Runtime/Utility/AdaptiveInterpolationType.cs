@@ -1,4 +1,4 @@
-﻿namespace FishNet.Object.Prediction
+namespace FishNet.Object.Prediction
 {
     public enum AdaptiveInterpolationType
     {

@@ -1,4 +1,4 @@
-﻿namespace FishNet.Managing.Scened
+namespace FishNet.Managing.Scened
 {
     /// <summary>
     /// Type of scopes for a scene load or unload.

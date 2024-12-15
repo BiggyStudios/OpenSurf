@@ -1,21 +1,25 @@
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.Component.Transforming;
 using FishNet.Connection;
 using FishNet.Documenting;
+using FishNet.Managing;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Server;
 using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Utility;
 using FishNet.Utility.Performance;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using FishNet.Managing;
+
 using UnityEngine;
+
 using TimeManagerCls = FishNet.Managing.Timing.TimeManager;
 
 namespace FishNet.Component.Animating
@@ -511,7 +515,7 @@ namespace FishNet.Component.Animating
             //     _toClientsBuffer.Add(new byte[0]);
             // }
         }
-        
+
         public override void OnStartClient()
         {
             base.TimeManager.OnUpdate += TimeManager_OnUpdate;
@@ -587,7 +591,7 @@ namespace FishNet.Component.Animating
         /// <summary>
         /// Called after a tick occurs; physics would have simulated if using PhysicsMode.TimeManager.
         /// </summary>
-        
+
         private void TimeManager_OnPostTick()
         {
             //One check rather than per each method.
@@ -641,7 +645,7 @@ namespace FishNet.Component.Animating
             foreach (AnimatorControllerParameter item in _animator.parameters)
             {
                 bool process = !_animator.IsParameterControlledByCurve(item.name);
-                
+
                 if (process)
                 {
                     //Over 250 parameters; who would do this!?

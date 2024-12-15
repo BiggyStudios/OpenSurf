@@ -1,7 +1,9 @@
-using FishNet.Managing;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+using FishNet.Managing;
+
 using GameKit.Dependencies.Utilities;
 
 namespace FishNet.Serializing
@@ -13,7 +15,7 @@ namespace FishNet.Serializing
     {
         public void Store() => WriterPool.Store(this);
         public void StoreLength() => WriterPool.StoreLength(this);
-        
+
         public void ResetState() => Store();
         public void InitializeState() { }
     }
@@ -55,7 +57,7 @@ namespace FishNet.Serializing
         }
         /// Gets a writer from the pool.
         /// </summary>
-        
+
         public static PooledWriter Retrieve()
         {
             return Retrieve(null);
@@ -65,7 +67,7 @@ namespace FishNet.Serializing
         /// Gets the next writer in the pool of minimum length.
         /// </summary>
         /// <param name="length">Minimum length the writer buffer must be.</param>
-        
+
         public static PooledWriter Retrieve(int length)
         {
             return Retrieve(null, length);
@@ -74,7 +76,7 @@ namespace FishNet.Serializing
         /// Gets the next writer in the pool of minimum length.
         /// </summary>
         /// <param name="length">Minimum length the writer buffer must be.</param>
-        
+
         public static PooledWriter Retrieve(NetworkManager networkManager, int length)
         {
             /* The index returned will be for writers which have

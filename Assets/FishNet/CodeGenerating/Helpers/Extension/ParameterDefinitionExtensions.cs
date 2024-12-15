@@ -1,5 +1,6 @@
-﻿using MonoFN.Cecil;
 using System;
+
+using MonoFN.Cecil;
 
 namespace FishNet.CodeGenerating.Helping.Extension
 {

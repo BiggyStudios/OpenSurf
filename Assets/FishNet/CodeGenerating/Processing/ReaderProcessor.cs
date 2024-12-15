@@ -1,17 +1,21 @@
-﻿using FishNet.CodeGenerating.Helping.Extension;
+using System;
+using System.Collections.Generic;
+
+using FishNet.CodeGenerating.Extension;
+using FishNet.CodeGenerating.Helping.Extension;
+using FishNet.CodeGenerating.ILCore;
+using FishNet.Object;
 using FishNet.Serializing;
+using FishNet.Utility;
+using FishNet.Utility.Performance;
+
+using GameKit.Dependencies.Utilities;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
 using MonoFN.Cecil.Rocks;
+
 using SR = System.Reflection;
-using System.Collections.Generic;
-using System;
-using FishNet.CodeGenerating.ILCore;
-using FishNet.CodeGenerating.Extension;
-using FishNet.Utility.Performance;
-using FishNet.Object;
-using FishNet.Utility;
-using GameKit.Dependencies.Utilities;
 
 namespace FishNet.CodeGenerating.Helping
 {

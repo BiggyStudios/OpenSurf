@@ -1,8 +1,10 @@
-﻿using FishNet.Utility.Performance;
-using LiteNetLib;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+
+using FishNet.Utility.Performance;
+
+using LiteNetLib;
 
 namespace FishNet.Transporting.Tugboat
 {

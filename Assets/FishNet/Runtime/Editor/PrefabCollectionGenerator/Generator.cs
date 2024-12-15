@@ -1,14 +1,18 @@
-﻿#if UNITY_EDITOR
-using FishNet.Configuring;
-using FishNet.Managing;
-using FishNet.Managing.Object;
-using FishNet.Object;
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+
+using FishNet.Configuring;
+using FishNet.Managing;
+using FishNet.Managing.Object;
+using FishNet.Object;
+
 using UnityEditor;
+
 using UnityEngine;
+
 using UnityDebug = UnityEngine.Debug;
 
 namespace FishNet.Editing.PrefabCollectionGenerator
@@ -488,22 +492,22 @@ namespace FishNet.Editing.PrefabCollectionGenerator
             if (!ParrelSync.ClonesManager.IsClone() && ParrelSync.Preferences.AssetModPref.Value)
             {
 #endif
-                if (_cachedDefaultPrefabs == null)
+            if (_cachedDefaultPrefabs == null)
+            {
+                string fullPath = Path.GetFullPath(defaultPrefabsPath);
+                UnityDebug.Log($"Creating a new DefaultPrefabsObject at {fullPath}.");
+                string directory = Path.GetDirectoryName(fullPath);
+
+                if (!Directory.Exists(directory))
                 {
-                    string fullPath = Path.GetFullPath(defaultPrefabsPath);
-                    UnityDebug.Log($"Creating a new DefaultPrefabsObject at {fullPath}.");
-                    string directory = Path.GetDirectoryName(fullPath);
-
-                    if (!Directory.Exists(directory))
-                    {
-                        Directory.CreateDirectory(directory);
-                        AssetDatabase.Refresh();
-                    }
-
-                    _cachedDefaultPrefabs = ScriptableObject.CreateInstance<DefaultPrefabObjects>();
-                    AssetDatabase.CreateAsset(_cachedDefaultPrefabs, defaultPrefabsPath);
-                    AssetDatabase.SaveAssets();
+                    Directory.CreateDirectory(directory);
+                    AssetDatabase.Refresh();
                 }
+
+                _cachedDefaultPrefabs = ScriptableObject.CreateInstance<DefaultPrefabObjects>();
+                AssetDatabase.CreateAsset(_cachedDefaultPrefabs, defaultPrefabsPath);
+                AssetDatabase.SaveAssets();
+            }
 #if PARRELSYNC
             }
 #endif

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+
 using UnityEngine.UIElements;
 
 namespace Edgegap.Editor
@@ -28,7 +29,7 @@ namespace Edgegap.Editor
             targetButton.AddToClassList(SHAKE_START_CLASS);
             await Task.Delay(msDelayBetweenShakes); // duration of the first transition
             targetButton.RemoveFromClassList(SHAKE_START_CLASS);
-            
+
             targetButton.AddToClassList(SHAKE_STOP_CLASS);
             await Task.Delay(msDelayBetweenShakes); // duration of the second transition
             targetButton.RemoveFromClassList(SHAKE_STOP_CLASS);

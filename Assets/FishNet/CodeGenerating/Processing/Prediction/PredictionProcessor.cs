@@ -1,4 +1,7 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System.Collections.Generic;
+using System.Linq;
+
+using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.CodeGenerating.Processing.Rpc;
@@ -9,14 +12,16 @@ using FishNet.Object.Prediction.Delegating;
 using FishNet.Serializing;
 using FishNet.Transporting;
 using FishNet.Utility.Performance;
+
 using GameKit.Dependencies.Utilities;
+using GameKit.Dependencies.Utilities.Types;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
 using MonoFN.Cecil.Rocks;
-using System.Collections.Generic;
-using System.Linq;
-using GameKit.Dependencies.Utilities.Types;
+
 using UnityEngine;
+
 using SR = System.Reflection;
 
 namespace FishNet.CodeGenerating.Processing
@@ -489,7 +494,7 @@ namespace FishNet.CodeGenerating.Processing
 
             Generate(predictionFields.ReplicateDatasQueue, gh.GetGenericBasicQueue(replicateDataTr), isRingBuffer: false);
             Generate(predictionFields.ReplicateDatasHistory, gh.GetGenericRingBuffer(replicateDataTr), isRingBuffer: true);
-            
+
             GenericInstanceType localReconcileGit = gh.GetGenericType(typeof(LocalReconcile<>), reconcileDataTr);
             GenericInstanceType reconcileRingBufferDataGit = gh.GetGenericRingBuffer(localReconcileGit);
             Generate(predictionFields.ReconcileDatasHistory, gh.GetGenericRingBuffer(localReconcileGit), isRingBuffer: true);
@@ -573,7 +578,7 @@ namespace FishNet.CodeGenerating.Processing
             GenericInstanceType queueDataGit = gh.GetGenericBasicQueue(replicateDataTr);
 
             //Make generic LocalReconcile.
-            
+
             //TypeReference localReconcileTr = base.ImportReference(typeof(LocalReconcile<>));
             //GenericInstanceType reconcileRingBufferDataGit = gh.GetGenericRingBuffer(localReconcileTr);
             GenericInstanceType localReconcileGit = gh.GetGenericType(typeof(LocalReconcile<>), reconcileDataTr);

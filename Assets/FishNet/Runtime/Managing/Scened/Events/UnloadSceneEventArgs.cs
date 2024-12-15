@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+
 using UnityEngine.SceneManagement;
 
 namespace FishNet.Managing.Scened
@@ -41,7 +42,7 @@ namespace FishNet.Managing.Scened
         /// This contains information of the scene unloaded but may not contain scene references as some Unity versions discard that information after a scene is unloaded.
         /// </summary>
         public List<UnloadedScene> UnloadedScenesV2;
-        
+
         internal SceneUnloadEndEventArgs(UnloadQueueData sqd, List<Scene> unloadedScenes, List<UnloadedScene> newUnloadedScenes)
         {
             QueueData = sqd;

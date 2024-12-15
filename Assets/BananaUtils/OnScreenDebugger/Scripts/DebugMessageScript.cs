@@ -1,5 +1,7 @@
 using System.Collections;
+
 using TMPro;
+
 using UnityEngine;
 
 namespace BananaUtils.OnScreenDebugger.Scripts
@@ -9,7 +11,7 @@ namespace BananaUtils.OnScreenDebugger.Scripts
         [SerializeField] private TMP_Text _text;
         private float _timeOnScreen;
 
-    
+
         public void AssignValues(string text, Color color, float timeOnScreen, float size)
         {
             _timeOnScreen = timeOnScreen;
@@ -17,7 +19,7 @@ namespace BananaUtils.OnScreenDebugger.Scripts
             _text.color = color;
             _text.GetComponent<RectTransform>().sizeDelta = new Vector2(200, size);
         }
-    
+
         private void Start()
         {
             StartCoroutine(DestroyMessageRoutine());

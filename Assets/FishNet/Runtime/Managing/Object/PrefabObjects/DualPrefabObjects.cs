@@ -1,7 +1,9 @@
-using FishNet.Documenting;
-using FishNet.Object;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+using FishNet.Object;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Object
@@ -102,7 +104,7 @@ namespace FishNet.Managing.Object
             _prefabs.Add(dp);
         }
 
-        
+
         public override void InitializePrefabRange(int startIndex)
         {
             for (int i = startIndex; i < _prefabs.Count; i++)

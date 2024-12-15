@@ -1,5 +1,6 @@
-﻿using FishNet.Managing.Scened;
+using FishNet.Managing.Scened;
 using FishNet.Object;
+
 using UnityEngine;
 
 namespace FishNet.Demo.AdditiveScenes

@@ -1,4 +1,4 @@
-﻿using FishNet.Object.Helping;
+using FishNet.Object.Helping;
 
 namespace FishNet.Object
 {

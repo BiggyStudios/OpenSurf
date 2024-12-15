@@ -1,18 +1,24 @@
-﻿using FishNet.Connection;
+using FishNet.Connection;
 using FishNet.Managing.Client;
 using FishNet.Managing.Server;
 using FishNet.Managing.Timing;
 using FishNet.Managing.Transporting;
+
 using UnityEngine;
+
 using FishNet.Managing.Scened;
 using FishNet.Authenticating;
 using FishNet.Object;
 using FishNet.Documenting;
 using FishNet.Managing.Logging;
+
 using System.Collections.Generic;
 using System;
+
 using FishNet.Managing.Observing;
+
 using System.Linq;
+
 using FishNet.Managing.Debugging;
 using FishNet.Managing.Object;
 using FishNet.Transporting;
@@ -21,11 +27,14 @@ using FishNet.Managing.Statistic;
 using FishNet.Utility.Performance;
 using FishNet.Component.ColliderRollback;
 using FishNet.Managing.Predicting;
+
 using System.Runtime.CompilerServices;
+
 using GameKit.Dependencies.Utilities;
 
 #if UNITY_EDITOR
 using FishNet.Editing.PrefabCollectionGenerator;
+
 using UnityEditor;
 #endif
 
@@ -322,7 +331,7 @@ namespace FishNet.Managing
         {
             bool clientStarted = ClientManager.Started;
             bool serverStarted = ServerManager.Started;
-            
+
             int frameRate = 0;
             //If both client and server are started then use whichever framerate is higher.
             if (clientStarted && serverStarted)

@@ -1,16 +1,19 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
 using System;
+using System.Collections.Generic;
+
 using FishNet.Connection;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Server;
 using FishNet.Object;
 using FishNet.Serializing;
-using FishNet.Transporting;
-using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
 using FishNet.Serializing.Helping;
+using FishNet.Transporting;
+
+using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 
@@ -439,7 +442,7 @@ namespace FishNet.Managing.Object
         /// Reads the payload returning it as an arraySegment.
         /// </summary>
         /// <returns></returns>
-        internal ArraySegment<byte> ReadPayload(PooledReader reader) 
+        internal ArraySegment<byte> ReadPayload(PooledReader reader)
         {
             int payloadLength = (int)ReservedLengthWriter.ReadLength(reader, NetworkBehaviour.PAYLOAD_RESERVE_BYTES);
             return reader.ReadArraySegment(payloadLength);

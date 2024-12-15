@@ -1,6 +1,7 @@
-﻿using MonoFN.Cecil;
-using MonoFN.Cecil.Cil;
 using System.Collections.Generic;
+
+using MonoFN.Cecil;
+using MonoFN.Cecil.Cil;
 
 namespace FishNet.CodeGenerating.Helping.Extension
 {
@@ -64,11 +65,11 @@ namespace FishNet.CodeGenerating.Helping.Extension
             if (instCount == 0)
                 return false;
 
-            if (processor.Body.Instructions[instCount-1].OpCode == OpCodes.Ret)
+            if (processor.Body.Instructions[instCount - 1].OpCode == OpCodes.Ret)
             {
                 processor.Body.Instructions.RemoveAt(instCount - 1);
                 return true;
-            }    
+            }
             else
             {
                 return false;

@@ -1,6 +1,11 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+
 using FishNet.Component.Observing;
 using FishNet.Connection;
 using FishNet.Managing.Logging;
@@ -9,11 +14,9 @@ using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Transporting;
 using FishNet.Utility.Extension;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -265,7 +268,7 @@ namespace FishNet.Managing.Object
             {
                 if (nob == null)
                     continue;
-                
+
                 DespawnWithoutSynchronization(nob, asServer, nob.GetDefaultDespawnType(), removeFromSpawned: false);
             }
 

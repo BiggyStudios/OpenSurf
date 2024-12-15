@@ -1,45 +1,47 @@
 using System.Collections.Generic;
+
 using FishNet.Object;
+
 using UnityEngine;
 
 public class LevelManager : NetworkBehaviour
 {
-   public static LevelManager Instance;
-   
-   [SerializeField] private List<GameObject> _levels;
+    public static LevelManager Instance;
 
-   private void Awake()
-   {
-      if (Instance == null)
-      {
-         Instance = this;
-      }
+    [SerializeField] private List<GameObject> _levels;
 
-      else
-      {
-         Destroy(gameObject);
-      }
-   }
-   
-   public void SwitchLevel(int index)
-   {
-      SwitchLevelServerRpc(index);
-   }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
 
-   [ServerRpc]
-   private void SwitchLevelServerRpc(int index)
-   {
-      SwitchLevelObserver(index);
-   }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
-   [ObserversRpc]
-   private void SwitchLevelObserver(int index)
-   {
-      foreach (var level in _levels)
-      {
-         level.SetActive(false);
-      }
-      
-      _levels[index].SetActive(true);
-   }
+    public void SwitchLevel(int index)
+    {
+        SwitchLevelServerRpc(index);
+    }
+
+    [ServerRpc]
+    private void SwitchLevelServerRpc(int index)
+    {
+        SwitchLevelObserver(index);
+    }
+
+    [ObserversRpc]
+    private void SwitchLevelObserver(int index)
+    {
+        foreach (var level in _levels)
+        {
+            level.SetActive(false);
+        }
+
+        _levels[index].SetActive(true);
+    }
 }

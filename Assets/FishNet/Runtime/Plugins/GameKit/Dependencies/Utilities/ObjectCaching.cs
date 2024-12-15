@@ -1,6 +1,7 @@
-using GameKit.Dependencies.Utilities.Types;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+using GameKit.Dependencies.Utilities.Types;
 
 namespace GameKit.Dependencies.Utilities
 {
@@ -300,7 +301,7 @@ namespace GameKit.Dependencies.Utilities
             value.Clear();
             CollectionCaches<T>.Store(value);
         }
-        
+
         /// <summary>
         /// Stores a collection and sets the original reference to default.
         /// Method will not execute if value is null.
@@ -311,7 +312,7 @@ namespace GameKit.Dependencies.Utilities
         {
             if (value == null)
                 return;
-            
+
             Store(value);
             value = default;
         }
@@ -329,7 +330,7 @@ namespace GameKit.Dependencies.Utilities
             value.Clear();
             CollectionCaches<T>.Store(value);
         }
-          
+
         /// <summary>
         /// Stores a collection and sets the original reference to default.
         /// Method will not execute if value is null.
@@ -340,7 +341,7 @@ namespace GameKit.Dependencies.Utilities
         {
             if (value == null)
                 return;
-            
+
             Store(value);
             value = default;
         }

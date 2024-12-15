@@ -8,90 +8,108 @@
 // Licensed under the MIT/X11 license.
 //
 
-using MonoFN.Collections.Generic;
 using System.Threading;
 
-namespace MonoFN.Cecil {
+using MonoFN.Collections.Generic;
 
-	public sealed class MethodReturnType : IConstantProvider, ICustomAttributeProvider, IMarshalInfoProvider {
+namespace MonoFN.Cecil
+{
 
-		internal IMethodSignature method;
-		internal ParameterDefinition parameter;
-		TypeReference return_type;
+    public sealed class MethodReturnType : IConstantProvider, ICustomAttributeProvider, IMarshalInfoProvider
+    {
 
-		public IMethodSignature Method {
-			get { return method; }
-		}
+        internal IMethodSignature method;
+        internal ParameterDefinition parameter;
+        TypeReference return_type;
 
-		public TypeReference ReturnType {
-			get { return return_type; }
-			set { return_type = value; }
-		}
+        public IMethodSignature Method
+        {
+            get { return method; }
+        }
 
-		internal ParameterDefinition Parameter {
-			get {
-				if (parameter == null)
-					Interlocked.CompareExchange (ref parameter, new ParameterDefinition (return_type, method), null);
+        public TypeReference ReturnType
+        {
+            get { return return_type; }
+            set { return_type = value; }
+        }
 
-				return parameter;
-			}
-		}
+        internal ParameterDefinition Parameter
+        {
+            get
+            {
+                if (parameter == null)
+                    Interlocked.CompareExchange(ref parameter, new ParameterDefinition(return_type, method), null);
 
-		public MetadataToken MetadataToken {
-			get { return Parameter.MetadataToken; }
-			set { Parameter.MetadataToken = value; }
-		}
+                return parameter;
+            }
+        }
 
-		public ParameterAttributes Attributes {
-			get { return Parameter.Attributes; }
-			set { Parameter.Attributes = value; }
-		}
+        public MetadataToken MetadataToken
+        {
+            get { return Parameter.MetadataToken; }
+            set { Parameter.MetadataToken = value; }
+        }
 
-		public string Name {
-			get { return Parameter.Name; }
-			set { Parameter.Name = value; }
-		}
+        public ParameterAttributes Attributes
+        {
+            get { return Parameter.Attributes; }
+            set { Parameter.Attributes = value; }
+        }
 
-		public bool HasCustomAttributes {
-			get { return parameter != null && parameter.HasCustomAttributes; }
-		}
+        public string Name
+        {
+            get { return Parameter.Name; }
+            set { Parameter.Name = value; }
+        }
 
-		public Collection<CustomAttribute> CustomAttributes {
-			get { return Parameter.CustomAttributes; }
-		}
+        public bool HasCustomAttributes
+        {
+            get { return parameter != null && parameter.HasCustomAttributes; }
+        }
 
-		public bool HasDefault {
-			get { return parameter != null && parameter.HasDefault; }
-			set { Parameter.HasDefault = value; }
-		}
+        public Collection<CustomAttribute> CustomAttributes
+        {
+            get { return Parameter.CustomAttributes; }
+        }
 
-		public bool HasConstant {
-			get { return parameter != null && parameter.HasConstant; }
-			set { Parameter.HasConstant = value; }
-		}
+        public bool HasDefault
+        {
+            get { return parameter != null && parameter.HasDefault; }
+            set { Parameter.HasDefault = value; }
+        }
 
-		public object Constant {
-			get { return Parameter.Constant; }
-			set { Parameter.Constant = value; }
-		}
+        public bool HasConstant
+        {
+            get { return parameter != null && parameter.HasConstant; }
+            set { Parameter.HasConstant = value; }
+        }
 
-		public bool HasFieldMarshal {
-			get { return parameter != null && parameter.HasFieldMarshal; }
-			set { Parameter.HasFieldMarshal = value; }
-		}
+        public object Constant
+        {
+            get { return Parameter.Constant; }
+            set { Parameter.Constant = value; }
+        }
 
-		public bool HasMarshalInfo {
-			get { return parameter != null && parameter.HasMarshalInfo; }
-		}
+        public bool HasFieldMarshal
+        {
+            get { return parameter != null && parameter.HasFieldMarshal; }
+            set { Parameter.HasFieldMarshal = value; }
+        }
 
-		public MarshalInfo MarshalInfo {
-			get { return Parameter.MarshalInfo; }
-			set { Parameter.MarshalInfo = value; }
-		}
+        public bool HasMarshalInfo
+        {
+            get { return parameter != null && parameter.HasMarshalInfo; }
+        }
 
-		public MethodReturnType (IMethodSignature method)
-		{
-			this.method = method;
-		}
-	}
+        public MarshalInfo MarshalInfo
+        {
+            get { return Parameter.MarshalInfo; }
+            set { Parameter.MarshalInfo = value; }
+        }
+
+        public MethodReturnType(IMethodSignature method)
+        {
+            this.method = method;
+        }
+    }
 }

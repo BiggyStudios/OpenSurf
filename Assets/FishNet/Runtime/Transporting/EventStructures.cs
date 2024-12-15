@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace FishNet.Transporting
@@ -141,7 +141,7 @@ namespace FishNet.Transporting
         public LocalConnectionState ConnectionState;
 
         public ServerConnectionStateArgs(LocalConnectionState connectionState, int transportIndex)
-        {            
+        {
             ConnectionState = connectionState;
             TransportIndex = transportIndex;
         }
@@ -163,7 +163,7 @@ namespace FishNet.Transporting
         public int TransportIndex;
 
         public ClientConnectionStateArgs(LocalConnectionState connectionState, int transportIndex)
-        {            
+        {
             ConnectionState = connectionState;
             TransportIndex = transportIndex;
         }

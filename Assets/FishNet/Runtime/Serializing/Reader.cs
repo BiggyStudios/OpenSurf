@@ -1,6 +1,11 @@
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.CompilerServices;
+
 using FishNet.CodeGenerating;
 using FishNet.Connection;
 using FishNet.Documenting;
@@ -11,11 +16,9 @@ using FishNet.Serializing.Helping;
 using FishNet.Transporting;
 using FishNet.Utility;
 using FishNet.Utility.Performance;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 [assembly: InternalsVisibleTo(UtilityConstants.GENERATED_ASSEMBLY_NAME)]

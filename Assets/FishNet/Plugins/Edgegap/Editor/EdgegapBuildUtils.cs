@@ -1,4 +1,4 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 
@@ -104,7 +105,7 @@ namespace Edgegap
                     onStatusUpdate(msg);
                 });
 
-            if(realErrorMessage != null)
+            if (realErrorMessage != null)
             {
                 throw new Exception(realErrorMessage);
             }
@@ -217,7 +218,7 @@ namespace Edgegap
 
         public static void UpdateEdgegapAppTag(string tag)
         {
-           // throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         /// <summary>Run a Docker cmd with streaming log response. TODO: Plugin to other Docker cmds</summary>
@@ -244,7 +245,7 @@ namespace Edgegap
 #elif UNITY_EDITOR_OSX
             await RunCommand("/bin/bash", $"-c \"docker login -u \"{repoUsername}\" --password \"{repoPasswordToken}\" \"{registryUrl}\"\"", outputReciever, errorReciever);
 #elif UNITY_EDITOR_LINUX
-            await RunCommand("/bin/bash", $"-c \"docker login -u \"{repoUsername}\" --password \"{repoPasswordToken}\" \"{registryUrl}\"\"", outputReciever, errorReciever);
+                await RunCommand("/bin/bash", $"-c \"docker login -u \"{repoUsername}\" --password \"{repoPasswordToken}\" \"{registryUrl}\"\"", outputReciever, errorReciever);
 #else
             Debug.LogError("The platform is not supported yet.");
 #endif

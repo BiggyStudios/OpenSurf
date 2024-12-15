@@ -1,6 +1,8 @@
-﻿using FishNet.Object.Helping;
-using MonoFN.Cecil;
 using System.Collections.Generic;
+
+using FishNet.Object.Helping;
+
+using MonoFN.Cecil;
 
 namespace FishNet.CodeGenerating.Processing.Rpc
 {

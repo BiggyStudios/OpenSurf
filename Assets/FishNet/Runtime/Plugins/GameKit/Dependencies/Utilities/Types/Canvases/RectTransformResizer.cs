@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities.Types
@@ -69,7 +70,7 @@ namespace GameKit.Dependencies.Utilities.Types
             {
                 _resizeDatas[i].Remaining--;
                 bool complete = (_resizeDatas[i].Remaining == 0);
-                _resizeDatas[i].Delegate?.Invoke(complete);                
+                _resizeDatas[i].Delegate?.Invoke(complete);
                 if (complete)
                 {
                     ResettableObjectCaches<ResizeData>.Store(_resizeDatas[i]);
@@ -99,7 +100,7 @@ namespace GameKit.Dependencies.Utilities.Types
 
             _instance.Resize_Internal(del);
         }
-        private  void Resize_Internal(ResizeDelegate del)
+        private void Resize_Internal(ResizeDelegate del)
         {
             ResizeData rd = ResettableObjectCaches<ResizeData>.Retrieve();
             rd.Delegate = del;

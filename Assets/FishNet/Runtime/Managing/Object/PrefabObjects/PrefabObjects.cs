@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 using FishNet.Documenting;
 using FishNet.Object;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Object

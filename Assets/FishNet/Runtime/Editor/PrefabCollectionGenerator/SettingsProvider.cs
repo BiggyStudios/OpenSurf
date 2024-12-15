@@ -1,16 +1,19 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+
+using FishNet.Configuring;
+
 using UnityEditor;
+
 using UnityEngine;
 
-using UnitySettingsProviderAttribute = UnityEditor.SettingsProviderAttribute;
 using UnitySettingsProvider = UnityEditor.SettingsProvider;
-using FishNet.Configuring;
-using System.Linq;
+using UnitySettingsProviderAttribute = UnityEditor.SettingsProviderAttribute;
 
 namespace FishNet.Editing.PrefabCollectionGenerator
 {

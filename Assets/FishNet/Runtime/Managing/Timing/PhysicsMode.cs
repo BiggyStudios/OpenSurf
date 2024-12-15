@@ -1,4 +1,4 @@
-﻿namespace FishNet.Managing.Timing
+namespace FishNet.Managing.Timing
 {
     /// <summary>
     /// How to simulate physics.

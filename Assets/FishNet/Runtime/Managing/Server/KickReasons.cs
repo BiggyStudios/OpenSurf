@@ -1,4 +1,4 @@
-﻿namespace FishNet.Managing.Server
+namespace FishNet.Managing.Server
 {
 
     public enum KickReason : short

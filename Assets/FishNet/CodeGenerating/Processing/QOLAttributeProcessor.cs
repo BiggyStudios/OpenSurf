@@ -1,13 +1,15 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System.Collections.Generic;
+using System.Linq;
+
+using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.CodeGenerating.Processing.Rpc;
 using FishNet.Configuring;
 using FishNet.Managing.Logging;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace FishNet.CodeGenerating.Processing
 {
@@ -19,7 +21,7 @@ namespace FishNet.CodeGenerating.Processing
             bool modified = false;
             List<MethodDefinition> methods = typeDef.Methods.ToList();
 
-            
+
 
             foreach (MethodDefinition md in methods)
             {
@@ -152,14 +154,14 @@ namespace FishNet.CodeGenerating.Processing
 
             bool StripMethod(MethodDefinition md)
             {
-                
+
 
                 //Fall through.
                 return false;
             }
         }
 
-        
+
     }
 
 }

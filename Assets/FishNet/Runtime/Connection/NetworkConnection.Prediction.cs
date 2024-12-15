@@ -1,14 +1,15 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.Managing;
 using FishNet.Managing.Predicting;
 using FishNet.Managing.Timing;
 using FishNet.Managing.Transporting;
 using FishNet.Serializing;
 using FishNet.Transporting;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace FishNet.Connection
 {
@@ -110,7 +111,7 @@ namespace FishNet.Connection
         /// <summary>
         /// Resets NetworkConnection.
         /// </summary>
-        
+
         private void Prediction_Reset()
         {
             StorePredictionStateWriters();

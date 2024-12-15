@@ -1,4 +1,4 @@
-﻿namespace FishNet.Managing.Scened
+namespace FishNet.Managing.Scened
 {
     /// <summary>
     /// Additional user-crafted data which can be included in scene unload callbacks.

@@ -1,15 +1,19 @@
-﻿using FishNet.CodeGenerating;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+using FishNet.CodeGenerating;
 using FishNet.Component.Observing;
 using FishNet.Documenting;
 using FishNet.Managing;
 using FishNet.Managing.Timing;
 using FishNet.Object;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 using static FishNet.Managing.Timing.EstimatedTick;
 
 namespace FishNet.Connection
@@ -259,7 +263,7 @@ namespace FishNet.Connection
         /// <summary>
         /// Initializes this for use.
         /// </summary>
-        
+
         private void Initialize(NetworkManager nm, int clientId, int transportIndex, bool asServer)
         {
             NetworkManager = nm;
@@ -350,7 +354,7 @@ namespace FishNet.Connection
         /// Adds to Objects owned by this connection.
         /// </summary>
         /// <param name="nob"></param>
-        
+
         internal void AddObject(NetworkObject nob)
         {
             if (!IsValid)
@@ -368,7 +372,7 @@ namespace FishNet.Connection
         /// Removes from Objects owned by this connection.
         /// </summary>
         /// <param name="nob"></param>
-        
+
         internal void RemoveObject(NetworkObject nob)
         {
             if (!IsValid)
@@ -437,7 +441,7 @@ namespace FishNet.Connection
         /// <summary>
         /// Resets all states for re-use.
         /// </summary>
-        
+
         public void ResetState()
         {
             MatchCondition.RemoveFromMatchesWithoutRebuild(this, NetworkManager);
@@ -466,7 +470,7 @@ namespace FishNet.Connection
         }
 
         public void InitializeState() { }
-    
+
     }
 
 

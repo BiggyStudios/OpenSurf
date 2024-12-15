@@ -1,6 +1,7 @@
-using FishNet.Documenting;
 using System;
 using System.Text;
+
+using FishNet.Documenting;
 
 namespace FishNet.Serializing
 {
@@ -42,6 +43,6 @@ namespace FishNet.Serializing
         {
             return _encoding.GetString(data.Array, data.Offset, data.Count);
         }
-   
+
     }
 }

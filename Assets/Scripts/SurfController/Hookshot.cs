@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace P90brush
@@ -24,17 +25,22 @@ namespace P90brush
 
         private HookStatus _status = HookStatus.None;
 
-        void Start() {
+        void Start()
+        {
             _lr.enabled = false;
         }
 
-        void Update() {
+        void Update()
+        {
         }
 
 
-        public void CheckForRelease(ISurfControllable surfer) {
-            if (!surfer.InputData.HookPressed) {
-                if (surfer.InputData.HookPressedLastUpdate) {//Player has Release the Hook Button
+        public void CheckForRelease(ISurfControllable surfer)
+        {
+            if (!surfer.InputData.HookPressed)
+            {
+                if (surfer.InputData.HookPressedLastUpdate)
+                {//Player has Release the Hook Button
                     ReleaseHook(surfer);
                 }
 
@@ -43,10 +49,12 @@ namespace P90brush
         }
 
 
-        public void CatchMovement(ISurfControllable surfer, float deltaTime) {
+        public void CatchMovement(ISurfControllable surfer, float deltaTime)
+        {
             CheckForRelease(surfer);//To be sure
 
-            if (!surfer.PlayerData.IsHooked()) {
+            if (!surfer.PlayerData.IsHooked())
+            {
                 return;//Player has No Point where Hook is Attached
             }
 
@@ -58,8 +66,10 @@ namespace P90brush
 
             float hookDistance = Vector3.Distance(surfer.PlayerData.Origin, surfer.PlayerData.HookedPosition);
 
-            if (!surfer.InputData.HookRetractPressed) {
-                if (hookDistance < _defaultLength) {
+            if (!surfer.InputData.HookRetractPressed)
+            {
+                if (hookDistance < _defaultLength)
+                {
                     _status = HookStatus.Free;
                     return; //Nothing to do
                 }
@@ -80,7 +90,8 @@ namespace P90brush
 
             Debug.Log("Hook Strength: " + strength);
 
-            if (strength != 0f) {
+            if (strength != 0f)
+            {
                 Vector3 playerToHookPosition = surfer.PlayerData.Origin - surfer.PlayerData.HookedPosition;
                 playerToHookPosition = playerToHookPosition.normalized; //Normalized ??
 
@@ -89,20 +100,25 @@ namespace P90brush
 
 
             // Check if we reached the Hoocked Position
-            if (hookDistance <= _minDistance) {
+            if (hookDistance <= _minDistance)
+            {
                 ReleaseHook(surfer);
             }
         }
 
-        private float ComputeStrength(ISurfControllable surfer, float hookDistance) {
+        private float ComputeStrength(ISurfControllable surfer, float hookDistance)
+        {
             float strength = 0f; // Strength to apply to the hook velocity
 
             float distancePercent = hookDistance * _defaultLengthPercent;
 
-            if (surfer.InputData.HookRetractPressed) {
+            if (surfer.InputData.HookRetractPressed)
+            {
                 _status = HookStatus.Retracting;
                 strength = _retractingStrength + _elasticCollapseStrength;
-            } else {
+            }
+            else
+            {
                 // Vector from Player To Hook Position
                 Vector3 playerToHookPosition = surfer.PlayerData.Origin - surfer.PlayerData.HookedPosition;
 
@@ -113,8 +129,9 @@ namespace P90brush
                 {
                     _status = HookStatus.ElasticExpanding; // We are expanding the elastic part
                     strength = _elasticExpandStrength;
-                } else                // Vectors are in same direction
-                  {
+                }
+                else                // Vectors are in same direction
+                {
                     _status = HookStatus.ElasticCollapsing; // We are collapsing the elastic part
                     strength = _elasticCollapseStrength;
                 }
@@ -144,10 +161,12 @@ namespace P90brush
         //    }
 
         //}
-        private float SmoothStrength(float strength, float hookDistance) {
+        private float SmoothStrength(float strength, float hookDistance)
+        {
             float hookPercentage = hookDistance * 100 / _defaultLength;
             Debug.Log("HookPercentage :" + hookPercentage);
-            if (hookPercentage > 100/* - _elasticSmoothPercentage*/ && hookPercentage < 100 + _elasticSmoothPercentage) {//Trigger the smooth area
+            if (hookPercentage > 100/* - _elasticSmoothPercentage*/ && hookPercentage < 100 + _elasticSmoothPercentage)
+            {//Trigger the smooth area
                 float delta = hookPercentage > 100 ? (hookPercentage - 100) : (100 - hookPercentage); //Delta Percentage (between 0 and hookPercentage)
                 delta /= _elasticSmoothPercentage; //Compute
 
@@ -194,8 +213,10 @@ namespace P90brush
     }*/
 
 
-        public void TriggerHook(ISurfControllable surfer) {
-            if (Physics.Raycast(_playerCam.transform.position, _playerCam.transform.forward, out RaycastHit hit, _maxDistance)) {
+        public void TriggerHook(ISurfControllable surfer)
+        {
+            if (Physics.Raycast(_playerCam.transform.position, _playerCam.transform.forward, out RaycastHit hit, _maxDistance))
+            {
                 //_isHooked = true;
                 surfer.PlayerData.HookedPosition = hit.point;
                 _lr.enabled = true;
@@ -205,13 +226,15 @@ namespace P90brush
             _defaultLength = Vector3.Distance(surfer.PlayerData.Origin, surfer.PlayerData.HookedPosition) /* _defaultLengthPercent*/;
         }
 
-        private void ReleaseHook(ISurfControllable surfer) {
+        private void ReleaseHook(ISurfControllable surfer)
+        {
             _status = HookStatus.None;
             _lr.enabled = false;
             surfer.PlayerData.HookedPosition = Vector3.zero;
         }
 
-        public HookStatus GetStatus() {
+        public HookStatus GetStatus()
+        {
             return _status;
         }
     }

@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace P90brush
@@ -18,7 +19,8 @@ namespace P90brush
         public bool HookRetractPressed = false;
         public bool SlowMotionPressed = false;
 
-        public void Reset() {
+        public void Reset()
+        {
             this.ForwardMove = 0f;
             this.SideMove = 0f;
             this.MouseX = 0f;
@@ -32,7 +34,8 @@ namespace P90brush
             this.SlowMotionPressed = false;
         }
 
-        public void Update(MovementConfig MoveConfig) {
+        public void Update(MovementConfig MoveConfig)
+        {
             #region Catch Movement
             var moveLeft = Input.GetKey(MoveConfig.MoveLeft);
             var moveRight = Input.GetKey(MoveConfig.MoveRight);
@@ -40,20 +43,30 @@ namespace P90brush
             var moveBack = Input.GetKey(MoveConfig.MoveBack);
 
             // Lateral Movements
-            if (moveLeft) {
+            if (moveLeft)
+            {
                 SideMove = -MoveConfig.Accel;
-            } else if (moveRight) {
+            }
+            else if (moveRight)
+            {
                 SideMove = MoveConfig.Accel;
-            } else {
+            }
+            else
+            {
                 SideMove = 0;
             }
 
             // Frontal Movements
-            if (moveFwd) {
+            if (moveFwd)
+            {
                 ForwardMove = MoveConfig.Accel;
-            } else if (moveBack) {
+            }
+            else if (moveBack)
+            {
                 ForwardMove = -MoveConfig.Accel;
-            } else {
+            }
+            else
+            {
                 ForwardMove = 0;
             }
             #endregion

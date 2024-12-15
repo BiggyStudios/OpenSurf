@@ -8,10 +8,12 @@
 // Licensed under the MIT/X11 license.
 //
 
-using MonoFN.Cecil.Metadata;
-using MonoFN.Collections.Generic;
 using System;
 using System.Collections.Generic;
+
+using MonoFN.Cecil.Metadata;
+using MonoFN.Collections.Generic;
+
 using SR = System.Reflection;
 
 namespace MonoFN.Cecil

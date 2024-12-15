@@ -1,4 +1,5 @@
-﻿using FishNet.Object;
+using FishNet.Object;
+
 using UnityEngine;
 
 
@@ -20,9 +21,9 @@ namespace FishNet.Demo.HashGrid
 
         public override void OnStartServer()
         {
-            
 
-            for (int x = (int)(_range * -1); x < _range; x+= _spacing)
+
+            for (int x = (int)(_range * -1); x < _range; x += _spacing)
             {
                 for (int y = (int)(_range * -1); y < _range; y++)
                 {

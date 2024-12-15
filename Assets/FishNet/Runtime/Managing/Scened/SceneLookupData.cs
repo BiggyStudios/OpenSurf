@@ -1,6 +1,8 @@
-﻿using GameKit.Dependencies.Utilities;
 using System;
 using System.Collections.Generic;
+
+using GameKit.Dependencies.Utilities;
+
 using UnityEngine.SceneManagement;
 
 namespace FishNet.Managing.Scened

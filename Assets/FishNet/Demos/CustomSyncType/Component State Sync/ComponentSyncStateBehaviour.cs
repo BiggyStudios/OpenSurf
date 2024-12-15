@@ -1,6 +1,7 @@
-﻿using FishNet.Object;
+using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using FishNet.Serializing;
+
 using UnityEngine;
 
 namespace FishNet.Example.ComponentStateSync
@@ -20,7 +21,7 @@ namespace FishNet.Example.ComponentStateSync
         /// <summary>  
         /// Using my custom SyncType for Structy.
         /// </summary>
-        
+
         private readonly ComponentStateSync<AMonoScript> _syncScript = new();
 
         private void Awake()

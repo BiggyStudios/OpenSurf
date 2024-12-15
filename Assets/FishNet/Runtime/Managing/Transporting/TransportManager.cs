@@ -1,15 +1,17 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.Connection;
 using FishNet.Managing.Timing;
 using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Transporting;
 using FishNet.Transporting.Multipass;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Transporting
@@ -382,7 +384,7 @@ namespace FishNet.Managing.Transporting
         /// </summary>
         /// <param name="channel"></param>
         /// <returns></returns>
-        
+
         public int GetLowestMTU()
         {
             SetLowestMTUs();
@@ -393,7 +395,7 @@ namespace FishNet.Managing.Transporting
         /// </summary>
         /// <param name="channel"></param>
         /// <returns></returns>
-        
+
         public int GetLowestMTU(byte channel)
         {
             SetLowestMTUs();
@@ -419,7 +421,7 @@ namespace FishNet.Managing.Transporting
         /// <param name="transportIndex">Index of the transport to get the MTU on.</param>
         /// <param name="channel">Channel to get MTU of.</param>
         /// <returns></returns>
-        
+
         public int GetMTU(int transportIndex, byte channel)
         {
             if (Transport is Multipass mp)
@@ -448,7 +450,7 @@ namespace FishNet.Managing.Transporting
         /// <typeparam name="T">Tyep of transport to use.</typeparam>
         /// <param name="channel">Channel to get MTU of.</param>
         /// <returns></returns>
-        
+
         public int GetMTU<T>(byte channel) where T : Transport
         {
             Transport transport = GetTransport<T>();
@@ -469,7 +471,7 @@ namespace FishNet.Managing.Transporting
         /// <summary>
         /// Passes received to the intermediate layer.
         /// </summary>
-        
+
         internal ArraySegment<byte> ProcessIntermediateIncoming(ArraySegment<byte> src, bool fromServer)
         {
             return _intermediateLayer.HandleIncoming(src, fromServer);
@@ -477,7 +479,7 @@ namespace FishNet.Managing.Transporting
         /// <summary>
         /// Passes sent to the intermediate layer.
         /// </summary>
-        
+
         private ArraySegment<byte> ProcessIntermediateOutgoing(ArraySegment<byte> src, bool toServer)
         {
             return _intermediateLayer.HandleOutgoing(src, toServer);
@@ -490,7 +492,7 @@ namespace FishNet.Managing.Transporting
         /// <param name="segment">Data to send.</param>
         /// <param name="connection">Connection to send to. Use null for all clients.</param>
         /// <param name="splitLargeMessages">True to split large packets which exceed MTU and send them in order on the reliable channel.</param>
-        
+
         internal void SendToClient(byte channelId, ArraySegment<byte> segment, NetworkConnection connection, bool splitLargeMessages = true, DataOrderType orderType = DataOrderType.Default)
         {
             SetSplitValues(channelId, segment, splitLargeMessages, out int requiredMessages, out int maxSplitMessageSize);
@@ -511,13 +513,13 @@ namespace FishNet.Managing.Transporting
         /// <summary>
         /// Sends data to observers.
         /// </summary>
-        
+
         internal void SendToClients(byte channelId, ArraySegment<byte> segment, HashSet<NetworkConnection> observers, HashSet<NetworkConnection> excludedConnections = null, bool splitLargeMessages = true, DataOrderType orderType = DataOrderType.Default)
         {
             SetSplitValues(channelId, segment, splitLargeMessages, out int requiredMessages, out int maxSplitMessageSize);
             SendToClients(channelId, segment, observers, excludedConnections, requiredMessages, maxSplitMessageSize, orderType);
         }
-        
+
         private void SendToClients(byte channelId, ArraySegment<byte> segment, HashSet<NetworkConnection> observers, HashSet<NetworkConnection> excludedConnections, int requiredSplitMessages, int maxSplitMessageSize, DataOrderType orderType = DataOrderType.Default)
         {
             if (excludedConnections == null || excludedConnections.Count == 0)
@@ -542,7 +544,7 @@ namespace FishNet.Managing.Transporting
         /// <param name="channelId">Channel to send on.</param>
         /// <param name="segment">Data to send.</param>
         /// <param name="splitLargeMessages">True to split large packets which exceed MTU and send them in order on the reliable channel.</param>
-        
+
         internal void SendToClients(byte channelId, ArraySegment<byte> segment, bool splitLargeMessages = true)
         {
             SetSplitValues(channelId, segment, splitLargeMessages, out int requiredMessages, out int maxSplitMessageSize);
@@ -564,13 +566,13 @@ namespace FishNet.Managing.Transporting
         /// <param name="channelId">Channel to send on.</param>
         /// <param name="segment">Data to send.</param>
         /// <param name="splitLargeMessages">True to split large packets which exceed MTU and send them in order on the reliable channel.</param>
-        
+
         internal void SendToServer(byte channelId, ArraySegment<byte> segment, bool splitLargeMessages = true, DataOrderType orderType = DataOrderType.Default)
         {
             SetSplitValues(channelId, segment, splitLargeMessages, out int requiredMessages, out int maxSplitMessageSize);
             SendToServer(channelId, segment, requiredMessages, maxSplitMessageSize, orderType);
         }
-        
+
         private void SendToServer(byte channelId, ArraySegment<byte> segment, int requiredMessages, int maxSplitMessageSize, DataOrderType orderType)
         {
             if (channelId >= _toServerBundles.Count)
@@ -602,7 +604,7 @@ namespace FishNet.Managing.Transporting
         /// <summary>
         /// Checks to set channel to reliable if dataLength is too long.
         /// </summary>
-        
+
         internal void CheckSetReliableChannel(int dataLength, ref Channel channel)
         {
             if (channel == Channel.Reliable)
@@ -627,7 +629,7 @@ namespace FishNet.Managing.Transporting
         /// </summary>
         /// <param name="channelId"></param>
         /// <param name="segmentSize"></param>
-        
+
         private bool SplitRequired(byte channelId, int segmentSize, out int requiredMessages, out int maxMessageSize)
         {
             requiredMessages = GetRequiredMessageCount(channelId, segmentSize, out maxMessageSize);

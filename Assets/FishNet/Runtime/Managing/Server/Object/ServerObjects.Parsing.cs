@@ -1,10 +1,11 @@
-﻿using FishNet.Connection;
+using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
 using FishNet.Managing.Object;
 using FishNet.Managing.Utility;
 using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Transporting;
-using System.Runtime.CompilerServices;
 
 namespace FishNet.Managing.Server
 {
@@ -14,7 +15,7 @@ namespace FishNet.Managing.Server
         /// <summary>
         /// Parses a ServerRpc.
         /// </summary>
-        
+
         internal void ParseServerRpc(PooledReader reader, NetworkConnection conn, Channel channel)
         {
             NetworkBehaviour nb = reader.ReadNetworkBehaviour();

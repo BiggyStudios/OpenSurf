@@ -1,4 +1,4 @@
-﻿
+
 using System;
 
 namespace GameKit.Dependencies.Utilities

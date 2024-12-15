@@ -1,8 +1,12 @@
-﻿#if !FISHNET_STABLE_MODE
+#if !FISHNET_STABLE_MODE
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.CodeGenerating;
 using FishNet.Connection;
 using FishNet.Documenting;
@@ -17,11 +21,10 @@ using FishNet.Serializing;
 using FishNet.Serializing.Helping;
 using FishNet.Transporting;
 using FishNet.Utility;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using GameKit.Dependencies.Utilities.Types;
+
 using UnityEngine;
 
 [assembly: InternalsVisibleTo(UtilityConstants.CODEGEN_ASSEMBLY_NAME)]
@@ -286,7 +289,7 @@ namespace FishNet.Object
         internal void RegisterReplicateRpc(uint hash, ReplicateRpcDelegate del)
         {
             _usesPrediction = true;
-            
+
             if (_replicateRpcDelegates == null)
                 _replicateRpcDelegates = CollectionCaches<uint, ReplicateRpcDelegate>.RetrieveDictionary();
             _replicateRpcDelegates[hash] = del;
@@ -360,7 +363,7 @@ namespace FishNet.Object
         /// Clears cached replicates for server and client. This can be useful to call on server and client after teleporting.
         /// </summary>
         public virtual void ClearReplicateCache() { }
-        
+
         /// <summary>
         /// Clears cached replicates and histories.
         /// </summary>
@@ -424,7 +427,7 @@ namespace FishNet.Object
              * The exception is for the owner, which we send the last replicate
              * tick so the owner knows which to roll back to. */
 
-//#if !FISHNET_STABLE_MODE
+            //#if !FISHNET_STABLE_MODE
 #if DO_NOT_USE
             methodWriter.WriteDeltaReconcile(lastReconcileData, reconcileData, GetDeltaSerializeOption());
 #else
@@ -543,7 +546,7 @@ namespace FishNet.Object
         /// </summary>
         protected internal void Replicate_Replay_NonAuthoritative<T>(uint replayTick, ReplicateUserLogicDelegate<T> del, RingBuffer<T> replicatesHistory, Channel channel) where T : IReplicateData
         {
-                         
+
             T data;
             ReplicateState state;
             bool isAppendedOrder = _networkObjectCache.PredictionManager.IsAppendedStateOrder;
@@ -885,7 +888,7 @@ namespace FishNet.Object
              * write the queueTick. */
             if (!toServer)
                 methodWriter.WriteTickUnpacked(queuedTick);
-//#if !FISHNET_STABLE_MODE
+            //#if !FISHNET_STABLE_MODE
 #if DO_NOT_USE
             methodWriter.WriteDeltaReplicate(replicatesHistory, offset, deltaOption);
 #else
@@ -954,7 +957,7 @@ namespace FishNet.Object
                 tick = (tm.LastPacketTick.LastRemoteTick);
 
             int receivedReplicatesCount;
-//#if !FISHNET_STABLE_MODE
+            //#if !FISHNET_STABLE_MODE
 #if DO_NOT_USE
             receivedReplicatesCount = reader.ReadDeltaReplicate(lastReadReplicate, ref arrBuffer, tick);
 #else
@@ -1038,7 +1041,7 @@ namespace FishNet.Object
             methodWriter.WriteTickUnpacked(runTickOflastEntry);
             //Write the replicates.
             int redundancyCount = (int)Mathf.Min(_networkObjectCache.PredictionManager.RedundancyCount, queueCount);
-//#if !FISHNET_STABLE_MODE
+            //#if !FISHNET_STABLE_MODE
 #if DO_NOT_USE
             methodWriter.WriteDeltaReplicate(replicatesQueue, redundancyCount, GetDeltaSerializeOption());
 #else
@@ -1223,7 +1226,7 @@ namespace FishNet.Object
                 return;
             if (!_networkObjectCache.PredictionManager.CreateLocalStates)
                 return;
-            
+
             /* This is called by the local client when creating
              * a local reconcile state. These states should always
              * be in order, so we will add data to the end
@@ -1316,7 +1319,7 @@ namespace FishNet.Object
                     }
 
                     //If index is set and behaviour is not reconciling then apply data.
-                    if (!isBehaviourReconciling && historyIndex != unsetHistoryIndex) 
+                    if (!isBehaviourReconciling && historyIndex != unsetHistoryIndex)
                     {
                         LocalReconcile<T> localReconcile = reconcilesHistory[(int)historyIndex];
                         //Before disposing get the writer and call reconcile reader so it's parsed.
@@ -1422,7 +1425,7 @@ namespace FishNet.Object
         {
             foreach (LocalReconcile<T> localReconcile in reconcilesHistory)
                 localReconcile.Dispose();
-            
+
             reconcilesHistory.Clear();
         }
 
@@ -1432,7 +1435,7 @@ namespace FishNet.Object
         public void Reconcile_Reader<T>(PooledReader reader, ref T lastReconciledata, Channel channel) where T : IReconcileData
         {
             uint tick = (IsOwner) ? PredictionManager.ClientStateTick : PredictionManager.ServerStateTick;
-//#if !FISHNET_STABLE_MODE
+            //#if !FISHNET_STABLE_MODE
 #if DO_NOT_USE
             T newData = reader.ReadDeltaReconcile(lastReconciledata);
 #else

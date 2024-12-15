@@ -1,12 +1,13 @@
-﻿#if UNITY_2018_3_OR_NEWER
+#if UNITY_2018_3_OR_NEWER
 #define UNITY_SOCKET_FIX
 #endif
-using System.Runtime.InteropServices;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Threading;
+
 using LiteNetLib.Utils;
 
 namespace LiteNetLib
@@ -118,7 +119,7 @@ namespace LiteNetLib
             catch (Exception e)
             {
                 //protects socket receive thread
-                NetDebug.WriteError("[NM] SocketReceiveThread error: " + e );
+                NetDebug.WriteError("[NM] SocketReceiveThread error: " + e);
             }
         }
 
@@ -186,7 +187,7 @@ namespace LiteNetLib
                 catch (Exception e)
                 {
                     //protects socket receive thread
-                    NetDebug.WriteError("[NM] SocketReceiveThread error: " + e );
+                    NetDebug.WriteError("[NM] SocketReceiveThread error: " + e);
                 }
             }
 
@@ -205,8 +206,8 @@ namespace LiteNetLib
 
                 //NetDebug.WriteForce($"[R]Received data from {endPoint}, result: {packet.Size}");
                 //refresh temp Addr/Port
-                short family      = (short)((address[1] << 8) | address[0]);
-                tempEndPoint.Port =(ushort)((address[2] << 8) | address[3]);
+                short family = (short)((address[1] << 8) | address[0]);
+                tempEndPoint.Port = (ushort)((address[2] << 8) | address[3]);
                 if ((NativeSocket.UnixMode && family == NativeSocket.AF_INET6) || (!NativeSocket.UnixMode && (AddressFamily)family == AddressFamily.InterNetworkV6))
                 {
                     uint scope = unchecked((uint)(
@@ -321,7 +322,7 @@ namespace LiteNetLib
                 catch (Exception e)
                 {
                     //protects socket receive thread
-                    NetDebug.WriteError("[NM] SocketReceiveThread error: " + e );
+                    NetDebug.WriteError("[NM] SocketReceiveThread error: " + e);
                 }
             }
         }
@@ -345,7 +346,7 @@ namespace LiteNetLib
             if (!BindSocket(_udpSocketv4, new(addressIPv4, port)))
                 return false;
 
-            LocalPort = ((IPEndPoint) _udpSocketv4.LocalEndPoint).Port;
+            LocalPort = ((IPEndPoint)_udpSocketv4.LocalEndPoint).Port;
 
 #if UNITY_SOCKET_FIX
             if (_useSocketFix && _pausedSocketFix == null)
@@ -408,7 +409,7 @@ namespace LiteNetLib
             {
                 try
                 {
-                    socket.IOControl(SioUdpConnreset, new byte[] {0}, null);
+                    socket.IOControl(SioUdpConnreset, new byte[] { 0 }, null);
                 }
                 catch
                 {

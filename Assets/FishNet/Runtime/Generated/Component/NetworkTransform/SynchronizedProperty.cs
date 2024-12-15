@@ -1,4 +1,4 @@
-﻿namespace FishNet.Component.Transforming
+namespace FishNet.Component.Transforming
 {
     [System.Flags]
     public enum SynchronizedProperty : byte

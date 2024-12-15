@@ -1,4 +1,4 @@
-﻿namespace FishNet.Observing
+namespace FishNet.Observing
 {
     /// <summary>
     /// States which observer(s) can change to.

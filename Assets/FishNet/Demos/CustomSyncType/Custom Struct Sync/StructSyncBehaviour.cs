@@ -1,5 +1,6 @@
-﻿using FishNet.Object;
+using FishNet.Object;
 using FishNet.Object.Synchronizing;
+
 using UnityEngine;
 
 namespace FishNet.Example.CustomSyncObject
@@ -10,7 +11,7 @@ namespace FishNet.Example.CustomSyncObject
         /// <summary>
         /// Using my custom SyncType for Structy.
         /// </summary>
-        
+
         private readonly StructySync _structy = new();
 
         private void Awake()

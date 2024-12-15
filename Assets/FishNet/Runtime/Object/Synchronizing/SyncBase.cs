@@ -1,10 +1,12 @@
-﻿using System;
+using System;
+using System.Runtime.CompilerServices;
+
 using FishNet.CodeGenerating;
 using FishNet.Managing;
 using FishNet.Managing.Timing;
 using FishNet.Serializing;
 using FishNet.Transporting;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Object.Synchronizing.Internal
@@ -76,7 +78,7 @@ namespace FishNet.Object.Synchronizing.Internal
         /// <param name="channel"></param>
         internal void SetCurrentChannel(Channel channel) => _currentChannel = channel;
         #endregion
-        
+
         #region Private.
         /// <summary>
         /// Sync interval converted to ticks.
@@ -380,8 +382,8 @@ namespace FishNet.Object.Synchronizing.Internal
             _lastReadChangeId = id;
             return true;
         }
-        
-        
+
+
         /// <summary>
         /// Writes the readId for a change.
         /// </summary>
@@ -398,7 +400,7 @@ namespace FishNet.Object.Synchronizing.Internal
             {
                 rollOver = false;
             }
-            
+
             _lastWrittenChangeId++;
             writer.WriteBoolean(rollOver);
             writer.WriteUInt16(_lastWrittenChangeId);

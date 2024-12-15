@@ -1,8 +1,10 @@
-﻿using FishNet.Connection;
+using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
 using FishNet.Documenting;
 using FishNet.Object.Synchronizing.Internal;
 using FishNet.Serializing;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -86,7 +88,7 @@ namespace FishNet.Object
             }
         }
 
-        
+
         internal virtual void OnStartNetwork_Internal()
         {
             _onStartNetworkCalled = true;
@@ -101,7 +103,7 @@ namespace FishNet.Object
         public virtual void OnStartNetwork() { }
 
 
-        
+
         internal virtual void OnStopNetwork_Internal()
         {
             _onStopNetworkCalled = true;
@@ -116,7 +118,7 @@ namespace FishNet.Object
         public virtual void OnStopNetwork() { }
 
 
-        
+
         internal void OnStartServer_Internal()
         {
             OnStartServerCalled = true;
@@ -129,7 +131,7 @@ namespace FishNet.Object
         public virtual void OnStartServer() { }
 
 
-        
+
         internal void OnStopServer_Internal()
         {
             OnStartServerCalled = false;
@@ -142,7 +144,7 @@ namespace FishNet.Object
         public virtual void OnStopServer() { }
 
 
-        
+
         internal void OnOwnershipServer_Internal(NetworkConnection prevOwner)
         {
             ResetState_Prediction(true);
@@ -167,7 +169,7 @@ namespace FishNet.Object
         public virtual void OnDespawnServer(NetworkConnection connection) { }
 
 
-        
+
         internal void OnStartClient_Internal()
         {
             OnStartClientCalled = true;
@@ -179,7 +181,7 @@ namespace FishNet.Object
         public virtual void OnStartClient() { }
 
 
-        
+
         internal void OnStopClient_Internal()
         {
             OnStartClientCalled = false;
@@ -190,7 +192,7 @@ namespace FishNet.Object
         /// </summary>
         public virtual void OnStopClient() { }
 
-        
+
         internal void OnOwnershipClient_Internal(NetworkConnection prevOwner)
         {
             //If losing or gaining ownership then clear replicate cache.

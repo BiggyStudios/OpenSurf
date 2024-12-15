@@ -8,7 +8,7 @@ namespace Edgegap.Editor.Api.Models
     {
         /// <summary>Unity default - fastest; !works in WebGL.</summary>
         UDP,
-        
+
         /// <summary>Slower, but more reliable; works in WebGL.</summary>
         TCP,
 

@@ -1,6 +1,8 @@
+using System.IO;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
-using System.IO;
+
 using Unity.CompilationPipeline.Common.ILPostProcessing;
 
 namespace FishNet.CodeGenerating.ILCore

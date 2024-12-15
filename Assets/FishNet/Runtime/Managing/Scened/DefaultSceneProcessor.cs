@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
-using UnityScene = UnityEngine.SceneManagement.Scene;
-using System.Collections;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+
+using UnityEngine;
+
+using UnityScene = UnityEngine.SceneManagement.Scene;
+using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace FishNet.Managing.Scened
 {
@@ -67,7 +69,7 @@ namespace FishNet.Managing.Scened
         {
             AsyncOperation ao = UnitySceneManager.LoadSceneAsync(sceneName, parameters);
             LoadingAsyncOperations.Add(ao);
-            
+
             CurrentAsyncOperation = ao;
             CurrentAsyncOperation.allowSceneActivation = false;
         }
@@ -128,7 +130,7 @@ namespace FishNet.Managing.Scened
                 {
                     LoadingAsyncOperations[i].allowSceneActivation = true;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     base.SceneManager.NetworkManager.LogError($"An error occured while activating scenes. {e.Message}");
                 }

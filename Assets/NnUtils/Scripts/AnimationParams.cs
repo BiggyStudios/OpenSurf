@@ -1,4 +1,5 @@
 using System;
+
 using UnityEngine;
 
 namespace NnUtils.Scripts
@@ -11,13 +12,13 @@ namespace NnUtils.Scripts
         public bool AdditivePosition;
         public float PositionDuration;
         public Easings.Types PositionEasing;
-        
+
         [Header("Rotation")]
         public Vector3 Rotation;
         public bool AdditiveRotation;
         public float RotationDuration;
         public Easings.Types RotationEasing;
-        
+
         [Header("Scale")]
         public Vector3 Scale;
         public bool AdditiveScale;
@@ -62,17 +63,17 @@ namespace NnUtils.Scripts
             AdditivePosition = additivePosition;
             PositionDuration = positionDuration;
             PositionEasing = positionEasing;
-            
+
             Rotation = rotation;
             AdditiveRotation = additiveRotation;
             RotationDuration = rotationDuration;
             RotationEasing = rotationEasing;
-            
+
             Scale = scale;
             AdditiveScale = additiveScale;
             ScaleDuration = scaleDuration;
             ScaleEasing = scaleEasing;
-            
+
             Unscaled = unscaled;
         }
     }

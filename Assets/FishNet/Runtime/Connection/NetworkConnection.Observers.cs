@@ -1,5 +1,6 @@
-﻿using FishNet.Component.Observing;
+using FishNet.Component.Observing;
 using FishNet.Managing;
+
 using UnityEngine;
 
 namespace FishNet.Connection
@@ -77,7 +78,7 @@ namespace FishNet.Connection
                     _hashGridPosition = newPosition;
                     HashGridEntry = _hashGrid.GetGridEntry(newPosition);
                 }
-            }            
+            }
         }
 
         /// <summary>

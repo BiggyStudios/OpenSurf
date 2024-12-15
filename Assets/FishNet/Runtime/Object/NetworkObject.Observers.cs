@@ -1,11 +1,14 @@
-﻿using FishNet.Component.Observing;
+using System;
+using System.Collections.Generic;
+
+using FishNet.Component.Observing;
 using FishNet.Connection;
 using FishNet.Managing;
 using FishNet.Managing.Timing;
 using FishNet.Observing;
-using System;
-using System.Collections.Generic;
+
 using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -133,10 +136,10 @@ namespace FishNet.Object
         {
             if (!force && !NetworkObserver.UpdateHostVisibility)
                 return;
-            
+
             UpdateRenderVisibility(visible);
         }
-        
+
         /// <summary>
         /// Updates visibilites on renders without checks.
         /// </summary>

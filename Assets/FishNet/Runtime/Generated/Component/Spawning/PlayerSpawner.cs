@@ -1,7 +1,9 @@
-﻿using FishNet.Connection;
+using System;
+
+using FishNet.Connection;
 using FishNet.Managing;
 using FishNet.Object;
-using System;
+
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -68,7 +70,7 @@ namespace FishNet.Component.Spawning
             if (_networkManager != null)
                 _networkManager.SceneManager.OnClientLoadedStartScenes -= SceneManager_OnClientLoadedStartScenes;
         }
- 
+
 
         /// <summary>
         /// Initializes this script for use.

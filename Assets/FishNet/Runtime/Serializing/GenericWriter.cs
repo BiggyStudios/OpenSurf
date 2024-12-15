@@ -1,7 +1,8 @@
-using FishNet.Documenting;
-using FishNet.Utility;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+using FishNet.Utility;
 
 [assembly: InternalsVisibleTo(UtilityConstants.GENERATED_ASSEMBLY_NAME)]
 

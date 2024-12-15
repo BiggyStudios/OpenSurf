@@ -1,5 +1,6 @@
-﻿using FishNet.Connection;
+using FishNet.Connection;
 using FishNet.Object;
+
 using UnityEngine;
 
 namespace FishNet.Example.Scened

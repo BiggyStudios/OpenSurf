@@ -1,11 +1,14 @@
-﻿using FishNet.Connection;
+using System;
+using System.Collections.Generic;
+
+using FishNet.Connection;
 using FishNet.Managing.Object;
 using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Utility.Extension;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Scripting;
 
@@ -431,7 +434,7 @@ namespace FishNet.Managing.Client
                                 behaviours[behaviourId].ReadSyncTypesForSpawn(reader);
                             }
                         }
- 
+
                         /* Only continue with the initialization if it wasn't initialized
                          * early to prevent a despawn conflict. */
                         bool canInitialize = (!_conflictingDespawns.Contains(cnob.ObjectId) || !_iteratedSpawns.Contains(cnob.NetworkObject));

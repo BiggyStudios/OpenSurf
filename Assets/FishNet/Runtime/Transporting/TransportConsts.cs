@@ -1,10 +1,12 @@
-﻿using FishNet.Managing;
 using System;
+
+using FishNet.Managing;
+
 using UnityEngine;
 
 namespace FishNet.Transporting
 {
-    
+
     public static class TransportConsts
     {
         /// <summary>

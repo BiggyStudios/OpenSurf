@@ -1,4 +1,4 @@
-﻿namespace FishNet.CodeGenerating.Helping
+namespace FishNet.CodeGenerating.Helping
 {
     public enum SyncType
     {

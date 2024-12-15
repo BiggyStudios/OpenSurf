@@ -1,6 +1,8 @@
+using System;
+
 using FishNet.Connection;
 using FishNet.Managing;
-using System;
+
 using UnityEngine;
 
 namespace FishNet.Transporting.Yak
@@ -28,12 +30,12 @@ namespace FishNet.Transporting.Yak
 
         public override void Initialize(NetworkManager networkManager, int transportIndex)
         {
-            
+
         }
 
         private void OnDestroy()
         {
-            
+
         }
 
         #region ConnectionStates.
@@ -66,7 +68,7 @@ namespace FishNet.Transporting.Yak
         /// <param name="server">True if getting ConnectionState for the server.</param>
         public override LocalConnectionState GetConnectionState(bool server)
         {
-            
+
             return LocalConnectionState.Stopped;
         }
         /// <summary>
@@ -83,7 +85,7 @@ namespace FishNet.Transporting.Yak
         /// <param name="connectionStateArgs"></param>
         public override void HandleClientConnectionState(ClientConnectionStateArgs connectionStateArgs)
         {
-            
+
         }
         /// <summary>
         /// Handles a ConnectionStateArgs for the local server.
@@ -91,7 +93,7 @@ namespace FishNet.Transporting.Yak
         /// <param name="connectionStateArgs"></param>
         public override void HandleServerConnectionState(ServerConnectionStateArgs connectionStateArgs)
         {
-            
+
         }
         /// <summary>
         /// Handles a ConnectionStateArgs for a remote client.
@@ -99,7 +101,7 @@ namespace FishNet.Transporting.Yak
         /// <param name="connectionStateArgs"></param>
         public override void HandleRemoteConnectionState(RemoteConnectionStateArgs connectionStateArgs)
         {
-            
+
         }
         #endregion
 
@@ -110,7 +112,7 @@ namespace FishNet.Transporting.Yak
         /// <param name="server">True to process data received on the server.</param>
         public override void IterateIncoming(bool server)
         {
-            
+
         }
 
         /// <summary>
@@ -155,7 +157,7 @@ namespace FishNet.Transporting.Yak
         /// /// <param name="segment">Data to send.</param>
         public override void SendToServer(byte channelId, ArraySegment<byte> segment)
         {
-            
+
         }
         /// <summary>
         /// Sends data to a client.
@@ -165,7 +167,7 @@ namespace FishNet.Transporting.Yak
         /// <param name="connectionId"></param>
         public override void SendToClient(byte channelId, ArraySegment<byte> segment, int connectionId)
         {
-            
+
         }
         #endregion
 
@@ -245,7 +247,7 @@ namespace FishNet.Transporting.Yak
         /// </summary>
         public override void Shutdown()
         {
-            
+
         }
 
         #region Privates.
@@ -255,7 +257,7 @@ namespace FishNet.Transporting.Yak
         /// <returns>True if there were no blocks. A true response does not promise a socket will or has connected.</returns>
         private bool StartServer()
         {
-            
+
 
             return (_server == null) ? false : _server.StartConnection();
         }
@@ -275,7 +277,7 @@ namespace FishNet.Transporting.Yak
         /// <returns>True if there were no blocks. A true response does not promise a socket will or has connected.</returns>
         private bool StartClient()
         {
-            
+
             return true;
         }
 
@@ -284,7 +286,7 @@ namespace FishNet.Transporting.Yak
         /// </summary>
         private bool StopClient()
         {
-            
+
             return false;
         }
 

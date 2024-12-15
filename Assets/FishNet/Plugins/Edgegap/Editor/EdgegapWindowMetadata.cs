@@ -1,4 +1,5 @@
 using System;
+
 using Edgegap.Editor.Api.Models;
 
 namespace Edgegap.Editor
@@ -21,20 +22,20 @@ namespace Edgegap.Editor
             Debug,
             Error,
         }
-        
+
         /// <summary>
         /// Set to Debug to show more logs. Default `Error`.
         /// - Error level includes "potentially-intentional" (!fatal) errors logged with Debug.Log
         /// - TODO: Move opt to UI?
         /// </summary>
         public const LogLevel LOG_LEVEL = LogLevel.Error;
-        
+
         /// <summary>
         /// Set to show a debug button at the top-right for arbitrary testing.
         /// Default enables groups. Default `false`.
         /// </summary>
         public const bool SHOW_DEBUG_BTN = false;
-        
+
         /// <summary>
         /// When running a Docker-based "Build & Push" flow, skip building the Unity server binary
         /// (great for testing push flow). Default false.
@@ -78,10 +79,10 @@ namespace Edgegap.Editor
         #region Colors
         /// <summary>Earthy lime green</summary>
         public const string SUCCESS_COLOR_HEX = "#8AEE8C";
-        
+
         /// <summary>Calming light orange</summary>
         public const string WARN_COLOR_HEX = "#EEC58A";
-        
+
         /// <summary>Vivid blood orange</summary>
         public const string FAIL_COLOR_HEX = "#EE9A8A";
 
@@ -92,17 +93,17 @@ namespace Edgegap.Editor
         {
             /// <summary>CornYellow</summary>
             Processing,
-            
+
             /// <summary>EarthyLimeGreen</summary>
             Success,
-            
+
             /// <summary>CalmingLightOrange</summary>
             Warn,
-                
+
             /// <summary>VividBloodOrange</summary>
             Error,
         }
-        
+
         /// <returns>Wraps string in color rich text</returns>
         public static string WrapRichTextInColor(string str, StatusColors statusColor)
         {
@@ -121,7 +122,7 @@ namespace Edgegap.Editor
             }
         }
         #endregion // Colors
-        
+
         #region Player Pref Key Ids for persistence
         /// <summary>Cached as base64</summary>
         public const string API_TOKEN_KEY_STR = "ApiToken";
@@ -130,14 +131,14 @@ namespace Edgegap.Editor
         public const string DEPLOYMENT_CONNECTION_STATUS_KEY_STR = "DeploymentsConnectionStatusLabel";
         public const string CONTAINER_REGISTRY_TRANSPORT_TYPE_ENUM_KEY_STR = "ContainerRegistryProtocolTypeEnum";
         #endregion // Editor Pref Key Ids for persistence
-        
+
         #region UI Element Ids
         public const string DEBUG_BTN_ID = "DebugBtn";
         public const string API_TOKEN_TXT_ID = "ApiTokenMaskedTxt";
         public const string API_TOKEN_VERIFY_BTN_ID = "ApiTokenVerifyPurpleBtn";
         public const string API_TOKEN_GET_BTN_ID = "ApiTokenGetBtn";
         public const string POST_AUTH_CONTAINER_ID = "PostAuthContainer";
-            
+
         public const string APP_INFO_FOLDOUT_ID = "ApplicationInfoFoldout";
         public const string APP_NAME_TXT_ID = "ApplicationNameTxt";
         public const string APP_LOAD_EXISTING_BTN_ID = "AppLoadExistingBtn";
@@ -157,7 +158,7 @@ namespace Edgegap.Editor
         public const string CONTAINER_TOKEN_TXT_ID = "ContainerTokenTxt";
         public const string CONTAINER_BUILD_AND_PUSH_BTN_ID = "ContainerBuildAndPushBtn";
         public const string CONTAINER_BUILD_AND_PUSH_RESULT_LABEL_ID = "ContainerBuildAndPushResultLabel";
-            
+
         public const string DEPLOYMENTS_FOLDOUT_ID = "DeploymentsFoldout";
         public const string DEPLOYMENTS_REFRESH_BTN_ID = "DeploymentsRefreshBtn";
         public const string DEPLOYMENTS_CREATE_BTN_ID = "DeploymentsCreateBtn";
@@ -168,11 +169,11 @@ namespace Edgegap.Editor
         public const string DEPLOYMENTS_CONNECTION_STATUS_LABEL_ID = "DeploymentsConnectionStatusLabel"; // Dynamic
         public const string DEPLOYMENTS_CONNECTION_SERVER_ACTION_STOP_BTN_ID = "DeploymentsConnectionServerStopBtn";
         public const string DEPLOYMENTS_CONNECTION_CONTAINER_LOGS_BTN_ID = "DeploymentsConnectionContainerLogsBtn";
-            
+
         public const string FOOTER_DOCUMENTATION_BTN_ID = "FooterDocumentationBtn";
         public const string FOOTER_NEED_MORE_GAME_SERVERS_BTN_ID = "FooterNeedMoreGameServersBtn";
         #endregion // UI Element Ids
-        
+
 
 
         //[Obsolete("Hard-coded; not from UI. TODO: Get from UI")] // MIRROR CHANGE: comment this out to avoid import warnings

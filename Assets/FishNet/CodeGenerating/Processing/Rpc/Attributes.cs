@@ -1,16 +1,18 @@
-﻿using FishNet.CodeGenerating.Helping;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.Connection;
 using FishNet.Object.Helping;
+
 using MonoFN.Cecil;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace FishNet.CodeGenerating.Processing.Rpc
 {
     internal class Attributes : CodegenBase
     {
-        
+
         /// <summary>
         /// Returns if methodDef has any Rpc attribute.
         /// </summary>

@@ -1,4 +1,4 @@
-﻿
+
 namespace FishNet.Observing
 {
     /// <summary>

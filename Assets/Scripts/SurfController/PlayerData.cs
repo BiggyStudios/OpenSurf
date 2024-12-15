@@ -1,5 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace P90brush
@@ -17,11 +18,13 @@ namespace P90brush
 
 
 
-        public bool IsGrounded() {
+        public bool IsGrounded()
+        {
             return GroundObject != null;
         }
 
-        public bool IsHooked() {
+        public bool IsHooked()
+        {
             return HookedPosition != Vector3.zero;
         }
     }

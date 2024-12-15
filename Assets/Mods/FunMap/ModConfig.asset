@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7875c7fcd3d107c88ed8e8baafb628, type: 3}
+  m_Name: ModConfig
+  m_EditorClassIdentifier: 
+  ModID: com.biggy.funmap
+  ModName: Fun Map
+  Version: 1.0.0
+  ModType: 0
+  MapPrefab: {fileID: 9128670752754964119, guid: 838259d6fe90db436b980b8c73b7f397, type: 3}
+  MapMovementConfig:
+    Gravity: 24
+    AutoBhop: 1
+    AirCap: 2000
+    AirAccel: 1200
+    Accel: 25
+    Friction: 4
+    AirFriction: 0.25
+    StopSpeed: 1.905
+    JumpPower: 8
+    JumpHeight: 1.5
+    MaxSpeed: 200
+    MaxVelocity: 2000
+    StepSize: 0.5
+    XSens: 20
+    YSens: 20
+    MoveLeft: 97
+    MoveRight: 100
+    MoveForward: 119
+    MoveBack: 115
+    JumpButton: 32
+    ResetButton: 114
+    HookButton: Fire1
+    HookRetractButton: 304
+    SlowMotion: 306
+    ClampAirSpeed: 0
+    Bounce: 0

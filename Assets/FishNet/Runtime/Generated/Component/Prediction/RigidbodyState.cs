@@ -1,5 +1,6 @@
-﻿using FishNet.CodeGenerating;
+using FishNet.CodeGenerating;
 using FishNet.Serializing;
+
 using UnityEngine;
 using UnityEngine.Scripting;
 
@@ -8,7 +9,7 @@ namespace FishNet.Component.Prediction
     [UseGlobalCustomSerializer]
     [Preserve]
     public struct RigidbodyState
-    {        
+    {
         public Vector3 Position;
         public Quaternion Rotation;
         public bool IsKinematic;

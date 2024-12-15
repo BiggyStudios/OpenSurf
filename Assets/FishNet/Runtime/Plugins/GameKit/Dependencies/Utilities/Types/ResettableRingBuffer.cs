@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities.Types
@@ -57,7 +58,7 @@ namespace GameKit.Dependencies.Utilities.Types
             /// <summary>
             /// Number of entries read during the enumeration.
             /// </summary>
-            private int _entriesEnumerated;            
+            private int _entriesEnumerated;
             /// <summary>
             /// Number of entries read during the enumeration.
             /// </summary>
@@ -66,7 +67,7 @@ namespace GameKit.Dependencies.Utilities.Types
             /// Start index of enumerations.
             /// </summary>
             private int _startIndex;
-           /// <summary>
+            /// <summary>
             /// True if currently enumerating.
             /// </summary>
             private bool _enumerating => (_enumeratedRingBuffer != null);
@@ -177,8 +178,8 @@ namespace GameKit.Dependencies.Utilities.Types
         /// </summary>
         private bool _atCapacity => (_written == Capacity);
         #endregion
-        
-        
+
+
         #region Consts.
         /// <summary>
         /// Default capacity when none is psecified.
@@ -186,7 +187,7 @@ namespace GameKit.Dependencies.Utilities.Types
         public const int DEFAULT_CAPACITY = 60;
         #endregion
 
-        public ResettableRingBuffer() 
+        public ResettableRingBuffer()
         {
             Initialize(DEFAULT_CAPACITY);
         }
@@ -223,7 +224,7 @@ namespace GameKit.Dependencies.Utilities.Types
             void GetNewCollection() => Collection = ArrayPool<T>.Shared.Rent(capacity);
 
         }
-        
+
         /// <summary>
         /// Initializes with default capacity.
         /// </summary>
@@ -470,8 +471,8 @@ namespace GameKit.Dependencies.Utilities.Types
         }
 
         public void InitializeState() { }
-        
-        
+
+
         /// <summary>
         /// Returns Enumerator for the collection.
         /// </summary>

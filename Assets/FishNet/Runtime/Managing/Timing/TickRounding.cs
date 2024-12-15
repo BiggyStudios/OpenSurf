@@ -1,4 +1,4 @@
-﻿namespace FishNet.Managing.Timing
+namespace FishNet.Managing.Timing
 {
     /// <summary>
     /// How ticks are rounded when using time.

@@ -1,9 +1,10 @@
 using System;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities
 {
-     public static class ColliderExtensions
+    public static class ColliderExtensions
     {
         public static void GetBoxOverlapParams(this BoxCollider boxCollider, out Vector3 center, out Vector3 halfExtents)
         {

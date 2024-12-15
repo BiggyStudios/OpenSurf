@@ -1,7 +1,10 @@
 using System;
+
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
+
 using TMPro;
+
 using UnityEngine;
 
 public class PlayerTimer : NetworkBehaviour
@@ -44,7 +47,7 @@ public class PlayerTimer : NetworkBehaviour
                 PlayerManager.Instance.Restart();
             }
         }
-            
+
     }
 
     private void CheckStart()

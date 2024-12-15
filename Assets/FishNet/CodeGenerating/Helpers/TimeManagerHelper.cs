@@ -1,6 +1,9 @@
-﻿using FishNet.Managing.Timing;
-using MonoFN.Cecil;
 using System;
+
+using FishNet.Managing.Timing;
+
+using MonoFN.Cecil;
+
 using UnityEngine;
 
 namespace FishNet.CodeGenerating.Helping

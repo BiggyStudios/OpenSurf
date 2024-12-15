@@ -1,7 +1,9 @@
-﻿using MonoFN.Cecil;
-using MonoFN.Cecil.Rocks;
 using System;
 using System.Collections.Generic;
+
+using MonoFN.Cecil;
+using MonoFN.Cecil.Rocks;
+
 using UnityEngine;
 
 namespace FishNet.CodeGenerating.Helping.Extension

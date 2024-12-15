@@ -1,7 +1,9 @@
-﻿using FishNet.Component.Prediction;
-using MonoFN.Cecil;
 using System;
 using System.Reflection;
+
+using FishNet.Component.Prediction;
+
+using MonoFN.Cecil;
 
 namespace FishNet.CodeGenerating.Helping
 {

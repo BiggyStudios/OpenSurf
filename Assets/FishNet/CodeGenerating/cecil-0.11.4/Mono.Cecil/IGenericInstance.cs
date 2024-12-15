@@ -8,40 +8,45 @@
 // Licensed under the MIT/X11 license.
 //
 
-using MonoFN.Collections.Generic;
 using System.Text;
 
-namespace MonoFN.Cecil {
+using MonoFN.Collections.Generic;
 
-	public interface IGenericInstance : IMetadataTokenProvider {
+namespace MonoFN.Cecil
+{
 
-		bool HasGenericArguments { get; }
-		Collection<TypeReference> GenericArguments { get; }
-	}
+    public interface IGenericInstance : IMetadataTokenProvider
+    {
 
-	static partial class Mixin {
+        bool HasGenericArguments { get; }
+        Collection<TypeReference> GenericArguments { get; }
+    }
 
-		public static bool ContainsGenericParameter (this IGenericInstance self)
-		{
-			var arguments = self.GenericArguments;
+    static partial class Mixin
+    {
 
-			for (int i = 0; i < arguments.Count; i++)
-				if (arguments [i].ContainsGenericParameter)
-					return true;
+        public static bool ContainsGenericParameter(this IGenericInstance self)
+        {
+            var arguments = self.GenericArguments;
 
-			return false;
-		}
+            for (int i = 0; i < arguments.Count; i++)
+                if (arguments[i].ContainsGenericParameter)
+                    return true;
 
-		public static void GenericInstanceFullName (this IGenericInstance self, StringBuilder builder)
-		{
-			builder.Append ("<");
-			var arguments = self.GenericArguments;
-			for (int i = 0; i < arguments.Count; i++) {
-				if (i > 0)
-					builder.Append (",");
-				builder.Append (arguments [i].FullName);
-			}
-			builder.Append (">");
-		}
-	}
+            return false;
+        }
+
+        public static void GenericInstanceFullName(this IGenericInstance self, StringBuilder builder)
+        {
+            builder.Append("<");
+            var arguments = self.GenericArguments;
+            for (int i = 0; i < arguments.Count; i++)
+            {
+                if (i > 0)
+                    builder.Append(",");
+                builder.Append(arguments[i].FullName);
+            }
+            builder.Append(">");
+        }
+    }
 }

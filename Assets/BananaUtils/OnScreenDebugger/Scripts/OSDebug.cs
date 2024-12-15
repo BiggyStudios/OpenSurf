@@ -36,18 +36,18 @@ namespace BananaUtils.OnScreenDebugger.Scripts
         public static void LogWarning(params object[] message) => LogWarning(5f, message);
         public static void LogError(params object[] message) => LogError(5f, message);
 
-        public static void Log(float messageTimeOnScreen, params object[] message) => 
+        public static void Log(float messageTimeOnScreen, params object[] message) =>
             LogMessage(messageTimeOnScreen, Color.white, 18, message);
 
-        public static void LogWarning(float messageTimeOnScreen, params object[] message) => 
+        public static void LogWarning(float messageTimeOnScreen, params object[] message) =>
             LogMessage(messageTimeOnScreen, Color.yellow, 18, message);
 
-        public static void LogError(float messageTimeOnScreen, params object[] message) => 
+        public static void LogError(float messageTimeOnScreen, params object[] message) =>
             LogMessage(messageTimeOnScreen, Color.red, 18, message);
 
         public static void LogMessage(float messageTimeOnScreen, Color32 color, float fontSize, params object[] message)
         {
-            var debugMessage = 
+            var debugMessage =
                 Instantiate(Debug._debugMessage, Debug._debugMessages.transform);
             debugMessage.GetComponent<DebugMessageScript>().AssignValues(string.Join("", message), color, messageTimeOnScreen, fontSize);
             debugMessage.transform.SetParent(Debug._debugMessages.transform);

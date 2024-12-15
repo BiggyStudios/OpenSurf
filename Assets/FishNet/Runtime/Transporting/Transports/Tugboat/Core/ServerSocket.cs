@@ -1,14 +1,17 @@
-using FishNet.Connection;
-using FishNet.Managing;
-using FishNet.Managing.Logging;
-using LiteNetLib;
-using LiteNetLib.Layers;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+using FishNet.Connection;
+using FishNet.Managing;
+using FishNet.Managing.Logging;
+
+using LiteNetLib;
+using LiteNetLib.Layers;
+
 using UnityEngine;
 
 namespace FishNet.Transporting.Tugboat.Server
@@ -129,7 +132,7 @@ namespace FishNet.Transporting.Tugboat.Server
         /// <summary>
         /// Polls the socket for new data.
         /// </summary>
-        
+
         internal void PollSocket()
         {
             base.PollSocket(base.NetManager);
@@ -138,7 +141,7 @@ namespace FishNet.Transporting.Tugboat.Server
         /// <summary>
         /// Threaded operation to process server actions.
         /// </summary>
-        
+
         private void ThreadedSocket()
         {
             EventBasedNetListener listener = new();
@@ -378,7 +381,7 @@ namespace FishNet.Transporting.Tugboat.Server
         /// <summary>
         /// Called when data is received from a peer.
         /// </summary>
-        
+
         private void Listener_NetworkReceiveEvent(NetPeer fromPeer, NetPacketReader reader, byte channel, DeliveryMethod deliveryMethod)
         {
             //If over the MTU.
@@ -415,7 +418,7 @@ namespace FishNet.Transporting.Tugboat.Server
         /// <summary>
         /// Dequeues and processes outgoing.
         /// </summary>
-        
+
         private void DequeueOutgoing()
         {
             if (base.GetConnectionState() != LocalConnectionState.Started || base.NetManager == null)
@@ -464,7 +467,7 @@ namespace FishNet.Transporting.Tugboat.Server
         /// <summary>
         /// Allows for Outgoing queue to be iterated.
         /// </summary>
-        
+
         internal void IterateOutgoing()
         {
             DequeueOutgoing();
@@ -473,7 +476,7 @@ namespace FishNet.Transporting.Tugboat.Server
         /// <summary>
         /// Iterates the Incoming queue.
         /// </summary>
-        
+
         internal void IterateIncoming()
         {
             /* Run local connection states first so we can begin
@@ -526,7 +529,7 @@ namespace FishNet.Transporting.Tugboat.Server
         /// <summary>
         /// Sends a packet to a single, or all clients.
         /// </summary>
-        
+
         internal void SendToClient(byte channelId, ArraySegment<byte> segment, int connectionId)
         {
             Send(ref _outgoing, channelId, segment, connectionId, _mtu);

@@ -1,10 +1,11 @@
-﻿#if !FISHNET_STABLE_MODE
+#if !FISHNET_STABLE_MODE
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.CodeGenerating;
 using FishNet.Documenting;
 using FishNet.Object.Synchronizing.Internal;
 using FishNet.Serializing;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace FishNet.Object.Synchronizing
 {
@@ -260,10 +261,10 @@ namespace FishNet.Object.Synchronizing
                 if (op == SyncStopwatchOperation.Start)
                 {
                     float elapsed = reader.ReadSingle();
-                    
+
                     if (canModifyValues)
                         Elapsed = elapsed;
-                    
+
                     if (newChangeId)
                         InvokeOnChange(op, elapsed, asServer);
                 }
@@ -271,17 +272,17 @@ namespace FishNet.Object.Synchronizing
                 {
                     if (canModifyValues)
                         Paused = true;
-                    
+
                     if (newChangeId)
                         InvokeOnChange(op, -1f, asServer);
                 }
                 else if (op == SyncStopwatchOperation.PauseUpdated)
                 {
                     float prev = reader.ReadSingle();
-                    
+
                     if (canModifyValues)
                         Paused = true;
-                    
+
                     if (newChangeId)
                         InvokeOnChange(op, prev, asServer);
                 }
@@ -289,7 +290,7 @@ namespace FishNet.Object.Synchronizing
                 {
                     if (canModifyValues)
                         Paused = false;
-                    
+
                     if (newChangeId)
                         InvokeOnChange(op, -1f, asServer);
                 }
@@ -297,7 +298,7 @@ namespace FishNet.Object.Synchronizing
                 {
                     if (canModifyValues)
                         StopStopwatch_Internal(asServer);
-                    
+
                     if (newChangeId)
                         InvokeOnChange(op, -1f, false);
                 }
@@ -306,7 +307,7 @@ namespace FishNet.Object.Synchronizing
                     float prev = reader.ReadSingle();
                     if (canModifyValues)
                         StopStopwatch_Internal(asServer);
-                    
+
                     if (newChangeId)
                         InvokeOnChange(op, prev, asServer);
                 }

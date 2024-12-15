@@ -1,4 +1,4 @@
-﻿#if FISHNET_STABLE_MODE
+#if FISHNET_STABLE_MODE
 using FishNet.CodeGenerating;
 using FishNet.Documenting;
 using FishNet.Object.Synchronizing.Internal;

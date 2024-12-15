@@ -1,6 +1,8 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using UnityEditor;
+
 using UnityEngine;
+
 using static FishNet.Component.ColliderRollback.ColliderRollback;
 
 namespace FishNet.Component.ColliderRollback

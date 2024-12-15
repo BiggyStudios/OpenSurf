@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities.Types
@@ -57,7 +58,7 @@ namespace GameKit.Dependencies.Utilities.Types
                 //if none are written then return.
                 if (c.Count == 0)
                     return;
-                
+
                 _entriesEnumerated = 0;
                 _startIndex = c.GetRealIndex(0);
                 _enumeratedRingBuffer = c;
@@ -419,7 +420,7 @@ namespace GameKit.Dependencies.Utilities.Types
             return _enumerator;
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator(); 
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

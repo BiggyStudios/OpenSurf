@@ -1,10 +1,12 @@
-﻿using FishNet.CodeGenerating;
+using System.Runtime.CompilerServices;
+
+using FishNet.CodeGenerating;
 using FishNet.Documenting;
+using FishNet.Managing;
 using FishNet.Managing.Transporting;
 using FishNet.Serializing.Helping;
 using FishNet.Utility;
-using System.Runtime.CompilerServices;
-using FishNet.Managing;
+
 using UnityEngine;
 
 [assembly: InternalsVisibleTo(UtilityConstants.CODEGEN_ASSEMBLY_NAME)]
@@ -107,7 +109,7 @@ namespace FishNet.Object
             }
             else
             {
-                if (!_initializedOnceClient && nob.EnablePrediction && _usesPrediction) 
+                if (!_initializedOnceClient && nob.EnablePrediction && _usesPrediction)
                     nob.RegisterPredictionBehaviourOnce(this);
 
                 _initializedOnceClient = true;

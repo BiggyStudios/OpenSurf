@@ -1,12 +1,15 @@
-using FishNet.Managing;
-using FishNet.Managing.Logging;
-using LiteNetLib;
-using LiteNetLib.Layers;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+using FishNet.Managing;
+using FishNet.Managing.Logging;
+
+using LiteNetLib;
+using LiteNetLib.Layers;
+
 using UnityEngine;
 
 namespace FishNet.Transporting.Tugboat.Client
@@ -89,7 +92,7 @@ namespace FishNet.Transporting.Tugboat.Client
         /// <summary>
         /// Polls the socket for new data.
         /// </summary>
-        
+
         internal void PollSocket()
         {
             base.PollSocket(base.NetManager);
@@ -181,7 +184,7 @@ namespace FishNet.Transporting.Tugboat.Client
         /// <summary>
         /// Resets queues.
         /// </summary>
-        
+
         private void ResetQueues()
         {
             base.ClearGenericQueue(ref _localConnectionStates);

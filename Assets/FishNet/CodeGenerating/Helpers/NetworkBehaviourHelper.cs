@@ -1,4 +1,9 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
+using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.CodeGenerating.Processing;
 using FishNet.Configuring;
@@ -7,12 +12,9 @@ using FishNet.Object;
 using FishNet.Object.Delegating;
 using FishNet.Object.Helping;
 using FishNet.Object.Prediction.Delegating;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace FishNet.CodeGenerating.Helping
 {
@@ -213,7 +215,7 @@ namespace FishNet.CodeGenerating.Helping
         /// <param name="rpcType"></param>
         internal void CreateRpcDelegate(bool runLocally, TypeDefinition typeDef, MethodDefinition readerMethodDef, RpcType rpcType, uint methodHash, CustomAttribute rpcAttribute)
         {
-            
+
 
             MethodDefinition methodDef = typeDef.GetMethod(NetworkBehaviourProcessor.NETWORKINITIALIZE_EARLY_INTERNAL_NAME);
             ILProcessor processor = methodDef.Body.GetILProcessor();

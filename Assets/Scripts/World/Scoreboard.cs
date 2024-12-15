@@ -1,11 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using FishNet.Object;
-using BNNUtils;
-using TMPro;
-using UnityEngine;
 using System.Linq;
+
+using BNNUtils;
+
+using FishNet.Object;
+
+using TMPro;
+
+using UnityEngine;
 
 public class Scoreboard : NetworkBehaviour
 {
@@ -17,7 +21,7 @@ public class Scoreboard : NetworkBehaviour
 
     private Dictionary<string, ScoreData> _playerScores = new Dictionary<string, ScoreData>();
     private Dictionary<string, ScoreboardItemScript> _scoreboardItems = new Dictionary<string, ScoreboardItemScript>();
-    
+
     private void Awake()
     {
         if (Instance == null)

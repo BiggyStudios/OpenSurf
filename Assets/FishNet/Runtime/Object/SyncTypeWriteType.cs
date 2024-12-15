@@ -1,4 +1,4 @@
-﻿// namespace FishNet.Object //Remove V5
+// namespace FishNet.Object //Remove V5
 // {
 //
 //     internal enum SyncTypeWriteType

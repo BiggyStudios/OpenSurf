@@ -1,6 +1,9 @@
-﻿using FishNet.Utility.Extension;
-using GameKit.Dependencies.Utilities;
 using System.Runtime.CompilerServices;
+
+using FishNet.Utility.Extension;
+
+using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Object.Prediction
@@ -131,7 +134,7 @@ namespace FishNet.Object.Prediction
         /// <summary>
         /// Moves transform to target values.
         /// </summary>
-        
+
         private void MoveToTarget()
         {
             _moveRates.MoveLocalToTarget(_graphicalObject, _gfxInitializedLocalValues, Time.deltaTime);

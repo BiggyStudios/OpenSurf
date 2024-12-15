@@ -1,9 +1,10 @@
-﻿using FishNet.Connection;
+using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
 using FishNet.Documenting;
 using FishNet.Serializing;
 using FishNet.Transporting;
 using FishNet.Utility;
-using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo(UtilityConstants.CODEGEN_ASSEMBLY_NAME)]
 namespace FishNet.Object.Prediction.Delegating

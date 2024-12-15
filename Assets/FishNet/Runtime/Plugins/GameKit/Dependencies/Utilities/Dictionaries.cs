@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace GameKit.Dependencies.Utilities
 {
@@ -47,7 +47,7 @@ namespace GameKit.Dependencies.Utilities
             foreach (TValue item in dict.Values)
                 result.Add(item);
         }
-        
+
         /// <summary>
         /// Clears a collection and populates it with this dictionaries keys.
         /// </summary>

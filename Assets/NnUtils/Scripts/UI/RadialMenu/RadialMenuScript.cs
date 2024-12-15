@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using TMPro;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +18,7 @@ namespace NnUtils.Scripts.UI.RadialMenu
         [SerializeField] private Image _hoveredImage;
 
         [Header("Values")]
-        [Range(0, 1)] [SerializeField] private float _itemDistance = 0.5f;
+        [Range(0, 1)][SerializeField] private float _itemDistance = 0.5f;
 
         [Header("Animation")]
         [SerializeField] private bool _animateOnOpen = true;
@@ -26,7 +28,7 @@ namespace NnUtils.Scripts.UI.RadialMenu
         [SerializeField] private Vector3 _startScale;
         [SerializeField] private AnimationParams _openAnimationParams;
         [SerializeField] private AnimationParams _closeAnimationParams;
-        
+
         [Header("Item Animation")]
         [SerializeField] private bool _overwriteOpenItemAnimation = true;
         [SerializeField] private bool _overwriteCloseItemAnimation = true;
@@ -66,7 +68,7 @@ namespace NnUtils.Scripts.UI.RadialMenu
             }
         }
         public Action<int> OnHoveredIndexChanged;
-        
+
         private RadialMenuItemScript _hovered;
         public RadialMenuItemScript Hovered
         {
@@ -96,7 +98,7 @@ namespace NnUtils.Scripts.UI.RadialMenu
             }
         }
         public Action<int> OnSelectedIndexChanged;
-        
+
         private RadialMenuItemScript _selected;
         public RadialMenuItemScript Selected
         {
@@ -108,11 +110,11 @@ namespace NnUtils.Scripts.UI.RadialMenu
             }
         }
         public Action<RadialMenuItemScript> OnSelectedChanged;
-        
+
         public Action<RadialMenuItemScript> OnClicked;
         public Action OnClosed;
         #endregion
-        
+
         private void Awake()
         {
             if (_animateOnOpen)
@@ -138,10 +140,10 @@ namespace NnUtils.Scripts.UI.RadialMenu
         {
             foreach (var item in _radialMenuItems) item.Destroy();
             _radialMenuItems.Clear();
-            
+
             ItemCount = content.Items.Count;
             var menuSize = _itemsParent.rect.height / 2;
-            
+
             for (int i = 0; i < ItemCount; i++)
             {
                 var angle = 450 - (_anglePerItem * i) - (_anglePerItem / 2f);
@@ -196,6 +198,6 @@ namespace NnUtils.Scripts.UI.RadialMenu
             Destroy(gameObject);
             _closeRoutine = null;
         }
-        
+
     }
 }

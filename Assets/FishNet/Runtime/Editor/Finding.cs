@@ -1,7 +1,10 @@
-﻿#if UNITY_EDITOR
-using FishNet.Utility;
+#if UNITY_EDITOR
 using System.Collections.Generic;
+
+using FishNet.Utility;
+
 using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

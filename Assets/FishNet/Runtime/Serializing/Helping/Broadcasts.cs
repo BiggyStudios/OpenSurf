@@ -1,10 +1,12 @@
-﻿using FishNet.Connection;
+using System;
+using System.Collections.Generic;
+
+using FishNet.Connection;
 using FishNet.Managing;
 using FishNet.Serializing;
 using FishNet.Transporting;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
 
 namespace FishNet.Broadcast.Helping
 {

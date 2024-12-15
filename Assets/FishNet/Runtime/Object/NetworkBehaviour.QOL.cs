@@ -1,4 +1,8 @@
-﻿using FishNet.CodeAnalysis.Annotations;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+using FishNet.CodeAnalysis.Annotations;
 using FishNet.Component.ColliderRollback;
 using FishNet.Connection;
 using FishNet.Managing;
@@ -10,9 +14,7 @@ using FishNet.Managing.Server;
 using FishNet.Managing.Timing;
 using FishNet.Managing.Transporting;
 using FishNet.Observing;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -142,7 +144,7 @@ namespace FishNet.Object
         /// </summary>
         /// <param name="value">New IsNetworked value.</param>
         public void SetIsNetworked(bool value) => _networkObjectCache.SetIsNetworked(value);
-        
+
         /// <summary>
         /// True if a reconcile is occuring on the PredictionManager. Note the difference between this and IsBehaviourReconciling.
         /// </summary>
@@ -275,18 +277,18 @@ namespace FishNet.Object
         /// <summary>
         /// Removes ownership from all clients.
         /// </summary>
-        
+
         public void RemoveOwnership() => _networkObjectCache.RemoveOwnership();
         /// <summary>
         /// Gives ownership to newOwner.
         /// </summary>
-        
+
         public void GiveOwnership(NetworkConnection newOwner) => _networkObjectCache.GiveOwnership(newOwner, asServer: true, includeNested: false);
 
         /// <summary>
         /// Gives ownership to newOwner.
         /// </summary>
-        
+
         public void GiveOwnership(NetworkConnection newOwner, bool includeNested) => _networkObjectCache.GiveOwnership(newOwner, asServer: true, includeNested);
 
         #region Registered components

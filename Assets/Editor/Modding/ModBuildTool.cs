@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
+
 using UnityEditor;
 using UnityEditor.VersionControl;
+
 using UnityEngine;
 
 public class ModBuildTool : EditorWindow
@@ -44,7 +46,7 @@ public class ModBuildTool : EditorWindow
             Debug.Log("Build cancelled - no output path selected");
             return;
         }
-        
+
         string tempFolder = Path.Combine(Path.GetTempPath(), "ModBuild_" + System.Guid.NewGuid().ToString());
         Directory.CreateDirectory(tempFolder);
 
@@ -71,7 +73,7 @@ public class ModBuildTool : EditorWindow
                 EditorUtility.RevealInFinder(outputPath);
             }
         }
-        
+
         finally
         {
             if (Directory.Exists(tempFolder))

@@ -1,6 +1,7 @@
-﻿using System.Net.Mime;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,53 +15,65 @@ namespace P90brush
         public GameObject pauseMenuUI;
 
         // Start is called before the first frame update
-        void Start() {
+        void Start()
+        {
         }
 
         // Update is called once per frame
-        void Update() {
+        void Update()
+        {
             // Cursor Lock Managment
-            if (Input.GetKeyDown(KeyCode.Escape)) {
-                if (GameIsPaused) {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GameIsPaused)
+                {
                     Resume();
-                } else {
+                }
+                else
+                {
                     Pause();
                 }
             }
         }
 
-        private void Pause() {
+        private void Pause()
+        {
             GameIsPaused = true;
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            if (pauseMenuUI) {
+            if (pauseMenuUI)
+            {
                 pauseMenuUI.SetActive(true);
             }
             Time.timeScale = 0f;
         }
 
-        public void Resume() {
+        public void Resume()
+        {
             GameIsPaused = false;
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            if (pauseMenuUI) {
+            if (pauseMenuUI)
+            {
                 pauseMenuUI.SetActive(false);
             }
             Time.timeScale = 1f;
         }
 
-        public void LevelSelectorMenu() {
+        public void LevelSelectorMenu()
+        {
             Resume();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             SceneManager.LoadScene("level_selector");
         }
 
-        public void Quit() {
+        public void Quit()
+        {
             Application.Quit();
         }
     }

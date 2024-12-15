@@ -1,8 +1,11 @@
-﻿using FishNet.Connection;
+using System;
+
+using FishNet.Connection;
 using FishNet.Managing.Server;
 using FishNet.Object;
-using System;
+
 using GameKit.Dependencies.Utilities.Types;
+
 using UnityEngine;
 
 namespace FishNet.Observing
@@ -31,7 +34,7 @@ namespace FishNet.Observing
         [Range(sbyte.MinValue, sbyte.MaxValue)]
         private sbyte _addOrder;
         #endregion
-        
+
         #region Private.
         /// <summary>
         /// True if this condition is enabled.

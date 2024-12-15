@@ -1,9 +1,11 @@
-﻿#if UNITY_EDITOR
-using FishNet.Editing.PrefabCollectionGenerator;
+#if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+
+using FishNet.Editing.PrefabCollectionGenerator;
+
 using UnityEditor;
 
 

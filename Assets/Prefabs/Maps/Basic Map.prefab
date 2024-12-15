@@ -2943,6 +2943,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 0
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -3097,6 +3100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 5
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -6918,6 +6924,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 2
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -7077,6 +7086,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 6
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -7235,6 +7247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 7
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -7377,6 +7392,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 1
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -7526,6 +7544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 4
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -7680,6 +7701,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 3
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -7806,6 +7830,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79be37278e5741806baab5cafea3ea5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 8
+  _addedNetworkObject: {fileID: 0}
+  _networkObjectCache: {fileID: 0}
   _animationCurve:
     serializedVersion: 2
     m_Curve:

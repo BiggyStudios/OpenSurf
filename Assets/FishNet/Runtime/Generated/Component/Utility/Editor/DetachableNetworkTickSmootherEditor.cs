@@ -1,8 +1,12 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using FishNet.Editing;
+
 using GameKit.Dependencies.Utilities;
+
 using UnityEditor;
+
 using UnityEngine;
+
 using GameKitEditing = GameKit.Dependencies.Utilities.Editing;
 
 namespace FishNet.Component.Transforming.Editing
@@ -52,7 +56,7 @@ namespace FishNet.Component.Transforming.Editing
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(_followObject);
             EditorGUILayout.PropertyField(_interpolation);
-            
+
             EditorGUILayout.PropertyField(_enableTeleport);
             if (_enableTeleport.boolValue)
             {
@@ -70,7 +74,7 @@ namespace FishNet.Component.Transforming.Editing
             EditorGUILayout.PropertyField(_synchronizeRotation);
             EditorGUILayout.PropertyField(_synchronizeScale);
             EditorGUI.indentLevel--;
-       
+
             serializedObject.ApplyModifiedProperties();
         }
     }

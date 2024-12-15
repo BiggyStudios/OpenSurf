@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace P90brush
 {
@@ -15,10 +15,12 @@ namespace P90brush
 
         public const float SurfSlope = 0.7f;
 
-        public static void ResolveCollisions(Collider collider, ref Vector3 origin, ref Vector3 velocity) {
+        public static void ResolveCollisions(Collider collider, ref Vector3 origin, ref Vector3 velocity)
+        {
             // manual collision resolving
             int numOverlaps = 0;
-            if (collider is CapsuleCollider) {
+            if (collider is CapsuleCollider)
+            {
                 var capc = collider as CapsuleCollider;
 
                 Vector3 point1, point2;
@@ -26,12 +28,15 @@ namespace P90brush
 
                 numOverlaps = Physics.OverlapCapsuleNonAlloc(point1, point2, capc.radius,
                     _colliders, GroundLayerMask, QueryTriggerInteraction.Ignore);
-            } else if (collider is BoxCollider) {
+            }
+            else if (collider is BoxCollider)
+            {
                 numOverlaps = Physics.OverlapBoxNonAlloc(origin, collider.bounds.extents, _colliders,
                     Quaternion.identity, GroundLayerMask, QueryTriggerInteraction.Ignore);
             }
 
-            for (int i = 0; i < numOverlaps; i++) {
+            for (int i = 0; i < numOverlaps; i++)
+            {
                 if (Physics.ComputePenetration(collider, origin,
                     Quaternion.identity, _colliders[i], _colliders[i].transform.position,
                     _colliders[i].transform.rotation, out Vector3 direction, out float distance))
@@ -80,7 +85,8 @@ namespace P90brush
             }
         }
 
-        public static int Reflect(ref Vector3 velocity, Collider collider, Vector3 origin, float deltaTime) {
+        public static int Reflect(ref Vector3 velocity, Collider collider, Vector3 origin, float deltaTime)
+        {
             float d;
             var newVelocity = Vector3.zero;
             var blocked = 0;           // Assume not blocked
@@ -91,8 +97,10 @@ namespace P90brush
             var allFraction = 0f;
             var timeLeft = deltaTime;   // Total time for this movement operation.
 
-            for (int bumpcount = 0; bumpcount < NumBumps; bumpcount++) {
-                if (velocity.magnitude == 0f) {
+            for (int bumpcount = 0; bumpcount < NumBumps; bumpcount++)
+            {
+                if (velocity.magnitude == 0f)
+                {
                     break;
                 }
 
@@ -103,7 +111,8 @@ namespace P90brush
 
                 allFraction += trace.Fraction;
 
-                if (trace.Fraction > 0) {
+                if (trace.Fraction > 0)
+                {
                     // actually covered some distance
                     originalVelocity = velocity;
                     numplanes = 0;
@@ -111,18 +120,21 @@ namespace P90brush
 
                 // If we covered the entire distance, we are done
                 //  and can return.
-                if (trace.Fraction == 1) {
+                if (trace.Fraction == 1)
+                {
                     break;      // moved the entire distance
                 }
 
                 // If the plane we hit has a high z component in the normal, then
                 //  it's probably a floor
-                if (trace.PlaneNormal.y > SurfSlope) {
+                if (trace.PlaneNormal.y > SurfSlope)
+                {
                     blocked |= 1;       // floor
                 }
                 // If the plane has a zero z component in the normal, then it's a 
                 //  step or wall
-                if (trace.PlaneNormal.y == 0) {
+                if (trace.PlaneNormal.y == 0)
+                {
                     blocked |= 2;       // step / wall
                 }
 
@@ -131,7 +143,8 @@ namespace P90brush
                 timeLeft -= timeLeft * trace.Fraction;
 
                 // Did we run out of planes to clip against?
-                if (numplanes >= MaxClipPlanes) {
+                if (numplanes >= MaxClipPlanes)
+                {
                     // this shouldn't really happen
                     //  Stop our movement if so.
                     velocity = Vector3.zero;
@@ -149,28 +162,37 @@ namespace P90brush
                 // reflect player velocity 
                 // Only give this a try for first impact plane because you can get yourself stuck in an acute corner by jumping in place
                 //  and pressing forward and nobody was really using this bounce/reflection feature anyway...
-                if (numplanes == 1) {
-                    for (int i = 0; i < numplanes; i++) {
-                        if (_planes[i][1] > SurfSlope) {
+                if (numplanes == 1)
+                {
+                    for (int i = 0; i < numplanes; i++)
+                    {
+                        if (_planes[i][1] > SurfSlope)
+                        {
                             // floor or slope
                             return blocked;
                             //ClipVelocity(originalVelocity, _planes[i], ref newVelocity, 1f);
                             //originalVelocity = newVelocity;
-                        } else {
+                        }
+                        else
+                        {
                             ClipVelocity(originalVelocity, _planes[i], ref newVelocity, 1f);
                         }
                     }
                     velocity = newVelocity;
                     originalVelocity = newVelocity;
-                } else {
+                }
+                else
+                {
                     int i = 0;
-                    for (i = 0; i < numplanes; i++) {
+                    for (i = 0; i < numplanes; i++)
+                    {
                         ClipVelocity(originalVelocity, _planes[i], ref velocity, 1);
 
                         int j = 0;
 
                         for (j = 0; j < numplanes; j++)
-                            if (j != i) {
+                            if (j != i)
+                            {
                                 // Are we now moving against this plane?
                                 if (Vector3.Dot(velocity, _planes[j]) < 0)
                                     break;
@@ -180,11 +202,15 @@ namespace P90brush
                     }
 
                     // Did we go all the way through plane set
-                    if (i != numplanes) {   // go along this plane
+                    if (i != numplanes)
+                    {   // go along this plane
                         // pmove.velocity is set in clipping call, no need to set again.
                         ;
-                    } else {   // go along the crease
-                        if (numplanes != 2) {
+                    }
+                    else
+                    {   // go along the crease
+                        if (numplanes != 2)
+                        {
                             velocity = Vector3.zero;
                             break;
                         }
@@ -198,7 +224,8 @@ namespace P90brush
                     // to avoid tiny occilations in sloping corners
                     //
                     d = Vector3.Dot(velocity, primalVelocity);
-                    if (d <= 0f) {
+                    if (d <= 0f)
+                    {
                         //Con_DPrintf("Back\n");
                         velocity = Vector3.zero;
                         break;
@@ -206,7 +233,8 @@ namespace P90brush
                 }
             }
 
-            if (allFraction == 0f) {
+            if (allFraction == 0f)
+            {
                 velocity = Vector3.zero;
             }
 
@@ -334,7 +362,8 @@ namespace P90brush
 
 
 
-        public static int ClipVelocity(Vector3 input, Vector3 normal, ref Vector3 output, float overbounce) {
+        public static int ClipVelocity(Vector3 input, Vector3 normal, ref Vector3 output, float overbounce)
+        {
             var angle = normal[1];
             var blocked = 0x00;         // Assume unblocked.
             if (angle > 0)          // If the plane that is blocking us has a positive z component, then assume it's a floor.
@@ -345,14 +374,16 @@ namespace P90brush
             // Determine how far along plane to slide based on incoming direction.
             var backoff = Vector3.Dot(input, normal) * overbounce;
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++)
+            {
                 var change = normal[i] * backoff;
                 output[i] = input[i] - change;
             }
 
             // iterate once to make sure we aren't still moving through the plane
             float adjust = Vector3.Dot(output, normal);
-            if (adjust < 0.0f) {
+            if (adjust < 0.0f)
+            {
                 output -= (normal * adjust);
                 //		Msg( "Adjustment = %lf\n", adjust );
             }

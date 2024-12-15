@@ -1,15 +1,18 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System.Collections.Generic;
+using System.Linq;
+
+using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.Object.Delegating;
 using FishNet.Object.Synchronizing;
 using FishNet.Object.Synchronizing.Internal;
+
 using GameKit.Dependencies.Utilities;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
 using MonoFN.Collections.Generic;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace FishNet.CodeGenerating.Processing
 {
@@ -266,7 +269,7 @@ namespace FishNet.CodeGenerating.Processing
             }
 
             //todo checking if field is initialized would be good.
-            
+
             /* Forces readonly unless user allows for serialization.
              * If within this logic then the field is readonly. */
             if (!fieldDef.Attributes.HasFlag(FieldAttributes.InitOnly))
@@ -502,12 +505,12 @@ namespace FishNet.CodeGenerating.Processing
             {
                 //Early
                 initializeEarlyMr = syncBaseTd.GetMethodReference(base.Session, INITIALIZEEARLY_METHOD_NAME);
-              //  if (variableTypeRefs != null)
-              //      initializeEarlyMr = initializeEarlyMr.MakeGenericMethod(variableTypeRefs);
+                //  if (variableTypeRefs != null)
+                //      initializeEarlyMr = initializeEarlyMr.MakeGenericMethod(variableTypeRefs);
                 //Late
                 initializeLateMr = syncBaseTd.GetMethodReference(base.Session, INITIALIZELATE_METHOD_NAME);
-             //   if (variableTypeRefs != null)
-              //      initializeLateMr = initializeLateMr.MakeGenericMethod(variableTypeRefs);
+                //   if (variableTypeRefs != null)
+                //      initializeLateMr = initializeLateMr.MakeGenericMethod(variableTypeRefs);
 
                 return true;
             }

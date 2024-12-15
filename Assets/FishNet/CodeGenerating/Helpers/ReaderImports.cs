@@ -1,10 +1,12 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System;
+using System.Reflection;
+
+using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.Connection;
 using FishNet.Serializing;
+
 using MonoFN.Cecil;
-using System;
-using System.Reflection;
 
 namespace FishNet.CodeGenerating.Helping
 {
@@ -56,7 +58,7 @@ namespace FishNet.CodeGenerating.Helping
                 else if (parameterCount == 0 && methodInfo.Name == nameof(PooledReader.ReadArrayAllocated))
                     Reader_ReadArray_MethodRef = base.ImportReference(methodInfo);
             }
-             
+
             return true;
         }
     }

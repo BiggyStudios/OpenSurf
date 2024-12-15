@@ -1,4 +1,4 @@
-﻿
+
 using System.Runtime.CompilerServices;
 
 namespace GameKit.Dependencies.Utilities

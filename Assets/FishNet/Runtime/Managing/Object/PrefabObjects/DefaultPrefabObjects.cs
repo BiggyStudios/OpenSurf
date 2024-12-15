@@ -1,11 +1,17 @@
 using FishNet.Documenting;
 using FishNet.Object.Helping;
+
 using System.Collections.Generic;
+
 using UnityEngine;
+
 using GameKit.Dependencies.Utilities;
+
 #if UNITY_EDITOR
 using FishNet.Editing;
+
 using UnityEditor;
+
 #endif
 using FishNet.Object;
 
@@ -77,7 +83,7 @@ namespace FishNet.Managing.Object
                 {
                     error = true;
                     Debug.LogError($"AssetPathHash is not set for GameObject {n.name}.");
-                    
+
                 }
                 hashcodesAndNobs.Add(n.AssetPathHash, n);
             }

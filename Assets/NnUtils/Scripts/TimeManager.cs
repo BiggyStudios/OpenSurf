@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections;
+
 using UnityEngine;
 
 namespace NnUtils.Scripts
@@ -15,7 +16,7 @@ namespace NnUtils.Scripts
         public bool IsPaused;
         private Coroutine _changeTimeScaleRoutine;
         private void Awake() => _fixedTimeStep = Time.fixedDeltaTime;
-        
+
         /// <summary>
         /// Set via <see cref="ChangeTimeScale(float, float)"/> function
         /// <returns><see cref="Time.timeScale"/></returns>
@@ -43,14 +44,14 @@ namespace NnUtils.Scripts
         /// Invoked when using <see cref="ChangeTimeScale(float[],float[])"/> and all the TimeScales have been applied
         /// </summary>
         public Action OnTimeScalesTransitioned;
-        
+
         public void ChangeTimeScale(float timeScale, float time = 0)
             => RestartRoutine(ref _changeTimeScaleRoutine, ChangeTimeScaleRoutine(timeScale, time, Easings.Types.None));
         public void ChangeTimeScale(float timeScale, float time, Easings.Types easing)
             => RestartRoutine(ref _changeTimeScaleRoutine, ChangeTimeScaleRoutine(timeScale, time, easing));
         public void ChangeTimeScale(float timeScale, float time, AnimationCurve curve)
             => RestartRoutine(ref _changeTimeScaleRoutine, ChangeTimeScaleRoutine(timeScale, time, curve));
-        
+
         private IEnumerator ChangeTimeScaleRoutine(float timeScale, float time, Easings.Types easing)
         {
             var startTimeScale = TimeScale;
@@ -79,14 +80,14 @@ namespace NnUtils.Scripts
             _changeTimeScaleRoutine = null;
             OnTimeScaleTransitioned?.Invoke();
         }
-        
+
         public void ChangeTimeScale(float[] timeScales, float[] times)
-            => RestartRoutine(ref _changeTimeScaleRoutine, ChangeTimeScaleRoutine(timeScales, times, new Easings.Types[]{}));
+            => RestartRoutine(ref _changeTimeScaleRoutine, ChangeTimeScaleRoutine(timeScales, times, new Easings.Types[] { }));
         public void ChangeTimeScale(float[] timeScales, float[] times, Easings.Types[] easings)
             => RestartRoutine(ref _changeTimeScaleRoutine, ChangeTimeScaleRoutine(timeScales, times, easings));
         public void ChangeTimeScale(float[] timeScales, float[] times, AnimationCurve[] curves)
             => RestartRoutine(ref _changeTimeScaleRoutine, ChangeTimeScaleRoutine(timeScales, times, curves));
-        
+
         private IEnumerator ChangeTimeScaleRoutine(float[] timeScales, float[] times, Easings.Types[] easings)
         {
             for (int i = 0; i < timeScales.Length; i++)

@@ -1,6 +1,8 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using FishNet.Object;
+
 using UnityEditor;
+
 using UnityEngine;
 
 namespace FishNet.Transporting.Tugboat.Editing
@@ -31,7 +33,7 @@ namespace FishNet.Transporting.Tugboat.Editing
             _ipv6BindAddress = serializedObject.FindProperty(nameof(_ipv6BindAddress));
             _port = serializedObject.FindProperty(nameof(_port));
             _maximumClients = serializedObject.FindProperty(nameof(_maximumClients));
-            _clientAddress = serializedObject.FindProperty(nameof(_clientAddress));            
+            _clientAddress = serializedObject.FindProperty(nameof(_clientAddress));
         }
 
         public override void OnInspectorGUI()

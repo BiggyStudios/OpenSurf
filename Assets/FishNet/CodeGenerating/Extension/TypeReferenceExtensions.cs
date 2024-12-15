@@ -1,7 +1,9 @@
-﻿
+
 using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.Helping.Extension;
+
 using MonoFN.Cecil;
+
 using UnityEngine;
 
 namespace FishNet.CodeGenerating.Extension
@@ -38,15 +40,15 @@ namespace FishNet.CodeGenerating.Extension
         /// Makes a GenericInstanceType.
         /// </summary>
         public static GenericInstanceType MakeGenericInstanceType(this TypeReference self)
-		{
-			GenericInstanceType instance = new(self);
-			foreach (GenericParameter argument in self.GenericParameters)
-				instance.GenericArguments.Add(argument);
+        {
+            GenericInstanceType instance = new(self);
+            foreach (GenericParameter argument in self.GenericParameters)
+                instance.GenericArguments.Add(argument);
 
-			return instance;
-		}
+            return instance;
+        }
 
-	}
+    }
 
 
 }

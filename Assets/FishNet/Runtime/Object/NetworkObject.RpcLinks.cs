@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -26,7 +27,7 @@ namespace FishNet.Object
         internal void RemoveClientRpcLinkIndexes()
         {
             //if (NetworkManager != null)
-                NetworkManager.ClientManager.Objects.RemoveLinkIndexes(_rpcLinkIndexes);
+            NetworkManager.ClientManager.Objects.RemoveLinkIndexes(_rpcLinkIndexes);
         }
     }
 }

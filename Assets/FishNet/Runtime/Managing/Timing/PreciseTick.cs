@@ -1,5 +1,7 @@
-﻿using System;
+using System;
+
 using FishNet.Serializing;
+
 using GameKit.Dependencies.Utilities;
 
 namespace FishNet.Managing.Timing
@@ -31,7 +33,7 @@ namespace FishNet.Managing.Timing
         /// Value to use when a precise tick is unset.
         /// </summary>
         public static PreciseTick GetUnsetValue() => new(TimeManager.UNSET_TICK, (byte)0);
-        
+
         /// <summary>
         /// Creates a precise tick where the percentage is a byte between 0 and 100.
         /// </summary>
@@ -96,10 +98,10 @@ namespace FishNet.Managing.Timing
 
         public bool Equals(PreciseTick other) => (Tick == other.Tick && PercentAsByte == other.PercentAsByte);
 
-        public override bool Equals(object obj)=> obj is PreciseTick other && Equals(other);
+        public override bool Equals(object obj) => obj is PreciseTick other && Equals(other);
 
         public override int GetHashCode() => HashCode.Combine(Tick, PercentAsDouble, PercentAsByte);
-        
+
     }
 
     public static class PreciseTickExtensions
@@ -156,7 +158,7 @@ namespace FishNet.Managing.Timing
 
             return new PreciseTick((uint)tick, percent);
         }
-        
+
     }
 
     public static class PreciseTickSerializer

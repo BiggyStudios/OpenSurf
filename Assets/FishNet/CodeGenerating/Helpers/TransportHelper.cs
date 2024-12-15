@@ -1,4 +1,5 @@
-﻿using FishNet.Transporting;
+using FishNet.Transporting;
+
 using MonoFN.Cecil;
 
 namespace FishNet.CodeGenerating.Helping

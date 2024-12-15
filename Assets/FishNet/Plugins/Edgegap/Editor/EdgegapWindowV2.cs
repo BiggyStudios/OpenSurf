@@ -8,17 +8,21 @@ using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
 using Edgegap.Editor.Api;
 using Edgegap.Editor.Api.Models;
 using Edgegap.Editor.Api.Models.Requests;
 using Edgegap.Editor.Api.Models.Results;
+
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEditor.UIElements;
+
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UIElements;
+
 using Application = UnityEngine.Application;
 
 namespace Edgegap.Editor
@@ -126,7 +130,7 @@ namespace Edgegap.Editor
         [InitializeOnLoadMethod]
         public static void AddDefineSymbols()
         {
-// check if defined first, otherwise adding the symbol causes an infinite loop of recompilation
+            // check if defined first, otherwise adding the symbol causes an infinite loop of recompilation
 #if !EDGEGAP_PLUGIN_SERVERS
             // Get data about current target group
             bool standaloneAndServer = false;

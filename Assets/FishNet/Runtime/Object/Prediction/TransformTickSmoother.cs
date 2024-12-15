@@ -1,4 +1,4 @@
-﻿//Remove on 2024/06/01
+//Remove on 2024/06/01
 //using FishNet.Utility.Extension;
 //using System.Runtime.CompilerServices;
 //using UnityEngine;

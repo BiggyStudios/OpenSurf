@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -122,7 +122,7 @@ namespace LiteNetLib
             }
         }
 
-        
+
         public static int RecvFrom(
             IntPtr socketHandle,
             byte[] pinnedBuffer,
@@ -135,7 +135,7 @@ namespace LiteNetLib
                 : WinSock.recvfrom(socketHandle, pinnedBuffer, len, 0, socketAddress, ref socketAddressSize);
         }
 
-        
+
         public static unsafe int SendTo(
             IntPtr socketHandle,
             byte* pinnedBuffer,
@@ -168,7 +168,7 @@ namespace LiteNetLib
             return new(error);
         }
 
-        
+
         public static short GetNativeAddressFamily(IPEndPoint remoteEndPoint)
         {
             return UnixMode

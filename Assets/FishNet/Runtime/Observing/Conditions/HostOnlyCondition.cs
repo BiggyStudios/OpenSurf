@@ -1,5 +1,6 @@
-﻿using FishNet.Connection;
+using FishNet.Connection;
 using FishNet.Observing;
+
 using UnityEngine;
 
 namespace FishNet.Component.Observing

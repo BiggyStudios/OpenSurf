@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+
 using UnityEngine;
 
 namespace NnUtils.Scripts
@@ -8,7 +9,7 @@ namespace NnUtils.Scripts
     {
         public void StartRoutineIf(ref Coroutine target, IEnumerator routine, Func<bool> startIf) =>
             Misc.StartRoutineIf(this, ref target, routine, startIf);
-        
+
         public void RestartRoutine(ref Coroutine target, IEnumerator routine) =>
             Misc.RestartRoutine(this, ref target, routine);
 
@@ -19,7 +20,7 @@ namespace NnUtils.Scripts
         private Coroutine _animatePositionRoutine, _animateRotationRoutine, _animateScaleRoutine;
         public bool IsAnimating =>
             _animatePositionRoutine != null || _animateRotationRoutine != null || _animateScaleRoutine != null;
-        
+
         public void Animate(AnimationParams animParams)
         {
             RestartRoutine(ref _animatePositionRoutine, AnimatePositionRoutine(animParams));
@@ -63,17 +64,17 @@ namespace NnUtils.Scripts
                 prevRot = newRot;
                 yield return null;
             }
-            
+
             _animateRotationRoutine = null;
         }
-        
+
         private IEnumerator AnimateScaleRoutine(AnimationParams animParams)
         {
             var startScale = transform.localScale;
             var targetScale = animParams.AdditiveScale ? startScale + animParams.Scale : animParams.Scale;
             var prevScale = startScale;
             float lerpScale = 0;
-            
+
             while (lerpScale < 1)
             {
                 var scaleT = Misc.UpdateLerpPos(ref lerpScale, animParams.ScaleDuration, animParams.Unscaled, animParams.ScaleEasing);
@@ -83,7 +84,7 @@ namespace NnUtils.Scripts
                 prevScale = newScale;
                 yield return null;
             }
-            
+
             _animateScaleRoutine = null;
         }
 

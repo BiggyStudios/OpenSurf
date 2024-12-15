@@ -1,16 +1,20 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System;
+using System.Collections.Generic;
+
+using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.CodeGenerating.ILCore;
 using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Utility;
 using FishNet.Utility.Performance;
+
+using GameKit.Dependencies.Utilities;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
 using MonoFN.Cecil.Rocks;
-using System;
-using System.Collections.Generic;
-using GameKit.Dependencies.Utilities;
+
 using SR = System.Reflection;
 using UnityDebug = UnityEngine.Debug;
 

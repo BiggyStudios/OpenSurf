@@ -1,4 +1,5 @@
-﻿using FishNet.Object;
+using FishNet.Object;
+
 using UnityEngine;
 
 
@@ -14,7 +15,7 @@ namespace FishNet.Example.ColliderRollbacks
         private float _startX;
         public override void OnStartServer()
         {
-            
+
             _startX = transform.position.x;
         }
 

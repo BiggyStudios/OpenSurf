@@ -1,12 +1,15 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 
-using UnityEngine;
-using UnityEditor;
+using System.Collections.Generic;
+
 using FishNet.Configuring;
 
-using UnitySettingsProviderAttribute = UnityEditor.SettingsProviderAttribute;
+using UnityEditor;
+
+using UnityEngine;
+
 using UnitySettingsProvider = UnityEditor.SettingsProvider;
-using System.Collections.Generic;
+using UnitySettingsProviderAttribute = UnityEditor.SettingsProviderAttribute;
 
 namespace FishNet.Configuring.Editing
 {

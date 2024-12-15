@@ -1,6 +1,8 @@
-﻿using FishNet.Managing;
-using FishNet.Managing.Logging;
 using System;
+
+using FishNet.Managing;
+using FishNet.Managing.Logging;
+
 using UnityEngine;
 
 namespace FishNet.Transporting

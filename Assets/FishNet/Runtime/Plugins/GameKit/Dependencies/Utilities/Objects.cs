@@ -1,6 +1,8 @@
-﻿
-using GameKit.Dependencies.Utilities.Types;
+
 using System.Collections.Generic;
+
+using GameKit.Dependencies.Utilities.Types;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

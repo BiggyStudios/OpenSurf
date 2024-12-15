@@ -1,6 +1,11 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 using FishNet.Authenticating;
 using FishNet.Component.Observing;
 using FishNet.Connection;
@@ -14,11 +19,9 @@ using FishNet.Serializing;
 using FishNet.Transporting;
 using FishNet.Utility.Extension;
 using FishNet.Utility.Performance;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Server
@@ -406,7 +409,7 @@ namespace FishNet.Managing.Server
                     item.Kick(KickReason.UnexpectedProblem, LoggingType.Common, $"{item.ToString()} has timed out. You can modify this feature on the ServerManager component.");
 
                 _nextClientTimeoutCheckIndex++;
-            }   
+            }
         }
 
         /// <summary>
@@ -766,7 +769,7 @@ namespace FishNet.Managing.Server
                     conn.Kick(KickReason.ExploitAttempt, LoggingType.Common, $"ConnectionId {conn.ClientId} sent packetId {packetId} without being authenticated. Connection will be kicked immediately.");
                     return;
                 }
-                
+
                 if (packetId == PacketId.Replicate)
                 {
                     Objects.ParseReplicateRpc(reader, conn, args.Channel);

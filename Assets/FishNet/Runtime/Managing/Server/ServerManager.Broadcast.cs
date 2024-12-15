@@ -1,4 +1,8 @@
-﻿using FishNet.Broadcast;
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+using FishNet.Broadcast;
 using FishNet.Broadcast.Helping;
 using FishNet.Connection;
 using FishNet.Managing.Logging;
@@ -7,10 +11,9 @@ using FishNet.Object;
 using FishNet.Serializing;
 using FishNet.Serializing.Helping;
 using FishNet.Transporting;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Server
@@ -70,7 +73,7 @@ namespace FishNet.Managing.Server
         /// <summary>
         /// Parses a received broadcast.
         /// </summary>
-        
+
         private void ParseBroadcast(PooledReader reader, NetworkConnection conn, Channel channel)
         {
             ushort key = reader.ReadUInt16();
@@ -296,7 +299,7 @@ namespace FishNet.Managing.Server
         /// <param name="message">Broadcast data being sent; for example: an instance of your broadcast type.</param>
         /// <param name="requireAuthenticated">True if the clients must be authenticated for this broadcast to send.</param>
         /// <param name="channel">Channel to send on.</param>
-        
+
         public void Broadcast<T>(NetworkObject networkObject, T message, bool requireAuthenticated = true, Channel channel = Channel.Reliable) where T : struct, IBroadcast
         {
             if (networkObject == null)

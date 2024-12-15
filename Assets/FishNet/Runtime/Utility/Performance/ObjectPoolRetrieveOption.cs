@@ -1,4 +1,4 @@
-﻿
+
 namespace FishNet.Utility.Performance
 {
 

@@ -1,6 +1,7 @@
-﻿using LiteNetLib.Utils;
 using System;
 using System.Net;
+
+using LiteNetLib.Utils;
 
 namespace LiteNetLib.Layers
 {

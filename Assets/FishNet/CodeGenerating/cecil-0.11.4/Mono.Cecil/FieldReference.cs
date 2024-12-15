@@ -10,59 +10,64 @@
 
 using System;
 
-namespace MonoFN.Cecil {
+namespace MonoFN.Cecil
+{
 
-	public class FieldReference : MemberReference {
+    public class FieldReference : MemberReference
+    {
 
-		TypeReference field_type;
+        TypeReference field_type;
 
-		public TypeReference FieldType {
-			get { return field_type; }
-			set { field_type = value; }
-		}
+        public TypeReference FieldType
+        {
+            get { return field_type; }
+            set { field_type = value; }
+        }
 
-		public override string FullName {
-			get { return field_type.FullName + " " + MemberFullName (); }
-		}
+        public override string FullName
+        {
+            get { return field_type.FullName + " " + MemberFullName(); }
+        }
 
-		public override bool ContainsGenericParameter {
-			get { return field_type.ContainsGenericParameter || base.ContainsGenericParameter; }
-		}
+        public override bool ContainsGenericParameter
+        {
+            get { return field_type.ContainsGenericParameter || base.ContainsGenericParameter; }
+        }
 
-		internal FieldReference ()
-		{
-			this.token = new MetadataToken (TokenType.MemberRef);
-		}
+        internal FieldReference()
+        {
+            this.token = new MetadataToken(TokenType.MemberRef);
+        }
 
-		public FieldReference (string name, TypeReference fieldType)
-			: base (name)
-		{
-			Mixin.CheckType (fieldType, Mixin.Argument.fieldType);
+        public FieldReference(string name, TypeReference fieldType)
+            : base(name)
+        {
+            Mixin.CheckType(fieldType, Mixin.Argument.fieldType);
 
-			this.field_type = fieldType;
-			this.token = new MetadataToken (TokenType.MemberRef);
-		}
+            this.field_type = fieldType;
+            this.token = new MetadataToken(TokenType.MemberRef);
+        }
 
-		public FieldReference (string name, TypeReference fieldType, TypeReference declaringType)
-			: this (name, fieldType)
-		{
-			Mixin.CheckType (declaringType, Mixin.Argument.declaringType);
+        public FieldReference(string name, TypeReference fieldType, TypeReference declaringType)
+            : this(name, fieldType)
+        {
+            Mixin.CheckType(declaringType, Mixin.Argument.declaringType);
 
-			this.DeclaringType = declaringType;
-		}
+            this.DeclaringType = declaringType;
+        }
 
-		protected override IMemberDefinition ResolveDefinition ()
-		{
-			return this.Resolve ();
-		}
+        protected override IMemberDefinition ResolveDefinition()
+        {
+            return this.Resolve();
+        }
 
-		public new virtual FieldDefinition Resolve ()
-		{
-			var module = this.Module;
-			if (module == null)
-				throw new NotSupportedException ();
+        public new virtual FieldDefinition Resolve()
+        {
+            var module = this.Module;
+            if (module == null)
+                throw new NotSupportedException();
 
-			return module.Resolve (this);
-		}
-	}
+            return module.Resolve(this);
+        }
+    }
 }

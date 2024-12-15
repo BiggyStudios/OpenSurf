@@ -1,14 +1,17 @@
 using System;
+
 using FishNet.Connection;
 using FishNet.Transporting.Tugboat;
+
 using TMPro;
+
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ConnectionManager : MonoBehaviour
 {
     [SerializeField] private GameObject _ui;
-    
+
     private Tugboat _tugboat;
 
     private void Start()
@@ -26,14 +29,14 @@ public class ConnectionManager : MonoBehaviour
     {
         _tugboat.StartConnection(true);
         _tugboat.StartConnection(false);
-        
+
         _ui.SetActive(false);
     }
 
     public void StartClient()
     {
         _tugboat.StartConnection(false);
-        
+
         _ui.SetActive(false);
     }
 }

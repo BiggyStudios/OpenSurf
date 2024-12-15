@@ -1,15 +1,19 @@
-﻿using FishNet.Connection;
+using System.IO;
+
+using FishNet.Connection;
 using FishNet.Managing;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Scened;
 using FishNet.Transporting;
 using FishNet.Utility;
+
 using GameKit.Dependencies.Utilities;
 using GameKit.Dependencies.Utilities.Types;
-using System.IO;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+
 using UnitySceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace FishNet.Component.Scenes

@@ -1,4 +1,5 @@
-﻿using FishNet.Object;
+using FishNet.Object;
+
 using UnityEngine;
 
 

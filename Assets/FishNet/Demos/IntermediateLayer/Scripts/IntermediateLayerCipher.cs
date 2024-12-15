@@ -1,5 +1,6 @@
-﻿using FishNet.Managing.Transporting;
 using System;
+
+using FishNet.Managing.Transporting;
 
 namespace FishNet.Example.IntermediateLayers
 {

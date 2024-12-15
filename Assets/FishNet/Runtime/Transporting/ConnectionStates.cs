@@ -1,4 +1,4 @@
-﻿namespace FishNet.Transporting
+namespace FishNet.Transporting
 {
 
     /// <summary>
@@ -22,7 +22,7 @@
         /// Connection is established.
         /// </summary>
         Started = 4,
-        
+
         StoppedError = 8,
         StoppedClosed = 16,
     }

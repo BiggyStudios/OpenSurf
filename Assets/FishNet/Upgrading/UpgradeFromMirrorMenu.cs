@@ -1,7 +1,10 @@
-﻿#if UNITY_EDITOR
-using FishNet.Documenting;
+#if UNITY_EDITOR
 using System.Collections.Generic;
+
+using FishNet.Documenting;
+
 using UnityEditor;
+
 using UnityEngine;
 
 namespace FishNet.Upgrading.Mirror.Editing

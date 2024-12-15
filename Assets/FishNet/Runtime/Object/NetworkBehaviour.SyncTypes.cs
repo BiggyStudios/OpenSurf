@@ -1,15 +1,18 @@
-﻿using FishNet.CodeGenerating;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+using FishNet.CodeGenerating;
 using FishNet.Connection;
 using FishNet.Managing;
 using FishNet.Managing.Transporting;
 using FishNet.Object.Synchronizing;
 using FishNet.Object.Synchronizing.Internal;
 using FishNet.Serializing;
-using FishNet.Transporting;
-using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using FishNet.Serializing.Helping;
+using FishNet.Transporting;
+
+using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -218,7 +221,7 @@ namespace FishNet.Object
             //     ResetState_SyncTypes(asServer: true);
             //     return true;
             // }
-            
+
             /* IsSpawned Can occur when a synctype is queued after
              * the object is marked for destruction. This should not
              * happen under most conditions since synctypes will be
@@ -281,7 +284,7 @@ namespace FishNet.Object
                 //If ReadPermission is owner but no owner skip this syncType write.
                 if (!ownerIsActive && rp == ReadPermission.OwnerOnly)
                     continue;
-                
+
                 writtenCount++;
 
                 if (forceReliable)
@@ -321,7 +324,7 @@ namespace FishNet.Object
                 CollectionCaches<ReadPermission>.Store(writtenReadPermissions);
                 return false;
             }
-            
+
             /* If here something was written. */
 
             PooledWriter fullWriter = WriterPool.Retrieve();
@@ -339,10 +342,10 @@ namespace FishNet.Object
                     //None written for this channel.
                     if (writer.Length == 0)
                         continue;
-                    
+
                     CompleteSyncTypePacket(fullWriter, writer);
                     writer.Reset();
-                    
+
                     //Should not be the case but check for safety.
                     if (fullWriter.Length == 0)
                         continue;
@@ -386,7 +389,7 @@ namespace FishNet.Object
         /// <summary>
         /// Writes all SyncTypes for a connection if readPermissions match.
         /// </summary>
-        
+
         internal void WriteSyncTypesForConnection(NetworkConnection conn, ReadPermission readPermissions)
         {
             //There are no syncTypes.
@@ -439,9 +442,9 @@ namespace FishNet.Object
 
             ReservedLengthWriter reservedWriter = ReservedWritersExtensions.Retrieve();
             reservedWriter.Initialize(fullWriter, SYNCTYPE_RESERVE_BYTES);
-            
+
             fullWriter.WriteArraySegment(syncTypeWriter.GetArraySegment());
-            
+
             reservedWriter.WriteLength();
             reservedWriter.Store();
         }
@@ -505,7 +508,7 @@ namespace FishNet.Object
             for (int i = 0; i < written; i++)
             {
                 byte syncTypeId = reader.ReadUInt8Unpacked();
-                
+
                 if (_syncTypes.TryGetValueIL2CPP(syncTypeId, out SyncBase sb))
                     sb.Read(reader, asServer: false);
                 else

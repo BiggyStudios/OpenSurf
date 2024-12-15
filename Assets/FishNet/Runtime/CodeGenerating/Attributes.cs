@@ -1,6 +1,7 @@
-﻿using FishNet.Utility;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Utility;
 
 [assembly: InternalsVisibleTo(UtilityConstants.CODEGEN_ASSEMBLY_NAME)]
 namespace FishNet.CodeGenerating

@@ -1,6 +1,8 @@
 using FishNet.Managing.Timing;
 using FishNet.Object;
+
 using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Utility.Template
@@ -57,9 +59,9 @@ namespace FishNet.Utility.Template
         {
             ChangeSubscriptions(subscribe: false);
             _tickCallbacks = value;
-            ChangeSubscriptions(subscribe: true);            
+            ChangeSubscriptions(subscribe: true);
         }
-        
+
         private void ChangeSubscriptions(bool subscribe)
         {
             TimeManager tm = base.TimeManager;

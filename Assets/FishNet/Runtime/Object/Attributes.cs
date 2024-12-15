@@ -1,6 +1,8 @@
-﻿using FishNet.Managing.Logging;
-using FishNet.Transporting;
 using System;
+
+using FishNet.Managing.Logging;
+using FishNet.Transporting;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -83,7 +85,7 @@ namespace FishNet.Object
     /// TargetRpc methods will send messages to a single client.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public class TargetRpcAttribute : RpcAttribute 
+    public class TargetRpcAttribute : RpcAttribute
     {
         /// <summary>
         /// True to prevent the connection from receiving this Rpc if they are also server.

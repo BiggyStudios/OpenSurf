@@ -1,6 +1,9 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.CodeGenerating;
 using FishNet.Connection;
 using FishNet.Documenting;
@@ -11,9 +14,9 @@ using FishNet.Object.Delegating;
 using FishNet.Serializing;
 using FishNet.Serializing.Helping;
 using FishNet.Transporting;
+
 using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -99,7 +102,7 @@ namespace FishNet.Object
         /// <param name="del"></param>
         [APIExclude]
         [MakePublic]
-        
+
         internal void RegisterServerRpc(uint hash, ServerRpcDelegate del)
         {
             if (_serverRpcDelegates.TryAdd(hash, del))
@@ -114,7 +117,7 @@ namespace FishNet.Object
         /// <param name="del"></param>
         [APIExclude]
         [MakePublic]
-        
+
         internal void RegisterObserversRpc(uint hash, ClientRpcDelegate del)
         {
             if (_observersRpcDelegates.TryAdd(hash, del))
@@ -129,7 +132,7 @@ namespace FishNet.Object
         /// <param name="del"></param>
         [APIExclude]
         [MakePublic]
-        
+
         internal void RegisterTargetRpc(uint hash, ClientRpcDelegate del)
         {
             if (_targetRpcDelegates.TryAdd(hash, del))
@@ -175,7 +178,7 @@ namespace FishNet.Object
         /// <summary>
         /// Called when a ServerRpc is received.
         /// </summary>
-        
+
         internal void ReadServerRpc(PooledReader reader, NetworkConnection sendingClient, Channel channel)
         {
             uint methodHash = ReadRpcHash(reader);
@@ -195,7 +198,7 @@ namespace FishNet.Object
         /// <summary>
         /// Called when an ObserversRpc is received.
         /// </summary>
-        
+
         internal void ReadObserversRpc(uint? methodHash, PooledReader reader, Channel channel)
         {
             if (methodHash == null)
@@ -210,7 +213,7 @@ namespace FishNet.Object
         /// <summary>
         /// Called when an TargetRpc is received.
         /// </summary>
-        
+
         internal void ReadTargetRpc(uint? methodHash, PooledReader reader, Channel channel)
         {
             if (methodHash == null)
@@ -229,7 +232,7 @@ namespace FishNet.Object
         /// <param name="methodWriter"></param>
         /// <param name="channel"></param>
         [MakePublic]
-        
+
         protected internal void SendServerRpc(uint hash, PooledWriter methodWriter, Channel channel, DataOrderType orderType)
         {
             if (!IsSpawnedWithWarning())
@@ -250,7 +253,7 @@ namespace FishNet.Object
         /// <param name="channel"></param>
         [APIExclude]
         [MakePublic] //Make internal.
-        
+
         protected internal void SendObserversRpc(uint hash, PooledWriter methodWriter, Channel channel, DataOrderType orderType, bool bufferLast, bool excludeServer, bool excludeOwner)
         {
             if (!IsSpawnedWithWarning())
@@ -305,7 +308,7 @@ namespace FishNet.Object
         /// Sends a RPC to target.
         /// </summary>
         [MakePublic] //Make internal.
-        
+
         protected internal void SendTargetRpc(uint hash, PooledWriter methodWriter, Channel channel, DataOrderType orderType, NetworkConnection target, bool excludeServer, bool validateTarget = true)
         {
             if (!IsSpawnedWithWarning())
@@ -379,7 +382,7 @@ namespace FishNet.Object
         /// <summary>
         /// Writes a full RPC and returns the writer.
         /// </summary>
-        
+
         private PooledWriter CreateRpc(uint hash, PooledWriter methodWriter, PacketId packetId, Channel channel)
         {
             int rpcHeaderBufferLength = GetEstimatedRpcHeaderLength();
@@ -403,7 +406,7 @@ namespace FishNet.Object
         /// </summary>
         /// <param name="hash"></param>
         /// <param name="writer"></param>
-        
+
         private void WriteRpcHash(uint hash, PooledWriter writer)
         {
             if (_rpcHashSize == 1)

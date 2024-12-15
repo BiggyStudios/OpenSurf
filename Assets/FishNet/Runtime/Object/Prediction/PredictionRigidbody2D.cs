@@ -1,9 +1,12 @@
-﻿using FishNet.CodeGenerating;
+using System.Collections.Generic;
+
+using FishNet.CodeGenerating;
 using FishNet.Component.Prediction;
 using FishNet.Managing;
 using FishNet.Serializing;
+
 using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Scripting;
 

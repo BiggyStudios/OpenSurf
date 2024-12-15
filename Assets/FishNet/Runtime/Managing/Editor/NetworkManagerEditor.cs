@@ -1,6 +1,8 @@
-﻿#if UNITY_EDITOR
+#if UNITY_EDITOR
 using FishNet.Managing.Object;
+
 using UnityEditor;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Editing

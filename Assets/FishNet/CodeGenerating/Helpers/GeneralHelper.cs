@@ -1,4 +1,8 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
+
+using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.CodeGenerating.ILCore;
 using FishNet.Managing;
@@ -8,15 +12,16 @@ using FishNet.Object.Helping;
 using FishNet.Serializing;
 using FishNet.Serializing.Helping;
 using FishNet.Utility.Performance;
+
 using GameKit.Dependencies.Utilities;
+using GameKit.Dependencies.Utilities.Types;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
 using MonoFN.Cecil.Rocks;
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
-using GameKit.Dependencies.Utilities.Types;
+
 using UnityEngine;
+
 using SR = System.Reflection;
 
 namespace FishNet.CodeGenerating.Helping
@@ -164,7 +169,7 @@ namespace FishNet.CodeGenerating.Helping
             List_TypeRef = base.ImportReference(tmpType);
             tmpType = typeof(RingBuffer<>);
             RingBuffer_TypeRef = base.ImportReference(tmpType);
-            
+
             SR.MethodInfo lstMi;
             lstMi = tmpType.GetMethod("Add");
             List_Add_MethodRef = base.ImportReference(lstMi);
@@ -485,8 +490,8 @@ namespace FishNet.CodeGenerating.Helping
             TypeReference typeTr = base.ImportReference(typeof(List<>));
             return typeTr.MakeGenericInstanceType(new TypeReference[] { dataTr });
         }
-        
-        
+
+
         /// <summary>
         /// Outputs generic Dictionary for keyTr and valueTr.
         /// </summary>

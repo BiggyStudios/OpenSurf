@@ -1,4 +1,4 @@
-﻿#if UNITY_2018_3_OR_NEWER
+#if UNITY_2018_3_OR_NEWER
 #define UNITY_SOCKET_FIX
 #endif
 using System;
@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+
 using LiteNetLib.Layers;
 using LiteNetLib.Utils;
 
@@ -1306,7 +1307,7 @@ namespace LiteNetLib
                 _peersLock.ExitReadLock();
             }
         }
-        
+
         /// <summary>
         /// Send message without connection
         /// </summary>

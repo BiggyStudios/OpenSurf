@@ -1,14 +1,16 @@
-﻿using FishNet.CodeGenerating.Extension;
+using System.Collections.Generic;
+using System.Linq;
+
+using FishNet.CodeGenerating.Extension;
 using FishNet.CodeGenerating.Helping;
 using FishNet.CodeGenerating.Helping.Extension;
 using FishNet.CodeGenerating.Processing.Rpc;
 using FishNet.Configuring;
 using FishNet.Object;
+
 using MonoFN.Cecil;
 using MonoFN.Cecil.Cil;
 using MonoFN.Collections.Generic;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace FishNet.CodeGenerating.Processing
 {
@@ -79,7 +81,7 @@ namespace FishNet.CodeGenerating.Processing
                 CreateNetworkInitializeMethods(td, out networkInitializeIfDisabledMd);
                 CallNetworkInitializesFromNetworkInitializeIfDisabled(networkInitializeIfDisabledMd);
 
-                
+
 
                 /* Prediction. */
                 /* Run prediction first since prediction will modify
@@ -198,7 +200,7 @@ namespace FishNet.CodeGenerating.Processing
             return false;
         }
 
-        
+
 
         /// <summary>
         /// Calls the next awake method if the nested awake was created by codegen.

@@ -1,9 +1,12 @@
-﻿using FishNet.CodeGenerating;
+using System.Collections.Generic;
+
+using FishNet.CodeGenerating;
 using FishNet.Component.Prediction;
 using FishNet.Managing;
 using FishNet.Serializing;
+
 using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Scripting;
 
@@ -116,14 +119,14 @@ namespace FishNet.Object.Prediction
 
         [DefaultDeltaReader]
         public static PredictionRigidbody.EntryData ReadDeltaEntryData(this Reader r) => r.ReadEntryData();
-        
+
         [DefaultDeltaWriter]
         public static bool WriteDeltaPredictionRigidbody(this Writer w, PredictionRigidbody pr)
         {
             w.WritePredictionRigidbody(pr);
             return true;
         }
-        
+
         [DefaultDeltaReader]
         public static PredictionRigidbody ReadDeltaPredictionRigidbody(this Reader r) => r.ReadPredictionRigidbody();
     }

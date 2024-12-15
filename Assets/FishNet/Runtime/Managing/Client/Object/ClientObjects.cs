@@ -1,6 +1,10 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.Connection;
 using FishNet.Documenting;
 using FishNet.Managing.Logging;
@@ -10,14 +14,13 @@ using FishNet.Managing.Utility;
 using FishNet.Object;
 using FishNet.Object.Helping;
 using FishNet.Serializing;
+using FishNet.Serializing.Helping;
 using FishNet.Transporting;
 using FishNet.Utility.Extension;
 using FishNet.Utility.Performance;
+
 using GameKit.Dependencies.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using FishNet.Serializing.Helping;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -97,7 +100,7 @@ namespace FishNet.Managing.Client
                     {
                         if (!n.CanDeinitialize(asServer: false))
                             continue;
-                        
+
                         n.InvokeStopCallbacks(false, true);
                         n.SetInitializedStatus(false, false);
                     }
@@ -313,7 +316,7 @@ namespace FishNet.Managing.Client
             int nextObjectId = reader.ReadNetworkObjectId();
             if (nextObjectId != NetworkObject.UNSET_OBJECTID_VALUE)
                 NetworkManager.ClientManager.Connection.PredictedObjectIds.Enqueue(nextObjectId);
-            
+
             /* If successful then read and apply RPCLinks.
              * Otherwise, find and deinitialize/destroy failed predicted spawn. */
             if (success)
@@ -394,7 +397,7 @@ namespace FishNet.Managing.Client
         internal void ReadSpawn(PooledReader reader)
         {
             SpawnType st = (SpawnType)reader.ReadUInt8Unpacked();
-            
+
             bool sceneObject = st.FastContains(SpawnType.Scene);
 
             ReadNestedSpawnIds(reader, st, out byte? nobComponentId, out int? parentObjectId, out byte? parentComponentId, _objectCache.ReadSpawningObjects);

@@ -1,9 +1,13 @@
-﻿//This file contains values serialized in editor or once at runtime.
+//This file contains values serialized in editor or once at runtime.
 
 using UnityEngine;
+
 using System;
+
 using GameKit.Dependencies.Utilities;
+
 using System.Collections.Generic;
+
 using FishNet.Managing;
 using FishNet.Utility.Extension;
 
@@ -123,8 +127,8 @@ namespace FishNet.Object
                 bool canGenerate = (!item.IsSceneObject || !setIds.Add(item.SceneId));
                 /* If an Id has not been generated yet or if it
                  * already exist then rebuild for this object. */
-                 if (force || canGenerate)
-                 {
+                if (force || canGenerate)
+                {
                     item.SceneId = NetworkObject.UNSET_SCENEID_VALUE;
                     rebuildingNobs.Add(item);
                 }

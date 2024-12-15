@@ -1,9 +1,11 @@
-﻿using FishNet.Authenticating;
+using System;
+
+using FishNet.Authenticating;
 using FishNet.Connection;
 using FishNet.Managing;
 using FishNet.Managing.Logging;
 using FishNet.Transporting;
-using System;
+
 using UnityEngine;
 
 namespace FishNet.Example.Authenticating

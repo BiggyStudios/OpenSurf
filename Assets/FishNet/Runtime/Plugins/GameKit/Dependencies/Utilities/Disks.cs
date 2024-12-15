@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.IO;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities

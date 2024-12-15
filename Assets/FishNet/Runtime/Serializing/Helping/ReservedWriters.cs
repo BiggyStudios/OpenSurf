@@ -1,6 +1,9 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
+
 using FishNet.Managing;
+
 using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Serializing.Helping

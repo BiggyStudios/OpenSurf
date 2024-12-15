@@ -1,4 +1,5 @@
-﻿using FishNet.Managing.Statistic;
+using FishNet.Managing.Statistic;
+
 using UnityEngine;
 
 namespace FishNet.Component.Utility

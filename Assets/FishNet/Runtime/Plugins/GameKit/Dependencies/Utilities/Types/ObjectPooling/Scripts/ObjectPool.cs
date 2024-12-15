@@ -1,6 +1,8 @@
-﻿using GameKit.Dependencies.Utilities;
 using System.Collections;
 using System.Collections.Generic;
+
+using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace GameKit.Dependencies.Utilities.ObjectPooling
@@ -82,7 +84,7 @@ namespace GameKit.Dependencies.Utilities.ObjectPooling
 
         private void Update()
         {
-            
+
         }
         private void Start()
         {

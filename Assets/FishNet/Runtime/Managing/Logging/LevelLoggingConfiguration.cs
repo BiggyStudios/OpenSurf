@@ -1,9 +1,11 @@
-﻿#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
 #define DEVELOPMENT
 #endif
-using FishNet.Documenting;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Documenting;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Logging
@@ -102,7 +104,7 @@ namespace FishNet.Managing.Logging
         /// <summary>
         /// Logs a common value if can log.
         /// </summary>
-        
+
         public override void Log(string value)
         {
             if (CanLog(LoggingType.Common))
@@ -112,7 +114,7 @@ namespace FishNet.Managing.Logging
         /// <summary>
         /// Logs a warning value if can log.
         /// </summary>
-        
+
         public override void LogWarning(string value)
         {
             if (CanLog(LoggingType.Warning))
@@ -122,7 +124,7 @@ namespace FishNet.Managing.Logging
         /// <summary>
         /// Logs an error value if can log.
         /// </summary>
-        
+
         public override void LogError(string value)
         {
             if (CanLog(LoggingType.Error))

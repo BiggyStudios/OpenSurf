@@ -1,5 +1,6 @@
-﻿using MonoFN.Cecil;
 using System.Collections.Generic;
+
+using MonoFN.Cecil;
 
 namespace FishNet.CodeGenerating.Helping
 {

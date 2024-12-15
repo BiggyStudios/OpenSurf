@@ -1,4 +1,5 @@
-﻿using FishNet.Object;
+using FishNet.Object;
+
 using UnityEngine;
 
 
@@ -28,7 +29,7 @@ namespace FishNet.Demo.Benchmarks.NetworkTransforms
 
             NetworkObject prefab = _prefab;
             Vector3 currentPosition = transform.position;
-            
+
             for (int i = 0; i < _count; i++)
             {
                 NetworkObject nob = Instantiate(prefab, currentPosition, Quaternion.identity);

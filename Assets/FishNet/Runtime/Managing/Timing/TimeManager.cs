@@ -1,10 +1,14 @@
-﻿using FishNet.Connection;
-using FishNet.Serializing;
-using FishNet.Transporting;
-using GameKit.Dependencies.Utilities;
 using System;
 using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
+using FishNet.Serializing;
+using FishNet.Transporting;
+
+using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
+
 using SystemStopwatch = System.Diagnostics.Stopwatch;
 
 namespace FishNet.Managing.Timing
@@ -830,7 +834,7 @@ namespace FishNet.Managing.Timing
         /// </summary>
         /// <param name="tickType">TickType to compare against.</param>
         /// <returns></returns>
-        
+
         public double TicksToTime(TickType tickType = TickType.LocalTick)
         {
             if (tickType == TickType.LocalTick)
@@ -857,7 +861,7 @@ namespace FishNet.Managing.Timing
         /// </summary>
         /// <param name="pt">PreciseTick to convert.</param>
         /// <returns></returns>
-        
+
         public double TicksToTime(PreciseTick pt)
         {
             double tickTime = TicksToTime(pt.Tick);
@@ -881,7 +885,7 @@ namespace FishNet.Managing.Timing
         /// <param name="currentTick">The current tick.</param>
         /// <param name="previousTick">The previous tick.</param>
         /// <returns></returns>
-        
+
         public double TimePassed(uint currentTick, uint previousTick)
         {
             double multiplier;
@@ -906,7 +910,7 @@ namespace FishNet.Managing.Timing
         /// <param name="preciseTick">PreciseTick value to compare against.</param>
         /// <param name="allowNegative">True to allow negative values. When false and value would be negative 0 is returned.</param>
         /// <returns></returns>
-        
+
         public double TimePassed(PreciseTick preciseTick, bool allowNegative = false)
         {
             PreciseTick currentPt = GetPreciseTick(TickType.Tick);
@@ -933,7 +937,7 @@ namespace FishNet.Managing.Timing
         /// <param name="previousTick">The previous tick.</param>
         /// <param name="allowNegative">True to allow negative values. When false and value would be negative 0 is returned.</param>
         /// <returns></returns>
-        
+
         public double TimePassed(uint previousTick, bool allowNegative = false)
         {
             uint currentTick = Tick;
@@ -962,7 +966,7 @@ namespace FishNet.Managing.Timing
         /// </summary>
         /// <param name="time">Time to convert.</param>
         /// <returns></returns>
-        
+
         public uint TimeToTicks(double time, TickRounding rounding = TickRounding.RoundNearest)
         {
             double result = (time / TickDelta);
@@ -974,7 +978,7 @@ namespace FishNet.Managing.Timing
             else
                 return (uint)Math.Ceiling(result);
         }
-        
+
         /// <summary>
         /// Converts time to a PreciseTick.
         /// </summary>
@@ -983,14 +987,14 @@ namespace FishNet.Managing.Timing
         public PreciseTick TimeToPreciseTick(double time)
         {
             double delta = TickDelta;
-            
+
             uint ticks = (uint)Math.Floor(time / delta);
             double percent = (time % delta);
 
             return new PreciseTick(ticks, percent);
         }
 
-        
+
         /// <summary>
         /// Estimatedly converts a synchronized tick to what it would be for the local tick.
         /// </summary>

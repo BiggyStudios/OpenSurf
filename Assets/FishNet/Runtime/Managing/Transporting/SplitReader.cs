@@ -1,5 +1,7 @@
-﻿using FishNet.Serializing;
 using System;
+
+using FishNet.Serializing;
+
 using UnityEngine;
 
 namespace FishNet.Managing.Transporting

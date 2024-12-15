@@ -1,8 +1,10 @@
-﻿using FishNet.CodeGenerating.ILCore;
-using MonoFN.Cecil;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+
+using FishNet.CodeGenerating.ILCore;
+
+using MonoFN.Cecil;
 
 namespace FishNet.CodeGenerating.Helping.Extension
 {
@@ -18,7 +20,7 @@ namespace FishNet.CodeGenerating.Helping.Extension
         {
             if (namespaceName.Length == 0)
                 namespaceName = FishNetILPP.RUNTIME_ASSEMBLY_NAME;
-            
+
             return moduleDef.GetType(namespaceName, className);
         }
 

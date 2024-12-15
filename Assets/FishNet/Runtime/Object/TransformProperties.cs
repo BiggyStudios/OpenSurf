@@ -1,5 +1,7 @@
-﻿using GameKit.Dependencies.Utilities;
 using System.Runtime.CompilerServices;
+
+using GameKit.Dependencies.Utilities;
+
 using UnityEngine;
 
 namespace FishNet.Object
@@ -21,30 +23,30 @@ namespace FishNet.Object
 
         public void InitializeState() { }
 
-        
+
         public void ResetState()
         {
             Update(Vector3.zero, Quaternion.identity, Vector3.zero);
         }
 
-        
+
         public void Update(Transform t)
         {
             Update(t.position, t.rotation, t.localScale);
         }
 
-        
+
         public void Update(TransformPropertiesCls tp)
         {
             Update(tp.Position, tp.Rotation, tp.LocalScale);
         }
-        
+
         public void Update(TransformProperties tp)
         {
             Update(tp.Position, tp.Rotation, tp.LocalScale);
         }
 
-        
+
         public void Update(Vector3 position, Quaternion rotation)
         {
             Update(position, rotation, LocalScale);
@@ -92,25 +94,25 @@ namespace FishNet.Object
             LocalScale = localScale;
         }
 
-        
+
         public void Reset()
         {
             Update(Vector3.zero, Quaternion.identity, Vector3.zero);
         }
 
-        
+
         public void Update(Transform t)
         {
             Update(t.position, t.rotation, t.localScale);
         }
 
-        
+
         public void Update(TransformProperties tp)
         {
             Update(tp.Position, tp.Rotation, tp.LocalScale);
         }
 
-        
+
         public void Update(Vector3 position, Quaternion rotation)
         {
             Update(position, rotation, LocalScale);

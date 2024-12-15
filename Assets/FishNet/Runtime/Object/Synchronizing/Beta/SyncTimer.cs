@@ -1,11 +1,13 @@
-﻿#if !FISHNET_STABLE_MODE
+#if !FISHNET_STABLE_MODE
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
 using FishNet.CodeGenerating;
 using FishNet.Documenting;
 using FishNet.Object.Synchronizing.Internal;
 using FishNet.Serializing;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Object.Synchronizing

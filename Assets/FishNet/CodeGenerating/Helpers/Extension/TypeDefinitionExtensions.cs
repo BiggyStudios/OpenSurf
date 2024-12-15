@@ -1,9 +1,12 @@
-﻿using FishNet.CodeGenerating.Extension;
-using MonoFN.Cecil;
-using MonoFN.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using FishNet.CodeGenerating.Extension;
+
+using MonoFN.Cecil;
+using MonoFN.Collections.Generic;
+
 using UnityEngine;
 
 namespace FishNet.CodeGenerating.Helping.Extension
@@ -346,7 +349,7 @@ namespace FishNet.CodeGenerating.Helping.Extension
         /// <param name="typeDef"></param>
         /// <param name="ClassTypeFullName"></param>
         /// <returns></returns>
-        internal static bool IsSubclassOf(this TypeDefinition typeDef,CodegenSession session, string ClassTypeFullName)
+        internal static bool IsSubclassOf(this TypeDefinition typeDef, CodegenSession session, string ClassTypeFullName)
         {
             if (!typeDef.IsClass) return false;
 

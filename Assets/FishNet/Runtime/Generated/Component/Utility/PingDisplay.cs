@@ -1,4 +1,5 @@
-﻿using FishNet.Managing.Timing;
+using FishNet.Managing.Timing;
+
 using UnityEngine;
 
 namespace FishNet.Component.Utility

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -15,17 +15,17 @@ namespace LiteNetLib.Utils
 
         public int Capacity
         {
-            
+
             get => _data.Length;
         }
         public byte[] Data
         {
-            
+
             get => _data;
         }
         public int Length
         {
-            
+
             get => _position;
         }
 
@@ -60,7 +60,7 @@ namespace LiteNetLib.Utils
                 netDataWriter.Put(bytes);
                 return netDataWriter;
             }
-            return new(true, 0) {_data = bytes, _position = bytes.Length};
+            return new(true, 0) { _data = bytes, _position = bytes.Length };
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace LiteNetLib.Utils
             return netDataWriter;
         }
 
-        
+
         public void ResizeIfNeed(int newSize)
         {
             if (_data.Length < newSize)
@@ -92,7 +92,7 @@ namespace LiteNetLib.Utils
             }
         }
 
-        
+
         public void EnsureFit(int additionalSize)
         {
             if (_data.Length < _position + additionalSize)
@@ -267,7 +267,7 @@ namespace LiteNetLib.Utils
 
         public void PutArray(Array arr, int sz)
         {
-            ushort length = arr == null ? (ushort) 0 : (ushort)arr.Length;
+            ushort length = arr == null ? (ushort)0 : (ushort)arr.Length;
             sz *= length;
             if (_autoResize)
                 ResizeIfNeed(_position + sz + 2);
@@ -337,7 +337,7 @@ namespace LiteNetLib.Utils
             for (int i = 0; i < strArrayLength; i++)
                 Put(value[i], strMaxLength);
         }
-        
+
         public void PutArray<T>(T[] value) where T : INetSerializable, new()
         {
             ushort strArrayLength = (ushort)(value?.Length ?? 0);

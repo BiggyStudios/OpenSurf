@@ -1,13 +1,16 @@
-﻿using FishNet.Connection;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+
+using FishNet.Connection;
 using FishNet.Managing;
 using FishNet.Managing.Logging;
 using FishNet.Managing.Server;
 using FishNet.Object;
 using FishNet.Observing;
+
 using GameKit.Dependencies.Utilities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
+
 using UnityEngine;
 
 namespace FishNet.Component.Observing
@@ -477,7 +480,7 @@ namespace FishNet.Component.Observing
         /// <param name="match">Match to remove conn from.</param>
         /// <param name="conn">Connection to remove from match.</param>
         /// <param name="manager">NetworkManager to rebuild observers on. If null InstanceFinder.NetworkManager will be used.</param>
-        
+
         public static bool RemoveFromMatch(int match, NetworkConnection conn, NetworkManager manager = null)
         {
             return RemoveFromMatch(match, conn, manager, true);
@@ -488,7 +491,7 @@ namespace FishNet.Component.Observing
         /// <param name="match">Match to remove conns from.</param>
         /// <param name="conns">Connections to remove from match.</param>
         /// <param name="manager">NetworkManager to rebuild observers on. If null InstanceFinder.NetworkManager will be used.</param>
-        
+
         public static void RemoveFromMatch(int match, NetworkConnection[] conns, NetworkManager manager)
         {
             RemoveFromMatch(match, conns.ToList(), manager);
@@ -499,7 +502,7 @@ namespace FishNet.Component.Observing
         /// <param name="match">Match to remove conns from.</param>
         /// <param name="conns">Connections to remove from match.</param>
         /// <param name="manager">NetworkManager to rebuild observers on. If null InstanceFinder.NetworkManager will be used.</param>
-        
+
         public static void RemoveFromMatch(int match, List<NetworkConnection> conns, NetworkManager manager)
         {
             bool removed = false;
@@ -587,7 +590,7 @@ namespace FishNet.Component.Observing
         /// <param name="match">Match to remove conn from.</param>
         /// <param name="nob">NetworkObject to remove from match.</param>
         /// <param name="manager">NetworkManager to rebuild observers on. If null InstanceFinder.NetworkManager will be used.</param>
-        
+
         public static void RemoveFromMatch(int match, NetworkObject nob, NetworkManager manager = null)
         {
             Dictionary<int, HashSet<NetworkObject>> matchObjects = GetMatchObjects(manager);
@@ -620,7 +623,7 @@ namespace FishNet.Component.Observing
         /// <param name="match">Match to remove conns from.</param>
         /// <param name="nobs">NetworkObjects to remove from match.</param>
         /// <param name="manager">NetworkManager to rebuild observers on. If null InstanceFinder.NetworkManager will be used.</param>
-        
+
         public static void RemoveFromMatch(int match, NetworkObject[] nobs, NetworkManager manager = null)
         {
             Dictionary<int, HashSet<NetworkObject>> matchObjects = GetMatchObjects(manager);
@@ -649,7 +652,7 @@ namespace FishNet.Component.Observing
         /// <param name="match">Match to remove conns from.</param>
         /// <param name="nobs">NetworkObjects to remove from match.</param>
         /// <param name="manager">NetworkManager to rebuild observers on. If null InstanceFinder.NetworkManager will be used.</param>
-        
+
         public static void RemoveFromMatch(int match, List<NetworkObject> nobs, NetworkManager manager = null)
         {
             Dictionary<int, HashSet<NetworkObject>> matchObjects = GetMatchObjects(manager);

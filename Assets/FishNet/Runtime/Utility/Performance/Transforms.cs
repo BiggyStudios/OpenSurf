@@ -1,5 +1,7 @@
-﻿using FishNet.Object;
 using System.Collections.Generic;
+
+using FishNet.Object;
+
 using UnityEngine;
 
 namespace FishNet.Utility.Performance

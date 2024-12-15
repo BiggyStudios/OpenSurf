@@ -1,4 +1,5 @@
-﻿using FishNet.Managing.Predicting;
+using FishNet.Managing.Predicting;
+
 using UnityEngine;
 
 namespace FishNet.Component.Prediction
@@ -11,7 +12,7 @@ namespace FishNet.Component.Prediction
         /// </summary>
         [Tooltip("Type of prediction movement which is being used.")]
         [SerializeField]
-        private RigidbodyType _rigidbodyType;  
+        private RigidbodyType _rigidbodyType;
         /// <summary>
         /// True to also get rigidbody components within children.
         /// </summary>

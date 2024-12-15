@@ -1,8 +1,11 @@
-﻿#if UNITY_EDITOR
-using FishNet.Managing;
+#if UNITY_EDITOR
 using System.Collections.Generic;
+
+using FishNet.Managing;
+
 using UnityEditor;
 using UnityEditor.Build;
+
 using UnityEngine;
 
 namespace FishNet
@@ -49,7 +52,7 @@ namespace FishNet
             {
                 "FISHNET",
                 thisVersion,
-                
+
             };
             bool modified = false;
             //Now add FN defines.
@@ -60,9 +63,9 @@ namespace FishNet
             modified |= definesHs.Remove("PREDICTION_V2");
             /* Remove pro define if not on pro. This might look a little
              * funny because the code below varies depending on if pro or not. */
-            
+
 #pragma warning disable CS0162 // Unreachable code detected
-                modified |= definesHs.Remove(proDefine);
+            modified |= definesHs.Remove(proDefine);
 #pragma warning restore CS0162 // Unreachable code detected
 
             List<string> definesToRemove = new();

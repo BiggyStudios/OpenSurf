@@ -1,4 +1,5 @@
 using TMPro;
+
 using UnityEngine;
 
 public class ScoreboardItemScript : MonoBehaviour
@@ -24,7 +25,7 @@ public class ScoreboardItemScript : MonoBehaviour
     {
         if (time == float.MaxValue)
             return "---";
-        
+
         int mins = (int)(time / 60f);
         int secs = (int)(time % 60f);
         int milisecs = (int)((time * 100f) % 100f);

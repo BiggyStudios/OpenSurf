@@ -1,4 +1,4 @@
-﻿namespace FishNet.Object.Synchronizing
+namespace FishNet.Object.Synchronizing
 {
     public enum SyncTimerOperation : byte
     {

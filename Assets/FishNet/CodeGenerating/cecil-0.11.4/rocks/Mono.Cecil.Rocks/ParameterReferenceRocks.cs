@@ -1,11 +1,13 @@
 
-namespace MonoFN.Cecil.Rocks {
+namespace MonoFN.Cecil.Rocks
+{
 
-	public static class ParameterReferenceRocks {
+    public static class ParameterReferenceRocks
+    {
 
-		public static int GetSequence (this ParameterReference self)
-		{
-			return self.Index + 1;
-		}
-	}
+        public static int GetSequence(this ParameterReference self)
+        {
+            return self.Index + 1;
+        }
+    }
 }

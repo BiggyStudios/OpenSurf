@@ -20,7 +20,7 @@ namespace FishNet.Transporting.Yak
             return _connectionState;
         }
 
-        
+
         #endregion
 
         #region Protected.
@@ -43,7 +43,7 @@ namespace FishNet.Transporting.Yak
         /// </summary>
         internal void ClearQueue(ref Queue<LocalPacket> queue)
         {
-            
+
         }
     }
 
