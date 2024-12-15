@@ -1,11 +1,6 @@
-using BananaUtils.OnScreenDebugger.Scripts;
-
 using FishNet.Object;
-
 using TMPro;
-
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace P90brush
 {

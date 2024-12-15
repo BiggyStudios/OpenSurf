@@ -18,21 +18,15 @@ public class MainMenuScript : MonoBehaviour
         ModeSelect
     }
 
-    [SerializeField]
-    private float _transitionTime;
-    [SerializeField]
-    private List<MenuScreenItem> _menuScreenItems;
+    [SerializeField] private float _transitionTime;
+    [SerializeField] private List<MenuScreenItem> _menuScreenItems;
 
-    [SerializeField]
-    private GameObject _capsule;
-    [SerializeField]
-    private GameObject _capsule2;
-    [SerializeField]
-    private GameObject _capsuleText;
-    [SerializeField]
-    private Vector3 _modeSelectPos;
-    [SerializeField]
-    private Quaternion _modeSelectRot;
+    [SerializeField] private GameObject _capsule;
+    [SerializeField] private GameObject _capsule2;
+    [SerializeField] private GameObject _capsule3;
+    [SerializeField] private GameObject _capsuleText;
+    [SerializeField] private Vector3 _modeSelectPos;
+    [SerializeField] private Quaternion _modeSelectRot;
 
     private MenuScreen _menuScreen;
 
@@ -48,9 +42,6 @@ public class MainMenuScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-            SetScreen(MenuScreen.InitialScreen);
-
         if (_menuScreen != MenuScreen.InitialScreen)
             return;
 
@@ -112,14 +103,9 @@ public class MainMenuScript : MonoBehaviour
         SetScreen(MenuScreen.ModeSelect);
     }
 
-    public void Solo()
+    public void Back()
     {
-        Debug.Log("Solo");
-    }
-
-    public void Multi()
-    {
-        Debug.Log("Multi");
+        SetScreen(MenuScreen.InitialScreen);
     }
 
     private Coroutine _initialScreenCoroutine;
@@ -140,6 +126,7 @@ public class MainMenuScript : MonoBehaviour
             _capsule.transform.localPosition = Vector3.Lerp(startPosition, _startPos, lerpPos);
             _capsule2.transform.localScale = Vector3.Lerp(startScale, Vector3.zero, lerpPos);
             _capsuleText.transform.localScale = Vector3.Lerp(startScaleText, Vector3.zero, lerpPos);
+            _capsule3.transform.localScale = Vector3.Lerp(startScale, Vector3.zero, lerpPos);
 
             yield return null;
         }
@@ -169,6 +156,7 @@ public class MainMenuScript : MonoBehaviour
             _capsule.transform.localRotation = Quaternion.Lerp(startRotation, _modeSelectRot, lerpPos);
             _capsule2.transform.localScale = Vector3.Lerp(startScale, new Vector3(1f, 1.5f, 1f), lerpPos);
             _capsuleText.transform.localScale = Vector3.Lerp(startScaleText, new Vector3(0.5f, 0.5f, 0.5f), lerpPos);
+            _capsule3.transform.localScale = Vector3.Lerp(startScale, new Vector3(1f, 1.5f, 1f), lerpPos);
 
             yield return null;
         }
@@ -177,6 +165,7 @@ public class MainMenuScript : MonoBehaviour
         _capsule.transform.localRotation = _modeSelectRot;
         _capsule2.transform.localScale = new Vector3(1f, 1.5f, 1f);
         _capsuleText.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        _capsule3.transform.localScale = new Vector3(1f, 1.5f, 1f);
         _menuScreen = MenuScreen.ModeSelect;
     }
 }
