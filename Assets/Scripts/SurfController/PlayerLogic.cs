@@ -15,14 +15,16 @@ namespace P90brush
         public float _jumpForce = 40f;
 
         [Header("TEMP")]
-        [SerializeField] private MeshRenderer _glassesMeshRenderer;
-        [SerializeField] private GameObject _ui;
-        [SerializeField] private TMP_Text _speed;
+        [SerializeField]
+        private MeshRenderer _glassesMeshRenderer;
+        [SerializeField]
+        private GameObject _ui;
+        [SerializeField]
+        private TMP_Text _speed;
 
         [Header("Physics Settings")]
         public int _tickRate = 128;
         public Camera _fpsCamera;
-
 
         [Header("Movement Config")]
         [SerializeField]
@@ -32,29 +34,30 @@ namespace P90brush
         [SerializeField]
         public Hookshot _hookshot;
 
-
-        #region =============================== Private Properties ===============================#
+        #region == == == == == == == == == == == == == == == = Private Properties == == == == == == == == == == == == == == == = #
 
         private PlayerManager _playerManager;
 
-        //Var set in Start() callback
+        // Var set in Start() callback
         private Rigidbody _rb;
         private Collider _collider;
-        //private Quaternion originalRotation;
+        // private Quaternion originalRotation;
         private Vector3 _startPosition;
         private Quaternion _originalRotation;
 
-        //Surf Oject
+        // Surf Oject
         private SurfController _controller = new SurfController();
 
-        #endregion ===============================================================================#
+        #endregion == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == = #
 
-
-        #region =============================== ISurfControllable Impl ===============================#
+        #region == == == == == == == == == == == == == == == = ISurfControllable Impl == == == == == == == == == == == == == == == = #
 
         public MovementConfig MoveConfig
         {
-            get { return moveConfig; }
+            get
+            {
+                return moveConfig;
+            }
         }
 
         public PlayerData PlayerData { get; } = new PlayerData();
@@ -63,17 +66,23 @@ namespace P90brush
 
         public Collider Collider
         {
-            get { return _collider; }
+            get
+            {
+                return _collider;
+            }
         }
 
         public Vector3 BaseVelocity { get; }
 
         public Camera FpsCamera
         {
-            get { return _fpsCamera; }
+            get
+            {
+                return _fpsCamera;
+            }
         }
 
-        #endregion ===================================================================================#
+        #endregion == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == = #
 
         private void Awake()
         {
@@ -106,7 +115,7 @@ namespace P90brush
             _playerManager = GetComponent<PlayerManager>();
             _rb = GetComponent<Rigidbody>();
             _rb.isKinematic = true;
-            _rb.freezeRotation = true; //Encore utile ??
+            _rb.freezeRotation = true; // Encore utile ??
 
             // Setup Collider
             _collider = gameObject.GetComponent<Collider>();
@@ -150,7 +159,7 @@ namespace P90brush
             }
 
             float fixedDeltaTime = Time.fixedDeltaTime;
-            _hookshot.CatchMovement(this, fixedDeltaTime);//Todo: Improve
+            _hookshot.CatchMovement(this, fixedDeltaTime); // Todo: Improve
             _controller.ProcessMovement(this, moveConfig, fixedDeltaTime);
 
             ApplyPlayerMovement();
@@ -163,7 +172,7 @@ namespace P90brush
 
         private void UpdateHook()
         {
-            if (!InputData.HookPressedLastUpdate && InputData.HookPressed) //Player has Started to Press to the Hook Button
+            if (!InputData.HookPressedLastUpdate && InputData.HookPressed) // Player has Started to Press to the Hook Button
                 _hookshot.TriggerHook(this);
             _hookshot.CheckForRelease(this);
         }

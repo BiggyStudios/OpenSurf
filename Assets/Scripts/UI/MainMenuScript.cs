@@ -70,30 +70,30 @@ public class MainMenuScript : MonoBehaviour
         switch (newScreen)
         {
             case MenuScreen.InitialScreen:
-                if (InitialScreenCoroutine != null)
+                if (_initialScreenCoroutine != null)
                 {
-                    StopCoroutine(InitialScreenCoroutine);
-                    InitialScreenCoroutine = null;
-                    InitialScreenCoroutine = StartCoroutine(InitialScreenRoutine());
+                    StopCoroutine(_initialScreenCoroutine);
+                    _initialScreenCoroutine = null;
+                    _initialScreenCoroutine = StartCoroutine(InitialScreenRoutine());
                 }
 
                 else
                 {
-                    InitialScreenCoroutine = StartCoroutine(InitialScreenRoutine());
+                    _initialScreenCoroutine = StartCoroutine(InitialScreenRoutine());
                 }
                 break;
 
             case MenuScreen.ModeSelect:
-                if (InitialScreenCoroutine != null)
+                if (_initialScreenCoroutine != null)
                 {
-                    StopCoroutine(ModeSelectCoroutine);
-                    ModeSelectCoroutine = null;
-                    ModeSelectCoroutine = StartCoroutine(ModeSelectScreenRoutine());
+                    StopCoroutine(_modeSelectCoroutine);
+                    _modeSelectCoroutine = null;
+                    _modeSelectCoroutine = StartCoroutine(ModeSelectScreenRoutine());
                 }
 
                 else
                 {
-                    ModeSelectCoroutine = StartCoroutine(ModeSelectScreenRoutine());
+                    _modeSelectCoroutine = StartCoroutine(ModeSelectScreenRoutine());
                 }
                 break;
         }
@@ -122,7 +122,7 @@ public class MainMenuScript : MonoBehaviour
         Debug.Log("Multi");
     }
 
-    private Coroutine InitialScreenCoroutine;
+    private Coroutine _initialScreenCoroutine;
     private IEnumerator InitialScreenRoutine()
     {
         float lerpPos = 0f;
@@ -150,7 +150,7 @@ public class MainMenuScript : MonoBehaviour
         _menuScreen = MenuScreen.InitialScreen;
     }
 
-    private Coroutine ModeSelectCoroutine;
+    private Coroutine _modeSelectCoroutine;
     private IEnumerator ModeSelectScreenRoutine()
     {
         float lerpPos = 0f;
