@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class WireframeComputor : MonoBehaviour
 {
-    private static Color[] _COLORS = new Color[]
+    private static Color[] _colors = new Color[]
         {
             Color.red,
             Color.green,
@@ -83,7 +83,7 @@ public class WireframeComputor : MonoBehaviour
 
         Color[] colors = new Color[n];
         for (int i = 0; i < n; i++)
-            colors[i] = labels[i] > 0 ? _COLORS[labels[i] - 1] : _COLORS[0];
+            colors[i] = labels[i] > 0 ? _colors[labels[i] - 1] : _colors[0];
 
         return colors;
     }

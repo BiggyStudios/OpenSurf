@@ -1,14 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
-using BNNUtils;
-
 using FishNet.Object;
-
-using TMPro;
-
 using UnityEngine;
 
 public class Scoreboard : NetworkBehaviour
