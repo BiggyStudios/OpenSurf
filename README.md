@@ -20,7 +20,7 @@ A movement game
 
 
 ## Wiki
-Check out the **[Wiki](https://github.com/IckyTheBiggy/OpenSurf/wiki)** for full documentation on mapping etc.
+Check out the **[Wiki](https://github.com/BiggyStudios/OpenSurf/wiki)** for full documentation on mapping etc.
 
 ## Contributing
 
