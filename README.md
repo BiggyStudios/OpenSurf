@@ -1,7 +1,7 @@
-# BeatRunner
+# Open Surf
 
 ## About
-A Movement Game
+A movement game
 
 
 ![Screenshot](Files/Screenshots/2024-12-09_22-01.png)
@@ -20,7 +20,7 @@ A Movement Game
 
 
 ## Wiki
-Check out the **[Wiki](https://github.com/IckyTheBiggy/BeatRunner/wiki)** for full documentation on mapping etc.
+Check out the **[Wiki](https://github.com/IckyTheBiggy/OpenSurf/wiki)** for full documentation on mapping etc.
 
 ## Contributing
 
