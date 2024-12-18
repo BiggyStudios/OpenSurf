@@ -183,6 +183,8 @@ namespace P90brush
 
         private void ApplyMouseMovement()
         {
+            if (PlayerManager.Instance.PauseMenuOpen)
+                return;
             // Get the rotation you will be at next as a Quaternion
             Quaternion yQuaternion = Quaternion.AngleAxis(PlayerData.ViewAngles.x, Vector3.right);
             Quaternion xQuaternion = Quaternion.AngleAxis(PlayerData.ViewAngles.y, Vector3.up);

@@ -15,6 +15,7 @@ public class PlayerManager : NetworkBehaviour
     [HideInInspector] public string Username;
     [HideInInspector] public float PlayerTime;
     [HideInInspector] public bool TimerActive;
+    [HideInInspector] public bool PauseMenuOpen;
 
     [Header("Values")]
     [SerializeField] private float _restartLerpSpeed;
@@ -30,7 +31,6 @@ public class PlayerManager : NetworkBehaviour
 
     private CapsuleCollider _capsuleCollider;
     private Vector3 _spawnPosition;
-    private bool _pauseMenuOpen;
     private Camera _playerCam;
 
     private PlayerLogic _playerLogic;
@@ -79,21 +79,21 @@ public class PlayerManager : NetworkBehaviour
             Restart();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !_pauseMenuOpen)
+        if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenuOpen)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-            _pauseMenuOpen = true;
+            PauseMenuOpen = true;
             _pauseMenu.SetActive(true);
         }
 
-        else if (Input.GetKeyDown(KeyCode.Escape) && _pauseMenuOpen)
+        else if (Input.GetKeyDown(KeyCode.Escape) && PauseMenuOpen)
         {
-            Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            PauseMenuOpen = false;
 
-            _pauseMenuOpen = false;
             _pauseMenu.SetActive(false);
         }
     }

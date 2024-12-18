@@ -57,7 +57,6 @@ public class PlayerTimer : NetworkBehaviour
 
         if (hit.transform == null)
         {
-            Debug.Log("Yes");
             PlayerManager.Instance.TimerActive = true;
         }
     }
