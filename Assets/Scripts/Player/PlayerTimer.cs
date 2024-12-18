@@ -53,12 +53,12 @@ public class PlayerTimer : NetworkBehaviour
     private void CheckStart()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.up, out hit, 2f))
+        Physics.Raycast(transform.position, -transform.up, out hit, 5f);
+
+        if (hit.transform == null)
         {
-            if (!hit.transform.CompareTag("Start"))
-            {
-                PlayerManager.Instance.TimerActive = true;
-            }
+            Debug.Log("Yes");
+            PlayerManager.Instance.TimerActive = true;
         }
     }
 

@@ -9,6 +9,7 @@ A movement game
 ## Roadmap
 
 - [ ] More Movement Mechanics
+- [ ] Knives
 - [ ] Better Music Visualizers Using VFX Graph and Different Types of Visualizers
 - [ ] Make Visualizers React to your Own Music Either Via Getting Background Music or Adding your Own Music
 - [ ] Implementation for Making Custom Maps and Mods with Unity
