@@ -18,6 +18,7 @@ A movement game
 - [ ] Leaderboard Database Tracking The Top Time For Every Map
 - [ ] Different Movement Types(Source, Rigidbody, .Etc)
 - [ ] Possibly Add a Movement PVP Mode(Combat Surf)
+- [ ] Rythm Based Surfing Mode(Rythm Surf)
 
 
 ## Wiki
