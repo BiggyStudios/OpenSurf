@@ -4,9 +4,8 @@ using FishNet.Transporting;
 using BananaUtils.OnScreenDebugger.Scripts;
 using FishNet.Transporting.Tugboat;
 
-public class MainMenuManager : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
-    public static MainMenuManager Instance { get; private set; }
     [HideInInspector] public Mode GameMode;
 
     public enum Mode
@@ -20,19 +19,6 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private GameObject _menuCamera;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void StartSolo()
     {
