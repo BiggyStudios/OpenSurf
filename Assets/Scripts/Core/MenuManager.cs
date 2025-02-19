@@ -20,6 +20,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private GameObject _menuCamera;
 
+    public string TestValue = "CumBall";
+
     public void StartSolo()
     {
         var transport = _networkManager.GetComponent<Tugboat>();

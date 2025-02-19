@@ -1,4 +1,3 @@
-using Unity.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -23,12 +22,13 @@ public class GameManager : MonoBehaviour
     private MenuManager _menuManager;
     public static MenuManager MenuManager => Instance._menuManager;
     
-
     private MapLoader _mapLoader;
     public static MapLoader MapLoader => Instance._mapLoader;
 
     private void Awake()
     {
+        if (_instance == null) Instance = this;
+
         _menuManager = GetComponent<MenuManager>();
         _mapLoader = GetComponent<MapLoader>();
     }

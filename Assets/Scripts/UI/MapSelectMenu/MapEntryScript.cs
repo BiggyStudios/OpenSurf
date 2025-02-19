@@ -24,6 +24,6 @@ public class MapEntryScript : MonoBehaviour
 
     public void PlayMap()
     {
-        
+        GameManager.MapLoader.LoadMapFromConfig(_mapConfig);
     }
 }
