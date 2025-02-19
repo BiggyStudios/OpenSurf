@@ -24,12 +24,12 @@ public class GameManager : MonoBehaviour
     public static MenuManager MenuManager => Instance._menuManager;
     
 
-    private ModLoader _modLoader;
-    public static ModLoader ModLoader => Instance._modLoader;
+    private MapLoader _mapLoader;
+    public static MapLoader MapLoader => Instance._mapLoader;
 
     private void Awake()
     {
         _menuManager = GetComponent<MenuManager>();
-        _modLoader = GetComponent<ModLoader>();
+        _mapLoader = GetComponent<MapLoader>();
     }
 }

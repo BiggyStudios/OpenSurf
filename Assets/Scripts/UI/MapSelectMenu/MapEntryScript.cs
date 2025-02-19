@@ -6,7 +6,7 @@ public class MapEntryScript : MonoBehaviour
 {
     private TMP_Text _text;
     private Button _button;
-    private MapModConfig _mapConfig;
+    private MapConfig _mapConfig;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class MapEntryScript : MonoBehaviour
         _button.onClick.AddListener(PlayMap);
     }
 
-    public void SetValues(string text, MapModConfig mapMod)
+    public void SetValues(string text, MapConfig mapMod)
     {
         _text.text = text;
         _mapConfig = mapMod;

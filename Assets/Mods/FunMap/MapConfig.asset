@@ -9,27 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da7875c7fcd3d107c88ed8e8baafb628, type: 3}
-  m_Name: ModConfig
+  m_Script: {fileID: 11500000, guid: fef6ccbd0c72cfd3392acf656757539f, type: 3}
+  m_Name: MapConfig
   m_EditorClassIdentifier: 
-  ModID: com.biggy.funmap
-  ModName: Fun Map
-  Version: 1.0.0
-  ModType: 0
+  MapID: com.bnn.funmap
+  MapName: FunMap
+  Version: 1.0
   MapPrefab: {fileID: 9128670752754964119, guid: 838259d6fe90db436b980b8c73b7f397, type: 3}
   MapMovementConfig:
     Gravity: 24
     AutoBhop: 1
-    AirCap: 2000
-    AirAccel: 1200
-    Accel: 25
+    AirCap: 0.575
+    AirAccel: 800
+    Accel: 10
     Friction: 4
     AirFriction: 0.25
     StopSpeed: 1.905
     JumpPower: 8
     JumpHeight: 1.5
-    MaxSpeed: 200
-    MaxVelocity: 2000
+    MaxSpeed: 8
+    MaxVelocity: 200
     StepSize: 0.5
     XSens: 20
     YSens: 20

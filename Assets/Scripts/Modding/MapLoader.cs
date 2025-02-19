@@ -5,29 +5,27 @@ using P90brush;
 
 using UnityEngine;
 
-public class ModLoader : MonoBehaviour
+public class MapLoader : MonoBehaviour
 {
-    public static ModLoader Instance { get; private set; }
-    public static MovementConfig MapMovementConfig;
+    public MovementConfig MapMovementConfig;
     [SerializeField] private Transform _mapTransform;
     private Dictionary<string, AssetBundle> _loadedMods = new Dictionary<string, AssetBundle>();
 
     private void Awake()
     {
-        Instance = this;
-        LoadMods();
+        LoadMapFiles();
     }
 
-    private void LoadMods()
+    private void LoadMapFiles()
     {
-        string modPath = Path.Combine(Application.dataPath, "../Mods");
-        Directory.CreateDirectory(modPath);
+        string mapPath = Path.Combine(Application.dataPath, "../Maps");
+        Directory.CreateDirectory(mapPath);
 
-        foreach (string bundlePath in Directory.GetFiles(modPath, "*.brmf"))
+        foreach (string bundlePath in Directory.GetFiles(mapPath, "*.brmf"))
         {
             try
             {
-                LoadMod(bundlePath);
+                LoadMapBundle(bundlePath);
             }
 
             catch (System.Exception e)
@@ -37,50 +35,41 @@ public class ModLoader : MonoBehaviour
         }
     }
 
-    private void LoadMod(string bundlePath)
+    private void LoadMapBundle(string bundlePath)
     {
-        Debug.Log($"Loading bundle: {bundlePath}");
+        Debug.Log($"Loading map: {bundlePath}");
         var bundle = AssetBundle.LoadFromFile(bundlePath);
 
         if (bundle == null)
         {
-            Debug.LogError($"No ModConfig found in {bundlePath}");
+            Debug.LogError($"No MapConfig found in {bundlePath}");
             return;
         }
 
-        var config = bundle.LoadAsset<ModConfig>("ModConfig");
+        var config = bundle.LoadAsset<MapConfig>("MapConfig");
         if (config == null)
         {
-            Debug.LogError($"No ModConfig found in {bundlePath}");
+            Debug.LogError($"No MapConfig found in {bundlePath}");
             return;
         }
 
-        _loadedMods.Add(config.ModID, bundle);
+        _loadedMods.Add(config.MapID, bundle);
+        LoadMap(bundle);
 
-        switch (config.ModType)
-        {
-            case ModTypes.Map:
-                LoadMapMod(bundle);
-                break;
-
-            default:
-                Debug.LogWarning($"Unknown mod type: {config.ModType}");
-                break;
-        }
-
-        Debug.Log($"Loaded {config.ModType} mod: {config.ModName} v{config.Version}");
+        Debug.Log($"Loaded Map: {config.MapName} v{config.Version}");
     }
 
-    private void LoadMapMod(AssetBundle bundle)
+    
+    public void LoadMap(AssetBundle bundle)
     {
-        var mapConfig = bundle.LoadAsset<MapModConfig>("ModConfig");
+        var mapConfig = bundle.LoadAsset<MapConfig>("MapConfig");
         MapMovementConfig = mapConfig.MapMovementConfig;
         if (mapConfig != null && mapConfig.MapPrefab != null)
         {
             _mapTransform.GetComponentInChildren<MapScript>().DestoryMap();
             var map = Instantiate(mapConfig.MapPrefab, Vector3.zero, Quaternion.identity);
             map.transform.SetParent(_mapTransform);
-            Debug.Log($"Loaded map: {mapConfig.ModName}");
+            Debug.Log($"Loaded map: {mapConfig.MapName}");
         }
 
         else
