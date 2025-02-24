@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -8,6 +9,7 @@ using UnityEngine;
 public class MapLoader : MonoBehaviour
 {  
     public MovementConfig MapMovementConfig;
+    public event Action OnMapChanged;
     [SerializeField] private Transform _mapTransform;
     private Dictionary<string, AssetBundle> _loadedMaps = new Dictionary<string, AssetBundle>();
     [HideInInspector] public List<MapConfig> MapConfigs = new();
@@ -69,6 +71,7 @@ public class MapLoader : MonoBehaviour
             var map = Instantiate(mapConfig.MapPrefab, Vector3.zero, Quaternion.identity);
             map.transform.SetParent(_mapTransform);
             Debug.Log($"Loaded map: {mapConfig.MapName}");
+            OnMapChanged?.Invoke();
         }
 
         else

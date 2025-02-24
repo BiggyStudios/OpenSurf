@@ -124,8 +124,7 @@ namespace P90brush
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            if (GameManager.MapLoader.MapMovementConfig != null)
-                moveConfig = GameManager.MapLoader.MapMovementConfig;
+            GameManager.MapLoader.OnMapChanged += UpdateMoveConfig;
         }
 
         void Update()
@@ -194,6 +193,16 @@ namespace P90brush
 
             // Rotate the attached camera for vertival move
             _fpsCamera.transform.localRotation = yQuaternion;
+        }
+
+        private void UpdateMoveConfig()
+        {
+            moveConfig = GameManager.MapLoader.MapMovementConfig;
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.MapLoader.OnMapChanged -= UpdateMoveConfig;
         }
     }
 }

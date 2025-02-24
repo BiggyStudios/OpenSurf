@@ -874,7 +874,6 @@ MonoBehaviour:
   _mainMenu: {fileID: 365032889}
   _playerPrefab: {fileID: 5467285084242854813, guid: 219db17e88beaacb5b208ee42f4cf8d8, type: 3}
   _menuCamera: {fileID: 725391030}
-  TestValue: CumBall
 --- !u!1 &332216050
 GameObject:
   m_ObjectHideFlags: 0
@@ -3533,7 +3532,7 @@ MonoBehaviour:
   m_Content: {fileID: 832897466}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 0
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
