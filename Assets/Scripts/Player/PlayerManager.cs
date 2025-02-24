@@ -23,6 +23,7 @@ public class PlayerManager : NetworkBehaviour
 
     [Header("References")]
     [SerializeField] private AudioMixer _masterMixer;
+    [SerializeField] private Button _mapSelectButton;
 
     [Header("UI")]
     [SerializeField] private GameObject _pauseMenu;
@@ -67,6 +68,7 @@ public class PlayerManager : NetworkBehaviour
         _playerCam = GetComponentInChildren<Camera>();
 
         _fovSlider.value = _playerCam.fieldOfView;
+        _mapSelectButton.onClick.AddListener(MapSelectButton);
     }
 
     private void Update()
@@ -95,6 +97,7 @@ public class PlayerManager : NetworkBehaviour
             PauseMenuOpen = false;
 
             _pauseMenu.SetActive(false);
+            GameManager.MenuManager.SetMapSelect(false);
         }
     }
 
@@ -144,5 +147,10 @@ public class PlayerManager : NetworkBehaviour
     public void SetMusicVol()
     {
         _masterMixer.SetFloat("music", _volSlider.value);
+    }
+
+    private void MapSelectButton()
+    {
+        GameManager.MenuManager.SetMapSelect(true);
     }
 }

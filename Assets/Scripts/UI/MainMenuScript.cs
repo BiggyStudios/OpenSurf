@@ -15,7 +15,8 @@ public class MainMenuScript : MonoBehaviour
     public enum MenuScreen
     {
         InitialScreen,
-        ModeSelect
+        ModeSelect,
+        MapSelect
     }
 
     [SerializeField] private float _transitionTime;
@@ -88,7 +89,7 @@ public class MainMenuScript : MonoBehaviour
                 }
                 break;
         }
-
+        
         foreach (var screen in _menuScreenItems)
         {
             if (screen.ScreenType != newScreen)

@@ -12,8 +12,6 @@ public class MapLoader : MonoBehaviour
     private Dictionary<string, AssetBundle> _loadedMaps = new Dictionary<string, AssetBundle>();
     [HideInInspector] public List<MapConfig> MapConfigs = new();
 
-    public string TestValue = "CumBall";
-
     private void Awake()
     {
         LoadMapFiles();
@@ -58,28 +56,8 @@ public class MapLoader : MonoBehaviour
 
         _loadedMaps.Add(config.MapID, bundle);
         MapConfigs.Add(config);
-        LoadMap(bundle);
 
         Debug.Log($"Loaded Map: {config.MapName} v{config.Version}");
-    }
-
-    
-    private void LoadMap(AssetBundle bundle)
-    {
-        var mapConfig = bundle.LoadAsset<MapConfig>("MapConfig");
-        MapMovementConfig = mapConfig.MapMovementConfig;
-        if (mapConfig != null && mapConfig.MapPrefab != null)
-        {
-            _mapTransform.GetComponentInChildren<MapScript>().DestoryMap();
-            var map = Instantiate(mapConfig.MapPrefab, Vector3.zero, Quaternion.identity);
-            map.transform.SetParent(_mapTransform);
-            Debug.Log($"Loaded map: {mapConfig.MapName}");
-        }
-
-        else
-        {
-            Debug.LogError("Failed to load map config or prefab");
-        }
     }
 
     public void LoadMapFromConfig(MapConfig mapConfig)

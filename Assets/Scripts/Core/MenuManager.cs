@@ -3,10 +3,13 @@ using FishNet.Managing;
 using FishNet.Transporting;
 using BananaUtils.OnScreenDebugger.Scripts;
 using FishNet.Transporting.Tugboat;
+using FishNet.Component.Spawning;
 
 public class MenuManager : MonoBehaviour
 {
     [HideInInspector] public Mode GameMode;
+    [SerializeField] private GameObject _mapSelectScreen;
+    private PlayerSpawner _playerSpawner;
 
     public enum Mode
     {
@@ -20,8 +23,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private GameObject _menuCamera;
 
-    public string TestValue = "CumBall";
-
     public void StartSolo()
     {
         var transport = _networkManager.GetComponent<Tugboat>();
@@ -30,7 +31,6 @@ public class MenuManager : MonoBehaviour
         transport.StartConnection(true);
         transport.StartConnection(false);
         GameMode = Mode.Solo;
-        InitializeSingleplayer();
         _menuCamera.SetActive(false);
         _mainMenu.SetActive(false);
     }
@@ -40,8 +40,13 @@ public class MenuManager : MonoBehaviour
         OSDebug.LogWarning("Work In Progress!!!");
     }
 
-    private void InitializeSingleplayer()
+    public void InitializePlayer()
     {
         GameObject player = Instantiate(_playerPrefab);
+    }
+
+    public void SetMapSelect(bool state)
+    {
+        _mapSelectScreen.SetActive(state);
     }
 }
