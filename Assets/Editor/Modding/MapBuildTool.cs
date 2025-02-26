@@ -48,7 +48,7 @@ public class MapBuildTool : EditorWindow
         string platformName = buildTarget.ToString();
         string outputPathFolder = Path.Combine(baseOutputPath, platformName);
         Directory.CreateDirectory(outputPathFolder);
-        string outputPath = Path.Combine(outputPathFolder, config.MapID + ".brmf");
+        string outputPath = Path.Combine(outputPathFolder, config.MapID.ToLower() + ".brmf");
 
         string tempFolder = Path.Combine(Path.GetTempPath(), "MapBuild_" + System.Guid.NewGuid().ToString() + "_" + platformName);
         Directory.CreateDirectory(tempFolder);
@@ -59,7 +59,7 @@ public class MapBuildTool : EditorWindow
             {
                 new AssetBundleBuild
                 {
-                    assetBundleName = config.MapID,
+                    assetBundleName = config.MapID.ToLower(),
                     assetNames = new string[] { AssetDatabase.GetAssetPath(config) },
                     assetBundleVariant = "",
                     addressableNames = new string[] { "MapConfig" }
@@ -68,7 +68,7 @@ public class MapBuildTool : EditorWindow
 
             BuildPipeline.BuildAssetBundles(tempFolder, buildMap, BuildAssetBundleOptions.None, buildTarget);
 
-            string builtBundle = Path.Combine(tempFolder, config.MapID);
+            string builtBundle = Path.Combine(tempFolder, config.MapID.ToLower());
             if (File.Exists(builtBundle))
             {
                 File.Copy(builtBundle, outputPath, true);
