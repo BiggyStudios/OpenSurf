@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class MapLoader : MonoBehaviour
 {  
-    public MovementConfig MapMovementConfig;
+    [HideInInspector]public MovementConfig MapMovementConfig;
     public event Action OnMapChanged;
     [SerializeField] private Transform _mapTransform;
     private Dictionary<string, AssetBundle> _loadedMaps = new Dictionary<string, AssetBundle>();
