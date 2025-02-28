@@ -1,3 +1,5 @@
+using FishNet.Object.Synchronizing;
+
 using P90brush;
 using UnityEngine;
 
@@ -19,7 +21,6 @@ public class AnimationControllerScript : MonoBehaviour
 
     private float _currentSpeed;
     private float _speedVelocity;
-    private bool _isGrounded;
     private bool _wasInAir = false;
 
     private void Start()

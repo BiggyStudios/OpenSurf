@@ -29,6 +29,7 @@ public class PlayerManager : NetworkBehaviour
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private Slider _fovSlider;
     [SerializeField] private Slider _volSlider;
+    [HideInInspector] public Toggle AnimatePlatforms;
 
     private CapsuleCollider _capsuleCollider;
     private Vector3 _spawnPosition;
@@ -147,6 +148,11 @@ public class PlayerManager : NetworkBehaviour
     public void SetMusicVol()
     {
         _masterMixer.SetFloat("music", _volSlider.value);
+    }
+
+    private void AnimePlatformsButton()
+    {
+        
     }
 
     private void MapSelectButton()

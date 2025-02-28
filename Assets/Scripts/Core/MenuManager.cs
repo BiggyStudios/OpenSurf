@@ -37,7 +37,13 @@ public class MenuManager : MonoBehaviour
 
     public void StartMulti()
     {
-        OSDebug.LogWarning("Work In Progress!!!");
+        var transport = _networkManager.GetComponent<Tugboat>();
+
+        transport.StartConnection(true);
+        transport.StartConnection(false);
+        GameMode = Mode.Multi;
+        _menuCamera.SetActive(false);
+        _mainMenu.SetActive(false);
     }
 
     public void InitializePlayer()
