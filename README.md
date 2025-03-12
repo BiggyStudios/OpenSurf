@@ -29,3 +29,5 @@ Check out the **[Wiki](https://github.com/BiggyStudios/OpenSurf/wiki)** for full
 See **[Contributing](./CONTRIBUTING.md)**
 
 ## LICENSE
+
+For now it's GPL V3 this may or may not change in the future.
