@@ -96,7 +96,6 @@ namespace P90brush
                 Destroy(_rb);
                 Destroy(_ui);
                 this.enabled = false;
-                this.GetComponent<AnimationControllerScript>().enabled = false;
             }
 
             if (base.IsOwner)

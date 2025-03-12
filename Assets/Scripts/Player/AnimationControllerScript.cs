@@ -1,9 +1,10 @@
-using FishNet.Object.Synchronizing;
+using System.Collections;
 
+using FishNet.Object;
 using P90brush;
 using UnityEngine;
 
-public class AnimationControllerScript : MonoBehaviour
+public class AnimationControllerScript : NetworkBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private float _animationSmoothTime;
@@ -30,39 +31,45 @@ public class AnimationControllerScript : MonoBehaviour
 
     private void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        float inputMagnitude = new Vector2(horizontalInput, verticalInput).magnitude;
-        inputMagnitude = Mathf.Clamp01(inputMagnitude);
-
-        _currentSpeed = Mathf.SmoothDamp(_currentSpeed, inputMagnitude, ref _speedVelocity, _animationSmoothTime);
-        _animator.SetFloat("Velocity", _currentSpeed);
-
-        if (Input.GetKeyDown(KeyCode.Space) && _playerMovementScript.PlayerData.IsGrounded())
+        if (IsOwner)
         {
-            _animator.SetBool("IsJumping", true);
-            _wasInAir = true;
-        }
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
 
-        if (_playerMovementScript.PlayerData.IsGrounded() && _wasInAir)
-        {
-            _animator.SetBool("IsJumping", false);
-            _wasInAir = false;
+            float inputMagnitude = new Vector2(horizontalInput, verticalInput).magnitude;
+            inputMagnitude = Mathf.Clamp01(inputMagnitude);
+
+            _currentSpeed = Mathf.SmoothDamp(_currentSpeed, inputMagnitude, ref _speedVelocity, _animationSmoothTime);
+            _animator.SetFloat("Velocity", _currentSpeed);
+
+            if (Input.GetKeyDown(KeyCode.Space) && _playerMovementScript.PlayerData.IsGrounded())
+            {
+                _animator.SetBool("IsJumping", true);
+                _wasInAir = true;
+            }
+
+            if (_playerMovementScript.PlayerData.IsGrounded() && _wasInAir)
+            {
+                _animator.SetBool("IsJumping", false);
+                _wasInAir = false;
+            }
         }
     }
 
     private void LateUpdate()
     {
-        float cameraPitch = _cameraTransform.eulerAngles.x;
+        if (IsOwner)
+        {
+            float cameraPitch = _cameraTransform.eulerAngles.x;
 
-        if (cameraPitch > 180f)
-            cameraPitch -= 360f;
+            if (cameraPitch > 180f)
+                cameraPitch -= 360f;
 
-        float targetXRotation = Mathf.Clamp(cameraPitch, -_maxLookDownAngle, _maxLookUpAngle);
+            float targetXRotation = Mathf.Clamp(cameraPitch, -_maxLookDownAngle, _maxLookUpAngle);
 
-        _currentXRotation = Mathf.SmoothDamp(_currentXRotation, targetXRotation, ref _xRotationVelocity, _lookSmoothTime);
+            _currentXRotation = Mathf.SmoothDamp(_currentXRotation, targetXRotation, ref _xRotationVelocity, _lookSmoothTime);
 
-        _neckBone.localRotation = _initialRotation * Quaternion.Euler(_currentXRotation, 0, 0);
+            _neckBone.localRotation = _initialRotation * Quaternion.Euler(_currentXRotation, 0, 0);
+        }
     }
 }
