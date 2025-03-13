@@ -1,5 +1,3 @@
-using System.Collections;
-
 using FishNet.Object;
 using P90brush;
 using UnityEngine;
@@ -22,6 +20,7 @@ public class AnimationControllerScript : NetworkBehaviour
 
     private float _currentSpeed;
     private float _speedVelocity;
+    private bool _dancing;
     private bool _wasInAir = false;
 
     private void Start()
@@ -53,6 +52,26 @@ public class AnimationControllerScript : NetworkBehaviour
                 _animator.SetBool("IsJumping", false);
                 _wasInAir = false;
             }
+
+            if (Input.GetKeyDown(KeyCode.B) && !_dancing)
+            {
+                _animator.SetBool("IsDancing", true);
+                _dancing = true;
+            }
+
+
+            else if (Input.GetKeyDown(KeyCode.B) && _dancing)
+            {
+                _animator.SetBool("IsDancing", false);
+                _dancing = false;
+            }
+
+            else if (inputMagnitude > 0.2f)
+            {
+                _animator.SetBool("IsDancing", false);
+                _dancing = false;
+            }
+
         }
     }
 
