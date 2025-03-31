@@ -136,7 +136,7 @@ namespace P90brush
 
             // Updates
             InputData.Update(moveConfig);
-            UpdateHook();
+            //UpdateHook();
             UpdateViewAngle();
 
             _speed.text = PlayerData.Velocity.magnitude.ToString();
@@ -150,7 +150,7 @@ namespace P90brush
             }
 
             float fixedDeltaTime = Time.fixedDeltaTime;
-            _hookshot.CatchMovement(this, fixedDeltaTime); // Todo: Improve
+            //_hookshot.CatchMovement(this, fixedDeltaTime); // Todo: Improve
             _controller.ProcessMovement(this, moveConfig, fixedDeltaTime);
 
             ApplyPlayerMovement();
