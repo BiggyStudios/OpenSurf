@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Scoreboard : NetworkBehaviour
 {
-    public static Scoreboard Instance;
+    public static Scoreboard Instance { get; private set ;}
 
     [SerializeField] private ScoreboardItemScript _scorePrefab;
     [SerializeField] private Transform _scoreboardContent;
