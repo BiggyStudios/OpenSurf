@@ -1,15 +1,8 @@
-using System;
-
-using FishNet.Connection;
-using FishNet.Transporting.Tugboat;
-
-using TMPro;
-
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ConnectionManager : MonoBehaviour
 {
+    /*
     [SerializeField] private GameObject _ui;
 
     private Tugboat _tugboat;
@@ -39,4 +32,5 @@ public class ConnectionManager : MonoBehaviour
 
         _ui.SetActive(false);
     }
+    */
 }

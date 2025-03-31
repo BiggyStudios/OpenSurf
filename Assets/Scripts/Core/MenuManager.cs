@@ -1,12 +1,8 @@
 using UnityEngine;
-using FishNet.Managing;
-using FishNet.Transporting;
-using BananaUtils.OnScreenDebugger.Scripts;
-using FishNet.Transporting.Tugboat;
-using FishNet.Component.Spawning;
 
 public class MenuManager : MonoBehaviour
 {
+    /*
     [HideInInspector] public Mode GameMode;
     [SerializeField] private GameObject _mapSelectScreen;
     private PlayerSpawner _playerSpawner;
@@ -55,4 +51,5 @@ public class MenuManager : MonoBehaviour
     {
         _mapSelectScreen.SetActive(state);
     }
+    */
 }

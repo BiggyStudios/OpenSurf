@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using FishNet.Object;
 using UnityEngine;
 
-public class Scoreboard : NetworkBehaviour
+public class Scoreboard : MonoBehaviour
 {
     public static Scoreboard Instance { get; private set ;}
 
@@ -54,6 +53,8 @@ public class Scoreboard : NetworkBehaviour
         }
     }
 
+    /*
+
     [ServerRpc(RequireOwnership = false)]
     public void UpdatePlayerTime(string playerID, float time)
     {
@@ -93,4 +94,6 @@ public class Scoreboard : NetworkBehaviour
             }
         }
     }
+
+    */
 }

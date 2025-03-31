@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-
-using FishNet.Object;
-
 using UnityEngine;
 
-public class LevelManager : NetworkBehaviour
+public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
@@ -25,9 +22,10 @@ public class LevelManager : NetworkBehaviour
 
     public void SwitchLevel(int index)
     {
-        SwitchLevelServerRpc(index);
+        //SwitchLevelServerRpc(index);
     }
-
+    
+    /*
     [ServerRpc]
     private void SwitchLevelServerRpc(int index)
     {
@@ -44,4 +42,5 @@ public class LevelManager : NetworkBehaviour
 
         _levels[index].SetActive(true);
     }
+    */
 }

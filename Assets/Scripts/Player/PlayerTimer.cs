@@ -1,21 +1,18 @@
-using System;
-
-using FishNet.Object;
-using FishNet.Object.Synchronizing;
-
 using TMPro;
 
 using UnityEngine;
 
-public class PlayerTimer : NetworkBehaviour
+public class PlayerTimer : MonoBehaviour
 {
     [SerializeField] private LayerMask _finishLayer;
     [SerializeField] private TMP_Text _timerText;
 
     private void Update()
     {
+        /*
         if (!base.IsOwner)
             return;
+        */
 
         UpdateTimer();
         CheckStart();
@@ -43,7 +40,7 @@ public class PlayerTimer : NetworkBehaviour
             {
                 PlayerManager.Instance.TimerActive = false;
 
-                Scoreboard.Instance.UpdatePlayerTime(PlayerManager.Instance.OwnerId.ToString(), PlayerManager.Instance.PlayerTime);
+                //Scoreboard.Instance.UpdatePlayerTime(PlayerManager.Instance.OwnerId.ToString(), PlayerManager.Instance.PlayerTime);
                 PlayerManager.Instance.Restart();
             }
         }

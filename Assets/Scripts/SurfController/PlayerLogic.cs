@@ -1,10 +1,9 @@
-using FishNet.Object;
 using TMPro;
 using UnityEngine;
 
 namespace P90brush
 {
-    public class PlayerLogic : NetworkBehaviour, ISurfControllable
+    public class PlayerLogic : MonoBehaviour, ISurfControllable
     {
         public float _walkSpeed = 80f;
         public float _jumpForce = 40f;
@@ -85,6 +84,7 @@ namespace P90brush
             Time.fixedDeltaTime = 1f / _tickRate;
         }
 
+        /*
         public override void OnStartClient()
         {
             base.OnStartClient();
@@ -103,6 +103,7 @@ namespace P90brush
                 _glassesMeshRenderer.enabled = false;
             }
         }
+        */
 
         void Start()
         {

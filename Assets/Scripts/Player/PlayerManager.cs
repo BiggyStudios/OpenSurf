@@ -1,14 +1,11 @@
 using System.Collections;
-
-using FishNet.Object;
-
 using P90brush;
 
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class PlayerManager : NetworkBehaviour
+public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }
     [HideInInspector] public Transform PlayerTransform;
@@ -37,6 +34,7 @@ public class PlayerManager : NetworkBehaviour
 
     private PlayerLogic _playerLogic;
 
+    /*
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -61,6 +59,8 @@ public class PlayerManager : NetworkBehaviour
         Scoreboard.Instance.RemovePlayer(OwnerId.ToString());
     }
 
+    */
+
     private void Start()
     {
         _playerLogic = GetComponent<PlayerLogic>();
@@ -74,8 +74,11 @@ public class PlayerManager : NetworkBehaviour
 
     private void Update()
     {
+        /*
         if (!base.IsOwner)
             return;
+
+        */
 
         if (transform.position.y < -300)
         {
@@ -98,7 +101,7 @@ public class PlayerManager : NetworkBehaviour
             PauseMenuOpen = false;
 
             _pauseMenu.SetActive(false);
-            GameManager.MenuManager.SetMapSelect(false);
+            //GameManager.MenuManager.SetMapSelect(false);
         }
     }
 
@@ -157,6 +160,6 @@ public class PlayerManager : NetworkBehaviour
 
     private void MapSelectButton()
     {
-        GameManager.MenuManager.SetMapSelect(true);
+        //GameManager.MenuManager.SetMapSelect(true);
     }
 }

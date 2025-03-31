@@ -1,8 +1,7 @@
-using FishNet.Object;
 using P90brush;
 using UnityEngine;
 
-public class AnimationControllerScript : NetworkBehaviour
+public class AnimationControllerScript : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private float _animationSmoothTime;
@@ -30,8 +29,8 @@ public class AnimationControllerScript : NetworkBehaviour
 
     private void Update()
     {
-        if (IsOwner)
-        {
+        //if (IsOwner)
+        //{
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
@@ -72,13 +71,13 @@ public class AnimationControllerScript : NetworkBehaviour
                 _dancing = false;
             }
 
-        }
+        //}
     }
 
     private void LateUpdate()
     {
-        if (IsOwner)
-        {
+        //if (IsOwner)
+        //{
             float cameraPitch = _cameraTransform.eulerAngles.x;
 
             if (cameraPitch > 180f)
@@ -89,6 +88,6 @@ public class AnimationControllerScript : NetworkBehaviour
             _currentXRotation = Mathf.SmoothDamp(_currentXRotation, targetXRotation, ref _xRotationVelocity, _lookSmoothTime);
 
             _neckBone.localRotation = _initialRotation * Quaternion.Euler(_currentXRotation, 0, 0);
-        }
+        //}
     }
 }
