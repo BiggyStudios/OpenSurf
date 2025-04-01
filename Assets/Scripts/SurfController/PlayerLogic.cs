@@ -1,16 +1,18 @@
 using TMPro;
 using UnityEngine;
+using Mirror;
+using System.Collections.Generic;
 
 namespace P90brush
 {
-    public class PlayerLogic : MonoBehaviour, ISurfControllable
+    public class PlayerLogic : NetworkBehaviour, ISurfControllable
     {
         public float _walkSpeed = 80f;
         public float _jumpForce = 40f;
 
         [Header("TEMP")]
         [SerializeField]
-        private MeshRenderer _glassesMeshRenderer;
+        private List<SkinnedMeshRenderer> _playerMesh;
         [SerializeField]
         private GameObject _ui;
         [SerializeField]
@@ -84,26 +86,26 @@ namespace P90brush
             Time.fixedDeltaTime = 1f / _tickRate;
         }
 
-        /*
         public override void OnStartClient()
         {
             base.OnStartClient();
 
-            if (!base.IsOwner)
+            if (!base.isLocalPlayer)
             {
                 _fpsCamera.enabled = false;
-                _glassesMeshRenderer.enabled = true;
+                foreach (SkinnedMeshRenderer mesh in _playerMesh)
+                    mesh.enabled = true;
                 Destroy(_rb);
                 Destroy(_ui);
                 this.enabled = false;
             }
 
-            if (base.IsOwner)
+            if (base.isLocalPlayer)
             {
-                _glassesMeshRenderer.enabled = false;
+                foreach (SkinnedMeshRenderer mesh in _playerMesh)
+                    mesh.enabled = false;
             }
         }
-        */
 
         void Start()
         {

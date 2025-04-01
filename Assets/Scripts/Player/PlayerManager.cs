@@ -4,8 +4,9 @@ using P90brush;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using Mirror;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : NetworkBehaviour
 {
     public static PlayerManager Instance { get; private set; }
     [HideInInspector] public Transform PlayerTransform;
@@ -34,21 +35,20 @@ public class PlayerManager : MonoBehaviour
 
     private PlayerLogic _playerLogic;
 
-    /*
     public override void OnStartClient()
     {
         base.OnStartClient();
 
-        if (base.IsOwner)
+        if (base.isLocalPlayer)
         {
             Instance = this;
             PlayerTransform = transform;
         }
 
-        Username = $"Player_{OwnerId}";
-        Scoreboard.Instance.AddPlayer(OwnerId.ToString(), Username);
+        Username = $"Player_{netId}";
+        //Scoreboard.Instance.AddPlayer(netId.ToString(), Username);
 
-        if (!base.IsOwner)
+        if (!base.isLocalPlayer)
             Destroy(this);
     }
 
@@ -56,10 +56,10 @@ public class PlayerManager : MonoBehaviour
     {
         base.OnStopClient();
 
-        Scoreboard.Instance.RemovePlayer(OwnerId.ToString());
-    }
+        if (Scoreboard.Instance == null) return;
 
-    */
+        Scoreboard.Instance.RemovePlayer(netId.ToString());
+    }
 
     private void Start()
     {
@@ -74,11 +74,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        /*
-        if (!base.IsOwner)
+        if (!base.isLocalPlayer)
             return;
-
-        */
 
         if (transform.position.y < -300)
         {
@@ -101,7 +98,7 @@ public class PlayerManager : MonoBehaviour
             PauseMenuOpen = false;
 
             _pauseMenu.SetActive(false);
-            //GameManager.MenuManager.SetMapSelect(false);
+            GameManager.MenuManager.SetMapSelect(false);
         }
     }
 
@@ -160,6 +157,6 @@ public class PlayerManager : MonoBehaviour
 
     private void MapSelectButton()
     {
-        //GameManager.MenuManager.SetMapSelect(true);
+        GameManager.MenuManager.SetMapSelect(true);
     }
 }

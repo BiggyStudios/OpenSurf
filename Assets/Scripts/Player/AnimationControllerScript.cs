@@ -1,7 +1,8 @@
 using P90brush;
 using UnityEngine;
+using Mirror;
 
-public class AnimationControllerScript : MonoBehaviour
+public class AnimationControllerScript : NetworkBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private float _animationSmoothTime;
@@ -29,8 +30,8 @@ public class AnimationControllerScript : MonoBehaviour
 
     private void Update()
     {
-        //if (IsOwner)
-        //{
+        if (isLocalPlayer)
+        {
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
@@ -71,13 +72,13 @@ public class AnimationControllerScript : MonoBehaviour
                 _dancing = false;
             }
 
-        //}
+        }
     }
 
     private void LateUpdate()
     {
-        //if (IsOwner)
-        //{
+        if (isLocalPlayer)
+        {
             float cameraPitch = _cameraTransform.eulerAngles.x;
 
             if (cameraPitch > 180f)
@@ -88,6 +89,6 @@ public class AnimationControllerScript : MonoBehaviour
             _currentXRotation = Mathf.SmoothDamp(_currentXRotation, targetXRotation, ref _xRotationVelocity, _lookSmoothTime);
 
             _neckBone.localRotation = _initialRotation * Quaternion.Euler(_currentXRotation, 0, 0);
-        //}
+        }
     }
 }

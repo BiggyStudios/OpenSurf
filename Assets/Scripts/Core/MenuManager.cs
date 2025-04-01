@@ -1,11 +1,10 @@
 using UnityEngine;
+using Mirror;
 
 public class MenuManager : MonoBehaviour
 {
-    /*
     [HideInInspector] public Mode GameMode;
     [SerializeField] private GameObject _mapSelectScreen;
-    private PlayerSpawner _playerSpawner;
 
     public enum Mode
     {
@@ -21,22 +20,15 @@ public class MenuManager : MonoBehaviour
 
     public void StartSolo()
     {
-        var transport = _networkManager.GetComponent<Tugboat>();
-        transport.SetServerBindAddress("127.0.0.1", IPAddressType.IPv4);
-        transport.SetClientAddress("127.0.0.1");
-        transport.StartConnection(true);
-        transport.StartConnection(false);
-        GameMode = Mode.Solo;
-        _menuCamera.SetActive(false);
-        _mainMenu.SetActive(false);
+
     }
 
     public void StartMulti()
     {
-        var transport = _networkManager.GetComponent<Tugboat>();
+        var transport = _networkManager.GetComponent<TelepathyTransport>();
 
-        transport.StartConnection(true);
-        transport.StartConnection(false);
+        //transport.StartConnection(true);
+        //transport.StartConnection(false);
         GameMode = Mode.Multi;
         _menuCamera.SetActive(false);
         _mainMenu.SetActive(false);
@@ -51,5 +43,4 @@ public class MenuManager : MonoBehaviour
     {
         _mapSelectScreen.SetActive(state);
     }
-    */
 }
