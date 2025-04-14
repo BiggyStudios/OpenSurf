@@ -1,12 +1,10 @@
 using System.Collections;
-
-using FishNet.Object;
-
 using P90brush;
 
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using Mirror;
 
 public class PlayerManager : NetworkBehaviour
 {
@@ -41,16 +39,16 @@ public class PlayerManager : NetworkBehaviour
     {
         base.OnStartClient();
 
-        if (base.IsOwner)
+        if (base.isLocalPlayer)
         {
             Instance = this;
             PlayerTransform = transform;
         }
 
-        Username = $"Player_{OwnerId}";
-        Scoreboard.Instance.AddPlayer(OwnerId.ToString(), Username);
+        Username = $"Player_{netId}";
+        //Scoreboard.Instance.AddPlayer(netId.ToString(), Username);
 
-        if (!base.IsOwner)
+        if (!base.isLocalPlayer)
             Destroy(this);
     }
 
@@ -58,7 +56,9 @@ public class PlayerManager : NetworkBehaviour
     {
         base.OnStopClient();
 
-        Scoreboard.Instance.RemovePlayer(OwnerId.ToString());
+        if (Scoreboard.Instance == null) return;
+
+        Scoreboard.Instance.RemovePlayer(netId.ToString());
     }
 
     private void Start()
@@ -74,13 +74,8 @@ public class PlayerManager : NetworkBehaviour
 
     private void Update()
     {
-        if (!base.IsOwner)
+        if (!base.isLocalPlayer)
             return;
-
-        if (transform.position.y < -300)
-        {
-            Restart();
-        }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenuOpen)
         {

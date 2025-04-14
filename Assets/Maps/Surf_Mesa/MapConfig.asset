@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef6ccbd0c72cfd3392acf656757539f, type: 3}
+  m_Name: MapConfig
+  m_EditorClassIdentifier: 
+  MapID: com.bnn.surfmesa
+  MapName: surf_mesa
+  Version: 1.0
+  MapPrefab: {fileID: 6880812981350313597, guid: 8a5fa5110ef6221e39b154f118dca7f2, type: 3}
+  MapMovementConfig:
+    Gravity: 24
+    AutoBhop: 1
+    AirCap: 0.575
+    AirAccel: 800
+    Accel: 10
+    Friction: 4
+    AirFriction: 0.25
+    StopSpeed: 1.905
+    JumpPower: 8
+    JumpHeight: 1.5
+    MaxSpeed: 8
+    MaxVelocity: 200
+    StepSize: 0.5
+    XSens: 20
+    YSens: 20
+    MoveLeft: 97
+    MoveRight: 100
+    MoveForward: 119
+    MoveBack: 115
+    JumpButton: 32
+    ResetButton: 114
+    HookButton: Fire1
+    HookRetractButton: 304
+    SlowMotion: 306
+    ClampAirSpeed: 0
+    Bounce: 0

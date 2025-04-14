@@ -1,6 +1,6 @@
-using FishNet.Object;
 using P90brush;
 using UnityEngine;
+using Mirror;
 
 public class AnimationControllerScript : NetworkBehaviour
 {
@@ -30,7 +30,7 @@ public class AnimationControllerScript : NetworkBehaviour
 
     private void Update()
     {
-        if (IsOwner)
+        if (isLocalPlayer)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
@@ -66,18 +66,20 @@ public class AnimationControllerScript : NetworkBehaviour
                 _dancing = false;
             }
 
+            /*
             else if (inputMagnitude > 0.2f)
             {
                 _animator.SetBool("IsDancing", false);
                 _dancing = false;
             }
+            */
 
         }
     }
 
     private void LateUpdate()
     {
-        if (IsOwner)
+        if (isLocalPlayer)
         {
             float cameraPitch = _cameraTransform.eulerAngles.x;
 

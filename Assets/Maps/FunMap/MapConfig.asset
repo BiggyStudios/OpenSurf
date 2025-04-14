@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fef6ccbd0c72cfd3392acf656757539f, type: 3}
   m_Name: MapConfig
   m_EditorClassIdentifier: 
-  MapID: com.bnn.movementmap
-  MapName: Movement Map
+  MapID: com.bnn.surfbasemap
+  MapName: surf_basemap
   Version: 1.0
   MapPrefab: {fileID: 9128670752754964119, guid: 838259d6fe90db436b980b8c73b7f397, type: 3}
   MapMovementConfig:

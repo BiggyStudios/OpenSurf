@@ -1,11 +1,6 @@
-using System;
-
-using FishNet.Object;
-using FishNet.Object.Synchronizing;
-
 using TMPro;
-
 using UnityEngine;
+using Mirror;
 
 public class PlayerTimer : NetworkBehaviour
 {
@@ -14,8 +9,7 @@ public class PlayerTimer : NetworkBehaviour
 
     private void Update()
     {
-        if (!base.IsOwner)
-            return;
+        if (!base.isLocalPlayer) return;
 
         UpdateTimer();
         CheckStart();
@@ -43,7 +37,7 @@ public class PlayerTimer : NetworkBehaviour
             {
                 PlayerManager.Instance.TimerActive = false;
 
-                Scoreboard.Instance.UpdatePlayerTime(PlayerManager.Instance.OwnerId.ToString(), PlayerManager.Instance.PlayerTime);
+                //Scoreboard.Instance.UpdatePlayerTime(PlayerManager.Instance.netId.ToString(), PlayerManager.Instance.PlayerTime);
                 PlayerManager.Instance.Restart();
             }
         }
