@@ -77,11 +77,6 @@ public class PlayerManager : NetworkBehaviour
         if (!base.isLocalPlayer)
             return;
 
-        if (transform.position.y < -300)
-        {
-            Restart();
-        }
-
         if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenuOpen)
         {
             Cursor.visible = true;

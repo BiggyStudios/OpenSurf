@@ -93,6 +93,7 @@ namespace P90brush
             if (!base.isLocalPlayer)
             {
                 _fpsCamera.enabled = false;
+
                 foreach (SkinnedMeshRenderer mesh in _playerMesh)
                     mesh.enabled = true;
                 Destroy(_rb);

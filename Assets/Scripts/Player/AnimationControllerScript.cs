@@ -66,11 +66,13 @@ public class AnimationControllerScript : NetworkBehaviour
                 _dancing = false;
             }
 
+            /*
             else if (inputMagnitude > 0.2f)
             {
                 _animator.SetBool("IsDancing", false);
                 _dancing = false;
             }
+            */
 
         }
     }
