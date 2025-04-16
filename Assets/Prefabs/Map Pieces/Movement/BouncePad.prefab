@@ -4955,4 +4955,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a29c23a4b42ec72ab088a0e724d1b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _launchForce: {x: 70, y: 40, z: 0}
+  _launchForce: {x: 0, y: 40, z: 70}
