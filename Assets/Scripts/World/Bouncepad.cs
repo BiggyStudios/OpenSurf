@@ -6,11 +6,8 @@ public class Bouncepad : MonoBehaviour
 {
     [SerializeField] private Vector3 _launchForce;
 
-    private void OnTriggerEnter(Collider other)
+    public void LaunchPlayer(PlayerLogic playerLogic)
     {
-        if (other.TryGetComponent(out PlayerLogic playerLogic))
-        {
-            playerLogic.PlayerData.Velocity += _launchForce;
-        }
+        playerLogic.PlayerData.Velocity += _launchForce;
     }
 }

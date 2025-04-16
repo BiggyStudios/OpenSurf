@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace P90brush
 {
@@ -142,6 +143,7 @@ namespace P90brush
             InputData.Update(moveConfig);
             //UpdateHook();
             UpdateViewAngle();
+            CheckBouncePads();
 
             _speed.text = PlayerData.Velocity.magnitude.ToString();
         }
@@ -207,6 +209,29 @@ namespace P90brush
         private void OnDestroy()
         {
             GameManager.MapLoader.OnMapChanged -= UpdateMoveConfig;
+        }
+
+        private bool _canBounce = true;
+        private void CheckBouncePads()
+        {
+            if (!_canBounce) return;
+
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, -transform.up, out hit, 2f))
+            {
+                if (hit.transform.TryGetComponent<Bouncepad>(out Bouncepad bouncepad))
+                {
+                    bouncepad.LaunchPlayer(this);
+                    _canBounce = false;
+                    StartCoroutine(BounceCoolDown());
+                }
+            }
+        }
+
+        private IEnumerator BounceCoolDown()
+        {
+            yield return new WaitForSecondsRealtime(0.2f);
+            _canBounce = true;
         }
     }
 }
