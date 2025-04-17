@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class WeaponScript : NetworkBehaviour
 {   
-    public Camera PlayerCamera;
+    public WeaponScriptObj WeaponScriptObj;
 
-    public float Damage;
-    public int MaxAmmo;
-    public float MaxRange;
+    public Camera PlayerCamera;
 
     private int _ammo;
 
     private void Start()
     {
-        _ammo = MaxAmmo;
+        _ammo = WeaponScriptObj.MaxAmmo;
     }
 
     private void Update()
@@ -41,7 +39,7 @@ public class WeaponScript : NetworkBehaviour
 
         Debug.Log("Shot");
 
-        if (Physics.Raycast(ray, out hit, MaxRange))
+        if (Physics.Raycast(ray, out hit, WeaponScriptObj.WeaponRange))
         {
             HealthScript targetHealth = hit.collider.GetComponent<HealthScript>();
             if (targetHealth != null)
@@ -73,6 +71,6 @@ public class WeaponScript : NetworkBehaviour
         }
         */
 
-        healthScript.TakeDamageOnServer(Damage);
+        healthScript.TakeDamageOnServer(WeaponScriptObj.Damage);
     }
 }

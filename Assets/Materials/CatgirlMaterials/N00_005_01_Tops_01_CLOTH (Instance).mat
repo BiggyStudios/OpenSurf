@@ -14,9 +14,10 @@ Material:
   m_ValidKeywords:
   - _EMISSIVE_SIMPLE
   - _IS_ANGELRING_OFF
-  - _IS_CLIPPING_TRANSMODE
   - _IS_OUTLINE_CLIPPING_YES
+  - _IS_TRANSCLIPPING_OFF
   - _OUTLINE_NML
+  - _SHADINGGRADEMAP
   m_InvalidKeywords:
   - _ALPHATEST_ON
   - _EMISSION
@@ -24,10 +25,10 @@ Material:
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap:
     IgnoreProjection: False
-    RenderType: TransparentCutout
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -288,7 +289,7 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ClippingMatteMode: 0
-    - _ClippingMode: 2
+    - _ClippingMode: 0
     - _Clipping_Level: 0
     - _CoatMask: 0
     - _ColorShift_Speed: 0
@@ -336,7 +337,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _EnvironmentReflections: 1
-    - _Farthest_Distance: 100
+    - _Farthest_Distance: 30
     - _FirstShadeOverridden: 0
     - _FirstShadeVisible: 1
     - _GI_Intensity: 0
@@ -409,7 +410,7 @@ Material:
     - _Offset_Z: 0
     - _OutlineOverridden: 0
     - _OutlineVisible: 1
-    - _Outline_Width: 0
+    - _Outline_Width: 2
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -511,7 +512,7 @@ Material:
     - _ZWriteMode: 1
     - _isUnityToonshader: 1
     - _simpleUI: 0
-    - _utsTechnique: 0
+    - _utsTechnique: 1
     - _utsVersionX: 0
     - _utsVersionY: 11
     - _utsVersionZ: 0
