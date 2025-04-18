@@ -2845,6 +2845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6280482948761466582}
   - component: {fileID: 3650532941015594302}
+  - component: {fileID: 6810783589297233403}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -2883,8 +2884,21 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  WeaponScriptObj: {fileID: 0}
+  WeaponScriptObj: {fileID: 11400000, guid: 11efa1bfa01f42153a1fc027fb257ef9, type: 2}
   PlayerCamera: {fileID: 5729860973589349047}
+--- !u!114 &6810783589297233403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7234186509551626755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea026187aef88786dbb36b10db5bfb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponScriptObj: {fileID: 11400000, guid: 11efa1bfa01f42153a1fc027fb257ef9, type: 2}
 --- !u!1 &7254781305019875645
 GameObject:
   m_ObjectHideFlags: 0

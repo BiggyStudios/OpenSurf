@@ -150,11 +150,6 @@ namespace P90brush
 
         void FixedUpdate()
         {
-            if (InputData.ResetPressed)
-            {
-                _playerManager.Restart();
-            }
-
             float fixedDeltaTime = Time.fixedDeltaTime;
             //_hookshot.CatchMovement(this, fixedDeltaTime); // Todo: Improve
             _controller.ProcessMovement(this, moveConfig, fixedDeltaTime);

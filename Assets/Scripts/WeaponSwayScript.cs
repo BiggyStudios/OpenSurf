@@ -19,7 +19,6 @@ public class WeaponSwayScript : NetworkBehaviour
     public float MoveSmoothAmount;
 
     private Vector3 _initialPosition;
-    private Vector3 _currentVelocitySway;
 
     private void Start()
     {

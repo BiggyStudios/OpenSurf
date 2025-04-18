@@ -10,12 +10,16 @@ public class WeaponScript : NetworkBehaviour
 
     public Camera PlayerCamera;
 
+    private WeaponRecoilScript _weaponRecoilScript;
+
     private int _ammo;
     private float _timeToNextShot;
     private bool _reloading;
 
     private void Start()
     {
+        _weaponRecoilScript = GetComponent<WeaponRecoilScript>();
+
         _ammo = WeaponScriptObj.MaxAmmo;
     }
 
@@ -29,7 +33,7 @@ public class WeaponScript : NetworkBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             Shoot();
         }
@@ -42,7 +46,9 @@ public class WeaponScript : NetworkBehaviour
 
     private void Shoot()
     {
+        if (_reloading) return;
         if (_ammo <= 0) return;
+        if (_timeToNextShot > 0) return;
         
         Ray ray = new Ray(PlayerCamera.transform.position, PlayerCamera.transform.forward);
         RaycastHit hit;
@@ -58,6 +64,7 @@ public class WeaponScript : NetworkBehaviour
 
         _ammo--;
         _timeToNextShot = WeaponScriptObj.FireRate;
+        _weaponRecoilScript.TriggerRecoil();
     }
 
     private void ShootDelay()
