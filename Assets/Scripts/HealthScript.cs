@@ -24,7 +24,8 @@ public class HealthScript : NetworkBehaviour
         HealthText.text = new string("Health:" + MaxHealth);
     }
 
-    private void UpdateHealthText()
+    [Server]    
+    public void UpdateHealthText()
     {
         HealthText.text = new string("Health:" + _health);
     }
