@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41ab731b67a0606597849e659a2b05a, type: 3}
   m_Name: AR15
   m_EditorClassIdentifier: 
-  WeaponName: 
-  Damage: 0
-  WeaponRange: 0
-  FireRate: 0
-  ReloadTime: 0
+  WeaponName: AR-15
+  Damage: 20
+  WeaponRange: 20
+  FireRate: 0.2
+  ReloadTime: 2
   DamageFallOff: 0
-  MaxAmmo: 0
+  MaxAmmo: 30
   PositionRecoilAmount: {x: 0, y: 0, z: -0.1}
   RotationRecoilAmount: {x: -10, y: 4, z: 0}
-  PositionReturnSpeed: 10
-  RotationReturnSpeed: 12
-  SnapMultiplier: 60
+  PositionReturnSpeed: 6
+  RotationReturnSpeed: 8
+  SnapMultiplier: 20

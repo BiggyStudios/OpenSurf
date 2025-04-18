@@ -83,10 +83,31 @@ public class WeaponScript : NetworkBehaviour
 
     private IEnumerator Reload()
     {
-        if (_reloading) yield return null;
+        if (_reloading) yield break;
 
         _reloading = true;
-        yield return new WaitForSecondsRealtime(WeaponScriptObj.ReloadTime);
+
+        float timer = 0f;
+        float duration = WeaponScriptObj.ReloadTime;
+
+        Quaternion startRotation = transform.localRotation;
+        Vector3 normalizedSpinAxis = -Vector3.right.normalized;
+        
+        while (timer < duration)
+        {
+            timer += Time.unscaledDeltaTime;
+            
+            float progress = Mathf.Clamp01(timer / duration);
+            float currentAngle = Mathf.Lerp(0f, 720f, progress);
+
+            Quaternion targetRotation = startRotation * Quaternion.AngleAxis(currentAngle, normalizedSpinAxis);
+            transform.localRotation = targetRotation;
+
+            yield return null;
+        }
+
+        transform.localRotation = startRotation * Quaternion.AngleAxis(720f, normalizedSpinAxis);
+
         _ammo = WeaponScriptObj.MaxAmmo;
         _reloading = false;
     }
