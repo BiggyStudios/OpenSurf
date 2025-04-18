@@ -2,6 +2,8 @@ using System.Collections;
 
 using Mirror;
 
+using TMPro;
+
 using UnityEngine;
 
 public class WeaponScript : NetworkBehaviour
@@ -9,6 +11,7 @@ public class WeaponScript : NetworkBehaviour
     public WeaponScriptObj WeaponScriptObj;
 
     public Camera PlayerCamera;
+    public TMP_Text AmmoText;
 
     private WeaponRecoilScript _weaponRecoilScript;
 
@@ -21,6 +24,7 @@ public class WeaponScript : NetworkBehaviour
         _weaponRecoilScript = GetComponent<WeaponRecoilScript>();
 
         _ammo = WeaponScriptObj.MaxAmmo;
+        AmmoText.text = new string("Ammo:" + _ammo);
     }
 
     private void Update()
@@ -65,6 +69,7 @@ public class WeaponScript : NetworkBehaviour
         _ammo--;
         _timeToNextShot = WeaponScriptObj.FireRate;
         _weaponRecoilScript.TriggerRecoil();
+        AmmoText.text = new string("Ammo:" + _ammo);
     }
 
     private void ShootDelay()
@@ -109,6 +114,7 @@ public class WeaponScript : NetworkBehaviour
         transform.localRotation = startRotation * Quaternion.AngleAxis(720f, normalizedSpinAxis);
 
         _ammo = WeaponScriptObj.MaxAmmo;
+        AmmoText.text = new string("Ammo:" + _ammo);
         _reloading = false;
     }
 }
