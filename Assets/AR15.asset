@@ -16,11 +16,11 @@ MonoBehaviour:
   Damage: 20
   WeaponRange: 20
   FireRate: 0.2
-  ReloadTime: 2
+  ReloadTime: 1.4
   DamageFallOff: 0
   MaxAmmo: 30
   PositionRecoilAmount: {x: 0, y: 0, z: -0.1}
   RotationRecoilAmount: {x: -10, y: 4, z: 0}
   PositionReturnSpeed: 6
   RotationReturnSpeed: 8
-  SnapMultiplier: 20
+  SnapMultiplier: 5
