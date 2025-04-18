@@ -48,10 +48,8 @@ public class WeaponSwayScript : NetworkBehaviour
         Vector3 targetMoveSwayPosition = new Vector3(targetMoveSwayX, targetMoveSwayY, targetMoveSwayZ);
         targetMoveSwayPosition = Vector3.ClampMagnitude(targetMoveSwayPosition, MaxMoveSwayAmount);
 
-        _currentVelocitySway = Vector3.Lerp(_currentVelocitySway, targetMoveSwayPosition, Time.deltaTime * MoveSmoothAmount);
+        Vector3 finalTargetPosition = _initialPosition + targetMouseSwayPosition + targetMoveSwayPosition;
 
-        Vector3 intermediatePosition = _initialPosition + targetMouseSwayPosition;
-
-        transform.localPosition = Vector3.Lerp(transform.localPosition, intermediatePosition + _currentVelocitySway, Time.deltaTime * MouseSmoothAmount);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, finalTargetPosition, Time.deltaTime * MouseSmoothAmount);
     }
 }
