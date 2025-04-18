@@ -95,6 +95,11 @@ public class PlayerManager : NetworkBehaviour
             _pauseMenu.SetActive(false);
             GameManager.MenuManager.SetMapSelect(false);
         }
+
+        if (transform.position.y < -80)
+        {
+            this.GetComponent<PlayerLogic>().PlayerData.Origin = Vector3.zero;
+        }
     }
 
 
