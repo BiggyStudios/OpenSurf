@@ -5,7 +5,6 @@ using Mirror;
 public class PlayerTimer : NetworkBehaviour
 {
     [SerializeField] private LayerMask _finishLayer;
-    [SerializeField] private TMP_Text _timerText;
 
     private void Update()
     {
@@ -20,12 +19,10 @@ public class PlayerTimer : NetworkBehaviour
     {
         if (!PlayerManager.Instance.TimerActive)
         {
-            _timerText.text = FormatTime(PlayerManager.Instance.PlayerTime);
             return;
         }
 
         PlayerManager.Instance.PlayerTime += Time.deltaTime;
-        _timerText.text = FormatTime(PlayerManager.Instance.PlayerTime);
     }
 
     private void CheckFinish()

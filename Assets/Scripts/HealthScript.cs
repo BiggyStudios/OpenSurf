@@ -2,10 +2,14 @@ using Mirror;
 
 using P90brush;
 
+using TMPro;
+
 using UnityEngine;
 
 public class HealthScript : NetworkBehaviour
 {
+    public TMP_Text HealthText;
+
     public float MaxHealth;
 
     private float _health;
@@ -16,6 +20,13 @@ public class HealthScript : NetworkBehaviour
     {
         _playerLogic = GetComponent<PlayerLogic>();
         _health = MaxHealth;
+
+        HealthText.text = new string("Health:" + MaxHealth);
+    }
+
+    private void UpdateHealthText()
+    {
+        HealthText.text = new string("Health:" + _health);
     }
 
     [Server]
@@ -24,6 +35,7 @@ public class HealthScript : NetworkBehaviour
         if (_health <= 0) return;
 
         _health -= amount;
+        UpdateHealthText();
 
         if (_health <= 0)
         {
@@ -36,5 +48,7 @@ public class HealthScript : NetworkBehaviour
     {
         _playerLogic.PlayerData.Origin = Vector3.zero;
         _health = MaxHealth;
+        
+        UpdateHealthText();
     }
 }
