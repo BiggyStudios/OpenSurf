@@ -5,6 +5,7 @@ using Mirror;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponScript : NetworkBehaviour
 {   
@@ -12,6 +13,7 @@ public class WeaponScript : NetworkBehaviour
 
     public BulletTracerScript BulletTracer;
     public Transform GunPoint;
+    public Image HitMarkerImage;
     public Camera PlayerCamera;
     public TMP_Text AmmoText;
 
@@ -93,6 +95,7 @@ public class WeaponScript : NetworkBehaviour
             if (targetHealth != null)
             {
                 CmdServerDamageTarget(targetHealth);
+                StartCoroutine(HitMarkerRoutine());
             }
         }
 
@@ -220,5 +223,17 @@ public class WeaponScript : NetworkBehaviour
         _ammo = WeaponScriptObj.MaxAmmo;
         AmmoText.text = new string("Ammo:" + _ammo);
         _reloading = false;
+    }
+
+    private bool _hitmarkerActive = false;
+    private IEnumerator HitMarkerRoutine()
+    {
+        if (_hitmarkerActive) yield break;
+
+        _hitmarkerActive = true;
+        HitMarkerImage.enabled = true;
+        yield return new WaitForSecondsRealtime(0.3f);
+        HitMarkerImage.enabled = false;
+        _hitmarkerActive = false;
     }
 }
