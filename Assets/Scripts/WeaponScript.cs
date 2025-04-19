@@ -10,6 +10,8 @@ public class WeaponScript : NetworkBehaviour
 {   
     public WeaponScriptObj WeaponScriptObj;
 
+    public BulletTracerScript BulletTracer;
+    public Transform GunPoint;
     public Camera PlayerCamera;
     public TMP_Text AmmoText;
 
@@ -18,10 +20,14 @@ public class WeaponScript : NetworkBehaviour
     private int _ammo;
     private float _timeToNextShot;
     private bool _reloading;
+    private bool _aiming;
+
+    private Vector3 _initialPosition;
 
     private void Start()
     {
         _weaponRecoilScript = GetComponent<WeaponRecoilScript>();
+        _initialPosition = transform.localPosition;
 
         _ammo = WeaponScriptObj.MaxAmmo;
         AmmoText.text = new string("Ammo:" + _ammo);
@@ -33,6 +39,7 @@ public class WeaponScript : NetworkBehaviour
 
         ShootDelay();
         HandleInput();
+        HandleAim();
     }
 
     private void HandleInput()
@@ -45,6 +52,29 @@ public class WeaponScript : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(Reload());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            _aiming = true;
+        }
+
+        else if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            _aiming = false;
+        }
+    }
+
+    private void HandleAim()
+    {
+        if (_aiming)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, WeaponScriptObj.ADSPosition, Time.deltaTime * WeaponScriptObj.AimSpeed);
+        }
+
+        else
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, _initialPosition, Time.deltaTime * WeaponScriptObj.AimSpeed);
         }
     }
 
@@ -68,6 +98,10 @@ public class WeaponScript : NetworkBehaviour
 
         _ammo--;
         _timeToNextShot = WeaponScriptObj.FireRate;
+
+        SpawnTracerClient();
+        CmdSpawnTracerServer();
+
         _weaponRecoilScript.TriggerRecoil();
         AmmoText.text = new string("Ammo:" + _ammo);
     }
@@ -86,9 +120,78 @@ public class WeaponScript : NetworkBehaviour
         healthScript.TakeDamageOnServer(WeaponScriptObj.Damage);
         healthScript.UpdateHealthText();
     }
+    
+    private void SpawnTracerClient()
+    {
+        Vector3 shootDirection = GetShootDirection();
+
+        if (!isServer)
+        {
+            var tracer =
+                Instantiate(BulletTracer.gameObject, GunPoint.transform.position, GunPoint.transform.rotation);
+
+            tracer.GetComponent<BulletTracerScript>().ShootDirection = shootDirection;
+        }
+
+        if (isServer)
+        {
+            SpawnTracerClients();
+        }
+    }
+
+    [Command]
+    private void CmdSpawnTracerServer()
+    {
+        Vector3 shootDirection = GetShootDirection();
+
+        var tracer =
+            Instantiate(BulletTracer.gameObject, GunPoint.transform.position, GunPoint.transform.rotation);
+
+        tracer.GetComponent<BulletTracerScript>().ShootDirection = shootDirection;
+
+        //NetworkServer.Spawn(tracer);
+
+        Destroy(tracer, 5f);
+    }
+
+    [ClientRpc]
+    private void SpawnTracerClients()
+    {
+        Vector3 shootDirection = GetShootDirection();
+
+        var tracer =
+            Instantiate(BulletTracer.gameObject, GunPoint.transform.position, GunPoint.transform.rotation);
+
+        tracer.GetComponent<BulletTracerScript>().ShootDirection = shootDirection;
+
+        Destroy(tracer, 5f);
+    }
+
+    private Vector3 GetShootDirection()
+    {
+        Ray ray = PlayerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+        RaycastHit hit;
+        Vector3 targetPoint;
+
+        if (Physics.Raycast(ray, out hit, WeaponScriptObj.WeaponRange))
+        {
+            targetPoint = hit.point;
+        }
+
+        else
+        {
+            targetPoint = ray.origin + ray.direction * WeaponScriptObj.WeaponRange;
+        }
+
+        Vector3 shootDirection = (targetPoint - GunPoint.position).normalized;
+
+        return shootDirection;
+    }
 
     private IEnumerator Reload()
     {
+        if (_ammo >= 30) yield break;
         if (_reloading) yield break;
 
         _reloading = true;

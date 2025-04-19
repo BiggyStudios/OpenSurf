@@ -9,6 +9,8 @@ public class WeaponScriptObj : ScriptableObject
     public float FireRate;
     public float ReloadTime;
     public float DamageFallOff;
+    public Vector3 ADSPosition;
+    public float AimSpeed;
     public int MaxAmmo;
 
     [Header("Recoil")]

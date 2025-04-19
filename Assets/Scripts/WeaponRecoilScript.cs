@@ -3,6 +3,7 @@ using UnityEngine;
 public class WeaponRecoilScript : MonoBehaviour
 {
     public WeaponScriptObj WeaponScriptObj;
+    public Transform WeaponMesh;
 
     private Vector3 _originalPosition;
     private Quaternion _originalRotation;
@@ -14,8 +15,8 @@ public class WeaponRecoilScript : MonoBehaviour
 
     private void Start()
     {
-        _originalPosition = transform.localPosition;
-        _originalRotation = transform.localRotation;
+        _originalPosition = WeaponMesh.transform.localPosition;
+        _originalRotation = WeaponMesh.transform.localRotation;
 
         _currentRecoilPosition = Vector3.zero;
         _currentRecoilRotation = Quaternion.identity;
@@ -31,8 +32,8 @@ public class WeaponRecoilScript : MonoBehaviour
         _currentRecoilPosition = Vector3.SmoothDamp(_currentRecoilPosition, Vector3.zero, ref _positionVelocity, 1f / WeaponScriptObj.PositionReturnSpeed);
         _currentRecoilRotation = Quaternion.Slerp(_currentRecoilRotation, Quaternion.identity, Time.deltaTime * WeaponScriptObj.RotationReturnSpeed);
 
-        transform.localPosition = _originalPosition + _currentRecoilPosition;
-        transform.localRotation = _originalRotation * _currentRecoilRotation;
+        WeaponMesh.transform.localPosition = _originalPosition + _currentRecoilPosition;
+        WeaponMesh.transform.localRotation = _originalRotation * _currentRecoilRotation;
     }
     public void TriggerRecoil()
     {
