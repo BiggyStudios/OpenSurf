@@ -5,9 +5,11 @@ using P90brush;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthScript : NetworkBehaviour
 {
+    public Slider Healthbar;
     public TMP_Text HealthText;
 
     public float MaxHealth;
@@ -21,13 +23,13 @@ public class HealthScript : NetworkBehaviour
         _playerLogic = GetComponent<PlayerLogic>();
         _health = MaxHealth;
 
-        HealthText.text = new string("Health:" + MaxHealth);
+        SetHealthBar(MaxHealth);
     }
 
     [Server]    
-    public void UpdateHealthText()
+    public void UpdateHealthBar()
     {
-        HealthText.text = new string("Health:" + _health);
+        SetHealthBar(_health);
     }
 
     [Server]
@@ -36,7 +38,7 @@ public class HealthScript : NetworkBehaviour
         if (_health <= 0) return;
 
         _health -= amount;
-        UpdateHealthText();
+        UpdateHealthBar();
 
         if (_health <= 0)
         {
@@ -50,6 +52,12 @@ public class HealthScript : NetworkBehaviour
         _playerLogic.PlayerData.Origin = Vector3.zero;
         _health = MaxHealth;
         
-        UpdateHealthText();
+        UpdateHealthBar();
+    }
+
+    private void SetHealthBar(float value)
+    {
+        Healthbar.value = value;
+        HealthText.text = new string(value + "/100+");
     }
 }

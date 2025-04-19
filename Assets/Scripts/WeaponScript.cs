@@ -121,7 +121,7 @@ public class WeaponScript : NetworkBehaviour
     private void CmdServerDamageTarget(HealthScript healthScript)
     {
         healthScript.TakeDamageOnServer(WeaponScriptObj.Damage);
-        healthScript.UpdateHealthText();
+        healthScript.UpdateHealthBar();
     }
     
     private void SpawnTracerClient()
