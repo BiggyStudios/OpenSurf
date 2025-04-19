@@ -12,6 +12,7 @@ public class WeaponScript : NetworkBehaviour
     public WeaponScriptObj WeaponScriptObj;
 
     public BulletTracerScript BulletTracer;
+    public GameObject MuzzleFlash;
     public Transform GunPoint;
     public Image HitMarkerImage;
     public Camera PlayerCamera;
@@ -104,6 +105,8 @@ public class WeaponScript : NetworkBehaviour
 
         SpawnTracerClient();
         CmdSpawnTracerServer();
+
+        StartCoroutine(MuzzleFlashRoutine());
 
         _weaponRecoilScript.TriggerRecoil();
         AmmoText.text = new string("Ammo:" + _ammo);
@@ -223,6 +226,18 @@ public class WeaponScript : NetworkBehaviour
         _ammo = WeaponScriptObj.MaxAmmo;
         AmmoText.text = new string("Ammo:" + _ammo);
         _reloading = false;
+    }
+    
+    private bool _muzzleFlashActive = false;
+    private IEnumerator MuzzleFlashRoutine()
+    {
+        if (_muzzleFlashActive) yield break;
+
+        _muzzleFlashActive = true;
+        MuzzleFlash.SetActive(true);
+        yield return new WaitForSecondsRealtime(0.1f);
+        MuzzleFlash.SetActive(false);
+        _muzzleFlashActive = false;
     }
 
     private bool _hitmarkerActive = false;
