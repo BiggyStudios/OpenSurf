@@ -160,6 +160,24 @@ public class WeaponScript : NetworkBehaviour
         Destroy(tracer, 5f);
     }
 
+    [Command]
+    private void CmdSetMuzzleFlash(bool state)
+    {
+        ServerSetMuzzleFlash(state);
+    }
+
+    [Server]
+    private void ServerSetMuzzleFlash(bool state)
+    {
+        ClientSetMuzzleFlash(state);
+    }
+
+    [ClientRpc]
+    private void ClientSetMuzzleFlash(bool state)
+    {
+        MuzzleFlash.SetActive(state);
+    }
+
     [ClientRpc]
     private void SpawnTracerClients()
     {
@@ -234,9 +252,9 @@ public class WeaponScript : NetworkBehaviour
         if (_muzzleFlashActive) yield break;
 
         _muzzleFlashActive = true;
-        MuzzleFlash.SetActive(true);
+        CmdSetMuzzleFlash(true);
         yield return new WaitForSecondsRealtime(0.1f);
-        MuzzleFlash.SetActive(false);
+        CmdSetMuzzleFlash(false);
         _muzzleFlashActive = false;
     }
 
