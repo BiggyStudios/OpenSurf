@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: AR-15
   Damage: 20
-  WeaponRange: 20
+  WeaponRange: 200
   FireRate: 0.2
   ReloadTime: 1.4
   DamageFallOff: 0
